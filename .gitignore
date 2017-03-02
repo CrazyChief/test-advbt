@@ -1,0 +1,7 @@
+.idea/
+*.pyc
+*.pyo
+*.db
+*.edd-info
+.DS_Store
+
