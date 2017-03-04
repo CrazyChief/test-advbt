@@ -1,4 +1,7 @@
+import datetime
+
 from django.db import models
+from django.utils import timezone
 
 
 class Category(models.Model):
@@ -14,6 +17,13 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+
+    def is_category_active(self):
+        return self.is_active
+
+    is_category_active.admin_order_field = 'is_active'
+    is_category_active.boolean = True
+    is_category_active.short_description = 'Is active?'
 
 
 class Product(models.Model):
@@ -34,11 +44,26 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
+    def is_product_available(self):
+        return self.is_available
+
+    def is_posted(self):
+        return self.status
+
+    is_product_available.admin_order_field = 'is_available'
+    is_product_available.boolean = True
+    is_product_available.short_description = 'Is available?'
+
+    is_posted.admin_order_field = 'status'
+    is_posted.boolean = True
+    is_posted.short_description = 'Is posted?'
+
 
 class ProductVariation(models.Model):
     """
     Variations of every product.
     """
+    title = models.CharField(max_length=150)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     vendor_code = models.CharField(max_length=20, unique=True)
     price = models.FloatField()
@@ -55,7 +80,7 @@ class ProductVariation(models.Model):
         verbose_name_plural = "Products variations"
 
     def __str__(self):
-        return str(self.product) + " - " + self.vendor_code
+        return str(self.product) + " - " + str(self.vendor_code)
 
 
 def upload_path(instance, filename):
@@ -74,7 +99,7 @@ class ProductImage(models.Model):
     """
     product = models.ForeignKey(ProductVariation, on_delete=models.CASCADE)
     image = models.FileField(upload_to=upload_path)
-    description = models.CharField(null=True, blank=True, max_length=200)
+    description = models.CharField(null=True, max_length=200)
     is_main = models.BooleanField()
     main_product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
 
@@ -83,7 +108,7 @@ class ProductImage(models.Model):
         verbose_name_plural = "Products images"
 
     def __str__(self):
-        return self.product
+        return str(self.product)
 
 
 class ProductReview(models.Model):
@@ -94,6 +119,7 @@ class ProductReview(models.Model):
     review = models.TextField()
     reviewer_name = models.CharField(max_length=100)
     reviewer_email = models.EmailField(max_length=254)
+    review_added = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = "Product Review"
@@ -101,6 +127,12 @@ class ProductReview(models.Model):
 
     def __str__(self):
         return self.reviewer_name + " - " + self.reviewer_email
+
+    def product_name(self):
+        return self.product
+
+    product_name.admin_order_field = 'product'
+    product_name.short_description = 'Review for product'
 
 
 class Order(models.Model):
@@ -173,4 +205,13 @@ class Discount(models.Model):
 
     def __str__(self):
         return "%s %s" % (self.discount_code, self.discount_type)
+
+    def out_of_date(self):
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.discount_end_period <= now
+
+    out_of_date.admin_order_field = 'discount_end_period'
+    out_of_date.boolean = True
+    out_of_date.short_description = 'Is out of date?'
+
 
