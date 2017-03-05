@@ -1,0 +1,12 @@
+{% if categories %}
+    <ul>
+    {% for category in categories %}
+        <li><a href="/products/all/{{ category.title }}/">{{ category.title }}</a></li>
+    {% endfor %}
+    </ul>
+    <div style="margin-top: 100px;">
+
+    </div>
+{% else %}
+    <p>No categories are available.</p>
+{% endif %}
