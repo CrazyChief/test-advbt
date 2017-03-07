@@ -1,0 +1,28 @@
+{% extends 'products/index.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="back">
+            <a href="{% url 'products:index' %}">back</a>
+    </div>
+    {% if category %}
+        <div>
+            <h3>{{ category.title }}</h3>
+        </div>
+        <div class="products">
+            {% if products_list %}
+                <ul>
+                {% for product in products_list %}
+                    <li>
+                        <a href="{% url 'products:detail' category.id product.id %}">{{ product.title }}</a>
+                    </li>
+{#                    <p>{{ product.title }}</p>#}
+{#                    <div>{{ product.description }}</div>#}
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    {% endif %}
+{#<h3>Lorem</h3>#}
+{% endblock %}

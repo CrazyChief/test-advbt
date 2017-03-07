@@ -1,0 +1,23 @@
+{% extends 'products/index.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="back">
+        <a href="{% url 'products:index' %}">back</a>
+    </div>
+    {% if productvariation %}
+        <h3>{{ productvariation.title }}</h3>
+        <span>SKU: {{ productvariation.vendor_code }}</span><br>
+        <span>{{ productvariation.price }} <b>UAN</b></span><br>
+        <div>
+            {{ productvariation.product.description.format }}
+        </div>
+        {% for image in product_images %}
+            <img src="{{ image.image.url }}" alt="{{ image.description }}">
+        {% endfor %}
+
+    {% else %}
+        <p style="color: #f00;">Product not found</p>
+    {% endif %}
+{% endblock %}

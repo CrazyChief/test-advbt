@@ -2,6 +2,7 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -24,6 +25,9 @@ class Category(models.Model):
     is_category_active.admin_order_field = 'is_active'
     is_category_active.boolean = True
     is_category_active.short_description = 'Is active?'
+
+    def get_absolute_url(self):
+        return reverse('products:ProductListByCategory', args=[self.title])
 
 
 class Product(models.Model):
@@ -58,6 +62,9 @@ class Product(models.Model):
     is_posted.boolean = True
     is_posted.short_description = 'Is posted?'
 
+    # def get_absolute_url(self):
+    #     return reverse('products:ProductDetail', args=[self.id])
+
 
 class ProductVariation(models.Model):
     """
@@ -81,6 +88,9 @@ class ProductVariation(models.Model):
 
     def __str__(self):
         return str(self.product) + " - " + str(self.vendor_code)
+
+    # def get_absolute_url(self):
+    #     return reverse('products:ProductDetail', args=[self.product, self.vendor_code])
 
 
 def upload_path(instance, filename):
@@ -109,6 +119,9 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return str(self.product)
+
+    # def get_absolute_url(self):
+    #     return reverse('products:ProductDetail', args=[self.product, self.image])
 
 
 class ProductReview(models.Model):

@@ -1,0 +1,45 @@
+{% extends 'products/index.html' %}
+
+{% load static %}
+
+{#{% block title %}#}
+{#    {% for category in category_list %}#}
+{#        {% if category %} {{ category.title }} {% else %} Product page {% endif %}#}
+{#    {% endfor %}#}
+{#{% endblock %}#}
+
+
+
+{% block content %}
+
+    {% if category_list %}
+        <ul>
+            {% for category in category_list %}
+                <li>
+                    <a href="{% url 'products:products_by_category' category.id %}">{{ category.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+    <div class="container">
+        {% if products_list %}
+            <ul>
+                {% for product in product_variation_list %}
+                    <li>
+                        <a href="{% url 'products:detail' product.product.category.id product.id %}">
+                            {{ product.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+
+{#                {% for product in products_list %}#}
+{#                    <li><a href="{% url "products:detail" product.category product.id %}">{{ product.title }}</a></li>#}
+{#                {% endfor %}#}
+            </ul>
+        {% endif %}
+    </div>
+
+
+{% endblock %}

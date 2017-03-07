@@ -1,12 +1,45 @@
-{% if categories %}
-    <ul>
-    {% for category in categories %}
-        <li><a href="/products/all/{{ category.title }}/">{{ category.title }}</a></li>
-    {% endfor %}
-    </ul>
-    <div style="margin-top: 100px;">
+{#{% if categories %}#}
+{#    <ul>#}
+{#    {% for category in categories %}#}
+{#        <li><a href="/products/all/{{ category.title }}/">{{ category.title }}</a></li>#}
+{#    {% endfor %}#}
+{#    </ul>#}
+{#    <div style="margin-top: 100px;">#}
+{##}
+{#    </div>#}
+{#{% else %}#}
+{#    <p>No categories are available.</p>#}
+{#{% endif %}#}
 
-    </div>
-{% else %}
-    <p>No categories are available.</p>
-{% endif %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Styles -->
+{#    <link rel="stylesheet" href="">#}
+{#    <link rel="stylesheet" href="">#}
+</head>
+<body>
+
+    <section id="header">
+        <div class="top container">
+            My online store
+        </div>
+        <div class="top-bl">
+            <div class="container">
+                <div class="cart">Your cart is empty</div>
+            </div>
+        </div>
+    </section>
+    <section id="content-row" class="container">
+        {% block content %}{% endblock %}
+    </section>
+
+</body>
+</html>
