@@ -3,6 +3,7 @@ import datetime
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
+from ckeditor.fields import RichTextField
 
 
 class Category(models.Model):
@@ -35,7 +36,7 @@ class Product(models.Model):
     Product body
     """
     title = models.CharField(max_length=100)
-    description = models.TextField()
+    description = RichTextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     date_added = models.DateTimeField(auto_now_add=True)
     is_available = models.BooleanField()
