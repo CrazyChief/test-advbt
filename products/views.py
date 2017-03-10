@@ -64,9 +64,8 @@ class ProductCategoryView(generic.TemplateView):
             return get_object_or_404(Category, pk=self.kwargs['pk'])
         raise Http404
 
-    def get_categories(self):
-        return self.category.get_deferred_fields()
-
+    # def get_categories(self):
+    #     return self.category.get_deferred_fields()
 
     # def get_queryset(self):
     #     return Category.objects.filter(pk=self.kwargs['pk'])
@@ -74,8 +73,9 @@ class ProductCategoryView(generic.TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ProductCategoryView, self).get_context_data(**kwargs)
         context['category'] = self.category
-        # context['category'] = Category.objects.filter(pk=self.kwargs['pk'])
+        context['category_list'] = Category.objects.all()
         context['products_list'] = ProductVariation.objects.filter(product__category__pk=self.category.id)
+        context['product_image_list'] = ProductImage.objects.filter(product__product__category__id=self.category.id)
         return context
 
 
@@ -83,9 +83,31 @@ class ProductView(generic.DetailView):
     model = ProductVariation
     template_name = 'products/detail.html'
 
+    def get(self, request, *args, **kwargs):
+        # self.category = self.get_category()
+        # self.variations = self.get_variation_list()
+
+        return super(ProductView, self).get(request, *args, **kwargs)
+
+    # def get_category(self):
+    #     if 'fk' in self.kwargs:
+    #         return get_object_or_404(Category, pk=self.kwargs['fk'])
+    #     raise Http404
+
+    # def get_variation_list(self):
+    #     if 'pk' in self.kwargs:
+    #         main_product = ProductVariation.objects.filter(pk=self.kwargs['pk'])
+    #         self.main_product = main_product.get()
+    #         return get_object_or_404(ProductVariation.objects.filter(product=self.main_product.pk))
+    #     raise Http404
+
     def get_context_data(self, **kwargs):
         context = super(ProductView, self).get_context_data(**kwargs)
+        context['category'] = Category.objects.filter(pk=self.kwargs['fk'])
         context['product_images'] = ProductImage.objects.filter(product=self.kwargs['pk'])
+        context['product_reviews'] = ProductReview.objects.filter(product=self.kwargs['pk'])
+        # context['product_variation_list'] = Product.objects.filter(productvariation=self.kwargs['pk'])
+        # context['product_variation_list'] = self.variations
         return context
 
 

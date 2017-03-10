@@ -1,45 +1,83 @@
 {% extends 'products/index.html' %}
 
-{% load static %}
-
-{#{% block title %}#}
-{#    {% for category in category_list %}#}
-{#        {% if category %} {{ category.title }} {% else %} Product page {% endif %}#}
-{#    {% endfor %}#}
-{#{% endblock %}#}
-
-
+{% block title %}
+    All products | Adavibeauty
+{% endblock %}
 
 {% block content %}
 
-    {% if category_list %}
-        <ul>
-            {% for category in category_list %}
-                <li>
-                    <a href="{% url 'products:products_by_category' category.id %}">{{ category.title }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    <div class="body woocomerce woocommerce">
 
+        <section class="header" style="max-height: 750px; background-repeat: no-repeat; background-image: url(&quot;https://www.adavibeauty.com/wp-content/uploads/2016/10/slide.png&quot;); background-color: rgb(230, 230, 230); color: rgb(255, 255, 255); height: 950px;">
+            <div class="box-header">
+                <h1 class="h1">The Organic Face</h1>
+                <div class="title">PRODUCTS</div>
+            </div><!-- box-header -->
+        </section><!-- header -->
 
-    <div class="container">
-        {% if products_list %}
-            <ul>
-                {% for product in product_variation_list %}
-                    <li>
-                        <a href="{% url 'products:detail' product.product.category.id product.id %}">
-                            {{ product.title }}
-                        </a>
-                    </li>
-                {% endfor %}
+        <section id="category-box" class="sector product">
+            <div class="line-1"></div>
+            <div class="line-2"></div>
 
-{#                {% for product in products_list %}#}
-{#                    <li><a href="{% url "products:detail" product.category product.id %}">{{ product.title }}</a></li>#}
-{#                {% endfor %}#}
-            </ul>
-        {% endif %}
+            <div class="container h120px">
+                <div class="filter-min hidden-md hidden-lg">
+                    <span class="btn">Фильтр</span>
+                </div>
+
+                {% if category_list %}
+                    <ul class="filter hidden-xs hidden-sm">
+                        <li class="item menu-item menu-item-type-taxonomy menu-item-object-product_cat current-menu-item">
+                            <a href="{% url 'products:index' %}">All</a>
+                        </li>
+                        {% for category in category_list %}
+                            <li class="item menu-item menu-item-type-taxonomy menu-item-object-product_cat">
+                                <a href="{% url 'products:products_by_category' category.id %}">{{ category.title|capfirst }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <div class="container flexbox">
+                <div class="new-product row">
+                    <div class="woocomerce-box">
+
+                        {% if products_list %}
+                            <ul class="products">
+                                {% for product in product_variation_list %}
+                                    {% if product.is_available %}
+                                        <li class="col post-all product type-product status-publish has-post-thumbnail product_cat-lips first outofstock shipping-taxable purchasable product-type-simple">
+                                            <a href="{% url 'products:detail' product.product.category.id product.id %}" class="item">
+                                                {% for image in product_image_list %}
+                                                    {% if image.product == product and image.is_main %}
+                                                        <span class="img"></span>
+                                                        <img width="200" height="240" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="{{ image.image.url }}" alt="{{ image.description }}" sizes="(max-width: 200px) 100vw, 200px">
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </a>
+                                            <h2 class="title" style="height: 45px;">
+                                                <span>{{ product.title }}</span>
+                                                <span>
+                                                    <span class="price">
+                                                        <span class="woocommerce-Price-amount amount">{{ product.price }}
+                                                            <span class="woocommerce-Price-currencySymbol">₴</span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </h2>
+                                            <p class="box-btn">
+                                                <a href="{% url 'products:detail' product.product.category.id product.id %}" class="btn btn-1 w234">смотреть еще</a>
+                                            </p>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
-
 {% endblock %}
+
