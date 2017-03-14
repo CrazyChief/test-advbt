@@ -1326,7 +1326,7 @@ body {
 #supsystic {
   max-width: 500px;
   border-top: 1px solid #e6e6e6;
-  margin: auto;
+  margin: 30px auto auto auto;
   padding-top: 30px;
 }
 #supsystic strong {
@@ -1819,3 +1819,84 @@ body {
   .ty-page .mid-text{ font-size:19px;}
   .ty-page .row-with-pay p{ font-size:19px;padding-bottom: 15px;}
 }
+
+
+div.tab {
+  overflow: hidden;
+  margin-top: 20px;
+  background-color: transparent!important;
+}
+
+div.tab button {
+  background-color: #f7f6f7;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  margin-left: 10px;
+  transition: 0.3s;
+  font-size: 15px;
+}
+
+div.tab button:hover, div.tab button.active:hover {
+  /*background-color: #ddd;*/
+  box-shadow: inset 0 60px #F8B2AB;
+}
+
+div.tab button.active {
+  background-color: #ccc;
+  box-shadow: inset 0 3px #F8B2AB;
+}
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  -webkit-animation: fadeEffect 1s;
+  animation: fadeEffect 1s;
+}
+@-webkit-keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+.conteiner-comments .authorInfo {
+  padding: 10px;
+  margin: 6px;
+  background-color: #f7f6f7;
+}
+.conteiner-comments .description {
+  text-indent: 30px;
+}
+#reviews .conteiner-comments {
+  margin-top: 20px;
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+}
+.conteiner-comments .description {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.conteiner-comments .time {
+  background-color: #f7f6f7;
+  text-align: right!important;
+  padding: 3px 10px 3px 0;
+}
+.conteiner-comments time {
+  /*float: right;*/
+  background-color: #f7f6f7;
+}
+
+.review-form {  margin-top: 30px!important;  }
+.review-form h3 {margin-bottom: 20px;}
+
+.review-form form input, .review-form form textarea{display:block;width:100%;height:45px;padding:6px 12px;font-size:14px;line-height:1.42857143;color:#555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);-webkit-transition:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;-webkit-transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}
+.review-form form input:focus, .review-form form textarea:focus{border-color:#f8ada6;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(248,173,166,0.6)}
+.review-form form input::-moz-placeholder, .review-form form textarea::-moz-placeholder{color:#999;opacity:1}
+.review-form form input:-moz-placeholder, .review-form form textarea:-moz-placeholder{color:#999;opacity:1}
+.review-form form input:-ms-input-placeholder, .review-form form textarea:-ms-input-placeholder{color:#999}
+.review-form form input::-webkit-input-placeholder, .review-form form textarea::-webkit-input-placeholder{color:#999}
+.review-form form textarea{height:auto; width: 100%}
+/*.form-control[disabled],.form-control[readonly],fieldset[disabled] .form-control{cursor:not-allowed;background-color:#eee;opacity:1}*/

@@ -79,6 +79,7 @@ class ProductView(DetailView, FormMixin):
     def get_context_data(self, **kwargs):
         context = super(ProductView, self).get_context_data(**kwargs)
         context['category'] = Category.objects.filter(pk=self.kwargs['fk'])
+        # kwargs['sizes'] = {size: self.model.objects.get_or_create(rate=str(size))[0] for size in range(10, 40)}
         context['product_images'] = ProductImage.objects.filter(product=self.kwargs['pk'])
         context['product_reviews'] = ProductReview.objects.filter(product=self.kwargs['pk'])
         context['product_variation_list'] = ProductVariation.objects.filter(product=self.get_product())

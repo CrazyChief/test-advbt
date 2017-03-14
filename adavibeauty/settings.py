@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'products.apps.ProductsConfig',
     'ckeditor',
     'colorfield',
+    'star_ratings',
 ]
 
 MIDDLEWARE = [
@@ -198,3 +199,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# STAR_RATINGS_STAR_HEIGHT = 30
+# STAR_RATINGS_STAR_WIDTH = 30
+STAR_RATINGS_ANONYMOUS = True

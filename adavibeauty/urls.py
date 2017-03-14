@@ -17,9 +17,12 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+# from adavibeauty.views import
 
 urlpatterns = [
+    url(r'^$'),
     url(r'^products/', include('products.urls', namespace='products')),
+    url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
     url(r'^admin/', admin.site.urls),
 ]
 
