@@ -2,8 +2,11 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
-from django.urls import reverse
+# from django.urls import reverse
+from django.core.urlresolvers import reverse
+
 from ckeditor.fields import RichTextField
+from colorfield.fields import ColorField
 
 
 class Category(models.Model):
@@ -27,8 +30,8 @@ class Category(models.Model):
     is_category_active.boolean = True
     is_category_active.short_description = 'Is active?'
 
-    def get_absolute_url(self):
-        return reverse('products:ProductListByCategory', args=[self.title])
+    # def get_absolute_url(self):
+    #     return reverse('products:ProductListByCategory', args=[self.title])
 
 
 class Product(models.Model):
@@ -75,7 +78,8 @@ class ProductVariation(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     vendor_code = models.CharField(max_length=20, unique=True)
     price = models.FloatField()
-    color = models.CharField(max_length=50)
+    color_description = models.CharField(max_length=50)
+    color_value = ColorField(default='#FF0000')
     quantity = models.IntegerField()
     rate = models.FloatField()
     is_new = models.BooleanField()
@@ -86,6 +90,9 @@ class ProductVariation(models.Model):
     class Meta:
         verbose_name = "Product variation"
         verbose_name_plural = "Products variations"
+
+    def get_absolute_url(self):
+        return reverse('products:detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return str(self.product) + " - " + str(self.vendor_code)
@@ -117,6 +124,7 @@ class ProductImage(models.Model):
     class Meta:
         verbose_name = "Product image"
         verbose_name_plural = "Products images"
+        ordering = ["-is_main"]
 
     def __str__(self):
         return str(self.product)

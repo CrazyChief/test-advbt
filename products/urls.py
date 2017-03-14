@@ -22,4 +22,6 @@ urlpatterns = [
     url(r'^(?P<pk>[0-9]+)/$', views.ProductCategoryView.as_view(), name='products_by_category'),
     # ex: /products/face/1101/
     url(r'^(?P<fk>[0-9]+)/(?P<pk>[0-9]+)/$', views.ProductView.as_view(), name='detail'),
+
+    # url(r'^(?P<fk>[0-9]+)/(?P<pk>[0-9]+)/$', views.ProductReviewCreate.as_view(), name='review-add'),
 ]

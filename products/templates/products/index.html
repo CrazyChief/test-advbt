@@ -28,8 +28,11 @@
         {% load staticfiles %}
         <link rel="stylesheet" type="text/css" href="{% static 'products/style.css' %}">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-        <script type="text/javascript" src="https://www.adavibeauty.com/wp-content/themes/templebeauty/js/library.js"></script>
-        <script src="https://www.adavibeauty.com/wp-content/themes/templebeauty/js/main.js"></script>
+{#        <script src="https://www.adavibeauty.com/wp-content/themes/templebeauty/js/main.js"></script>#}
+{#        <script type="text/javascript" src="https://www.adavibeauty.com/wp-content/themes/templebeauty/js/library.js"></script>#}
+
+        <script type="text/javascript" src="{% static 'products/main.js' %}"></script>
+        <script type="text/javascript" src="{% static 'products/library.js' %}"></script>
         <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
         <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
 </head>
@@ -71,6 +74,8 @@
             </div>
         </div>
     </div><!-- footer -->
+
+
 
 </body>
 </html>
