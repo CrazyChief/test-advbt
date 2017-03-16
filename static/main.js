@@ -7,13 +7,13 @@
         // form();
         click();
     });
-    // $('body').addClass("viewing-page-1");
+    $('body').addClass("viewing-page-1");
     $(window).scroll(function() {
         if ($(this).scrollTop() > 2) {
-            // $('body').removeClass("viewing-page-1");
+            $('body').removeClass("viewing-page-1");
             $('.bar-menu').removeClass("sticky");
         } else {
-            // $('body').addClass("viewing-page-1");
+            $('body').addClass("viewing-page-1");
             $('.bar-menu').removeClass("sticky");
         }
     });

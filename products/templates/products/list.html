@@ -1,7 +1,9 @@
 {% extends 'products/index.html' %}
 
+{% load staticfiles %}
+
 {% block title %}
-    All products | Adavibeauty
+    All products
 {% endblock %}
 
 {% block content %}
@@ -26,11 +28,11 @@
 
                 {% if category_list %}
                     <ul class="filter hidden-xs hidden-sm">
-                        <li class="item menu-item menu-item-type-taxonomy menu-item-object-product_cat current-menu-item">
+                        <li class="item menu-item current-menu-item">
                             <a href="{% url 'products:index' %}">All</a>
                         </li>
                         {% for category in category_list %}
-                            <li class="item menu-item menu-item-type-taxonomy menu-item-object-product_cat">
+                            <li class="item menu-item">
                                 <a href="{% url 'products:products_by_category' category.id %}">{{ category.title|capfirst }}</a>
                             </li>
                         {% endfor %}
@@ -46,12 +48,12 @@
                             <ul class="products">
                                 {% for product in product_variation_list %}
                                     {% if product.is_available %}
-                                        <li class="col post-all product type-product status-publish has-post-thumbnail product_cat-lips first outofstock shipping-taxable purchasable product-type-simple">
+                                        <li class="col post-all product">
                                             <a href="{% url 'products:detail' product.product.category.id product.id %}" class="item">
                                                 {% for image in product_image_list %}
                                                     {% if image.product == product and image.is_main %}
                                                         <span class="img"></span>
-                                                        <img width="200" height="240" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="{{ image.image.url }}" alt="{{ image.description }}" sizes="(max-width: 200px) 100vw, 200px">
+                                                        <img width="200" height="240" src="{{ image.image.url }}" alt="{{ image.description }}" sizes="(max-width: 200px) 100vw, 200px">
                                                     {% endif %}
                                                 {% endfor %}
                                             </a>
@@ -59,7 +61,7 @@
                                                 <span>{{ product.title }}</span>
                                                 <span>
                                                     <span class="price">
-                                                        <span class="woocommerce-Price-amount amount">{{ product.price }}
+                                                        <span class="amount">{{ product.price }}
                                                             <span class="woocommerce-Price-currencySymbol">₴</span>
                                                         </span>
                                                     </span>

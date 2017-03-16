@@ -1,9 +1,9 @@
 {% extends 'products/index.html' %}
 
-{% load static %}
+{% load staticfiles %}
 
 {% block title %}
-    {% if category %} {{ category.title|capfirst }} | Adavibeauty {% else %} All products | Adavibeauty {% endif %}
+    {% if category %} {{ category.title|capfirst }} {% else %} All products {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -11,7 +11,7 @@
     <div class="body woocomerce woocommerce">
 
         <section class="header" style="max-height: 750px; background-repeat: no-repeat;
-         background-image: url(&quot;https://www.adavibeauty.com/wp-content/uploads/2016/10/slide.png&quot;);
+         background-image: url({% static 'img/slide.png' %});
           background-color: rgb(230, 230, 230); color: rgb(255, 255, 255); height: 950px;">
             <div class="box-header">
                 <h1 class="h1">The Organic Face</h1>
@@ -29,16 +29,16 @@
                         <span class="btn">Фильтр</span>
                     </div>
                     <ul class="filter hidden-xs hidden-sm">
-                        <li class="item menu-item menu-item-type-taxonomy menu-item-object-product_cat">
+                        <li class="item menu-item">
                                 <a href="{% url 'products:index' %}">All</a>
                             </li>
                         {% for cat in category_list %}
                             {% if cat == category %}
-                                <li class="item menu-item menu-item-type-taxonomy menu-item-object-product_cat current-menu-item">
+                                <li class="item menu-item current-menu-item">
                                 <a href="{% url 'products:products_by_category' cat.id %}">{{ cat.title|capfirst }}</a>
                             </li>
                             {% else %}
-                                <li class="item menu-item menu-item-type-taxonomy menu-item-object-product_cat">
+                                <li class="item menu-item">
                                 <a href="{% url 'products:products_by_category' cat.id %}">{{ cat.title|capfirst }}</a>
                             </li>
                             {% endif %}
@@ -55,12 +55,12 @@
 
                                     {% for product in products_list %}
                                         {% if product.is_available %}
-                                            <li class="col post-all product type-product status-publish has-post-thumbnail product_cat-lips first outofstock shipping-taxable purchasable product-type-simple">
+                                            <li class="col post-all product">
                                                 <a href="{% url 'products:detail' category.id product.id %}" class="item">
                                                     {% for image in product_image_list %}
                                                         {% if image.product == product and image.is_main %}
                                                             <span class="img"></span>
-                                                            <img width="200" height="240" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="{{ image.image.url }}" alt="{{ image.description }}" sizes="(max-width: 200px) 100vw, 200px">
+                                                            <img width="200" height="240" src="{{ image.image.url }}" alt="{{ image.description }}" sizes="(max-width: 200px) 100vw, 200px">
                                                         {% endif %}
                                                     {% endfor %}
                                                 </a>
@@ -68,7 +68,7 @@
                                                     <span>{{ product.title }}</span>
                                                     <span>
                                                         <span class="price">
-                                                            <span class="woocommerce-Price-amount amount">{{ product.price }}
+                                                            <span class="amount">{{ product.price }}
                                                                 <span class="woocommerce-Price-currencySymbol">₴</span>
                                                             </span>
                                                         </span>
