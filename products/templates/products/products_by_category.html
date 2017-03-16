@@ -1,0 +1,94 @@
+{% extends 'products/index.html' %}
+
+{% load staticfiles %}
+
+{% block title %}
+    {% if category %} {{ category.title|capfirst }} {% else %} All products {% endif %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="body woocomerce woocommerce">
+
+        <section class="header" style="max-height: 750px; background-repeat: no-repeat;
+         background-image: url({% static 'img/slide.png' %});
+          background-color: rgb(230, 230, 230); color: rgb(255, 255, 255); height: 950px;">
+            <div class="box-header">
+                <h1 class="h1">The Organic Face</h1>
+                <div class="title">PRODUCTS</div>
+            </div><!-- box-header -->
+        </section><!-- header -->
+
+        <section id="category-box" class="sector product">
+            <div class="line-1"></div>
+            <div class="line-2"></div>
+
+            {% if category %}
+                <div class="container h120px">
+                    <div class="filter-min hidden-md hidden-lg">
+                        <span class="btn">Фильтр</span>
+                    </div>
+                    <ul class="filter hidden-xs hidden-sm">
+                        <li class="item menu-item">
+                                <a href="{% url 'products:index' %}">All</a>
+                            </li>
+                        {% for cat in category_list %}
+                            {% if cat == category %}
+                                <li class="item menu-item current-menu-item">
+                                <a href="{% url 'products:products_by_category' cat.id %}">{{ cat.title|capfirst }}</a>
+                            </li>
+                            {% else %}
+                                <li class="item menu-item">
+                                <a href="{% url 'products:products_by_category' cat.id %}">{{ cat.title|capfirst }}</a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="container flexbox">
+                    <div class="new-product row">
+                        <div class="woocomerce-box">
+
+                            {% if products_list %}
+                                <ul class="products">
+
+                                    {% for product in products_list %}
+                                        {% if product.is_available %}
+                                            <li class="col post-all product">
+                                                <a href="{% url 'products:detail' category.id product.id %}" class="item">
+                                                    {% for image in product_image_list %}
+                                                        {% if image.product == product and image.is_main %}
+                                                            <span class="img"></span>
+                                                            <img width="200" height="240" src="{{ image.image.url }}" alt="{{ image.description }}" sizes="(max-width: 200px) 100vw, 200px">
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </a>
+                                                <h2 class="title" style="height: 45px;">
+                                                    <span>{{ product.title }}</span>
+                                                    <span>
+                                                        <span class="price">
+                                                            <span class="amount">{{ product.price }}
+                                                                <span class="woocommerce-Price-currencySymbol">₴</span>
+                                                            </span>
+                                                        </span>
+                                                    </span>
+                                                </h2>
+                                                <p class="box-btn">
+                                                    <a href="{% url 'products:detail' category.id product.id %}" class="btn btn-1 w234">смотреть еще</a>
+                                                </p>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+            {% endif %}
+
+        </section>
+    </div>
+
+{% endblock %}

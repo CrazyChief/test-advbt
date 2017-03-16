@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %} | Adavibeauty</title>
+    {% load staticfiles %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+    <script type="text/javascript" src="{% static 'jquery-1.12.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main.js' %}"></script>
+
+    {% block includefiles %}{% endblock %}
+
+    <style>
+        #page-preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255,255,255,1);
+            z-index: 100500;
+        }
+        #page-preloader .spinner {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 999;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+            background: #fff url('{% static 'img/logo-header.png' %}') no-repeat center center;
+        }
+        .fancybox-margin{
+            margin-right:0px;
+        }
+    </style>
+    <script>
+        $(window).on('load', function () {
+            var $preloader = $('#page-preloader'),
+                $spinner = $preloader.find('.spinner');
+            $spinner.delay(50).fadeOut('slow');
+            $preloader.delay(50).fadeOut('slow');
+        });
+    </script>
+
+</head>
+<body class="viewing-page-1">
+
+    <!-- PRELOADER -->
+    <div id="page-preloader" style="display: none;">
+        <span class="spinner" style="display: none;"></span>
+    </div>
+    <!-- !PRELOADER -->
+
+{#    <script>#}
+{#        $('body').addClass('js');#}
+{#        var new_footer = $('body.js .footer').html();#}
+{#        /*$('body.js #footer').html(new_footer).addClass('footer');#}
+{#        $('#end-section').remove();*/#}
+{#        $('li.go a').attr('data-href','off');#}
+{#        var main_outerwidth = $(window).outerWidth();#}
+{#        var main_outerHeight = $(window).outerHeight();#}
+{#        if (main_outerwidth > 992 ) {#}
+{#            $('.body').addClass('main');#}
+{#            document.write('<link rel="stylesheet" href="https://www.adavibeauty.com/wp-content/themes/templebeauty/media-md.css" />');#}
+{#            $(document).ready(function ($) {#}
+{#                $(".main").onepage_scroll({#}
+{#                    sectionContainer: "section", // контейнер, к которому будет применяться скролл#}
+{#                    easing: "ease-in-out", // Тип анимации "ease", "linear", "ease-in", "ease-out", "ease-in-out"#}
+{#                    animationTime: 500, // время анимации#}
+{#                    pagination: true, // скрыть или отобразить пагинатор#}
+{#                    updateURL: true // обновлять URL или нет#}
+{#                });#}
+{#            });#}
+{#            $('li.go a').click(function(){#}
+{#                var url = $(this).attr('href');#}
+{#                //url = url.substring(4);#}
+{#                url = '2';#}
+{#                $('.onepage-pagination a[href="#'+url+'"]').trigger('click');#}
+{#                return false#}
+{#            });#}
+{#            //$('.li.go a').attr('herf','');#}
+{#        } else {#}
+{#            $('.box-blog').addClass('owl2');#}
+{#            $('.go').click(function(event) {#}
+{#                event.preventDefault();#}
+{#                var target = $(this).find('>a').prop('hash');#}
+{#                $('html, body').animate({#}
+{#                    scrollTop: $(target).offset().top#}
+{#                }, 500);#}
+{#            });#}
+{#        }#}
+{#        $('.box-blog .col-xs-12:first-child').addClass('col-1');#}
+{#        $('.box-blog .col-xs-12:last-child').addClass('col-2');#}
+{#        $('li.go').removeClass('current-menu-item');#}
+{#        $('li.go a[data-href]').attr('href','/#d2');#}
+{##}
+{#        $('.widget_wysija').addClass('form max-width280');#}
+{#        $('.wysija-paragraph').addClass('form-group');#}
+{#        $('.wysija-input').addClass('form-control');#}
+{#        $('.wysija-submit').addClass('btn');#}
+{#        $('.widget_wysija_cont').addClass('min-height-form');#}
+{#    </script>#}
+
+{#    <link rel="stylesheet" href="https://www.adavibeauty.com/wp-content/themes/templebeauty/media-md.css">#}
+
+{#    <style type="text/css">#}
+{#        .box-blog img {#}
+{#            max-height: 380px;#}
+{#        }#}
+{#    </style>#}
+{#    <div style="display:none"></div>#}
+{#    <style type="text/css">#}
+{#        body.wp-admin.upload-php #wpbody-content {#}
+{#            width: calc(100% - 250px);#}
+{#        }.rml-container.rml-no-dummy {#}
+{#            width: 250px;#}
+{#        }#}
+{#    </style>#}
+
+    <div class="bar-menu">
+        <div class="container">
+            <div class="logo">
+                <a href="/"><img src="{% static 'img/logo-header.png' %}" alt=""></a>
+            </div><!-- logo -->
+
+            <div class="menu">
+                <ul class="hidden-md hidden-sm hidden-xs">
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item current_page_item menu-item"><a href="/">Главная</a></li>
+                    <li class="go menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item"><a href="#second" data-href="off">О нас</a></li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item"><a href="{% url 'products:index' %}">Продукция</a></li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item"><a href="blog">Блог</a></li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item"><a href="contacts">Контакты</a></li>
+                </ul>
+                <div class="clear"></div>
+            </div><!-- menu -->
+
+            <div class="box-cart">
+                <button type="button" class="tcon tcon1 tcon-menu--xcross hidden-lg pull-right" aria-label="toggle menu">
+                    <span class="tcon-menu__lines" aria-hidden="true"></span>
+                    <span class="tcon-visuallyhidden">toggle menu</span>
+                </button>
+
+                <a href="/cart" class="cart">
+                    <img src="https://www.adavibeauty.com/wp-content/themes/templebeauty/img/cart-object.png" alt="">
+                    <span>0</span>
+                </a>
+
+                <div class="lang">
+                    <div class="rezult"><span>RUS</span>
+                        <ul class="language-chooser language-chooser-both qtranxs_language_chooser" id="qtranslate-chooser">
+                            <li class="active"><a href="https://www.adavibeauty.com/ru/" class="qtranxs_flag_ru qtranxs_flag_and_text" title="RUS (ru)"><span>RUS</span></a></li>
+                            <li><a href="https://www.adavibeauty.com/ua/" class="qtranxs_flag_ua qtranxs_flag_and_text" title="UKR (ua)"><span>UKR</span></a></li>
+                            <li><a href="https://www.adavibeauty.com/en/" class="qtranxs_flag_en qtranxs_flag_and_text" title="ENG (en)"><span>ENG</span></a></li>
+                        </ul>
+                        <div class="qtranxs_widget_end"></div>
+                    </div>
+                </div>
+
+                <div class="currency">
+                     <strong style="display:none">WMCS Currency Switcher 1</strong>
+                    <select class="wmcs_currency_switcher_dropdown">
+                        <option value="/?wmcs_set_currency=USD">$</option>
+                        <option value="/?wmcs_set_currency=UAH" selected="selected">₴</option>
+                        <option value="/?wmcs_set_currency=EUR">€</option>
+                    </select>
+                    <script>
+                        jQuery(document).ready(function(){
+                            jQuery('.wmcs_currency_switcher_dropdown').on('change', function () {
+                                var url = jQuery(this).val();
+                                if (url) {
+                                    window.location = url;
+                                }
+                                return false;
+                            });
+                        });
+                    </script>
+                </div>
+            </div><!-- box-cart -->
+
+            <div class="clear"></div>
+        </div>
+    </div><!-- bar-menu -->
+
+    {% block content %}
+
+    {% endblock %}
+
+    <div id="end-section" class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 hidden-xs">
+                    <a href=""><img src="https://www.adavibeauty.com/wp-content/uploads/2016/10/logo-foter.png" alt=""></a>
+                </div><!-- col -->
+                <div class="col-sm-6 col-xs-12">
+                    <p class="text-center copyright">©<span id="copyrightTime"></span> AdaviBeauty.com All Rights Reserved</p>
+                </div><!-- col -->
+                <div class="col-sm-3 col-xs-12">
+                    <div class="box-ico">
+                        <a href="https://www.instagram.com/adavibeauty/" target="_blank" class="icon-instagram demo-icon"></a>
+                        <a href="https://www.facebook.com/adavibeauty/" target="_blank" class="icon-facebook demo-icon"></a>
+                        <a href="https://www.youtube.com/channel/UCV0W_NNNpT69EwolYTFKZ6Q" target="_blank" class="icon-youtube demo-icon"></a>
+                        <a href="https://plus.google.com/u/0/" target="_blank" class="icon-gplus demo-icon"></a>
+                    </div>
+                </div><!-- col -->
+            </div>
+        </div>
+    </div><!-- footer -->
+
+</body>
+</html>
