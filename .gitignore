@@ -4,4 +4,5 @@
 *.db
 *.edd-info
 .DS_Store
+/media
 
