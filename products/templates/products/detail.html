@@ -1,14 +1,19 @@
 {% extends 'products/index.html' %}
 
-{% load static %}
-
-{% load ratings %}
-
 {% block title %}
     {% if productvariation %}
-        {{ productvariation.title }} | Adavibeauty
+        {{ productvariation.title }}
     {% endif %}
 {% endblock %}
+
+{% load staticfiles %}
+
+{% block includefiles %}
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.js' %}"></script>
+{% endblock %}
+
+{% load ratings %}
 
 {% block content %}
 

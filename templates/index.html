@@ -1,0 +1,312 @@
+{% extends 'layout/layout.html' %}
+
+{% load staticfiles %}
+
+{% block includefiles %}
+{#    <link rel="stylesheet" type="text/css" href="{% static 'jquery.pagepiling.css' %}">#}
+{#    <script type="text/javascript" src="{% static 'jquery.pagepiling.min.js' %}"></script>#}
+{#    <script type="text/javascript" src="{% static 'pagepilingconf.js' %}"></script>#}
+{#    <link rel="stylesheet" type="text/css" href="{% static 'media-md.css' %}">#}
+{#    <link rel="stylesheet" type="text/css" href="{% static 'onepage-scroll.css' %}">#}
+{#    <script type="text/javascript" src="{% static 'jquery.onepage-scroll.min.js' %}"></script>#}
+{#    <script>#}
+{#    $(".main").onepage_scroll({#}
+{#       sectionContainer: "section",     // sectionContainer accepts any kind of selector in case you don't want to use section#}
+{#       easing: "ease",                  // Easing options accepts the CSS3 easing animation such "ease", "linear", "ease-in",#}
+{#                                        // "ease-out", "ease-in-out", or even cubic bezier value such as "cubic-bezier(0.175, 0.885, 0.420, 1.310)"#}
+{#       animationTime: 1000,             // AnimationTime let you define how long each section takes to animate#}
+{#       pagination: true,                // You can either show or hide the pagination. Toggle true for show, false for hide.#}
+{#       updateURL: true,                // Toggle this true if you want the URL to be updated automatically when the user scroll to each page.#}
+{#       beforeMove: function() {},  // This option accepts a callback function. The function will be called before the page moves.#}
+{#       afterMove: function() {},   // This option accepts a callback function. The function will be called after the page moves.#}
+{#       loop: false,                     // You can have the page loop back to the top/bottom when the user navigates at up/down on the first/last page.#}
+{#       keyboard: true,                  // You can activate the keyboard controls#}
+{#       responsiveFallback: false,        // You can fallback to normal page scroll by defining the width of the browser in which#}
+{#                                        // you want the responsive fallback to be triggered. For example, set this to 600 and whenever#}
+{#                                        // the browser's width is less than 600, the fallback will kick in.#}
+{#       direction: "vertical"            // You can now define the direction of the One Page Scroll animation. Options available are "vertical" and "horizontal". The default value is "vertical".#}
+{#    });#}
+{#    </script>#}
+{% endblock %}
+
+{% block title %}Main{% endblock %}
+
+{% block content %}
+
+    <ul class="onepage-pagination">
+        <li><a data-index="1" href="#1" class="active"></a></li>
+        <li><a data-index="2" href="#2"></a></li>
+        <li><a data-index="3" href="#3"></a></li>
+        <li><a data-index="4" href="#4"></a></li>
+        <li><a data-index="5" href="#5"></a></li>
+    </ul>
+
+    <div class="menu-scroll">
+        <ul>
+            <li id="menu-item" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item current_page_item menu-item"><a href="/">Главная</a></li>
+            <li id="menu-item" class="go menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item"><a href="#second" data-href="off">О нас</a></li>
+            <li id="menu-item" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item"><a href="https://www.adavibeauty.com/products/all">Продукция</a></li>
+            <li id="menu-item" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item"><a href="https://www.adavibeauty.com/blog">Блог</a></li>
+            <li id="menu-item" class="menu-item menu-item-type-post_type menu-item-object-page menu-item"><a href="https://www.adavibeauty.com/kontakti">Контакты</a></li>
+        </ul>
+    </div>
+
+{##}
+{#    <div class="main body js onepage-wrapper" style="position: relative;">#}
+{#        <section class="header section active" style="height: 950px; position: absolute; top: 0%;" data-index="1">#}
+{#            <div class="box-header">#}
+{#                <span class="before-object" style="left: calc(50% + 474px);"></span>#}
+{#                <span class="after-object" style="border-width:950px 950px"></span>#}
+{#                <span class="slide-object"></span>#}
+{#                <div class="header-logo">#}
+{#                    <img src="{% static 'img/logo-slide.png' %}" alt="">#}
+{#                </div>#}
+{#                <h1 class="h1">Органическая косметика</h1>#}
+{#                <h2 class="title">Официальный сайт The Organic Face в Европе</h2>#}
+{#            </div><!-- box-header -->#}
+{#        </section><!-- header -->#}
+{##}
+{#        <section class="sector pos-sm section" data-index="2" style="position: absolute; top: 100%;">#}
+{#            <div class="line-1"></div>#}
+{#            <div class="line-2"></div>#}
+{#            <div class="container flexbox">#}
+{#                <div class="title style-1">#}
+{#                    <img src="https://www.adavibeauty.com/wp-content/uploads/2016/09/fon-logo.png" alt="">#}
+{#                    <h2 class="h2 ttnone">Органическая 95% Натуральная 100%</h2>#}
+{#                </div><!-- title -->#}
+{#                <div class="content text-center max-w850">#}
+{#                    <p>Добро пожаловать на сайт&nbsp;Adavi Beauty. Нашей главной гордостью является професиональная <strong>органическая косметика</strong> The Organic Face. Начиная с начала 2016 года Алена Мевша-Adavi подписала договор с американским производителем этой органической косметики на эксклюзивную продажу и распространение на территории всей Европы. Частое, професиональное использование даже на чувствительной коже – это главная задача которую ставила перед собой создательница The Organic Face – Норин Диани, работая професиональным визажистом, и добилась своей цели. Используя только натуральные составляющие, Норин&nbsp;воплотила в жизнь то что считала своей главной задачей как визажиста – создать органическую косметику которая качественно работает при интенсивных и длительных фото&nbsp;и виде сьемках и, при этом, сохраняя кожу от негативного воздействия химических веществ, которые содержаться в неорганической косметике. Высокое качество косметики оценила компания Амазон, и на основании отличных отзывов покупателей и продаж подписала договор о покупке продуктов The Organic Face напрямую для компании Amazon, фактически создав себе монополию по продаже этой органической косметики на всей территории США (С Амазона в Украину продукция не поставляется).#}
+{#                        <img class="size-full wp-image-867 aligncenter" src="http://www.adavibeauty.com/wp-content/uploads/flovers.png" alt="flovers" width="728" height="200" srcset="https://www.adavibeauty.com/wp-content/uploads/flovers.png 728w, https://www.adavibeauty.com/wp-content/uploads/flovers-600x165.png 600w, https://www.adavibeauty.com/wp-content/uploads/flovers-400x110.png 400w, https://www.adavibeauty.com/wp-content/uploads/flovers-210x58.png 210w" sizes="(max-width: 728px) 100vw, 728px">#}
+{#                    </p>#}
+{#                </div><!-- content -->#}
+{#            </div>#}
+{#        </section><!-- section id="d2" -->#}
+{##}
+{#        <section class="sector product section" data-index="3" style="position: absolute; top: 200%;">#}
+{#            <div class="container flexbox">#}
+{#                <div class="title style-2">#}
+{#                    <h2 class="h2">Новые товары</h2>#}
+{#                </div><!-- title -->#}
+{#                <div class="new-product row home">#}
+{#                    <div class="owl1" style="width: 1140px;">#}
+{#                        <div class="woocommerce columns-4">#}
+{#                            <ul class="products owl-carousel owl-theme" style="opacity: 1; display: block;">#}
+{#                                <div class="owl-wrapper-outer">#}
+{#                                    <div class="owl-wrapper" style="width: 2280px; left: 0px; display: block; transition: all 0ms ease; transform: translate3d(0px, 0px, 0px);">#}
+{#                                        <div class="owl-item" style="width: 380px;">#}
+{#                                            <li class="col post-964 product type-product status-publish has-post-thumbnail product_cat-face first instock shipping-taxable purchasable product-type-simple">#}
+{#                                                <a href="https://www.adavibeauty.com/product/all/face/tonalniy-krem" class="item">#}
+{#                                                    <span class="img"></span>#}
+{#                                                    <img width="115" height="240" src="https://www.adavibeauty.com/wp-content/uploads/Ivory-115x240.png" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="ivory" title="ivory" srcset="https://www.adavibeauty.com/wp-content/uploads/Ivory-115x240.png 115w, https://www.adavibeauty.com/wp-content/uploads/Ivory-600x1254.png 600w, https://www.adavibeauty.com/wp-content/uploads/Ivory-220x460.png 220w, https://www.adavibeauty.com/wp-content/uploads/Ivory-287x600.png 287w, https://www.adavibeauty.com/wp-content/uploads/Ivory.png 980w" sizes="(max-width: 115px) 100vw, 115px">#}
+{#                                                </a>#}
+{#                                                <h2 class="title" style="height: 45px;">#}
+{#                                                    <span>Тональный крем Ivory</span>#}
+{#                                                    <span>#}
+{#                                                        <span class="price">#}
+{#                                                            <span class="woocommerce-Price-amount amount">1,074.8<span class="woocommerce-Price-currencySymbol">₴</span></span>#}
+{#                                                        </span>#}
+{#                                                    </span>#}
+{#                                                </h2>#}
+{#                                                <p class="box-btn">#}
+{#                                                    <a href="https://www.adavibeauty.com/product/all/face/tonalniy-krem" class="btn btn-1 w234">смотреть еще</a>#}
+{#                                                </p>#}
+{#                                            </li>#}
+{#                                        </div>#}
+{#                                        <div class="owl-item" style="width: 380px;">#}
+{#                                            <li class="col post-1025 product type-product status-publish has-post-thumbnail product_cat-lips  outofstock shipping-taxable purchasable product-type-simple">#}
+{#                                                <a href="https://www.adavibeauty.com/product/all/lips/gubnaya-pomada-tiger-melon" class="item">#}
+{#                                                    <span class="img"></span>#}
+{#                                                    <img width="200" height="240" src="https://www.adavibeauty.com/wp-content/uploads/Lipstick-Tiger-Melon-250x300-200x240.png" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="lipstick-tiger-melon-250x300" title="lipstick-tiger-melon-250x300" srcset="https://www.adavibeauty.com/wp-content/uploads/Lipstick-Tiger-Melon-250x300-200x240.png 200w, https://www.adavibeauty.com/wp-content/uploads/Lipstick-Tiger-Melon-250x300.png 250w" sizes="(max-width: 200px) 100vw, 200px">#}
+{#                                                </a>#}
+{#                                                <h2 class="title" style="height: 45px;">#}
+{#                                                    <span>Губная помада TIGER MELON</span>#}
+{#                                                    <span>#}
+{#                                                        <span class="price">#}
+{#                                                            <span class="woocommerce-Price-amount amount">618.0<span class="woocommerce-Price-currencySymbol">₴</span>#}
+{#                                                            </span>#}
+{#                                                        </span>#}
+{#                                                    </span>#}
+{#                                                </h2>#}
+{#                                                <p class="box-btn">#}
+{#                                                    <a href="https://www.adavibeauty.com/product/all/lips/gubnaya-pomada-tiger-melon" class="btn btn-1 w234">смотреть еще</a>#}
+{#                                                </p>#}
+{#                                            </li>#}
+{#                                        </div>#}
+{#                                        <div class="owl-item" style="width: 380px;">#}
+{#                                            <li class="col post-989 product type-product status-publish has-post-thumbnail product_cat-face  instock shipping-taxable purchasable product-type-simple">#}
+{#                                                <a href="https://www.adavibeauty.com/product/all/face/rumyana-i-avtozagar-lilly-pink" class="item">#}
+{#                                                    <span class="img"></span>#}
+{#                                                    <img width="200" height="240" src="https://www.adavibeauty.com/wp-content/uploads/lilly-pink-250x300-200x240.png" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="lilly-pink-250x300" title="lilly-pink-250x300" srcset="https://www.adavibeauty.com/wp-content/uploads/lilly-pink-250x300-200x240.png 200w, https://www.adavibeauty.com/wp-content/uploads/lilly-pink-250x300.png 250w" sizes="(max-width: 200px) 100vw, 200px">#}
+{#                                                </a>#}
+{#                                                <h2 class="title" style="height: 45px;">#}
+{#                                                    <span>Румяна и автозагар Lilly Pink &amp; Sun Kissed</span>#}
+{#                                                    <span>#}
+{#                                                        <span class="price">#}
+{#                                                            <span class="woocommerce-Price-amount amount">618.0<span class="woocommerce-Price-currencySymbol">₴</span>#}
+{#                                                            </span>#}
+{#                                                        </span>#}
+{#                                                    </span>#}
+{#                                                </h2>#}
+{#                                                <p class="box-btn">#}
+{#                                                    <a href="https://www.adavibeauty.com/product/all/face/rumyana-i-avtozagar-lilly-pink" class="btn btn-1 w234">смотреть еще</a>#}
+{#                                                </p>#}
+{#                                            </li>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{##}
+{#                                <div class="owl-controls clickable" style="display: none;">#}
+{#                                    <div class="owl-pagination">#}
+{#                                        <div class="owl-page active">#}
+{#                                            <span class=""></span>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="owl-buttons">#}
+{#                                        <div class="owl-prev">prev</div>#}
+{#                                        <div class="owl-next">next</div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                    </div><!-- owl1 -->#}
+{#                </div><!-- row new-product -->#}
+{#                <p class="text-center">#}
+{#                    <a href="/products/all" class="btn">Подробнее</a>#}
+{#                </p>#}
+{#            </div>#}
+{#        </section><!-- section product -->#}
+{##}
+{#        <section class="sector form section" data-index="4" style="position: absolute; top: 300%;">#}
+{#            <div class="container flexbox">#}
+{#                <div class="box-form">#}
+{#                    <div class="row">#}
+{#                        <div class="col-xs-12">#}
+{#                            <div class="title">#}
+{#                                <h2 class="title-1 h1">#}
+{#                                    <p>Подпишись<br>#}
+{#                                        на обновления!</p>#}
+{#                                </h2>#}
+{#                                <h3 class="title-2">#}
+{#                                    <p>Будь в курсе всех интересностей</p>#}
+{#                                </h3>#}
+{#                            </div>#}
+{#                            <div class="col-lg-6 col-lg-offset-6 col-md-5 col-md-offset-7">#}
+{#                                <div class="textwidget">#}
+{#                                    <div class="widget_wysija_cont shortcode_wysija min-height-form">#}
+{#                                        <div id="mailerlite-form_1" data-temp-id="58a97cb3d28b7">#}
+{#                                            <div class="mailerlite-form">#}
+{#                                                <form action="" method="post" class="form  max-width280" novalidate="novalidate">#}
+{#                                                    <div class="mailerlite-form-inputs">#}
+{#                                                        <div class="mailerlite-form-field">#}
+{#                                                            <input id="mailerlite-1-field-email" class="form-control" placeholder="E-mail" type="email" required="required" name="form_fields[email]" aria-required="true">#}
+{#                                                        </div>#}
+{#                                                        <div class="mailerlite-form-field">#}
+{#                                                            <input id="mailerlite-1-field-name" class="form-control" placeholder="Имя" type="text" required="required" name="form_fields[name]" aria-required="true">#}
+{#                                                        </div>#}
+{#                                                        <div class="mailerlite-form-loader">Подождите....</div>#}
+{#                                                        <div class="mailerlite-subscribe-button-container">#}
+{#                                                            <input class="mailerlite-subscribe-submit btn" type="submit" value="Подписаться">#}
+{#                                                        </div>#}
+{#                                                        <input type="hidden" name="form_id" value="1">#}
+{#                                                        <input type="hidden" name="action" value="mailerlite_subscribe_form">#}
+{#                                                    </div>#}
+{#                                                    <div class="mailerlite-form-response">#}
+{#                                                        <h4>#}
+{#                                                            <p>#}
+{#                                                                <span style="color: #339966;">Спасибо за подписку. На ваш Email отправлено письмо с подтверждением. Проверьте свою почту.</span>#}
+{#                                                            </p>#}
+{#                                                        </h4>#}
+{#                                                    </div>#}
+{#                                                </form>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <script type="text/javascript">#}
+{#                                        (function() {#}
+{#                                            var jQuery = window.jQueryWP || window.jQuery;#}
+{#                                            jQuery(document).ready(function () {#}
+{#                                                var form_container = jQuery("#mailerlite-form_1[data-temp-id=58a97cb3d28b7] form");#}
+{#                                                form_container.submit(function (e) {#}
+{#                                                    e.preventDefault();#}
+{#                                                }).validate({#}
+{#                                                    submitHandler: function (form) {#}
+{#                                                        jQuery(this.submitButton).prop('disabled', true);#}
+{#                                                        form_container.find('.mailerlite-subscribe-button-container').fadeOut(function () {#}
+{#                                                            form_container.find('.mailerlite-form-loader').fadeIn()#}
+{#                                                        });#}
+{#                                                        var data = jQuery(form).serialize();#}
+{#                                                        jQuery.post('https://www.adavibeauty.com/wp-admin/admin-ajax.php', data, function (response) {#}
+{#                                                            form_container.find('.mailerlite-form-inputs').fadeOut(function () {#}
+{#                                                                form_container.find('.mailerlite-form-response').fadeIn()#}
+{#                                                            });#}
+{#                                                        });#}
+{#                                                    }#}
+{#                                                });#}
+{#                                            });#}
+{#                                        })();#}
+{#                                    </script>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div><!-- col -->#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </section><!-- section -->#}
+{##}
+{#        <section class="sector blog section" data-index="5" style="position: absolute; top: 400%;">#}
+{#            <div class="container flexbox">#}
+{#                <div class="title style-3">#}
+{#                    <h2 class="h2">Блог</h2>#}
+{#                </div><!-- title -->#}
+{#                <div class="row box-blog">#}
+{#                    <div class="col-xs-12 col-md-6 col col-1">#}
+{#                        <div class="item-blog">#}
+{#                            <a href="https://www.adavibeauty.com/blog/interesting/6-prichin-otkazatsya-ot-khimii-v-kosmetike">#}
+{#                                <img src="https://www.adavibeauty.com/wp-content/uploads/6-prichin-otkazatsya-ot-khimii-v-kosmetike-min.jpg" alt="">#}
+{#                            </a>#}
+{#                            <div class="text">#}
+{#                                <span class="pull-left cat">#}
+{#                                    <a href="https://www.adavibeauty.com/blog/interesting" rel="category tag">Interesting</a>#}
+{#                                </span>#}
+{#                                <span class="pull-right data">14.03</span>#}
+{#                                <p class="clear"></p>#}
+{#                                <h3 class="title">6 причин отказаться от химии в косметике</h3>#}
+{#                                <p class="min-content"></p>#}
+{#                                <p>Как может женщина обойтись без крема для лица, рук и ног? Как можно выходить в свет без макияжа? В каждой женщине природой заложено желание выглядеть красиво и эффектно, все хотят</p>#}
+{#                                <p></p>#}
+{#                                <a href="https://www.adavibeauty.com/blog/interesting/6-prichin-otkazatsya-ot-khimii-v-kosmetike" class="read-more">Читать</a>#}
+{#                            </div><!-- text -->#}
+{#                        </div><!-- item-blog -->#}
+{#                    </div><!-- col -->#}
+{#                    <div class="col-xs-12 col-md-6 col col-2">#}
+{#                        <div class="item-blog">#}
+{#                            <a href="https://www.adavibeauty.com/blog/interesting/orhanichna-kosmetyka-korinnykh-zhyteliv-madahaskaru">#}
+{#                                <img src="https://www.adavibeauty.com/wp-content/uploads/Madagaskar-organic-cosmetics-min.jpg" alt=""></a>#}
+{#                            <div class="text">#}
+{#                                <span class="pull-left cat">#}
+{#                                    <a href="https://www.adavibeauty.com/blog/interesting" rel="category tag">Interesting</a>#}
+{#                                </span>#}
+{#                                <span class="pull-right data">10.02</span>#}
+{#                                <p class="clear"></p>#}
+{#                                <h3 class="title">Органическая косметика коренных жителей Мадагаскара</h3>#}
+{#                                <p class="min-content"></p>#}
+{#                                <p>У восточного побережья Африки расположен четвертый по величине остров, который еще называют Великим Красным островом. Люблю все удивительное, необычное, а на этой части нашей Земли все уникальное. Такая особенность Мадагаскара</p>#}
+{#                                <p></p>#}
+{#                                <a href="https://www.adavibeauty.com/blog/interesting/orhanichna-kosmetyka-korinnykh-zhyteliv-madahaskaru" class="read-more">Читать</a>#}
+{#                            </div><!-- text -->#}
+{#                        </div><!-- item-blog -->#}
+{#                    </div><!-- col -->#}
+{#                </div>#}
+{#                <p class="text-center">#}
+{#                    <a href="/category/vsi" class="btn">Перейти</a>#}
+{#                </p>#}
+{#            </div>#}
+{#        </section><!-- section blog -->#}
+{##}
+{#    </div><!-- body -->#}
+
+{% endblock %}
+
+
+
+
