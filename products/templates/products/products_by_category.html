@@ -55,7 +55,7 @@
 
                                     {% for product in products_list %}
                                         {% if product.is_available %}
-                                            <li class="col post-all product">
+                                            <li class="col product">
                                                 <a href="{% url 'products:detail' category.id product.id %}" class="item">
                                                     {% for image in product_image_list %}
                                                         {% if image.product == product and image.is_main %}

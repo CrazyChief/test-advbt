@@ -1186,9 +1186,9 @@ body .body section.sector.product .filter .item ul li a{margin:30px;white-space:
 body .body section.sector.product .filter .item ul li a:hover{color:#f98a82}
 body .body section.sector.product .new-product{padding-top:90px;margin-bottom:90px;width:100%}
 body .body section.sector.product .new-product .cat{color:#f8ada6;font-family:"Times New Roman";font-style:italic;width:234px;display:block;margin:auto;letter-spacing:.01em;}
-body .body section.sector.product .new-product .title{width:234px;display:block;margin:auto;padding:10px 0 5px;justify-content:space-between;flex-direction:row;align-items:center;display:flex}
+body .body section.sector.product .new-product .title{width:234px;display:block;margin:auto;padding:10px 0 5px;justify-content:space-between!important;flex-direction:row;align-items:center;display:flex}
 body .body section.sector.product .new-product .title span:first-child{color:#383a3a;letter-spacing:.15em;font-weight:500}
-body .body section.sector.product .new-product .title span:last-child{font-weight:500;color:#f8ada6}
+body .body section.sector.product .new-product .title span:last-child{font-weight:500;color:#f8ada6;font-size:.97em;}
 body .body section.sector.product .new-product .item{width:234px;height:277px;text-align:center;display:block;position:relative;margin:20px auto 40px}
 body .body section.sector.product .new-product .item:hover .img{border:13px solid #ffb1aa}
 body .body section.sector.product .new-product .item .img{-o-transition:all 1s ease;-moz-transition:all 1s ease;-webkit-transition:all 1s ease;transition:all 1s ease;border:13px solid #e6e6e6;display:block;height:100%;width:100%}
@@ -1451,6 +1451,7 @@ body {
   body.js .body section.sector.blog .title{margin-top:15px!important}
   body.js .body section.sector.blog .box-blog .col-1{position:relative;right:0}
   body.js .body section.sector.blog .box-blog .col-2{position:relative;left:0}
+  block-left-fon {width: calc(20% + 5%)}
 }
 @media (min-width: 550px) {
   .contacts{justify-content:center;flex-direction:column;align-items:center;display:flex;height:100%}

@@ -25,7 +25,9 @@ SECRET_KEY = 't0fd&$z^=g5kwn%^obiwpcrzs%o3!s@b3@$413%4ye@nib97bm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    # 'crazycat.pythonanywhere.com'
+    ]
 
 
 # Application definition
@@ -58,7 +60,10 @@ ROOT_URLCONF = 'adavibeauty.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [
+            'templates',
+            # '/home/CrazyCat/test-advbt/templates/',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,22 +82,25 @@ WSGI_APPLICATION = 'adavibeauty.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'adavibeauty',
-#         'USER': 'postgres',
-#         'PASSWORD': 'NumberOne123',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'adavibeauty',
+        'USER': 'postgres',
+        'PASSWORD': 'NumberOne123',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'CrazyCat$adavibeauty',
+#         'USER': 'CrazyCat',
+#         'PASSWORD': 'numberone123',
+#         'HOST': 'CrazyCat.mysql.pythonanywhere-services.com',
+#     }
+# }
 
 
 # Password validation
@@ -208,6 +216,6 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-# STAR_RATINGS_STAR_HEIGHT = 30
-# STAR_RATINGS_STAR_WIDTH = 30
+# STAR_RATINGS_STAR_HEIGHT = 16
+# STAR_RATINGS_RERATE = False
 STAR_RATINGS_ANONYMOUS = True
