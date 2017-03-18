@@ -20,22 +20,31 @@ class ProductImageInline(admin.TabularInline):
     extra = 1
 
 
-class ProductVariationInline(admin.TabularInline):
-    model = ProductVariation
-    extra = 1
-
-
 class ProductAdmin(admin.ModelAdmin):
-    inlines = [ProductVariationInline, ProductImageInline]
-
     list_display = (
         'title',
         'date_added',
+        'is_posted',
+    )
+    list_filter = [
+        'title',
+        'date_added',
+        'status',
+    ]
+
+
+class ProduvtVariationAdmin(admin.ModelAdmin):
+    inlines = [ProductImageInline]
+
+    list_display = (
+        'title',
+        'sku',
         'is_product_available',
         'is_posted',
     )
     list_filter = [
         'title',
+        'sku',
         'date_added',
         'is_available',
         'status',
@@ -84,6 +93,7 @@ class OrderAdmin(admin.ModelAdmin):
 class DiscountAdmin(admin.ModelAdmin):
     list_display = (
         'discount_title',
+        'discount_type',
         'discount_range',
         'discount_code',
         'out_of_date',
@@ -100,6 +110,7 @@ class DiscountAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(ProductVariation, ProduvtVariationAdmin)
 admin.site.register(ProductReview, ProductReviewAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Discount, DiscountAdmin)
