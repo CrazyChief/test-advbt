@@ -1,3 +1,7 @@
+{% load i18n %}
+
+{% get_available_languages as languages %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -130,11 +134,11 @@
 
             <div class="menu">
                 <ul class="hidden-md hidden-sm hidden-xs">
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item current_page_item menu-item"><a href="/">Главная</a></li>
-                    <li class="go menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item"><a href="#second" data-href="off">О нас</a></li>
-                    <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item"><a href="{% url 'products:index' %}">Продукция</a></li>
-                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item"><a href="blog">Блог</a></li>
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item"><a href="contacts">Контакты</a></li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item current_page_item menu-item"><a href="/">{% trans "Main" %}</a></li>
+                    <li class="go menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item"><a href="#second" data-href="off">{% trans "About us" %}</a></li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item"><a href="{% url 'products:index' %}">{% trans "Products" %}</a></li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item"><a href="blog">{% trans "Blog" %}</a></li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item"><a href="contacts">{% trans "Contacts" %}</a></li>
                 </ul>
                 <div class="clear"></div>
             </div><!-- menu -->
@@ -197,7 +201,7 @@
                     <a href=""><img src="https://www.adavibeauty.com/wp-content/uploads/2016/10/logo-foter.png" alt=""></a>
                 </div><!-- col -->
                 <div class="col-sm-6 col-xs-12">
-                    <p class="text-center copyright">©<span id="copyrightTime"></span> AdaviBeauty.com All Rights Reserved</p>
+                    <p class="text-center copyright">©<span id="copyrightTime"></span> AdaviBeauty.com {% trans "All Rights Reserved" %}</p>
                 </div><!-- col -->
                 <div class="col-sm-3 col-xs-12">
                     <div class="box-ico">
