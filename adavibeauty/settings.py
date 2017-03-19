@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'products.apps.ProductsConfig',
+    'cart',
     'ckeditor',
     'colorfield',
     'star_ratings',
@@ -215,6 +216,8 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+CART_SESSION_ID = 'cart'
 
 # STAR_RATINGS_STAR_HEIGHT = 16
 # STAR_RATINGS_RERATE = False

@@ -21,6 +21,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.IndexView.as_view()),
+    url(r'^cart/', include('cart.urls', namespace='cart')),
     url(r'^products/', include('products.urls', namespace='products')),
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
     url(r'^admin/', admin.site.urls),
