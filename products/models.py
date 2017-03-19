@@ -14,7 +14,7 @@ class Category(models.Model):
     Category model
     """
     title = models.CharField(max_length=50, unique=True)
-    is_active = models.BooleanField()
+    is_active = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Category"
@@ -30,20 +30,21 @@ class Category(models.Model):
     is_category_active.boolean = True
     is_category_active.short_description = 'Is active?'
 
-    # def get_absolute_url(self):
-    #     return reverse('products:ProductListByCategory', args=[self.title])
-
 
 class Product(models.Model):
     """
     Product body
     """
+    PUBLISHED = True
+    DRAFT = False
+    STATUSES = (
+        (PUBLISHED, 'Published'),
+        (DRAFT, 'Draft'),
+    )
     title = models.CharField(max_length=100)
-    description = RichTextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     date_added = models.DateTimeField(auto_now_add=True)
-    is_available = models.BooleanField()
-    status = models.BooleanField()
+    status = models.BooleanField(choices=STATUSES, default=DRAFT)
 
     class Meta:
         verbose_name = "Product"
@@ -51,6 +52,50 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+    def is_posted(self):
+        return self.status
+
+    is_posted.admin_order_field = 'status'
+    is_posted.boolean = True
+    is_posted.short_description = 'Is posted?'
+
+    def get_absolute_url(self):
+        return reverse('products:detail', kwargs={'pk': self.pk})
+
+
+class ProductVariation(models.Model):
+    """
+    Variations of every product.
+    """
+    PUBLISHED = True
+    DRAFT = False
+    STATUSES = (
+        (PUBLISHED, 'Published'),
+        (DRAFT, 'Draft'),
+    )
+    title = models.CharField(max_length=150)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    sku = models.CharField(max_length=20, unique=True, null=True)
+    price = models.FloatField(default=0)
+    quantity = models.IntegerField(default=0)
+    color_description = models.CharField(max_length=50, blank=True)
+    color_value = ColorField(default='#FF0000')
+    is_new = models.BooleanField(default=False)
+    is_available = models.BooleanField(default=False)
+    status = models.BooleanField(choices=STATUSES, default=DRAFT)
+    date_added = models.DateTimeField(auto_now_add=True)
+    description = RichTextField()
+
+    class Meta:
+        verbose_name = "Product variation"
+        verbose_name_plural = "Products variations"
+
+    def get_absolute_url(self):
+        return reverse('products:detail', kwargs={'pk': self.pk})
+
+    def __str__(self):
+        return str(self.product) + " - " + str(self.sku)
 
     def is_product_available(self):
         return self.is_available
@@ -65,37 +110,6 @@ class Product(models.Model):
     is_posted.admin_order_field = 'status'
     is_posted.boolean = True
     is_posted.short_description = 'Is posted?'
-
-    # def get_absolute_url(self):
-    #     return reverse('products:ProductDetail', args=[self.id])
-
-
-class ProductVariation(models.Model):
-    """
-    Variations of every product.
-    """
-    title = models.CharField(max_length=150)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    vendor_code = models.CharField(max_length=20, unique=True)
-    price = models.FloatField()
-    color_description = models.CharField(max_length=50)
-    color_value = ColorField(default='#FF0000')
-    quantity = models.IntegerField()
-    rate = models.FloatField()
-    is_new = models.BooleanField()
-    is_available = models.BooleanField()
-    date_added = models.DateTimeField(auto_now_add=True)
-    status = models.BooleanField()
-
-    class Meta:
-        verbose_name = "Product variation"
-        verbose_name_plural = "Products variations"
-
-    def get_absolute_url(self):
-        return reverse('products:detail', kwargs={'pk': self.pk})
-
-    def __str__(self):
-        return str(self.product) + " - " + str(self.vendor_code)
 
     # def get_absolute_url(self):
     #     return reverse('products:ProductDetail', args=[self.product, self.vendor_code])
@@ -115,11 +129,11 @@ class ProductImage(models.Model):
     """
     Store of images for all products
     """
-    product = models.ForeignKey(ProductVariation, on_delete=models.CASCADE)
+    product = models.ForeignKey(ProductVariation, null=True, on_delete=models.SET_NULL)
     image = models.FileField(upload_to=upload_path)
     description = models.CharField(null=True, max_length=200)
-    is_main = models.BooleanField()
-    main_product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
+    is_main = models.BooleanField(default=False)
+    # main_product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name = "Product image"
@@ -128,9 +142,6 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return str(self.product)
-
-    # def get_absolute_url(self):
-    #     return reverse('products:ProductDetail', args=[self.product, self.image])
 
 
 class ProductReview(models.Model):
@@ -172,7 +183,7 @@ class Order(models.Model):
     shipping_country = models.CharField(max_length=50, null=True)
     shipping_city = models.CharField(max_length=100, null=True)
     shipping_departament = models.CharField(max_length=400, null=True)
-    shipping_to_home = models.BooleanField()
+    shipping_to_home = models.BooleanField(default=False)
     shipping_phone = models.CharField(max_length=20)
     shipping_email = models.EmailField(max_length=254)
 
@@ -180,7 +191,7 @@ class Order(models.Model):
     discount_code = models.CharField(max_length=20, null=True)
     total = models.FloatField()
     item_total = models.IntegerField()
-    pay_status = models.BooleanField()
+    pay_status = models.BooleanField(default=False)
     time = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -199,8 +210,9 @@ class OrderItem(models.Model):
     """
     Order item model. Stores an information about every product in order
     """
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    product_variation = models.ForeignKey(ProductVariation, on_delete=models.CASCADE)
+    # product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    # product_variation = models.ForeignKey(ProductVariation, on_delete=models.CASCADE)
+    product = models.ForeignKey(ProductVariation, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     quantity = models.IntegerField()
 
@@ -213,10 +225,17 @@ class Discount(models.Model):
     """
     Discount model. Stores an information about discount in details
     """
+    PER_PRODUCT = 'P_P'
+    FOR_ALL = 'F_A'
+    TYPES = (
+        (PER_PRODUCT, 'Per product'),
+        (FOR_ALL, 'For all'),
+    )
     discount_title = models.CharField(max_length=200)
     discount_range = models.IntegerField()
     discount_code = models.CharField(max_length=20)
-    discount_type = models.CharField(max_length=100)
+    discount_type = models.CharField(max_length=20, choices=TYPES, default=FOR_ALL)
+    discount_product = models.ForeignKey(ProductVariation, on_delete=models.CASCADE, null=True)
     discount_start_period = models.DateTimeField()
     discount_end_period = models.DateTimeField()
     discount_description = models.TextField()

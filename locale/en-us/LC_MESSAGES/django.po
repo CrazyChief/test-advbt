@@ -1,0 +1,106 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-19 07:26+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\products\forms.py:11
+msgid "Name"
+msgstr ""
+
+#: .\products\forms.py:12
+msgid "Email"
+msgstr ""
+
+#: .\products\templates\products\detail.html:31
+#: .\templates\layout\layout.html:137
+msgid "Home"
+msgstr ""
+
+#: .\products\templates\products\detail.html:33
+#: .\products\templates\products\list.html:36
+#: .\products\templates\products\products_by_category.html:38
+msgid "All"
+msgstr ""
+
+#: .\products\templates\products\detail.html:98
+msgid "Add to cart"
+msgstr ""
+
+#: .\products\templates\products\detail.html:116
+msgid "SKU"
+msgstr ""
+
+#: .\products\templates\products\detail.html:146
+#: .\products\templates\products\detail.html:196
+msgid "Reviews"
+msgstr ""
+
+#: .\products\templates\products\detail.html:148
+msgid "No reviews"
+msgstr ""
+
+#: .\products\templates\products\detail.html:172
+msgid "Add your review"
+msgstr ""
+
+#: .\products\templates\products\detail.html:186
+msgid "Submit"
+msgstr ""
+
+#: .\products\templates\products\detail.html:194
+msgid "Description"
+msgstr ""
+
+#: .\products\templates\products\list.html:10
+#: .\products\templates\products\products_by_category.html:11
+msgid "All products"
+msgstr ""
+
+#: .\products\templates\products\list.html:19
+msgid ""
+"<h1 class=\"h1\">The Organic Face</h1>\n"
+"                <div class=\"title\">PRODUCTS</div>"
+msgstr ""
+
+#: .\products\templates\products\list.html:30
+#: .\products\templates\products\products_by_category.html:34
+msgid "Filter"
+msgstr ""
+
+#: .\products\templates\products\list.html:75
+#: .\products\templates\products\products_by_category.html:83
+msgid "view more"
+msgstr ""
+
+#: .\templates\layout\layout.html:138
+msgid "About us"
+msgstr ""
+
+#: .\templates\layout\layout.html:139
+msgid "Products"
+msgstr ""
+
+#: .\templates\layout\layout.html:140
+msgid "Blog"
+msgstr ""
+
+#: .\templates\layout\layout.html:141
+msgid "Contacts"
+msgstr ""
+
+#: .\templates\layout\layout.html:204
+msgid "All Rights Reserved"
+msgstr ""

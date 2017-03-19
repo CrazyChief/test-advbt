@@ -1,10 +1,11 @@
 from django.contrib import admin
 from django.db.models import TextField
+from modeltranslation.admin import TranslationAdmin, TabbedTranslationAdmin, TranslationTabularInline
 from .models import Category, Product, ProductVariation, ProductImage, ProductReview, Order, OrderItem, Discount
 from ckeditor.widgets import CKEditorWidget
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TabbedTranslationAdmin):
     list_display = (
         'title',
         'is_category_active',
@@ -13,29 +14,39 @@ class CategoryAdmin(admin.ModelAdmin):
         'title',
         'is_active',
     ]
+    # pass
 
 
-class ProductImageInline(admin.TabularInline):
+class ProductImageInline(TranslationTabularInline):
     model = ProductImage
     extra = 1
 
 
-class ProductVariationInline(admin.TabularInline):
-    model = ProductVariation
-    extra = 1
-
-
-class ProductAdmin(admin.ModelAdmin):
-    inlines = [ProductVariationInline, ProductImageInline]
-
+class ProductAdmin(TabbedTranslationAdmin):
     list_display = (
         'title',
         'date_added',
+        'is_posted',
+    )
+    list_filter = [
+        'title',
+        'date_added',
+        'status',
+    ]
+
+
+class ProduvtVariationAdmin(TabbedTranslationAdmin):
+    inlines = [ProductImageInline]
+
+    list_display = (
+        'title',
+        'sku',
         'is_product_available',
         'is_posted',
     )
     list_filter = [
         'title',
+        'sku',
         'date_added',
         'is_available',
         'status',
@@ -81,9 +92,10 @@ class OrderAdmin(admin.ModelAdmin):
     ]
 
 
-class DiscountAdmin(admin.ModelAdmin):
+class DiscountAdmin(TabbedTranslationAdmin):
     list_display = (
         'discount_title',
+        'discount_type',
         'discount_range',
         'discount_code',
         'out_of_date',
@@ -100,6 +112,7 @@ class DiscountAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(ProductVariation, ProduvtVariationAdmin)
 admin.site.register(ProductReview, ProductReviewAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Discount, DiscountAdmin)

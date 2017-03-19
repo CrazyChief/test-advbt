@@ -6,6 +6,7 @@ from django.urls import reverse
 
 from .models import Category, Product, ProductVariation, ProductImage, ProductReview
 from .forms import ReviewForm
+from cart.forms import CartAddProductForm
 
 
 class IndexView(ListView):
@@ -59,6 +60,7 @@ class ProductView(DetailView, FormMixin):
     model = ProductVariation
     template_name = 'products/detail.html'
     form_class = ReviewForm
+    second_form_class = CartAddProductForm
 
     def get(self, request, *args, **kwargs):
         # self.category = self.get_category()

@@ -1,9 +1,13 @@
 {% extends 'products/index.html' %}
 
+{% load i18n %}
+
+{% get_available_languages as languages %}
+
 {% load staticfiles %}
 
 {% block title %}
-    All products
+    {% trans "All products" %}
 {% endblock %}
 
 {% block content %}
@@ -12,8 +16,8 @@
 
         <section class="header" style="max-height: 750px; background-repeat: no-repeat; background-image: url(&quot;https://www.adavibeauty.com/wp-content/uploads/2016/10/slide.png&quot;); background-color: rgb(230, 230, 230); color: rgb(255, 255, 255); height: 950px;">
             <div class="box-header">
-                <h1 class="h1">The Organic Face</h1>
-                <div class="title">PRODUCTS</div>
+                {% blocktrans %}<h1 class="h1">The Organic Face</h1>
+                <div class="title">PRODUCTS</div>{% endblocktrans %}
             </div><!-- box-header -->
         </section><!-- header -->
 
@@ -23,13 +27,13 @@
 
             <div class="container h120px">
                 <div class="filter-min hidden-md hidden-lg">
-                    <span class="btn">Фильтр</span>
+                    <span class="btn">{% trans "Filter" %}</span>
                 </div>
 
                 {% if category_list %}
                     <ul class="filter hidden-xs hidden-sm">
                         <li class="item menu-item current-menu-item">
-                            <a href="{% url 'products:index' %}">All</a>
+                            <a href="{% url 'products:index' %}">{% trans "All" %}</a>
                         </li>
                         {% for category in category_list %}
                             <li class="item menu-item">
@@ -68,7 +72,7 @@
                                                 </span>
                                             </h2>
                                             <p class="box-btn">
-                                                <a href="{% url 'products:detail' product.product.category.id product.id %}" class="btn btn-1 w234">смотреть еще</a>
+                                                <a href="{% url 'products:detail' product.product.category.id product.id %}" class="btn btn-1 w234">{% trans "view more" %}</a>
                                             </p>
                                         </li>
                                     {% endif %}

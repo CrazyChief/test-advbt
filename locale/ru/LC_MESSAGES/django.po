@@ -1,0 +1,118 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-19 07:26+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%"
+"100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\products\forms.py:11
+msgid "Name"
+msgstr "Имя"
+
+#: .\products\forms.py:12
+msgid "Email"
+msgstr ""
+
+#: .\products\templates\products\detail.html:31
+#: .\templates\layout\layout.html:137
+msgid "Home"
+msgstr "Главная"
+
+#: .\products\templates\products\detail.html:33
+#: .\products\templates\products\list.html:36
+#: .\products\templates\products\products_by_category.html:38
+msgid "All"
+msgstr "Все"
+
+#: .\products\templates\products\detail.html:98
+msgid "Add to cart"
+msgstr "Добавить в корзину"
+
+#: .\products\templates\products\detail.html:116
+msgid "SKU"
+msgstr "Артикул"
+
+#: .\products\templates\products\detail.html:146
+#: .\products\templates\products\detail.html:196
+msgid "Reviews"
+msgstr "Отзывы"
+
+#: .\products\templates\products\detail.html:148
+msgid "No reviews"
+msgstr "Нет отзывов"
+
+#: .\products\templates\products\detail.html:172
+msgid "Add your review"
+msgstr "Добавить отзыв"
+
+#: .\products\templates\products\detail.html:186
+msgid "Submit"
+msgstr "Отправить"
+
+#: .\products\templates\products\detail.html:194
+msgid "Description"
+msgstr "Описание"
+
+#: .\products\templates\products\list.html:10
+#: .\products\templates\products\products_by_category.html:11
+#, fuzzy
+#| msgid "Products"
+msgid "All products"
+msgstr "Продукты"
+
+#: .\products\templates\products\list.html:19
+#, fuzzy
+#| msgid ""
+#| "                    <h1 class=\"h1\">The Organic Face</h1>\n"
+#| "                    <div class=\"title\">PRODUCTS</div>\n"
+#| "                "
+msgid ""
+"<h1 class=\"h1\">The Organic Face</h1>\n"
+"                <div class=\"title\">PRODUCTS</div>"
+msgstr ""
+"<h1 class=\"h1\">Органическая косметика</h1>\n"
+"                <div class=\"title\">ДЛЯ ЛИЦА</div>"
+
+#: .\products\templates\products\list.html:30
+#: .\products\templates\products\products_by_category.html:34
+msgid "Filter"
+msgstr "Фильтр"
+
+#: .\products\templates\products\list.html:75
+#: .\products\templates\products\products_by_category.html:83
+msgid "view more"
+msgstr "смотреть еще"
+
+#: .\templates\layout\layout.html:138
+msgid "About us"
+msgstr "О нас"
+
+#: .\templates\layout\layout.html:139
+msgid "Products"
+msgstr "Продукты"
+
+#: .\templates\layout\layout.html:140
+msgid "Blog"
+msgstr "Блог"
+
+#: .\templates\layout\layout.html:141
+msgid "Contacts"
+msgstr "Контакты"
+
+#: .\templates\layout\layout.html:204
+msgid "All Rights Reserved"
+msgstr "Все права защищены"
