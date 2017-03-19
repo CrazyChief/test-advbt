@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-19 05:24+0200\n"
+"POT-Creation-Date: 2017-03-19 07:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,32 +20,98 @@ msgstr ""
 
 #: .\products\forms.py:11
 msgid "Name"
-msgstr ""
+msgstr "Ім'я"
 
 #: .\products\forms.py:12
 msgid "Email"
 msgstr ""
 
+#: .\products\templates\products\detail.html:31
 #: .\templates\layout\layout.html:137
-msgid "Main"
+msgid "Home"
+msgstr "Головна"
+
+#: .\products\templates\products\detail.html:33
+#: .\products\templates\products\list.html:36
+#: .\products\templates\products\products_by_category.html:38
+msgid "All"
+msgstr "Всі"
+
+#: .\products\templates\products\detail.html:98
+msgid "Add to cart"
+msgstr "Додати в кошик"
+
+#: .\products\templates\products\detail.html:116
+msgid "SKU"
+msgstr "Артикул"
+
+#: .\products\templates\products\detail.html:146
+#: .\products\templates\products\detail.html:196
+msgid "Reviews"
+msgstr "Відгуки"
+
+#: .\products\templates\products\detail.html:148
+msgid "No reviews"
+msgstr "Немає відгуків"
+
+#: .\products\templates\products\detail.html:172
+msgid "Add your review"
+msgstr "Додати відгук"
+
+#: .\products\templates\products\detail.html:186
+msgid "Submit"
+msgstr "Надіслати"
+
+#: .\products\templates\products\detail.html:194
+msgid "Description"
+msgstr "Опис"
+
+#: .\products\templates\products\list.html:10
+#: .\products\templates\products\products_by_category.html:11
+#, fuzzy
+#| msgid "Products"
+msgid "All products"
+msgstr "Продукти"
+
+#: .\products\templates\products\list.html:19
+#, fuzzy
+#| msgid ""
+#| "                    <h1 class=\"h1\">The Organic Face</h1>\n"
+#| "                    <div class=\"title\">PRODUCTS</div>\n"
+#| "                "
+msgid ""
+"<h1 class=\"h1\">The Organic Face</h1>\n"
+"                <div class=\"title\">PRODUCTS</div>"
 msgstr ""
+"<h1 class=\"h1\">Органічна косметика</h1>\n"
+"                <div class=\"title\">ДЛЯ ОБЛИЧЧЯ</div>"
+
+#: .\products\templates\products\list.html:30
+#: .\products\templates\products\products_by_category.html:34
+msgid "Filter"
+msgstr "Фільтр"
+
+#: .\products\templates\products\list.html:75
+#: .\products\templates\products\products_by_category.html:83
+msgid "view more"
+msgstr "дивитись ще"
 
 #: .\templates\layout\layout.html:138
 msgid "About us"
-msgstr ""
+msgstr "Про нас"
 
 #: .\templates\layout\layout.html:139
 msgid "Products"
-msgstr ""
+msgstr "Продукти"
 
 #: .\templates\layout\layout.html:140
 msgid "Blog"
-msgstr ""
+msgstr "Блог"
 
 #: .\templates\layout\layout.html:141
 msgid "Contacts"
-msgstr ""
+msgstr "Контакти"
 
 #: .\templates\layout\layout.html:204
 msgid "All Rights Reserved"
-msgstr ""
+msgstr "Всі права захищені"

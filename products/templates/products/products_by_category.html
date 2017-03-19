@@ -1,9 +1,14 @@
 {% extends 'products/index.html' %}
 
+{% load i18n %}
+
+{% get_available_languages as languages %}
+
+
 {% load staticfiles %}
 
 {% block title %}
-    {% if category %} {{ category.title|capfirst }} {% else %} All products {% endif %}
+    {% if category %} {{ category.title|capfirst }} {% else %} {% trans "All products" %} {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -26,11 +31,11 @@
             {% if category %}
                 <div class="container h120px">
                     <div class="filter-min hidden-md hidden-lg">
-                        <span class="btn">Фильтр</span>
+                        <span class="btn">{% trans "Filter" %}</span>
                     </div>
                     <ul class="filter hidden-xs hidden-sm">
                         <li class="item menu-item">
-                                <a href="{% url 'products:index' %}">All</a>
+                                <a href="{% url 'products:index' %}">{% trans "All" %}</a>
                             </li>
                         {% for cat in category_list %}
                             {% if cat == category %}
@@ -75,7 +80,7 @@
                                                     </span>
                                                 </h2>
                                                 <p class="box-btn">
-                                                    <a href="{% url 'products:detail' category.id product.id %}" class="btn btn-1 w234">смотреть еще</a>
+                                                    <a href="{% url 'products:detail' category.id product.id %}" class="btn btn-1 w234">{% trans "view more" %}</a>
                                                 </p>
                                             </li>
                                         {% endif %}

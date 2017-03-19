@@ -33,6 +33,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'products.apps.ProductsConfig',
     'cart',
-    'modeltranslation',
     'ckeditor',
     'colorfield',
     'star_ratings',
@@ -193,6 +193,7 @@ CKEDITOR_CONFIGS = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en-us'
 LANGUAGE_CODE = 'en-us'
 
 LANGUAGES = (

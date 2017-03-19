@@ -1,5 +1,9 @@
 {% extends 'layout/layout.html' %}
 
+{% load i18n %}
+
+{% get_available_languages as languages %}
+
 {% load staticfiles %}
 
 {% block includefiles %}
@@ -29,7 +33,7 @@
 {#    </script>#}
 {% endblock %}
 
-{% block title %}Main{% endblock %}
+{% block title %}{% trans "Home" %}{% endblock %}
 
 {% block content %}
 

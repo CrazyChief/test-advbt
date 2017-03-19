@@ -1,10 +1,11 @@
 from django.contrib import admin
 from django.db.models import TextField
+from modeltranslation.admin import TranslationAdmin, TabbedTranslationAdmin, TranslationTabularInline
 from .models import Category, Product, ProductVariation, ProductImage, ProductReview, Order, OrderItem, Discount
 from ckeditor.widgets import CKEditorWidget
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TabbedTranslationAdmin):
     list_display = (
         'title',
         'is_category_active',
@@ -13,14 +14,15 @@ class CategoryAdmin(admin.ModelAdmin):
         'title',
         'is_active',
     ]
+    # pass
 
 
-class ProductImageInline(admin.TabularInline):
+class ProductImageInline(TranslationTabularInline):
     model = ProductImage
     extra = 1
 
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(TabbedTranslationAdmin):
     list_display = (
         'title',
         'date_added',
@@ -33,7 +35,7 @@ class ProductAdmin(admin.ModelAdmin):
     ]
 
 
-class ProduvtVariationAdmin(admin.ModelAdmin):
+class ProduvtVariationAdmin(TabbedTranslationAdmin):
     inlines = [ProductImageInline]
 
     list_display = (
@@ -90,7 +92,7 @@ class OrderAdmin(admin.ModelAdmin):
     ]
 
 
-class DiscountAdmin(admin.ModelAdmin):
+class DiscountAdmin(TabbedTranslationAdmin):
     list_display = (
         'discount_title',
         'discount_type',

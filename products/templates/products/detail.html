@@ -1,5 +1,9 @@
 {% extends 'products/index.html' %}
 
+{% load i18n %}
+
+{% get_available_languages as languages %}
+
 {% block title %}
     {% if productvariation %}
         {{ productvariation.title }}
@@ -24,9 +28,9 @@
 		<div class="container">
 
 			<div class="nav">
-                <a href="/">Main</a>
+                <a href="/">{% trans "Home" %}</a>
                 <span class="line-bg"></span>
-                <a href="{% url 'products:index' %}">All</a>
+                <a href="{% url 'products:index' %}">{% trans "All" %}</a>
                 <span class="line-bg"></span>
                 <a href="{% url 'products:products_by_category' category.get.id %}">{{ category.get.title|capfirst }}</a>
                 <span class="line-bg"></span>
@@ -91,7 +95,7 @@
                                                size="4" pattern="[0-9]*" inputmode="numeric">
                                     </div>
                                     <input type="hidden" name="add-to-cart" value="980">
-                                    <button type="submit" class="single_add_to_cart_button button alt btn btn-1">Add to cart</button>
+                                    <button type="submit" class="single_add_to_cart_button button alt btn btn-1">{% trans "Add to cart" %}</button>
                                 </form>
                             </div><!-- box-desc -->
                             <!-- !ADD TO CARD FORM -->
@@ -109,7 +113,7 @@
                                     <div itemprop="name" class="product_title entry-title">{{ productvariation.title }}</div>
                                 </h1>
                                 <div class="sku">
-                                    <div class="product_meta">Артикул:{{ productvariation.sku }}
+                                    <div class="product_meta">{% trans "SKU" %}:{{ productvariation.sku }}
                                     <!--<span class="sku_wrapper">Артикул: <span class="sku" itemprop="sku">1102</span></span>-->
                                     </div>
                                 </div>
@@ -139,9 +143,9 @@
                                         {{ productvariation.description|safe }}
                                     </div>
                                     <div id="reviews" class="tabcontent">
-                                        <h2 class="woocommerce-Reviews-title">Reviews</h2>
+                                        <h2 class="woocommerce-Reviews-title">{% trans "Reviews" %}</h2>
                                         {% if not product_reviews %}
-                                            <p class="woocommerce-noreviews">No reviews</p>
+                                            <p class="woocommerce-noreviews">{% trans "No reviews" %}</p>
                                         {% else %}
                                             <!-- REVIEWS -->
                                             {% for review in product_reviews %}
@@ -165,7 +169,7 @@
 
                                     <!-- REVIEW_FORM -->
                                         <div class="review-form">
-                                            <h3 class="text-center">Add your review:</h3>
+                                            <h3 class="text-center">{% trans "Add your review" %}:</h3>
                                             <form class="form-horizontal" action="" method="post">
                                                 {% csrf_token %}
                                                 {% for field in form %}
@@ -179,7 +183,7 @@
                                                 {% endfor %}
                                                 <div class="form-group">
                                                     <div class="col-sm-offset-4 col-sm-8">
-                                                        <button type="submit" class="btn btn-1">Submit</button>
+                                                        <button type="submit" class="btn btn-1">{% trans "Submit" %}</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -187,9 +191,9 @@
                                     <!-- !REVIEW_FORM -->
                                     </div>
                                     <div class="tab tabs ws-tabs">
-                                        <button class="tablinks" onclick="openDesc(event, 'description')" id="defaultOpen">Description</button>
+                                        <button class="tablinks" onclick="openDesc(event, 'description')" id="defaultOpen">{% trans "Description" %}</button>
                                         <button class="tablinks" onclick="openDesc(event, 'reviews')">
-                                            Reviews ({{ product_reviews|length }})
+                                            {% trans "Reviews" %} ({{ product_reviews|length }})
                                         </button>
                                     </div>
                                 </div>
