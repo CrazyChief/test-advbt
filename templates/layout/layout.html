@@ -138,7 +138,7 @@
                     <li class="go menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item"><a href="#second" data-href="off">{% trans "About us" %}</a></li>
                     <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item"><a href="{% url 'products:index' %}">{% trans "Products" %}</a></li>
                     <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item"><a href="blog">{% trans "Blog" %}</a></li>
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item"><a href="contacts">{% trans "Contacts" %}</a></li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item"><a href="{% url 'contacts:index' %}">{% trans "Contacts" %}</a></li>
                 </ul>
                 <div class="clear"></div>
             </div><!-- menu -->
