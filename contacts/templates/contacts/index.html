@@ -1,0 +1,82 @@
+{% extends 'layout/layout.html' %}
+
+{% load i18n %}
+
+{% get_available_languages as languages %}
+
+{% block title %}{% trans "Contacts" %}{% endblock %}
+
+{% load staticfiles %}
+
+{% block includefiles %}{% endblock %}
+
+{% block content %}
+    <div class="body page">
+        <section class="sector contacts">
+            <div class="container">
+                <div class="col-xs-12"><h1 class="h2 title text-center">{% trans "Contacts" %}</h1></div>
+            </div>
+            <div class="container">
+                <div class="col-sm-6 col-xs-12">
+                    <div class="form">
+                        <form action="" method="post" class="form" id="form-contacts">
+                            {% csrf_token %}
+                            {% for field in form %}
+                                <div class="form-group">
+                                    <div class="col-sm-offset-4 col-sm-8">
+                                        <span class="text-danger small">{{ field.errors }}</span>
+                                    </div>
+                                    <div class="col-sm-11">
+                                        <label class="control-label col-sm-1">{{ field.label_tag }}</label>
+                                        {{ field }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <p class="center">
+                                <button type="submit" class="btn">{% trans "Submit" %}</button>
+                            </p>
+                        </form>
+                    </div><!-- form -->
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                    <div class="box">
+                        <ul>
+                            {% if locations %}
+                                <li class="local ico">
+                                    {% for location in locations %}
+                                        <p>{{ location.company_name }}<br>{{ location.location }}</p>
+                                    {% endfor %}
+                                </li>
+                            {% endif %}
+                            {% if phones %}
+                                <li class="phone ico">
+                                    {% for phone in phones %}
+                                        {{ phone.country_prefix }}: {{ phone.phone }}<br>
+                                    {% endfor %}
+                                </li>
+                            {% endif %}
+                            {% if emails %}
+                                <li class="email ico">
+                                {% for email in emails %}
+                                    {% if email.is_active %}
+                                        {{ email.email }}<br>
+                                    {% endif %}
+                                {% endfor %}
+                                </li>
+                            {% endif %}
+                        </ul>
+                        <div class="box-ico">
+                            <a href="https://www.instagram.com/adavibeauty/" target="_blank" class="icon-instagram demo-icon"></a>
+                            <a href="https://www.facebook.com/adavibeauty/" target="_blank" class="icon-facebook demo-icon"></a>
+                            <a href="https://www.youtube.com/channel/UCV0W_NNNpT69EwolYTFKZ6Q" target="_blank" class="icon-youtube demo-icon"></a>
+                            <a href="https://plus.google.com/u/0/" target="_blank" class="icon-gplus demo-icon"></a>
+                        </div>
+                        <p class="text-center">
+                            <img src="{% static 'img/vector-smart-object.png' %}" alt="">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section><!-- section blog -->
+    </div>
+{% endblock %}

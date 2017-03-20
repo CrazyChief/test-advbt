@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'products.apps.ProductsConfig',
     'cart',
+    'contacts',
     'ckeditor',
     'colorfield',
     'star_ratings',

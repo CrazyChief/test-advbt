@@ -1894,11 +1894,13 @@ div.tab button.active {
 .review-form {  margin-top: 30px!important;  }
 .review-form h3 {margin-bottom: 20px;}
 
-.review-form form input, .review-form form textarea{display:block;width:100%;height:45px;padding:6px 12px;font-size:14px;line-height:1.42857143;color:#555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);-webkit-transition:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;-webkit-transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}
-.review-form form input:focus, .review-form form textarea:focus{border-color:#f8ada6;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(248,173,166,0.6)}
-.review-form form input::-moz-placeholder, .review-form form textarea::-moz-placeholder{color:#999;opacity:1}
-.review-form form input:-moz-placeholder, .review-form form textarea:-moz-placeholder{color:#999;opacity:1}
-.review-form form input:-ms-input-placeholder, .review-form form textarea:-ms-input-placeholder{color:#999}
-.review-form form input::-webkit-input-placeholder, .review-form form textarea::-webkit-input-placeholder{color:#999}
-.review-form form textarea{height:auto; width: 100%}
+#form-contacts.form {padding-top: 0; padding-bottom: 0; max-width: 400px!important;}
+
+#form-contacts input, #form-contacts textarea, .review-form form input, .review-form form textarea{display:block;width:100%;height:45px;padding:6px 12px;font-size:14px;line-height:1.42857143;color:#555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);-webkit-transition:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;-webkit-transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}
+#form-contacts input:focus, #form-contacts textarea:focus, .review-form form input:focus, .review-form form textarea:focus{border-color:#f8ada6;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(248,173,166,0.6)}
+#form-contacts input::-moz-placeholder, #form-contacts textarea::-moz-placeholder, .review-form form input::-moz-placeholder, .review-form form textarea::-moz-placeholder{color:#999;opacity:1}
+#form-contacts input:-moz-placeholder, #form-contacts textarea:-moz-placeholder, .review-form form input:-moz-placeholder, .review-form form textarea:-moz-placeholder{color:#999;opacity:1}
+#form-contacts input:-ms-input-placeholder, #form-contacts textarea:-ms-input-placeholder, .review-form form input:-ms-input-placeholder, .review-form form textarea:-ms-input-placeholder{color:#999}
+#form-contacts input::-webkit-input-placeholder, #form-contacts textarea::-webkit-input-placeholder, .review-form form input::-webkit-input-placeholder, .review-form form textarea::-webkit-input-placeholder{color:#999}
+#form-contacts input, #form-contacts textarea, .review-form form textarea{height:auto; width: 100%}
 /*.form-control[disabled],.form-control[readonly],fieldset[disabled] .form-control{cursor:not-allowed;background-color:#eee;opacity:1}*/
