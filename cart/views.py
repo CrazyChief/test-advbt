@@ -6,24 +6,6 @@ from .cart import Cart
 from .forms import CartAddProductForm
 
 
-# @require_POST
-class CartAdd(CreateView):
-    pass
-
-
-class CartDelete(DeleteView):
-    pass
-
-
-class CartDetail(TemplateView):
-    template_name = 'cart/detail.html'
-
-    def get(self, request, *args, **kwargs):
-        self.cart = self.get_cart(request)
-
-    def get_cart(self, request):
-        cart = Cart(request)
-        return cart
 
 
 

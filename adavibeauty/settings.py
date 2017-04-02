@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'colorfield',
     'star_ratings',
+    'easycart',
 ]
 
 MIDDLEWARE = [
