@@ -398,10 +398,10 @@ $(document).ready(function(){
     document.getElementById('copyrightTime').innerHTML = d;
     /* !Time */
 
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
-
-
+    /* Get the element with id="defaultOpen" and click on it */
+    if (window.location.pathname.match(/\/products\/([0-9]+)\/([0-9]+)\//)) {
+        document.getElementById("defaultOpen").click();
+    }
 
   //   // Add smooth scrolling to all links in navbar + footer link
   // $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
@@ -444,7 +444,7 @@ $(document).ready(function(){
     validate('.form-part form', {submitFunction:validationCall});
 
     function csrfSafeMethod(method) {
-            // these HTTP methods do not require CSRF protection
+            /* these HTTP methods do not require CSRF protection */
             return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
         }
         $.ajaxSetup({
@@ -455,6 +455,8 @@ $(document).ready(function(){
             }
         });
 
+
+
     $("#addToCart").on('click', function () {
         var pk = $(this).siblings("input[name='add-to-cart']").val(),
             quantity = $(this).siblings("div").find("input[name='quantity']").val();
@@ -463,16 +465,23 @@ $(document).ready(function(){
         cart.add(pk, quantity);
         console.log("success!");
     });
+
+    $(".deleter button").on('click', function () {
+        var bt = $(this),
+            pk = bt.attr('data-product_id');
+        cart.removeProd(pk);
+        console.log(pk);
+    });
 });
 
-// using jQuery
+/* using jQuery */
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
         var cookies = document.cookie.split(';');
         for (var i = 0; i < cookies.length; i++) {
             var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
+            /* Does this cookie string begin with the name we want? */
             if (cookie.substring(0, name.length + 1) === (name + '=')) {
                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                 break;

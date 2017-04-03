@@ -7,10 +7,20 @@ var cart = {
         }, 'json');
     },
 
-    remove: function (itemPK) {
+    removeProd: function (itemPK) {
         return $.post(URLS.removeItem, {pk: itemPK}, function (xhr) {
             $("a.cart span").html("");
             $("a.cart span").html(xhr['itemCount']);
+            if (window.location.pathname.match(/\/cart\/$/)) {
+                var bt = $('div.cart_item').find('.deleter button[data-product_id="' + itemPK + '"]'),
+                    field = bt.parents('div.cart_item');
+                field.remove();
+            }
+            if (xhr['itemCount'] == 0) {
+                var wrapp = $('section.sector'),
+                    blockForDelete = wrapp.find('div.row');
+                blockForDelete.remove();
+            }
         }, 'json');
     },
 

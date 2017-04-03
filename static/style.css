@@ -1727,9 +1727,10 @@ body {
 .conteiner-corzin .item .texter-part .botomer .price .prise{ font-size: 18px; color: rgb(56, 58, 58); line-height: 1.2; font-weight: 900;}
 
 .conteiner-corzin .item .deleter{width: 40px;}
-.conteiner-corzin .item .deleter .deleter-christ{position: relative; border: 1px solid #ff887b; border-radius: 50%; width: 28px; height: 28px; margin: 0 auto; cursor: pointer; }
+.conteiner-corzin .item .deleter .deleter-christ{position: relative; border: 1px solid #ff887b; border-radius: 50%; width: 28px; height: 28px; margin: 0 auto; cursor: pointer; display: block!important; background-color: transparent; transition: all, 0.3s;}
 .conteiner-corzin .item .deleter .deleter-christ:before{ content: ''; position: absolute; top: 7px; left: 13px; width: 1px; height: 12px; background-color: #ff887b; transform: rotate(-45deg); }
 .conteiner-corzin .item .deleter .deleter-christ:after{ content: ''; position: absolute; top: 7px; left: 13px; width: 1px; height: 12px; background-color: #ff887b; transform: rotate(45deg); }
+.conteiner-corzin .item .deleter .deleter-christ:hover{transform: rotate(180deg);}
 
 .conteiner-corzin .last-row-part{display: flex; align-items: center; justify-content: space-between;padding: 40px 0;}
 .conteiner-corzin .last-row-part .cupon{ max-width: 225px; }
