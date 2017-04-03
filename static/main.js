@@ -491,3 +491,34 @@ function getCookie(name) {
     return cookieValue;
 }
 var csrftoken = getCookie('csrftoken');
+
+function incr(e) {
+    var field = $(e).siblings('input'),
+        pk = field.attr('data-product_id'),
+        mVal = field.attr("max"),
+        vl = field.val(),
+        btn = $('.checkout-button');
+    btn.addClass('disabled');
+    if (+vl >= +mVal) {
+        alert("This is the largest quantity of product you can order.");
+        btn.removeClass('disabled');
+    } else {
+        vl++;
+    }
+    cart.changeQuantity(pk, vl);
+}
+
+function decr(e) {
+    var field = $(e).siblings('input'),
+        pk = field.attr('data-product_id'),
+        vl = field.val(),
+        btn = $('.checkout-button');
+    btn.addClass('disabled');
+    if (+vl == 1) {
+        alert("This is the least quantity of product you can order.");
+        btn.removeClass('disabled');
+    } else {
+        vl--;
+    }
+    cart.changeQuantity(pk, vl);
+}

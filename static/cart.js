@@ -25,7 +25,14 @@ var cart = {
     },
 
     changeQuantity: function (pk, quantity) {
-        return $.post(URLS.changeQuantity, {pk: pk, quantity: quantity}, 'json');
+        return $.post(URLS.changeQuantity, {pk: pk, quantity: quantity}, function (xhr) {
+            console.log(xhr);
+            var tp = +xhr['totalPrice'];
+            tp = tp.toFixed(2);
+            $('input[data-product_id="'+pk+'"]').val(quantity);
+            $('.cart_totals .woocommerce-Price-amount').text(tp);
+            $('.checkout-button').removeClass('disabled');
+        }, 'json');
     },
 
     empty: function () {

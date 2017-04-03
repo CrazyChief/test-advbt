@@ -165,9 +165,9 @@
                                                                 <div class="kilkist">
                                                                     <div class="name">Количество:: </div>
                                                                     <div class="input-row">
-                                                                        <input type="number" step="1" min="0" max="" name="cart[4a08142c38dbe374195d41c04562d9f8][qty]" value="{{ item.quantity }}" title="Кол-во" class="input-text qty text" size="4" pattern="[0-9]*" inputmode="numeric">
-                                                                        <span class="less"></span>
-                                                                        <span class="more"></span>
+                                                                        <input type="number" step="1" min="1" max="{{ item.obj.quantity }}" data-product_id="{{ item.obj.id }}" value="{{ item.quantity }}" class="input-text qty text">
+                                                                        <span class="less" onclick="decr(this)"></span>
+                                                                        <span class="more" onclick="incr(this)"></span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="price">
@@ -200,7 +200,7 @@
                                                     <div class="cart-collaterals">
                                                         <div class="all-price cart_totals ">
                                                             <div class="allcost" style="text-align: right;">
-                                                                <div>Итого <b> <span><strong><span class="woocommerce-Price-amount amount">{{ cart.total_price|floatformat }}<span class="woocommerce-Price-currencySymbol">₴</span></span></strong> </span></b></div>
+                                                                <div>Итого <b> <span><strong><span class="woocommerce-Price-amount amount">{{ cart.total_price|floatformat }}</span><span class="woocommerce-Price-currencySymbol"> ₴</span></strong></span></b></div>
                                                             </div>
                                                             <a href="https://www.adavibeauty.com/checkout" class="checkout-button alt wc-forward submition-butt btn">
                                                                 <span>Перейти к оформлению</span>
