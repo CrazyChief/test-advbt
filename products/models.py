@@ -94,6 +94,9 @@ class ProductVariation(models.Model):
     def get_absolute_url(self):
         return reverse('products:detail', kwargs={'pk': self.pk})
 
+    def get_main_image(self):
+        return self.productimage_set.get(is_main=True).image
+
     def __str__(self):
         return str(self.product) + " - " + str(self.sku)
 

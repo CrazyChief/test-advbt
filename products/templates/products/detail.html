@@ -88,14 +88,13 @@
                             <!-- !VARIATION LINKS -->
                             <!-- ADD TO CARD FORM -->
                             <div class="btn-box">
-                                <form class="cart" method="post">
+                                <form class="cart" action="javascript:void(0)" method="post">
+                                    <input type="hidden" name="add-to-cart" value="{{ productvariation.pk }}">
                                     <div class="quantity">
                                         <input type="number" step="1" min="1" max="" name="quantity"
-                                               value="1" title="Кол-во" class="input-text qty text"
-                                               size="4" pattern="[0-9]*" inputmode="numeric">
+                                               value="1" title="Кол-во" class="input-text qty text">
                                     </div>
-                                    <input type="hidden" name="add-to-cart" value="980">
-                                    <button type="submit" class="single_add_to_cart_button button alt btn btn-1">{% trans "Add to cart" %}</button>
+                                    <button id="addToCart" type="button" class="single_add_to_cart_button button alt btn btn-1">{% trans "Add to cart" %}</button>
                                 </form>
                             </div><!-- box-desc -->
                             <!-- !ADD TO CARD FORM -->

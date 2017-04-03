@@ -1,7 +1,7 @@
 (function() {
     $(document).ready(function() {
         // box_operation();
-        fancyboxs();
+        // fancyboxs();
         // owlCarousel();
         // form();
         // click();
@@ -156,33 +156,33 @@
     //         navigation: true
     //     });
     // }
-    function fancyboxs() {
-        $(".fancybox-products").fancybox({
-            openEffect: 'elastic',
-            closeEffect: 'elastic',
-
-            helpers: {
-                title: {
-                    type: 'inside'
-                }
-            }
-        });
-        /*$(".fancybox-media").fancybox({
-            helpers: {
-                media: true
-            },
-            openEffect  : 'elastic',
-            closeEffect : 'elastic',
-        });*/
-
-        $(".fancybox-media").fancybox({
-            openEffect  : 'none',
-            closeEffect : 'none',
-            helpers : {
-                media : {}
-            }
-        });
-    }
+    // function fancyboxs() {
+    //     $(".fancybox-products").fancybox({
+    //         openEffect: 'elastic',
+    //         closeEffect: 'elastic',
+    //
+    //         helpers: {
+    //             title: {
+    //                 type: 'inside'
+    //             }
+    //         }
+    //     });
+    //     /*$(".fancybox-media").fancybox({
+    //         helpers: {
+    //             media: true
+    //         },
+    //         openEffect  : 'elastic',
+    //         closeEffect : 'elastic',
+    //     });*/
+    //
+    //     $(".fancybox-media").fancybox({
+    //         openEffect  : 'none',
+    //         closeEffect : 'none',
+    //         helpers : {
+    //             media : {}
+    //         }
+    //     });
+    // }
 
     function form() {
         $("#form-contacts").validate({
@@ -261,27 +261,6 @@ function setEqualHeight(columns) {
     $(window).load(function() {
         setEqualHeight($(".col.product.type-product  .title"));
     });
-
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
-function setCookie(cname, cvalue) {
-    document.cookie = cname + "=" + cvalue + ";" ;
-}
 
 function validate(form, options){
     var setings = {
@@ -463,4 +442,43 @@ $(document).ready(function(){
     });
 
     validate('.form-part form', {submitFunction:validationCall});
+
+    function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+    $("#addToCart").on('click', function () {
+        var pk = $(this).siblings("input[name='add-to-cart']").val(),
+            quantity = $(this).siblings("div").find("input[name='quantity']").val();
+        console.log("PK: " + pk);
+        console.log("quantity: " + quantity);
+        cart.add(pk, quantity);
+        console.log("success!");
+    });
 });
+
+// using jQuery
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');

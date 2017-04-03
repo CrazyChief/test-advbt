@@ -13,8 +13,9 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 
     <script type="text/javascript" src="{% static 'jquery-1.12.4.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'library.js' %}"></script>
+{#    <script type="text/javascript" src="{% static 'library.js' %}"></script>#}
     <script type="text/javascript" src="{% static 'main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'cart.js' %}"></script>
 
     {% block includefiles %}{% endblock %}
 
@@ -49,6 +50,14 @@
             $spinner.delay(50).fadeOut('slow');
             $preloader.delay(50).fadeOut('slow');
         });
+    </script>
+    <script>
+        var URLS ={
+            addItem: '{% url "cart:cart-add" %}',
+            removeItem: '{% url "cart:cart-remove" %}',
+            changeQuantity: '{% url "cart:cart-change-quantity" %}',
+            emptyCart: '{% url "cart:cart-empty" %}',
+        }
     </script>
 
 </head>
@@ -149,9 +158,9 @@
                     <span class="tcon-visuallyhidden">toggle menu</span>
                 </button>
 
-                <a href="/cart" class="cart">
+                <a href="{% url 'cart:detail' %}" class="cart">
                     <img src="https://www.adavibeauty.com/wp-content/themes/templebeauty/img/cart-object.png" alt="">
-                    <span>0</span>
+                    <span>{{ cart.item_count }}</span>
                 </a>
 
                 <div class="lang">
