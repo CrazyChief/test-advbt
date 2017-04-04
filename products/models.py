@@ -171,59 +171,6 @@ class ProductReview(models.Model):
     product_name.short_description = 'Review for product'
 
 
-class Order(models.Model):
-    """
-    Order model. Stores detail information of every order
-    """
-    billing_first_name = models.CharField(max_length=100)
-    billing_last_name = models.CharField(max_length=100)
-    shipping_first_name = models.CharField(max_length=100)
-    shipping_last_name = models.CharField(max_length=100)
-    shipping_type = models.CharField(max_length=50)
-    shipping_street = models.CharField(max_length=200, null=True)
-    shipping_state = models.CharField(max_length=100, null=True)
-    shipping_postcode = models.CharField(max_length=15, null=True)
-    shipping_country = models.CharField(max_length=50, null=True)
-    shipping_city = models.CharField(max_length=100, null=True)
-    shipping_departament = models.CharField(max_length=400, null=True)
-    shipping_to_home = models.BooleanField(default=False)
-    shipping_phone = models.CharField(max_length=20)
-    shipping_email = models.EmailField(max_length=254)
-
-    shipping_total = models.FloatField()
-    discount_code = models.CharField(max_length=20, null=True)
-    total = models.FloatField()
-    item_total = models.IntegerField()
-    pay_status = models.BooleanField(default=False)
-    time = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        verbose_name = "Order"
-        verbose_name_plural = "Orders"
-        ordering = ["-id"]
-
-    def billing_name(self):
-        return "%s %s" % (self.billing_first_name, self.billing_last_name)
-
-    def __str__(self):
-        return "%s %s %s" % (self.id, self.billing_name(), self.time)
-
-
-class OrderItem(models.Model):
-    """
-    Order item model. Stores an information about every product in order
-    """
-    # product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    # product_variation = models.ForeignKey(ProductVariation, on_delete=models.CASCADE)
-    product = models.ForeignKey(ProductVariation, on_delete=models.CASCADE)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
-
-    class Meta:
-        verbose_name = "Order item"
-        verbose_name_plural = "Order items"
-
-
 class Discount(models.Model):
     """
     Discount model. Stores an information about discount in details
