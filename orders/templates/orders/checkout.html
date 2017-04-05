@@ -19,6 +19,7 @@
                     <h1 class="h2">Оформление заказа</h1>
                     <div class="clear"></div>
                 </div><!-- title -->
+
                 <div class="row box-blog">
                     <div class="col-xs-12">
                         <div class="woocommerce">
@@ -103,97 +104,93 @@
                                     <div class="title-name-form">
                                         <h2>Оберіть бажаний метод доставки, оплати та заповніть всі поля з інформацією </h2>
                                     </div>
-                                    <form name="checkout" method="post" action="https://www.adavibeauty.com/checkout" enctype="multipart/form-data" class="conteiner-form">
+                                    <form name="checkout" method="post" action="" class="conteiner-form">
+                                        {% csrf_token %}
                                         <div class="top-row">
                                             <!--div class="woocommerce-billing-fields"-->
                                             <div class="cel-inp">
-                                                <div class="titl-inp">Ваше имя</div>
-                                                <input type="text" name="billing_first_name" id="billing_first_name" autocomplete="given-name" value="" required="required">
+                                                <div class="titl-inp">{{ form.shipping_first_name.label_tag }}</div>
+                                                {{ form.shipping_first_name }}
                                             </div>
                                             <div class="cel-inp">
-                                                <div class="titl-inp">Ваша фамилия</div>
-                                                <input type="text" name="billing_last_name" id="billing_last_name" placeholder="" autocomplete="family-name" value="" required="required">
+                                                <div class="titl-inp">{{ form.shipping_last_name.label_tag }}</div>
+                                                {{ form.shipping_last_name }}
                                             </div>
                                             <div class="cel-inp">
-                                                <div class="titl-inp">Ваш E-mail</div>
-                                                <input type="email" name="billing_email" id="billing_email" placeholder="" autocomplete="email" value="" required="required">
+                                                <div class="titl-inp">{{ form.shipping_email.label_tag }}</div>
+                                                {{ form.shipping_email }}
                                             </div>
                                             <div class="cel-inp">
-                                                <div class="titl-inp">Ваш номер телефона</div>
-                                                <input type="tel" name="billing_phone" id="billing_phone" placeholder="" autocomplete="tel" value="" required="required">
+                                                <div class="titl-inp">{{ form.shipping_phone.label_tag }}</div>
+                                                {{ form.shipping_phone }}
                                             </div>
                                             <!--/div-->
                                         </div>
                                         <div id="order_review" class="woocommerce-checkout-review-order">
                                             <div class="last-row">
                                                 <div class="title-row">
-                                                    <h3>Доставка</h3>
+                                                    <h3>{{ form.shipping_type.label_tag }}</h3>
                                                 </div>
                                                 <div id="shipping_method" class="ckekers">
-                                                    <div class="cheker-cur">
-                                                        <label>
-                                                            <input type="radio" name="shipping_method[0]" data-index="0" id="shipping_method_0_local_pickup1" value="local_pickup:1" class="shipping_method" checked="checked">
-                                                            <span class="beutfy-qa"></span>
-                                                            <span class="descript">Другой вариант (Мы Вам перезвоним для уточнения деталей)</span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="cheker-cur">
-                                                        <label>
-                                                            <input type="radio" name="shipping_method[0]" data-index="0" id="shipping_method_0_local_pickup4" value="local_pickup:4" class="shipping_method">
-                                                            <span class="beutfy-qa"></span>
-                                                            <span class="descript">Новая почта</span>
-                                                        </label>
-                                                    </div>
+                                                    {% for radio in form.shipping_type %}
+                                                        <div class="cheker-cur">
+                                                            <label>
+                                                                {{ radio.tag }}
+                                                                <span class="beutfy-qa"></span>
+                                                                <span class="descript">{{ radio.choice_label }}</span>
+                                                            </label>
+                                                        </div>
+                                                    {% endfor %}
                                                 </div>
                                             </div>
                                             <div class="hidden-part" style="display: none;">
                                                 <div class="main-row">
-                                                    <div class="cel-inp" id="billing_otdel_field">
-                                                        <div class="titl-inp">Номер отделения Новой Почты</div>
-                                                        <input type="text" name="billing_otdel" id="billing_otdel" placeholder="" value="">
+                                                    <div class="cel-inp" id="id_shipping_departament_field">
+                                                        <div class="titl-inp">{{ form.shipping_departament.label_tag }}</div>
+                                                        {{ form.shipping_departament }}
                                                     </div>
-                                                    <div class="cel-inp" id="billing_city_field">
-                                                        <div class="titl-inp">Город доставки</div>
-                                                        <input type="text" name="billing_city" id="billing_city" placeholder="" autocomplete="address-level2" value="">
+                                                    <div class="cel-inp" id="id_shipping_city_field">
+                                                        <div class="titl-inp">{{ form.shipping_city.label_tag }}</div>
+                                                        {{ form.shipping_city }}
                                                     </div>
                                                 </div>
                                                 <div class="center-row">
                                                     <div class="cheker-cur">
                                                         <label>
-                                                            <input type="checkbox" name="delivery2Doors">
+                                                            {{ form.shipping_to_home }}
                                                             <span class="beutfy-qa"></span>
-                                                            <span class="descript">Доставка до дверей</span>
+                                                            <span class="descript">{{ form.shipping_to_home.label_tag }}</span>
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="last-row-hide" style="display: none;">
-                                                    <div class="cel-inp" id="billing_address_1_field">
-                                                        <div class="titl-inp">Улица, номер дома или квартиры</div>
-                                                        <input type="text" name="billing_address_1" id="billing_address_1" placeholder="Улица и т.д." autocomplete="address-line1" value="">
+                                                    <div class="cel-inp" id="id_shipping_street_field">
+                                                        <div class="titl-inp">{{ form.shipping_street.label_tag }}</div>
+                                                        {{ form.shipping_street }}
+                                                    </div>
+                                                </div>
+                                                <div class="last-row-hide" style="display: none;">
+                                                    <div class="cel-inp" id="id_shipping_home_field">
+                                                        <div class="titl-inp">{{ form.shipping_home.label_tag }}</div>
+                                                        {{ form.shipping_home }}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="middle-row">
                                             <div class="title-row">
-                                                <h3>Как планируете оплатить?</h3>
+                                                <h3>{{ form.pay_type.label_tag }}</h3>
                                             </div>
                                             <div id="payment" class="ckekers woocommerce-checkout-payment wc_payment_methods payment_methods methods">
-                                                <div class="cheker-cur payment_method_liqpay">
-                                                    <label>
-                                                        <input id="payment_method_liqpay" type="radio" name="payment_method" value="liqpay" checked="checked" data-order_button_text="">
-                                                        <span class="beutfy-qa"></span>
-                                                        <span class="descript">Сейчас </span>
-                                                    </label>
-                                                </div>
-
-                                                <div class="cheker-cur payment_method_cod">
-                                                    <label style="opacity: 0.4;">
-                                                        <input id="payment_method_cod" type="radio" name="payment_method" value="cod" data-order_button_text="" disabled="">
-                                                        <span class="beutfy-qa"></span>
-                                                        <span class="descript">При получении (только для Новой Почты) </span>
-                                                    </label>
-                                                </div>
+                                                {% for radio in form.pay_type %}
+                                                    <div class="cheker-cur">
+                                                        <label>
+                                                            {{ radio.tag }}
+                                                            <span class="beutfy-qa"></span>
+                                                            <span class="descript">{{ radio.choice_label }}</span>
+                                                        </label>
+                                                    </div>
+                                                {% endfor %}
                                             </div>
                                         </div>
                                         <div class="submit-row form-row place-order">
@@ -212,6 +209,7 @@
                         </div>
                     </div>
                 </div><!-- col -->
+
             </div><!-- box-blog -->
         </section>
     </div>

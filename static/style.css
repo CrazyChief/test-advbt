@@ -1166,7 +1166,7 @@ body .body section.sector .title.style-2 .h2{position:relative}
 body .body section.sector .title.style-2 .h2:before{background-color:#e3b62c}
 body .body section.sector .title.style-3 .h2{position:relative}
 body .body section.sector .title.style-3 .h2:before{background-color:#ff887b}
-body .body section.sector .title.style-4{text-align:right}
+/*body .body section.sector .title.style-4{text-align:right}*/
 body .body section.sector .title.style-4 .h2{position:relative;width:50%;padding:0}
 body .body section.sector .content{width:100%;margin-top:20px; color: #000;}
 body .body section.sector .content img{max-width:100%; height: auto;}

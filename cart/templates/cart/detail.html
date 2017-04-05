@@ -202,7 +202,7 @@
                                                             <div class="allcost" style="text-align: right;">
                                                                 <div>Итого <b> <span><strong><span class="woocommerce-Price-amount amount">{{ cart.total_price|floatformat }}</span><span class="woocommerce-Price-currencySymbol"> ₴</span></strong></span></b></div>
                                                             </div>
-                                                            <a href="https://www.adavibeauty.com/checkout" class="checkout-button alt wc-forward submition-butt btn">
+                                                            <a href="{% url 'orders:checkout' %}" class="checkout-button alt wc-forward submition-butt btn">
                                                                 <span>Перейти к оформлению</span>
                                                             </a>
                                                         </div>

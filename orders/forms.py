@@ -1,9 +1,9 @@
-from django import forms
+from django.forms import ModelForm, RadioSelect
 from django.utils.translation import ugettext_lazy as _
 from .models import Order
 
 
-class OrderCreateForm(forms.ModelForm):
+class OrderCreateForm(ModelForm):
     class Meta:
         model = Order
         fields = [
@@ -13,6 +13,8 @@ class OrderCreateForm(forms.ModelForm):
             'shipping_city',
             'shipping_departament',
             'shipping_to_home',
+            'shipping_street',
+            'shipping_home',
             'shipping_phone',
             'shipping_email',
             'pay_type',
@@ -24,6 +26,8 @@ class OrderCreateForm(forms.ModelForm):
             'shipping_city': _('City'),
             'shipping_departament': _('Departament'),
             'shipping_to_home': _('Home delivery'),
+            'shipping_street': _('Street'),
+            'shipping_home': _('Home number, flat number'),
             'shipping_phone': _('Phone'),
             'shipping_email': _('Email'),
             'pay_type': _('How do you plan to pay?'),
@@ -35,6 +39,10 @@ class OrderCreateForm(forms.ModelForm):
             'shipping_last_name': {
                 'max_length': _("This surname is too long. Max number of letters is 100")
             }
+        }
+        widgets = {
+            'shipping_type': RadioSelect,
+            'pay_type': RadioSelect,
         }
 
 
