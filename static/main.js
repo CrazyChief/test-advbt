@@ -431,31 +431,66 @@ $(document).ready(function(){
   //       menu: '#myMenu'
   //   });
 
-    var redFlag = false ;
 
-    $('.form-part form input').on('keyup', function(){
-        if( $(this).val() != '' ){
-            $(this).addClass('error');
+    $('input[name="shipping_to_home"]').on('change', function () {
+        if( $(this).is( ":checked" )  ){
+            $('.last-row-hide').slideDown(300);
+            $('.hidden-part #id_shipping_street').prop('required',true);
+            $('.hidden-part #id_shipping_home').prop('required',true);
         } else {
-            $(this).removeClass('error');
+            $('.last-row-hide').slideUp(300);
+            $('.hidden-part #id_shipping_street').prop('required',false);
+            $('.hidden-part #id_shipping_home').prop('required',false);
         }
     });
 
-    validate('.form-part form', {submitFunction:validationCall});
+    $('input[name="shipping_type"]').on('change', function () {
+        console.log($(this).val());
+        if( $(this).val() == 'N_P' ){
+            $('.hidden-part').slideDown(300);
+            $('.hidden-part .main-row input').prop('required',true);
+        } else {
+            $('.hidden-part').slideUp(300);
+            $('.hidden-part .main-row input').prop('required',false);
+            if ( $('#id_pay_type_1').is(":checked") ) {
+                $('#id_pay_type_1').removeAttr('checked');
+                $('#id_pay_type_0').attr('checked', true);
+
+            }
+            // $('.middle-row').find("input[name='whenPay']:first").click();
+        }
+    });
+    if($('input[name="shipping_type"]:checked').val() == 'N_P') {
+        $('.hidden-part').slideDown(300);
+        $('.hidden-part .main-row input').prop('required',true);
+    }
+
+    if($('#id_shipping_type_1:checked').length) {
+        $('#id_pay_type_1').prop('disabled', true);
+        $('#id_pay_type_1').parent('label').css('opacity', '0.4');
+        $('#id_pay_type_0').prop('checked', true);
+    }
+    $('input[name="shipping_type"]').on('change', function() {
+        if($('#id_shipping_type_1:checked').length) {
+            $('#id_pay_type_1').prop('disabled', true);
+            $('#id_pay_type_1').parent('label').css('opacity', '0.4');
+        } else {
+            $('#id_pay_type_1').prop('disabled', false);
+            $('#id_pay_type_1').parent('label').css('opacity', '1');
+        }
+    });
 
     function csrfSafeMethod(method) {
-            /* these HTTP methods do not require CSRF protection */
-            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-        }
-        $.ajaxSetup({
-            beforeSend: function(xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                }
+        /* these HTTP methods do not require CSRF protection */
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
             }
-        });
-
-
+        }
+    });
 
     $("#addToCart").on('click', function () {
         var pk = $(this).siblings("input[name='add-to-cart']").val(),
@@ -522,136 +557,3 @@ function decr(e) {
     }
     cart.changeQuantity(pk, vl);
 }
-
-
-$(document).ready(function(){
-
-    var redFlag = false ;
-
-    $('.form-part form input').on('keyup', function(){
-        if( $(this).val() != '' ){
-            $(this).addClass('error');
-        } else {
-            $(this).removeClass('error');
-        }
-    });
-
-    $('input[name="shipping_to_home"]').on('change', function () {
-        if( $(this).is( ":checked" )  ){
-            $('.last-row-hide').slideDown(300);
-            $('.hidden-part #id_shipping_street').prop('required',true);
-            $('.hidden-part #id_shipping_home').prop('required',true);
-        } else {
-            $('.last-row-hide').slideUp(300);
-            $('.hidden-part #id_shipping_street').prop('required',false);
-            $('.hidden-part #id_shipping_home').prop('required',false);
-        }
-    });
-
-    $('input[name="shipping_type"]').on('change', function () {
-        console.log($(this).val());
-        if( $(this).val() == 'N_P' ){
-            $('.hidden-part').slideDown(300);
-            $('.hidden-part .main-row input').prop('required',true);
-        } else {
-            $('.hidden-part').slideUp(300);
-            $('.hidden-part .main-row input').prop('required',false);
-            if ( $('#id_pay_type_1').is(":checked") ) {
-                $('#id_pay_type_1').removeAttr('checked');
-                $('#id_pay_type_0').attr('checked', true);
-
-            }
-            // $('.middle-row').find("input[name='whenPay']:first").click();
-        }
-    });
-    if($('input[name="shipping_type"]:checked').val() == 'N_P') {
-        $('.hidden-part').slideDown(300);
-        $('.hidden-part .main-row input').prop('required',true);
-    }
-
-    // $('input[name="whenPay"]').on('change', function () {
-    //     if ( $(this).val() !=  'now' ) {
-    //         $('.last-row').find("input[name='delivery']:first").click();
-    //     }
-    // });
-
-    validate('.form-part form', {submitFunction:validationCall});
-
-
-    // $('.input-row .less').click(function() {
-    //     var $input = $(this).parent().find('.qty');
-    //     var count = parseInt($input.val()) - 1;
-    //     count = count < 1 ? 1 : count;
-    //     $input.val(count).change();
-    //     $input.change();
-    //     totalChange($input);
-    //     //return false;
-    // });
-    // $('.input-row .more').click(function() {
-    //     var $input = $(this).parent().find('.qty');
-    //     $input.val(parseInt($input.val()) + 1).change();
-    //     $input.trigger("change");
-    //     totalChange($input);
-    //     //return false;
-    // });
-
-    if($('#id_shipping_type_1:checked').length) {
-        $('#id_pay_type_1').prop('disabled', true);
-        $('#id_pay_type_1').parent('label').css('opacity', '0.4');
-        $('#id_pay_type_0').prop('checked', true);
-    }
-    $('input[name="shipping_type"]').on('change', function() {
-        if($('#id_shipping_type_1:checked').length) {
-            $('#id_pay_type_1').prop('disabled', true);
-            $('#id_pay_type_1').parent('label').css('opacity', '0.4');
-        } else {
-            $('#id_pay_type_1').prop('disabled', false);
-            $('#id_pay_type_1').parent('label').css('opacity', '1');
-        }
-    });
-
-    function totalChange(th) {
-        form = $(th).closest('form');
-
-        // emulates button Update cart click
-        $("<input type='hidden' name='update_cart' id='update_cart' value='1'>").appendTo(form);
-
-        // plugin flag
-        $("<input type='hidden' name='is_wac_ajax' id='is_wac_ajax' value='1'>").appendTo(form);
-
-        el_qty = $(th);
-        matches = $(th).attr('name').match(/cart\[(\w+)\]/);
-        cart_item_key = matches[1];
-        form.append( $("<input type='hidden' name='cart_item_key' id='cart_item_key'>").val(cart_item_key) );
-
-        // get the form data before disable button...
-        formData = form.serialize();
-
-        $("input[name='update_cart']").val('Updating…').prop('disabled', true);
-
-        $("a.checkout-button.wc-forward").addClass('disabled').html('Updating…');
-
-        $.post( form.attr('action'), formData, function(resp) {
-            // ajax response
-            $('.cart-collaterals').html(resp.html);
-
-            el_qty.closest('.cart_item').find('.product-subtotal').html(resp.price);
-
-            $('#update_cart').remove();
-            $('#is_wac_ajax').remove();
-            $('#cart_item_key').remove();
-
-            $("input[name='update_cart']").val(resp.update_label).prop('disabled', false);
-
-            $("a.checkout-button.wc-forward").removeClass('disabled').html(resp.checkout_label);
-
-            // when changes to 0, remove the product from cart
-            if ( el_qty.val() == 0 ) {
-                el_qty.closest('tr').remove();
-            }
-        },
-        'json'
-        );
-    }
-
-});
