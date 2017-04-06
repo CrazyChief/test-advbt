@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from easycart import BaseCart
+from django.urls import reverse
 from django.http import HttpResponseForbidden
-from django.views.generic import FormView
+from django.views.generic import FormView, DetailView
 from .forms import OrderCreateForm
 from .models import Order, OrderItem
 from products.models import ProductVariation
@@ -38,12 +39,18 @@ class CheckoutView(FormView):
             return self.form_invalid(form)
 
     def form_valid(self, form):
-        order = form.save()
+        self.order = form.save()
         for item in self.cart.list_items(Cart(self.request)):
-            OrderItem.objects.create(order=order, product=item.obj, price=item.obj.price, quantity=item.quantity)
+            OrderItem.objects.create(order=self.order, product=item.obj, price=item.obj.price, quantity=item.quantity)
             ProductVariation.objects.get(pk=item.obj.pk).update_quantity(item.quantity)
         self.cart.empty(Cart(self.request))
         return super(CheckoutView, self).form_valid(form)
 
+    def get_success_url(self):
+        return reverse('orders:created', kwargs={'pk': self.order.pk})
 
+
+class CreatedView(DetailView):
+    model = Order
+    template_name = 'orders/created.html'
 

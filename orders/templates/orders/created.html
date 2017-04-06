@@ -1,0 +1,27 @@
+{% extends 'layout/layout.html' %}
+
+{% load i18n %}
+
+{% get_available_languages as languages %}
+
+{% load staticfiles %}
+
+{% block includefiles %}{% endblock %}
+
+{% block title %}{% trans "Thank You" %}{% endblock %}
+
+{% block content %}
+    <div class="body page height-2" style="min-height:855px">
+        <div class="block-left-fon" style="width: calc(95.5px + 225px); height: 1114px"></div>
+        <section class="sector blog page">
+            <div class="container">
+                <div class="title style-4">
+                    <h1 class="h2">{% trans "Thank You for order" %}!</h1>
+                    <br><br>
+                    <p>{% trans "Your order ID" %}: {{ order.id }}</p>
+                    <div class="clear"></div>
+                </div><!-- title -->
+            </div>
+        </section>
+    </div>
+{% endblock %}
