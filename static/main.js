@@ -183,65 +183,66 @@
     //         }
     //     });
     // }
-
-    function form() {
-        $("#form-contacts").validate({
-            rules: {
-                sendto: {
-                    required: true
-                },
-                textarea: {
-                    required: true
-                },
-                name: {
-                    required: true
-                },
-                email: {
-                    required: true
-                }
-            },
-            messages: {
-                sendto: '',
-                textarea: '',
-                name: '',
-                email: ''
-            },
-            errorPlacement: function(error, element) {},
-            submitHandler: function(form) {
-                var forma = $(form);
-                $.ajax({
-                    type: 'POST',
-                    url: '/wp-content/themes/templebeauty/sendmessage.php',
-                    data: forma.serialize(),
-                    success: function(data) {
-                        $("form").find('input,textarea').val('');
-                        if (data == "true") {
-                            $.fancybox.close()
-                            $.fancybox(
-                                '<div class="thenks-fancybox text-center" style="max-width:550px"><p class="img-text-2"><h2>' + title_form + '</h2> <p>' + text_form + '</p></p></div>', {
-                                    'autoDimensions': false,
-                                    'height': 'auto',
-                                    'transitionIn': 'none',
-                                    'transitionOut': 'none'
-                                }
-                            );
-                            setTimeout("$.fancybox.close()", 4000);
-                        }
-                    }
-                });
-            },
-            success: function() {},
-            highlight: function(element, errorClass) {
-                $(element).addClass('error');
-            },
-            unhighlight: function(element, errorClass, validClass) {
-                $(element).removeClass('error');
-            }
-        });
-        $(function() {
-            $("[name='phone']").mask("+38 (999) 999 - 9999");
-        });
-    }
+    //
+    // function form() {
+    //     $("#form-contacts").validate({
+    //         rules: {
+    //             sendto: {
+    //                 required: true
+    //             },
+    //             textarea: {
+    //                 required: true
+    //             },
+    //             name: {
+    //                 required: true
+    //             },
+    //             email: {
+    //                 required: true
+    //             }
+    //         },
+    //         messages: {
+    //             sendto: '',
+    //             textarea: '',
+    //             name: '',
+    //             email: ''
+    //         },
+    //         errorPlacement: function(error, element) {},
+    //         submitHandler: function(form) {
+    //             var forma = $(form);
+    //             $.ajax({
+    //                 type: 'POST',
+    //                 url: '/wp-content/themes/templebeauty/sendmessage.php',
+    //                 data: forma.serialize(),
+    //                 success: function(data) {
+    //                     $("form").find('input,textarea').val('');
+    //                     if (data == "true") {
+    //                         $.fancybox.close()
+    //                         $.fancybox(
+    //                             '<div class="thenks-fancybox text-center" style="max-width:550px"><p class="img-text-2"><h2>' + title_form + '</h2> <p>' + text_form + '</p></p></div>', {
+    //                                 'autoDimensions': false,
+    //                                 'height': 'auto',
+    //                                 'transitionIn': 'none',
+    //                                 'transitionOut': 'none'
+    //                             }
+    //                         );
+    //                         setTimeout("$.fancybox.close()", 4000);
+    //                     }
+    //                 }
+    //             });
+    //         },
+    //         success: function() {},
+    //         highlight: function(element, errorClass) {
+    //             $(element).addClass('error');
+    //         },
+    //         unhighlight: function(element, errorClass, validClass) {
+    //             $(element).removeClass('error');
+    //         }
+    //     });
+    //     $(function() {
+    //         $("[name='phone']").mask("+38 (999) 999 - 9999");
+    //     });
+    // }
+    //
 })();
 
 function setEqualHeight(columns) {
@@ -262,120 +263,120 @@ function setEqualHeight(columns) {
         setEqualHeight($(".col.product.type-product  .title"));
     });
 
-function validate(form, options){
-    var setings = {
-        errorFunction:null,
-        submitFunction:null,
-        highlightFunction:null,
-        unhighlightFunction:null
-    };
-    $.extend(setings, options);
+// function validate(form, options){
+//     var setings = {
+//         errorFunction:null,
+//         submitFunction:null,
+//         highlightFunction:null,
+//         unhighlightFunction:null
+//     };
+//     $.extend(setings, options);
+//
+//     var $form = $(form);
+//
+//     if ($form.length && $form.attr('novalidate') === undefined) {
+//         $form.on('submit', function(e) {
+//             e.preventDefault();
+//         });
+//         $form.validate({
+//             errorClass : 'errorText',
+//             focusCleanup : true,
+//             focusInvalid : false,
+//             invalidHandler: function(event, validator) {
+//                 if(typeof(setings.errorFunction) === 'function'){
+//                     setings.errorFunction(form);
+//                 }
+//             },
+//             errorPlacement: function(error, element) {
+//                 error.appendTo( element.closest('.form_input'));
+//             },
+//             highlight: function(element, errorClass, validClass) {
+//                 $(element).addClass('error');
+//                 $(element).closest('.form_row').addClass('error').removeClass('valid');
+//                 if( typeof(setings.highlightFunction) === 'function' ) {
+//                     setings.highlightFunction(form);
+//                 }
+//             },
+//             unhighlight: function(element, errorClass, validClass) {
+//                 $(element).removeClass('error');
+//                 if($(element).closest('.form_row').is('.error')){
+//                     $(element).closest('.form_row').removeClass('error').addClass('valid');
+//                 }
+//                 if( typeof(setings.unhighlightFunction) === 'function' ) {
+//                     setings.unhighlightFunction(form);
+//                 }
+//             },
+//             submitHandler: function(form) {
+//                 if( typeof(setings.submitFunction) === 'function' ) {
+//                     setings.submitFunction(form);
+//                 } else {
+//                     $form[0].submit();
+//                 }
+//             }
+//         });
+//         $('[required]',$form).each(function(){
+//             $(this).rules( "add", {
+//                 required: true,
+//                 messages: {
+//                     required: "Вы пропустили"
+//                 }
+//             });
+//         });
+//         if($('[type="email"]',$form).length) {
+//             $('[type="email"]',$form).rules( "add",
+//             {
+//                 messages: {
+//                     email: "Невалидный email"
+//                  }
+//             });
+//         }
+//         if($('.tel-mask[required]',$form).length){
+//             $('.tel-mask[required]',$form).rules("add",
+//             {
+//                 messages:{
+//                     required:"Введите номер мобильного телефона."
+//                 }
+//             });
+//         }
+//         $('[type="password"]',$form).each(function(){
+//             if($(this).is("#re_password") == true){
+//                 $(this).rules("add", {
+//                     minlength:3,
+//                     equalTo:"#password",
+//                     messages:{
+//                         equalTo:"Неверный пароль.",
+//                         minlength:"Недостаточно символов."
+//                     }
+//                 });
+//             }
+//         })
+//     }
+// }
 
-    var $form = $(form);
-
-    if ($form.length && $form.attr('novalidate') === undefined) {
-        $form.on('submit', function(e) {
-            e.preventDefault();
-        });
-        $form.validate({
-            errorClass : 'errorText',
-            focusCleanup : true,
-            focusInvalid : false,
-            invalidHandler: function(event, validator) {
-                if(typeof(setings.errorFunction) === 'function'){
-                    setings.errorFunction(form);
-                }
-            },
-            errorPlacement: function(error, element) {
-                error.appendTo( element.closest('.form_input'));
-            },
-            highlight: function(element, errorClass, validClass) {
-                $(element).addClass('error');
-                $(element).closest('.form_row').addClass('error').removeClass('valid');
-                if( typeof(setings.highlightFunction) === 'function' ) {
-                    setings.highlightFunction(form);
-                }
-            },
-            unhighlight: function(element, errorClass, validClass) {
-                $(element).removeClass('error');
-                if($(element).closest('.form_row').is('.error')){
-                    $(element).closest('.form_row').removeClass('error').addClass('valid');
-                }
-                if( typeof(setings.unhighlightFunction) === 'function' ) {
-                    setings.unhighlightFunction(form);
-                }
-            },
-            submitHandler: function(form) {
-                if( typeof(setings.submitFunction) === 'function' ) {
-                    setings.submitFunction(form);
-                } else {
-                    $form[0].submit();
-                }
-            }
-        });
-        $('[required]',$form).each(function(){
-            $(this).rules( "add", {
-                required: true,
-                messages: {
-                    required: "Вы пропустили"
-                }
-            });
-        });
-        if($('[type="email"]',$form).length) {
-            $('[type="email"]',$form).rules( "add",
-            {
-                messages: {
-                    email: "Невалидный email"
-                 }
-            });
-        }
-        if($('.tel-mask[required]',$form).length){
-            $('.tel-mask[required]',$form).rules("add",
-            {
-                messages:{
-                    required:"Введите номер мобильного телефона."
-                }
-            });
-        }
-        $('[type="password"]',$form).each(function(){
-            if($(this).is("#re_password") == true){
-                $(this).rules("add", {
-                    minlength:3,
-                    equalTo:"#password",
-                    messages:{
-                        equalTo:"Неверный пароль.",
-                        minlength:"Недостаточно символов."
-                    }
-                });
-            }
-        })
-    }
-}
-
-function validationCall(form){
-
-  var thisForm = $(form);
-  var formSur = thisForm.serialize();
-
-    $.ajax({
-        url : thisForm.attr('action'),
-        data: formSur,
-        method:'POST',
-        error: function(){
-          /*  popNext("#error-popup", "fancybox-form-error"); */
-        },
-        success : function(data){
-            if ( data.trim() == 'true') {
-                thisForm.trigger("reset");
-               /* popNext("#call_success", "fancybox-form-error");*/
-            }
-            else {
-               thisForm.trigger('reset');
-            }
-
-        }
-    });
-}
+// function validationCall(form){
+//
+//   var thisForm = $(form);
+//   var formSur = thisForm.serialize();
+//
+//     $.ajax({
+//         url : thisForm.attr('action'),
+//         data: formSur,
+//         method:'POST',
+//         error: function(){
+//           /*  popNext("#error-popup", "fancybox-form-error"); */
+//         },
+//         success : function(data){
+//             if ( data.trim() == 'true') {
+//                 thisForm.trigger("reset");
+//                /* popNext("#call_success", "fancybox-form-error");*/
+//             }
+//             else {
+//                thisForm.trigger('reset');
+//             }
+//
+//         }
+//     });
+// }
 
 function openDesc(evt, descName) {
         var i, tabcontent, tablinks;
@@ -432,53 +433,7 @@ $(document).ready(function(){
   //   });
 
 
-    $('input[name="shipping_to_home"]').on('change', function () {
-        if( $(this).is( ":checked" )  ){
-            $('.last-row-hide').slideDown(300);
-            $('.hidden-part #id_shipping_street').prop('required',true);
-            $('.hidden-part #id_shipping_home').prop('required',true);
-        } else {
-            $('.last-row-hide').slideUp(300);
-            $('.hidden-part #id_shipping_street').prop('required',false);
-            $('.hidden-part #id_shipping_home').prop('required',false);
-        }
-    });
 
-    $('input[name="shipping_type"]').on('change', function () {
-        console.log($(this).val());
-        if( $(this).val() == 'N_P' ){
-            $('.hidden-part').slideDown(300);
-            $('.hidden-part .main-row input').prop('required',true);
-        } else {
-            $('.hidden-part').slideUp(300);
-            $('.hidden-part .main-row input').prop('required',false);
-            if ( $('#id_pay_type_1').is(":checked") ) {
-                $('#id_pay_type_1').removeAttr('checked');
-                $('#id_pay_type_0').attr('checked', true);
-
-            }
-            // $('.middle-row').find("input[name='whenPay']:first").click();
-        }
-    });
-    if($('input[name="shipping_type"]:checked').val() == 'N_P') {
-        $('.hidden-part').slideDown(300);
-        $('.hidden-part .main-row input').prop('required',true);
-    }
-
-    if($('#id_shipping_type_1:checked').length) {
-        $('#id_pay_type_1').prop('disabled', true);
-        $('#id_pay_type_1').parent('label').css('opacity', '0.4');
-        $('#id_pay_type_0').prop('checked', true);
-    }
-    $('input[name="shipping_type"]').on('change', function() {
-        if($('#id_shipping_type_1:checked').length) {
-            $('#id_pay_type_1').prop('disabled', true);
-            $('#id_pay_type_1').parent('label').css('opacity', '0.4');
-        } else {
-            $('#id_pay_type_1').prop('disabled', false);
-            $('#id_pay_type_1').parent('label').css('opacity', '1');
-        }
-    });
 
     function csrfSafeMethod(method) {
         /* these HTTP methods do not require CSRF protection */

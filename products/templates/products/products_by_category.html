@@ -59,7 +59,7 @@
                                 <ul class="products">
 
                                     {% for product in products_list %}
-                                        {% if product.is_available %}
+                                        {% if product.status %}
                                             <li class="col product">
                                                 <a href="{% url 'products:detail' category.id product.id %}" class="item">
                                                     {% for image in product_image_list %}

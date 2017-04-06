@@ -1,5 +1,5 @@
 from django.db import models
-from products.models import ProductVariation
+from products.models import ProductVariation, Discount
 
 
 class Order(models.Model):
@@ -21,22 +21,21 @@ class Order(models.Model):
     shipping_first_name = models.CharField(max_length=100)
     shipping_last_name = models.CharField(max_length=100)
     shipping_type = models.CharField(max_length=50, choices=SHIPPING_TYPES, default=ANOTHER_VARIANT)
-    shipping_street = models.CharField(max_length=200, null=True)
-    shipping_home = models.CharField(max_length=20, null=True)
-    shipping_state = models.CharField(max_length=100, null=True)
-    shipping_postcode = models.CharField(max_length=15, null=True)
-    shipping_country = models.CharField(max_length=50, null=True)
-    shipping_city = models.CharField(max_length=100, null=True)
-    shipping_departament = models.CharField(max_length=400, null=True)
+    shipping_street = models.CharField(max_length=200, null=True, blank=True)
+    shipping_home = models.CharField(max_length=20, null=True, blank=True)
+    shipping_state = models.CharField(max_length=100, null=True, blank=True)
+    shipping_postcode = models.CharField(max_length=15, null=True, blank=True)
+    shipping_country = models.CharField(max_length=50, null=True, blank=True)
+    shipping_city = models.CharField(max_length=100, null=True, blank=True)
+    shipping_departament = models.CharField(max_length=400, null=True, blank=True)
     shipping_to_home = models.BooleanField(default=False)
     shipping_phone = models.CharField(max_length=20)
     shipping_email = models.EmailField(max_length=254)
 
-    shipping_total = models.FloatField()
     pay_type = models.CharField(max_length=40, choices=PAY_TYPES, default=PAY_NOW)
-    discount_code = models.CharField(max_length=20, null=True)
-    total = models.FloatField()
-    item_total = models.IntegerField()
+    discount_code = models.ForeignKey(Discount, null=True, on_delete=models.SET_NULL)
+    # total = models.FloatField(null=True, blank=True)
+    # item_total = models.IntegerField()
     pay_status = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -45,8 +44,11 @@ class Order(models.Model):
         verbose_name = "Order"
         verbose_name_plural = "Orders"
 
+    def shipping_name(self):
+        return "%s %s" % (self.shipping_first_name, self.shipping_last_name)
+
     def __str__(self):
-        return "%s %s %s" % (self.id, self.billing_name(), self.time)
+        return "%s %s %s" % (self.id, self.shipping_name(), self.created)
 
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.items.all())

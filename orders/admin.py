@@ -14,13 +14,11 @@ class OrderAdmin(admin.ModelAdmin):
         'shipping_first_name',
         'shipping_last_name',
         'pay_status',
-        'total',
         'created',
     )
     list_filter = [
         'shipping_type',
         'pay_status',
-        'total',
         'created',
     ]
 

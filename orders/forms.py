@@ -1,3 +1,4 @@
+from django import forms
 from django.forms import ModelForm, RadioSelect
 from django.utils.translation import ugettext_lazy as _
 from .models import Order
@@ -44,6 +45,9 @@ class OrderCreateForm(ModelForm):
             'shipping_type': RadioSelect,
             'pay_type': RadioSelect,
         }
+
+    # class Media:
+    #     js = ('checkout.js',)
 
 
 

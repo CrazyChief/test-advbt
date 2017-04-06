@@ -97,6 +97,12 @@ class ProductVariation(models.Model):
     def get_main_image(self):
         return self.productimage_set.get(is_main=True).image
 
+    def update_quantity(self, ordered_quantity):
+        self.quantity -= ordered_quantity
+        if self.quantity == 0:
+            self.is_available = False
+        return self.save()
+
     def __str__(self):
         return str(self.product) + " - " + str(self.sku)
 

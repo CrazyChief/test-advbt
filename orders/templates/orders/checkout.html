@@ -6,7 +6,9 @@
 
 {% load staticfiles %}
 
-{% block includefiles %}{% endblock %}
+{% block includefiles %}
+    <script type="text/javascript" src="{% static 'checkout.js' %}"></script>
+{% endblock %}
 
 {% block title %}{% trans "Ordering" %}{% endblock %}
 
@@ -104,7 +106,7 @@
                                     <div class="title-name-form">
                                         <h2>Оберіть бажаний метод доставки, оплати та заповніть всі поля з інформацією </h2>
                                     </div>
-                                    <form name="checkout" method="post" action="" class="conteiner-form">
+                                    <form name="checkout" action="" method="post" class="conteiner-form">
                                         {% csrf_token %}
                                         <div class="top-row">
                                             <!--div class="woocommerce-billing-fields"-->
@@ -197,11 +199,11 @@
                                             <noscript>
                                                 Поскольку ваш браузер не поддерживает JavaScript или в нем он отключен, просим убедиться в том, что вы нажали кнопку &lt;em&gt;Обновить итог&lt;/em&gt; перед регистрацией заказа. Иначе, есть риск неправильного подсчета стоимости.        &lt;br/&gt;&lt;input type="submit" class="button alt" name="woocommerce_checkout_update_totals" value="Обновить итог" /&gt;
                                             </noscript>
-                                            <button type="submit" class="btn alt" name="woocommerce_checkout_place_order" id="place_order" data-value="Подтвердить заказ">
+                                            <button type="submit" class="btn alt">
                                                 <span>Подтвердить заказ</span>
                                             </button>
-                                            <input type="hidden" id="_wpnonce" name="_wpnonce" value="aca3235573">
-                                            <input type="hidden" name="_wp_http_referer" value="/checkout">
+{#                                            <input type="hidden" id="_wpnonce" name="_wpnonce" value="aca3235573">#}
+{#                                            <input type="hidden" name="_wp_http_referer" value="/checkout">#}
                                         </div>
                                     </form>
                                 </div>
