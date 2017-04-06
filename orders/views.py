@@ -7,6 +7,7 @@ from .forms import OrderCreateForm
 from .models import Order, OrderItem
 from products.models import ProductVariation
 from cart.views import Cart
+from .tasks import OrderCreate
 
 
 class CheckoutView(FormView):
@@ -32,7 +33,7 @@ class CheckoutView(FormView):
         if not request:
             return HttpResponseForbidden()
         form = self.get_form()
-        print(form)
+        # print(form)
         if form.is_valid():
             return self.form_valid(form)
         else:
@@ -53,4 +54,16 @@ class CheckoutView(FormView):
 class CreatedView(DetailView):
     model = Order
     template_name = 'orders/created.html'
+
+    def __init__(self):
+        self.order = OrderCreate
+
+    def get(self, request, *args, **kwargs):
+        self.order(kwargs['pk'])
+        return super(CreatedView, self).get(request, *args, **kwargs)
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(CreatedView, self).get_context_data(**kwargs)
+    #     context['ord'] = OrderCreate(kwargs['pk'])
+    #     return context
 
