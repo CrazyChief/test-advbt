@@ -4,6 +4,7 @@ var cart = {
         return $.post(URLS.addItem, {pk: pk, quantity: quantity}, function (xhr) {
             $("a.cart span").html("");
             $("a.cart span").html(xhr['itemCount']);
+            $("div.wm").css({display: 'block'}).show(600);
         }, 'json');
     },
 

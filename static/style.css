@@ -1905,3 +1905,12 @@ div.tab button.active {
 #form-contacts input::-webkit-input-placeholder, #form-contacts textarea::-webkit-input-placeholder, .review-form form input::-webkit-input-placeholder, .review-form form textarea::-webkit-input-placeholder{color:#999}
 #form-contacts input, #form-contacts textarea, .review-form form textarea{height:auto; width: 100%}
 /*.form-control[disabled],.form-control[readonly],fieldset[disabled] .form-control{cursor:not-allowed;background-color:#eee;opacity:1}*/
+
+@font-face {
+    font-family: WooCommerce;
+    src: url(fonts/WooCommerce.woff);
+}
+
+.wm{  padding: 1em 2em 1em 3.5em!important;  margin: 0 0 2em!important;  position: relative;  color: #515151;  list-style: none!important;  width: auto;  word-wrap: break-word; border-top: 3px solid #8fae1b !important; height: 0; display: none; transition: all 0.4s ease!important;}
+.wm:before{  content: "\e015";  color: #8fae1b;  font-family: WooCommerce;  display: inline-block;  top: 1em;  left: 1.5em;}
+.wm .button {  float: right;  }
