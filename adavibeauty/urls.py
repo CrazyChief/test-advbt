@@ -27,6 +27,7 @@ urlpatterns = i18n_patterns(
     url(r'^checkout/', include('orders.urls', namespace='orders')),
     url(r'^contacts/', include('contacts.urls', namespace='contacts')),
     url(r'^products/', include('products.urls', namespace='products')),
+    url(r'^blog/', include('bloggiz.urls', namespace='bloggiz')),
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
     url(r'^admin/', admin.site.urls),
 )
