@@ -4,7 +4,8 @@ from . import views
 
 app_name = 'bloggiz'
 urlpatterns = [
-    url('', views.ListView.as_view(), name='list'),
+    url(r'^$', views.IndexView.as_view(), name='list'),
+    url(r'(?P<slug>[-\w]+)/$', views.PostView.as_view(), name='detail'),
 ]
 
 

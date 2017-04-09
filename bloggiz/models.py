@@ -1,4 +1,5 @@
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -38,6 +39,16 @@ class Tag(models.Model):
         return self.title
 
 
+def upload_path(instance, filename):
+    """
+    Path to files
+    :param instance:
+    :param filename:
+    :return:
+    """
+    return "blog/{0}".format(filename)
+
+
 class Post(models.Model):
     PUBLISHED = True
     DRAFT = False
@@ -46,11 +57,13 @@ class Post(models.Model):
         (DRAFT, _('Draft')),
     )
     title = models.CharField(max_length=500, unique=True, verbose_name=_('Title'))
+    slug = models.SlugField(null=True)
+    cover_picture = models.FileField(upload_to=upload_path, null=True)
     # category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    is_published = models.CharField(max_length=20, choices=POST_CHOICES, default=DRAFT, verbose_name=_('Is published'))
+    is_published = models.BooleanField(choices=POST_CHOICES, default=DRAFT, verbose_name=_('Is published'))
     pretext = models.TextField(verbose_name=_('Short content'))
     content = models.TextField(verbose_name=_('Content'))
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_('Author'))
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, verbose_name=_('Author'))
     tag = models.ManyToManyField(Tag, verbose_name=_('Tag'))
     date_added = models.DateTimeField(auto_now_add=True, verbose_name=_('Date of creation'))
 

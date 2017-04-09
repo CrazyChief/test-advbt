@@ -6,6 +6,8 @@ from ckeditor.widgets import CKEditorWidget
 
 
 class PostAdmin(TabbedTranslationAdmin):
+    prepopulated_fields = {"slug": ("title",)}
+    radio_fields = {'is_published': admin.HORIZONTAL}
     list_display = (
         'title',
         'is_post_published',
