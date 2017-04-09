@@ -1,6 +1,6 @@
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin, TabbedTranslationAdmin, TranslationTabularInline
-from .models import Post, Tag
+from .models import Post, Comments
 from django.db.models import TextField, FileField
 from ckeditor.widgets import CKEditorWidget
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
@@ -23,18 +23,31 @@ class PostAdmin(TabbedTranslationAdmin):
     }
 
 
-class TagAdmin(TabbedTranslationAdmin):
+# class TagAdmin(TabbedTranslationAdmin):
+#     list_display = (
+#         'title',
+#         'is_active',
+#         'date_added',
+#     )
+#     list_filter = [
+#         'title',
+#         'is_active',
+#         'date_added',
+#     ]
+
+
+class CommentsAdmin(admin.ModelAdmin):
     list_display = (
-        'title',
-        'is_active',
+        'name',
+        'email',
         'date_added',
     )
-    list_filter = [
-        'title',
-        'is_active',
-        'date_added',
-    ]
+    list_filter = ['date_added']
+    formfield_overrides = {
+        TextField: {'widget': CKEditorUploadingWidget},
+    }
 
 
 admin.site.register(Post, PostAdmin)
-admin.site.register(Tag, TagAdmin)
+# admin.site.register(Tag, TagAdmin)
+admin.site.register(Comments, CommentsAdmin)

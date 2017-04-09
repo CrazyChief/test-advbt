@@ -1,5 +1,5 @@
 from modeltranslation.translator import translator, TranslationOptions
-from .models import Post, Tag
+from .models import Post
 
 
 # class CategoryTranslationOptions(TranslationOptions):
@@ -10,10 +10,10 @@ class PostTranslationOptions(TranslationOptions):
     fields = ('title', 'pretext', 'content')
 
 
-class TagTranslationOptions(TranslationOptions):
-    fields = ('title', 'description',)
+# class TagTranslationOptions(TranslationOptions):
+#     fields = ('title', 'description',)
 
 
 # translator.register(Category, CategoryTranslationOptions)
 translator.register(Post, PostTranslationOptions)
-translator.register(Tag, TagTranslationOptions)
+# translator.register(Tag, TagTranslationOptions)

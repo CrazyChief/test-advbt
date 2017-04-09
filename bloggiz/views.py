@@ -1,7 +1,13 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from .models import Post, Tag
+from django.views.generic.edit import FormMixin
+from django.http import Http404, HttpResponseForbidden
+from django.urls import reverse
+
+from .models import Post
+from .forms import CommentForm
 
 
 class IndexView(ListView):
@@ -13,11 +19,32 @@ class IndexView(ListView):
         return Post.objects.all()
 
 
-class PostView(DetailView):
+class PostView(DetailView, FormMixin):
     model = Post
     template_name = "bloggiz/detail.html"
+    form_class = CommentForm
 
     def get_context_data(self, **kwargs):
         context = super(PostView, self).get_context_data(**kwargs)
         context['single_post'] = Post.objects.get(slug=self.kwargs['slug'])
+        context['form'] = self.get_form()
         return context
+
+    def post(self, request, *args, **kwargs):
+        if not request:
+            return HttpResponseForbidden
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.post = Post.objects.get(slug=self.kwargs['slug'])
+        obj.save()
+        return super(PostView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('bloggiz:detail', kwargs={'slug': self.kwargs['slug']})
