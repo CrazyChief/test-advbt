@@ -1,8 +1,9 @@
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin, TabbedTranslationAdmin, TranslationTabularInline
 from .models import Post, Tag
-from django.db.models import TextField
+from django.db.models import TextField, FileField
 from ckeditor.widgets import CKEditorWidget
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
 class PostAdmin(TabbedTranslationAdmin):
@@ -17,7 +18,9 @@ class PostAdmin(TabbedTranslationAdmin):
         'date_added',
         'is_published',
     ]
-    formfield_overrides = {TextField: {'widget': CKEditorWidget}}
+    formfield_overrides = {
+        TextField: {'widget': CKEditorUploadingWidget},
+    }
 
 
 class TagAdmin(TabbedTranslationAdmin):

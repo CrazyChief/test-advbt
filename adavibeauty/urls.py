@@ -25,6 +25,7 @@ urlpatterns = i18n_patterns(
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^cart/', include('cart.urls', namespace='cart')),
     url(r'^checkout/', include('orders.urls', namespace='orders')),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^contacts/', include('contacts.urls', namespace='contacts')),
     url(r'^products/', include('products.urls', namespace='products')),
     url(r'^blog/', include('bloggiz.urls', namespace='bloggiz')),

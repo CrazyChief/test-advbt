@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import PIL
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'contacts.apps.ContactsConfig',
     'bloggiz.apps.BloggizConfig',
     'ckeditor',
+    'ckeditor_uploader',
     'colorfield',
     'star_ratings',
     'easycart',
@@ -236,6 +238,9 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+CKEDITOR_IMAGE_BACKEND = PIL
+CKEDITOR_UPLOAD_PATH = "ckeditor/uploads/"
 
 EASYCART_CART_CLASS = 'cart.views.Cart'
 

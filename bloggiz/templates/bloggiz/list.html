@@ -13,7 +13,7 @@
 {% block content %}
 
     <div class="body page">
-        <div class="block-left-fon" style="width: calc(381.5px + 225px); height: 1468px"></div>
+        <div class="block-left-fon" style="width: calc(381.5px + 225px); height: 100%"></div>
         <section class="sector blog page">
             <div class="container">
                 <div class="title style-4">
@@ -27,23 +27,28 @@
 
                     {% for post in post_list %}
 
-                    <div class="col-xs-12 col-md-6 col">
-                        <div class="item-blog">
-                            <a href="{% url 'bloggiz:detail' post.slug %}">
-                                <img src="{{ post.cover_picture.url }}" alt="{{ post.title }}" height="400px" width="400px">
-                            </a>
-                            <div class="text">
-    {#							<span class="pull-left cat"><a href="https://www.adavibeauty.com/blog/interesting" rel="category tag">Interesting</a></span> << Blog category here #}
-                                <span class="pull-right data">{{ post.date_added }}</span> {# << Date of post #}
-                                <p class="clear"></p>
-                                <h2 class="title">{{ post.title }}</h2> {# Title of post #}
-                                <p class="min-content"></p>
-                                <p>{{ post.pretext|safe }}</p> {# Mini content of post #}
-                                <p></p>
-                                <a href="{% url 'bloggiz:detail' post.slug %}" class="read-more">{% trans "Read" %}</a> {# Link to post #}
-                            </div><!-- text -->
-                        </div><!-- item-blog -->
-                    </div><!-- col -->
+                        {% if post.is_published %}
+
+                            <div class="col-md-6 col">
+                                <div class="item-blog">
+                                    <a href="{% url 'bloggiz:detail' post.slug %}">
+                                        <img src="{{ post.cover_picture.url }}" alt="{{ post.title }}" height="430px" width="300px">
+                                    </a>
+                                    <div class="text">
+        {#    							<span class="pull-left cat"><a href="https://www.adavibeauty.com/blog/interesting" rel="category tag">Interesting</a></span> << Blog category here#}
+                                        <span class="pull-right data">{{ post.date_added }}</span> {# << Date of post #}
+                                        <p class="clear"></p>
+                                        <h2 class="title">{{ post.title }}</h2> {# Title of post #}
+    {#                                    <p class="min-content">#}
+                                        {{ post.pretext|safe }} {# Mini content of post #}
+    {#                                    </p>#}
+    {#                                    <p></p>#}
+                                        <a href="{% url 'bloggiz:detail' post.slug %}" class="read-more">{% trans "Read" %}</a> {# Link to post #}
+                                    </div><!-- text -->
+                                </div><!-- item-blog -->
+                            </div><!-- col -->
+
+                        {% endif %}
 
                     {% endfor %}
 

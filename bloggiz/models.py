@@ -79,5 +79,6 @@ class Post(models.Model):
         return self.is_published
 
     is_post_published.admin_order_field = 'is_published'
+    is_post_published.boolean = True
     is_post_published.short_description = _('Is published?')
 

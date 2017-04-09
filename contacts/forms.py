@@ -15,6 +15,18 @@ class ReviewForm(forms.ModelForm):
             'review': _('Message')
         }
 
+    def __init__(self, *args, **kwargs):
+        super(ReviewForm, self).__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs.update({
+            'placeholder': _('Name'),
+        })
+        self.fields['email'].widget.attrs.update({
+            'placeholder': _('Email'),
+        })
+        self.fields['review'].widget.attrs.update({
+            'placeholder': _('Message'),
+        })
+
 
 
 
