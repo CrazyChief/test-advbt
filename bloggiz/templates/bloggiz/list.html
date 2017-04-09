@@ -25,6 +25,8 @@
                 </div><!-- title -->
                 <div class="row box-blog wauto">
 
+                {% if post_list %}
+                    
                     {% for post in post_list %}
 
                         {% if post.is_published %}
@@ -39,10 +41,7 @@
                                         <span class="pull-right data">{{ post.date_added }}</span> {# << Date of post #}
                                         <p class="clear"></p>
                                         <h2 class="title">{{ post.title }}</h2> {# Title of post #}
-    {#                                    <p class="min-content">#}
                                         {{ post.pretext|safe }} {# Mini content of post #}
-    {#                                    </p>#}
-    {#                                    <p></p>#}
                                         <a href="{% url 'bloggiz:detail' post.slug %}" class="read-more">{% trans "Read" %}</a> {# Link to post #}
                                     </div><!-- text -->
                                 </div><!-- item-blog -->
@@ -51,6 +50,30 @@
                         {% endif %}
 
                     {% endfor %}
+
+                    <div class="container">
+                        {% if is_paginated %}
+                            <div class="pagination">
+                                <span class="page-links">
+                                    {% if page_obj.has_previous %}
+                                        <a href="?page={{ page_obj.previous_page_number }}">{% trans "previous" %}</a>
+                                    {% endif %}
+                                    <span class="page-current">
+                                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                                    </span>
+                                    {% if page_obj.has_next %}
+                                        <a href="?page={{ page_obj.next_page_number }}">{% trans "next" %}</a>
+                                    {% endif %}
+                                </span>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                {% else %}
+
+                    <p class="text-center">{% trans "No posts found" %}</p>
+
+                {% endif %}
 
                 </div><!-- box-blog -->
             </div>
