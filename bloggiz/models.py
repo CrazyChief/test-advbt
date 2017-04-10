@@ -88,6 +88,8 @@ class Comments(models.Model):
     name = models.CharField(max_length=100, verbose_name=_('Author'))
     email = models.EmailField(max_length=254)
     comment = models.TextField(verbose_name=_('Comment'))
+    parent = models.ForeignKey('self', null=True, blank=True, verbose_name=_('Parent'))
+    user = models.ForeignKey(User, null=True, blank=True, verbose_name=_('User'))
     date_added = models.DateTimeField(auto_now_add=True, verbose_name=_('Date of creation'))
 
     class Meta:
@@ -97,4 +99,13 @@ class Comments(models.Model):
 
     def __str__(self):
         return self.name
+
+    def children(self):     # replies
+        return Comments.objects.filter(parent=self)
+
+    @property
+    def is_parent(self):
+        if self.parent is not None:
+            return False
+        return True
 
