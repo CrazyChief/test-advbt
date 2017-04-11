@@ -9,6 +9,8 @@
 {% load staticfiles %}
 
 {% block includefiles %}
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
     <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
     <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.js' %}"></script>
     <link rel="stylesheet" id="sss-base-css" href="https://www.adavibeauty.com/wp-content/plugins/social-share-buttons-by-supsystic/src/SocialSharing/Projects/assets/css/base.css?ver=58cb77066fd31" type="text/css" media="all">
@@ -29,8 +31,7 @@
                     <div class="clear"></div>
                 </div><!-- title -->
                 <div class="row box-blog wauto">
-                    <!--	<div class="col-xs-12"><span class="data data2">14.03</span></div> -->
-                    <div class="col-lg-6 col-md-5 col-xs-12 text-center m20"></div><!-- col -->
+{#                    <div class="col-lg-6 col-md-5 col-xs-12 text-center m20"></div><!-- col -->#}
                     <div class="col-xs-12">
                         <div class="cat cat2 name-article-tree">
 {#                            <a href="https://www.adavibeauty.com/blog/interesting" rel="category tag">Interesting</a>#}
@@ -40,6 +41,7 @@
                                 <h1>{{ single_post.title }}</h1>
                             </div>
                             <div class="col-md-6 info">
+                                <div><span class="data data2">{{ single_post.date_added }}</span></div>
                                 <div class="maker">
                                     <span>by</span>
                                     <b>{{ single_post.author }}</b>
@@ -138,33 +140,80 @@
                                                 <blockquote>
                                                     {{ comment.comment|safe }}
                                                 </blockquote>
-                                                <p>{% trans "Comment added" %}: <time>{{ comment.date_added|timesince }}</time></p>
+                                                <div class="botomer">
+                                                    <p>{% trans "Comment added" %}: <time>{{ comment.date_added|timesince }}</time></p>
+                                                    <button class="btn btn-xs" id="comment_reply_{{ comment.id }}">
+                                                        <span class="fa fa-reply"></span>
+                                                        {% trans "Reply" %}
+                                                    </button>
+                                                </div>
                                             </div>
+
+                                            {% for child_comment in comment.children %}
+                                                <div class="replies">
+{#                                                <ul>#}
+                                                    <li class="reply">
+                                                        <div class="left-side">
+                                                            <div class="con">
+                                                                <img src="{% static 'img/user.svg' %}" alt="user">
+                                                            </div>
+                                                            {% if child_comment.user %}
+                                                                <div class="name">{{ child_comment.user.username }}</div>
+                                                                <div class="status">{{ child_comment.user.groups.get.name }}</div>
+                                                            {% else %}
+                                                                <div class="name">{{ child_comment.name }}</div>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="right-side">
+                                                            <blockquote>
+                                                                {{ child_comment.comment|safe }}
+                                                            </blockquote>
+                                                            <div class="botomer">
+                                                                <p>{% trans "Comment added" %}: <time>{{ child_comment.date_added|timesince }}</time></p>
+                                                                <button class="btn btn-xs" id="comment_reply_{{ comment.id }}">
+                                                                    <span class="fa fa-reply"></span>
+                                                                    {% trans "Reply" %}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+{#                                                </ul>#}
+                                                </div>
+                                            {% endfor %}
+
                                         </div>
                                     {% endfor %}
                                 {% endif %}
                             </div>
 
-                            <div class="form-part">
+                            <div class="form-part" id="comment_form">
                                 <form action="" method="post">
                                     {% csrf_token %}
-{#                                    {{ form.user }}#}
-                                    {{ form.parent }}
                                     <div class="row-name">
                                         <div class="name">{% trans "pass your comment" %}</div>
                                         {% if user %}
+                                            {{ form.name }}
+                                            {{ form.email }}
                                         {% else %}
                                             <div class="input-convert">
                                                 {{ form.name }}
+                                            <span class="text-danger small">{{ form.name.errors }}</span>
                                             </div>
                                             <div class="input-convert">
                                                 {{ form.email }}
+                                            <span class="text-danger small">{{ form.email.errors }}</span>
                                             </div>
                                         {% endif %}
                                     </div>
                                     <div class="contein-text">
                                         {{ form.comment }}
+                                        <span class="text-danger small">{{ form.comment.errors }}</span>
                                     </div>
+                                    <input type="hidden" id="id_parent" name="parent">
+                                    {% for field in form %}
+                                        {{ field.errors }}
+                                    {% endfor %}
+
                                     <div class="submition-row">
                                         <button type="submit">
                                             <span>{% trans "Submit" %}</span>

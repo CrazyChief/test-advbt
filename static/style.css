@@ -605,8 +605,8 @@ textarea.form-group-lg .form-control,select[multiple].form-group-lg .form-contro
 .btn-link:hover,.btn-link:focus{color:#23527c;text-decoration:underline;background-color:transparent}
 .btn-link[disabled]:hover,fieldset[disabled] .btn-link:hover,.btn-link[disabled]:focus,fieldset[disabled] .btn-link:focus{color:#777;text-decoration:none}
 .btn-lg{padding:10px 16px;font-size:18px;line-height:1.33;border-radius:6px}
-.btn-sm{padding:5px 10px;font-size:12px;line-height:1.5;border-radius:3px}
-.btn-xs{padding:1px 5px;font-size:12px;line-height:1.5;border-radius:3px}
+.btn-sm{padding:5px 10px!important;font-size:12px!important;line-height:1.5;border-radius:3px}
+.btn-xs{padding:1px 5px!important;font-size:12px!important;line-height:1.5;border-radius:3px;}
 .btn-block{display:block;width:100%}
 .btn-block + .btn-block{margin-top:5px}
 input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"].btn-block{width:100%}
@@ -1599,8 +1599,8 @@ body {
 
 @media (max-width: 767px) {
    .conteiner-comments .main-comment .single-comment {flex-wrap: wrap;}
-   .conteiner-comments .main-comment .left-side{width: 100%; order: 2;}
-   .conteiner-comments .main-comment .right-side{width: 100%; order: 1; padding: 0 0 10px;}
+   .conteiner-comments .main-comment .left-side{width: 100%; order: 1;}
+   .conteiner-comments .main-comment .right-side{width: 100%; order: 2; padding: 0 0 10px;}
    .conteiner-comments .main-comment .right-side p{margin: 5px; font-size: 14px; text-align: justify;}
 }
 
@@ -1655,6 +1655,7 @@ body {
 
 @media (max-width: 1024px) {
    .content2 .ctext p{text-align: justify;}
+  blockquote{font-size: 14px;}
    .conteiner-comments .main-comment .right-side p{font-size: 14px; margin: 5px 0;}
    .form-part .row-name{padding-left: 0; padding-right: 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; margin: 0;}
    .form-part .row-name .name{display: block; max-width: 100%; text-align: center; width: 100%; padding-bottom: 10px;}
@@ -1918,3 +1919,6 @@ div.tab button.active {
 
 .headrow .info, .headrow .col-md-6 { display: inline-flex;}
 .headrow div:last-child {justify-content: flex-end;}
+
+.right-side p, .right-side button {display: inline;}
+.right-side, .replies {display: block!important;}

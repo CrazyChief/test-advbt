@@ -462,6 +462,23 @@ $(document).ready(function(){
         cart.removeProd(pk);
         console.log(pk);
     });
+
+    // $("a[href='#comment_form']").on('click', function () {
+    $("button").on('click', function () {
+        if (this.id.match(/comment_reply_([0-9]+)/)) {
+            var cForm = $("#comment_form"),
+                pos = cForm.position();
+            console.log(this.id);
+            var elem = this,
+                parent_id = this.id.match(/([0-9]+)/)[0],
+                parent_name = elem.parentNode.parentNode.previousSibling.previousSibling.childNodes[3].innerText;
+            $('body').animate({scrollTop: pos.top}, 600); /* animating of scroll to form */
+            console.log(parent_id);
+            console.log(parent_name);
+            cForm.find('input[id="id_parent"]').val(parent_id);
+            $('textarea[id="id_comment"]').text("<b>" + parent_name + "</b>, ");
+        }
+    });
 });
 
 /* using jQuery */

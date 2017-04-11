@@ -190,7 +190,41 @@ CKEDITOR_CONFIGS = {
                 'dialogui',
                 'elementspath'
             ]),
-    }
+    },
+    # 'comment': {
+    #     # 'skin': 'moono',
+    #     'toolbar_Basic': [
+    #         ['Source', '-', 'Bold', 'Italic']
+    #     ],
+    #     'toolbar_YourCustomToolbarConfig': [
+    #         {'name': 'basicstyles',
+    #          'items': ['Bold', 'Italic', 'Underline', 'Strike', '-']},
+    #         {'name': 'paragraph',
+    #          'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft',
+    #              'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', ]},
+    #         {'name': 'styles', 'items': ['Styles', 'Font', 'FontSize']},
+    #         {'name': 'colors', 'items': ['TextColor', 'BGColor']},
+    #         {'name': 'about', 'items': ['About']},
+    #     ],
+    #     'toolbar': 'YourCustomToolbarConfig',
+    #     'tabSpaces': 2,
+    #     'extraPlugins': ','.join(
+    #         [
+    #             # your extra plugins here
+    #             'div',
+    #             'autolink',
+    #             'autoembed',
+    #             'embedsemantic',
+    #             'autogrow',
+    #             # 'devtools',
+    #             'widget',
+    #             'lineutils',
+    #             # 'clipboard',
+    #             'dialog',
+    #             'dialogui',
+    #             'elementspath'
+    #         ]),
+    # }
 }
 
 # Email
