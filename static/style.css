@@ -1920,5 +1920,30 @@ div.tab button.active {
 .headrow .info, .headrow .col-md-6 { display: inline-flex;}
 .headrow div:last-child {justify-content: flex-end;}
 
-.right-side p, .right-side button {display: inline;}
-.right-side, .replies {display: block!important;}
+
+/*.right-side, .replies {display: block!important;}*/
+
+.conteiner-comments .replies {width: 80%!important; margin: auto;}
+.replies {list-style-type: none!important;}
+.reply {margin: 20px auto; border-bottom: 2px solid lightgrey;}
+.reply img {width: 60px; height: 60px; margin: 6px auto}
+.bottom-comment-pannel { padding: 4px 6px; background-color: #eeeeee;}
+.bottom-comment-pannel p, .bottom-comment-pannel button {display: inline; margin: auto 6px;}
+.bottom-comment-pannel p {font-size: 13px!important; font-weight: 600;}
+.comment-info {width: 19%; vertical-align: top}
+.comment-content {width: 80%;}
+.comment-info, .comment-content {display: inline-block!important;}
+.comment-info img, .comment-info span {display: block!important; justify-content: center}
+.comment-info span {text-align: center; font-weight: 500;}
+.status {border-radius: 3px; padding: 2px; background-color: #ff887b; color: #ebebeb;}
+
+@media screen and (max-width: 991px){
+  .conteiner-comments .replies {width: 90%!important; margin: auto;}
+}
+@media screen and (max-width: 767px){
+  .conteiner-comments .replies {width: 100%!important; margin: auto;}
+  .comment-info, .comment-content {display: block!important;}
+  .comment-info {width: 100%; vertical-align: top}
+  .comment-content {width: 100%;}
+  .reply img {width: 40px; height: 40px; margin: 3px auto}
+}

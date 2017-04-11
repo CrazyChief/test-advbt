@@ -9,8 +9,8 @@
 {% load staticfiles %}
 
 {% block includefiles %}
-    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
-    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{#    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>#}
+{#    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>#}
     <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
     <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.js' %}"></script>
     <link rel="stylesheet" id="sss-base-css" href="https://www.adavibeauty.com/wp-content/plugins/social-share-buttons-by-supsystic/src/SocialSharing/Projects/assets/css/base.css?ver=58cb77066fd31" type="text/css" media="all">
@@ -121,70 +121,62 @@
 
                             </div>
 
-                            <div class="main-comment">
-                                {% if comments %}
+                            {% if comments %}
+                                <ul class="replies">
                                     {% for comment in comments %}
-                                        <div class="single-comment">
-                                            <div class="left-side">
-                                                <div class="con">
-                                                    <img src="{% static 'img/user.svg' %}" alt="user">
-                                                </div>
+                                        <li class="reply">
+                                            <div class="comment-info">
+                                                <img src="{% static 'img/user.svg' %}" alt="user">
                                                 {% if comment.user %}
-                                                    <div class="name">{{ comment.user.username }}</div>
-                                                    <div class="status">{{ comment.user.groups.get.name }}</div>
+                                                    <span class="name">{{ comment.user.username }}</span>
+                                                    <span class="status">{{ comment.user.groups.get.name }}</span>
                                                 {% else %}
-                                                    <div class="name">{{ comment.name }}</div>
+                                                    <span class="name">{{ comment.name }}</span>
                                                 {% endif %}
                                             </div>
-                                            <div class="right-side">
-                                                <blockquote>
-                                                    {{ comment.comment|safe }}
-                                                </blockquote>
-                                                <div class="botomer">
-                                                    <p>{% trans "Comment added" %}: <time>{{ comment.date_added|timesince }}</time></p>
-                                                    <button class="btn btn-xs" id="comment_reply_{{ comment.id }}">
-                                                        <span class="fa fa-reply"></span>
-                                                        {% trans "Reply" %}
-                                                    </button>
-                                                </div>
+                                            <div class="comment-content">
+                                                <blockquote>{{ comment.comment|safe }}</blockquote>
+                                            </div>
+                                            <div class="bottom-comment-pannel">
+                                                <p>{% trans "Comment added" %}: <time>{{ comment.date_added|timesince }}</time></p>
+                                                <button class="btn btn-xs" id="comment_reply_{{ comment.id }}">
+                                                    <span class="fa fa-reply"> {{ comment.children|length }}</span>
+                                                    {% trans "Reply" %}
+                                                </button>
                                             </div>
 
-                                            {% for child_comment in comment.children %}
-                                                <div class="replies">
-{#                                                <ul>#}
-                                                    <li class="reply">
-                                                        <div class="left-side">
-                                                            <div class="con">
+                                            {% if comment.children %}
+                                                <ul class="replies">
+                                                    {% for child in comment.children %}
+                                                        <li class="reply">
+                                                            <div class="comment-info">
                                                                 <img src="{% static 'img/user.svg' %}" alt="user">
+                                                                {% if child.user %}
+                                                                    <span class="name">{{ child.user.username }}</span>
+                                                                    <span class="status">{{ child.user.groups.get.name }}</span>
+                                                                {% else %}
+                                                                    <span class="name">{{ child.name }}</span>
+                                                                {% endif %}
                                                             </div>
-                                                            {% if child_comment.user %}
-                                                                <div class="name">{{ child_comment.user.username }}</div>
-                                                                <div class="status">{{ child_comment.user.groups.get.name }}</div>
-                                                            {% else %}
-                                                                <div class="name">{{ child_comment.name }}</div>
-                                                            {% endif %}
-                                                        </div>
-                                                        <div class="right-side">
-                                                            <blockquote>
-                                                                {{ child_comment.comment|safe }}
-                                                            </blockquote>
-                                                            <div class="botomer">
-                                                                <p>{% trans "Comment added" %}: <time>{{ child_comment.date_added|timesince }}</time></p>
-                                                                <button class="btn btn-xs" id="comment_reply_{{ comment.id }}">
+                                                            <div class="comment-content">
+                                                                <blockquote>{{ child.comment|safe }}</blockquote>
+                                                            </div>
+                                                            <div class="bottom-comment-pannel">
+                                                                <p>{% trans "Reply added" %}: <time>{{ child.date_added|timesince }}</time></p>
+                                                                <button class="btn btn-xs" id="comment_reply_{{ child.id }}">
                                                                     <span class="fa fa-reply"></span>
                                                                     {% trans "Reply" %}
                                                                 </button>
                                                             </div>
-                                                        </div>
-                                                    </li>
-{#                                                </ul>#}
-                                                </div>
-                                            {% endfor %}
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
 
-                                        </div>
+                                        </li>
                                     {% endfor %}
-                                {% endif %}
-                            </div>
+                                </ul>
+                            {% endif %}
 
                             <div class="form-part" id="comment_form">
                                 <form action="" method="post">
@@ -192,8 +184,10 @@
                                     <div class="row-name">
                                         <div class="name">{% trans "pass your comment" %}</div>
                                         {% if user %}
-                                            {{ form.name }}
-                                            {{ form.email }}
+                                            <div class="hidden">
+                                                {{ form.name }}
+                                                {{ form.email }}
+                                            </div>
                                         {% else %}
                                             <div class="input-convert">
                                                 {{ form.name }}

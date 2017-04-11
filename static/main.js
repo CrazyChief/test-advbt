@@ -471,10 +471,10 @@ $(document).ready(function(){
             console.log(this.id);
             var elem = this,
                 parent_id = this.id.match(/([0-9]+)/)[0],
-                parent_name = elem.parentNode.parentNode.previousSibling.previousSibling.childNodes[3].innerText;
-            $('body').animate({scrollTop: pos.top}, 600); /* animating of scroll to form */
+                parent_name = elem.parentNode.previousSibling.previousSibling.previousSibling.previousSibling.childNodes[3].innerText;
             console.log(parent_id);
             console.log(parent_name);
+            $('body').animate({scrollTop: pos.top}, 600); /* animating of scroll to form */
             cForm.find('input[id="id_parent"]').val(parent_id);
             $('textarea[id="id_comment"]').text("<b>" + parent_name + "</b>, ");
         }
