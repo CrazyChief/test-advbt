@@ -229,7 +229,16 @@ CKEDITOR_CONFIGS = {
 
 # Email
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'danilovdmitry94@gmail.com'
+EMAIL_HOST_PASSWORD = '609NumberOne$$123'
+DEFAULT_FROM_EMAIL = 'danilovdmitry94@gmail.com'
+# DEFAULT_TO_EMAIL = 'to email'
 
 
 # Internationalization
