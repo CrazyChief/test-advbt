@@ -174,25 +174,26 @@
                     </div>
                 </div>
 
-                <div class="currency">
-                     <strong style="display:none">WMCS Currency Switcher 1</strong>
-                    <select class="wmcs_currency_switcher_dropdown">
-                        <option value="/?wmcs_set_currency=USD">$</option>
-                        <option value="/?wmcs_set_currency=UAH" selected="selected">₴</option>
-                        <option value="/?wmcs_set_currency=EUR">€</option>
-                    </select>
-                    <script>
-                        jQuery(document).ready(function(){
-                            jQuery('.wmcs_currency_switcher_dropdown').on('change', function () {
-                                var url = jQuery(this).val();
-                                if (url) {
-                                    window.location = url;
-                                }
-                                return false;
-                            });
-                        });
-                    </script>
-                </div>
+{#                {% include 'cy/currency_base_template.html' %}#}
+{#                <div class="currency">#}
+{#                     <strong style="display:none">WMCS Currency Switcher 1</strong>#}
+{#                    <select class="wmcs_currency_switcher_dropdown">#}
+{#                        <option value="/?wmcs_set_currency=USD">$</option>#}
+{#                        <option value="/?wmcs_set_currency=UAH" selected="selected">₴</option>#}
+{#                        <option value="/?wmcs_set_currency=EUR">€</option>#}
+{#                    </select>#}
+{#                    <script>#}
+{#                        jQuery(document).ready(function(){#}
+{#                            jQuery('.wmcs_currency_switcher_dropdown').on('change', function () {#}
+{#                                var url = jQuery(this).val();#}
+{#                                if (url) {#}
+{#                                    window.location = url;#}
+{#                                }#}
+{#                                return false;#}
+{#                            });#}
+{#                        });#}
+{#                    </script>#}
+{#                </div>#}
             </div><!-- box-cart -->
 
             <div class="clear"></div>
