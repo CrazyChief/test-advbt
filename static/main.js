@@ -404,6 +404,10 @@ $(document).ready(function(){
         document.getElementById("defaultOpen").click();
     }
 
+    $('#curr_dropdown').on('click', function () {
+        $('#curr_dropdown_container').toggleClass('show');
+    });
+
   //   // Add smooth scrolling to all links in navbar + footer link
   // $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
   //

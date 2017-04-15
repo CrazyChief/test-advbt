@@ -10,6 +10,8 @@
     {% trans "All products" %}
 {% endblock %}
 
+{% load cy %}
+
 {% block content %}
 
     <div class="body woocomerce woocommerce">
@@ -65,8 +67,13 @@
                                                 <span>{{ product.title }}</span>
                                                 <span>
                                                     <span class="price">
-                                                        <span class="amount">{{ product.price }}
-                                                            <span class="woocommerce-Price-currencySymbol">₴</span>
+                                                        <span class="amount">
+{#                                                            {{ product.price }}#}
+                                                            {% change_currency product.price CURRENCY_ACTIVE.abbreviation %}
+{#                                                            <span class="woocommerce-Price-currencySymbol">₴</span>#}
+                                                            <span class="woocommerce-Price-currencySymbol">
+                                                                {{ CURRENCY_ACTIVE.symbol }}
+                                                            </span>
                                                         </span>
                                                     </span>
                                                 </span>

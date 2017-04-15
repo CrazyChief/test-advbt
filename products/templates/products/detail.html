@@ -20,6 +20,8 @@
 
 {% load ratings %}
 
+{% load cy %}
+
 {% block content %}
 
     <div class="body woocomerce page">
@@ -133,8 +135,12 @@
                             <div class="line-price">
                                 <div class="price">
                                     <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
-                                        <span class="woocommerce-Price-amount amount">{{ productvariation.price }}
-                                            <span class="woocommerce-Price-currencySymbol">₴</span>
+                                        <span class="woocommerce-Price-amount amount">
+                                            {% change_currency productvariation.price CURRENCY_ACTIVE.abbreviation %}
+{#                                            {{ productvariation.price }}#}
+                                            <span class="woocommerce-Price-currencySymbol">
+                                                {{ CURRENCY_ACTIVE.symbol }}
+                                            </span>
                                         </span>
                                         <meta itemprop="price" content="1073.2">
                                         <meta itemprop="priceCurrency" content="UAH">

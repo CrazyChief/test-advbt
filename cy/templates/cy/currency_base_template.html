@@ -1,4 +1,5 @@
-{% load cy %}{% spaceless %}
+{% load cy %}
+{#{% spaceless %}#}
 {% curr_context %}
 <div class="dropdown">
     <button id="curr_dropdown" class="dropbtn" title="{{ CURRENCY_ACTIVE.name }}">
@@ -6,11 +7,11 @@
     </button>
     <div id="curr_dropdown_container" class="dropdown-content">
         {% for currency in CURRENCIES %}
-            <a href="{% url 'currency:set-currency' %}?currency_abbreviation={{ currency.abbreviation }}"
+            <a href="{% url 'cy:set-currency' %}?currency_abbreviation={{ currency.abbreviation }}"
             title="{{ currency.name }}">
                 {{ currency.symbol }}
             </a>
         {% endfor %}
     </div>
 </div>
-{% endspaceless %}
+{#{% endspaceless %}#}

@@ -10,6 +10,7 @@
 
 {% block title %}{% trans "Cart" %}{% endblock %}
 
+{% load cy %}
 
 {% block content %}
     <div class="body page height-2" style="min-height:855px">
@@ -173,7 +174,13 @@
                                                                 <div class="price">
                                                                     <div class="name">Цена:: </div>
                                                                     <div class="prise">
-                                                                        <span class="woocommerce-Price-amount amount">{{ item.price }}<span class="woocommerce-Price-currencySymbol">₴</span></span>
+                                                                        <span class="woocommerce-Price-amount amount">
+                                                                            {% change_currency item.price CURRENCY_ACTIVE.abbreviation %}
+{#                                                                            {{ item.price }}#}
+                                                                            <span class="woocommerce-Price-currencySymbol">
+                                                                                {{ CURRENCY_ACTIVE.symbol }}
+                                                                            </span>
+                                                                        </span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -200,7 +207,12 @@
                                                     <div class="cart-collaterals">
                                                         <div class="all-price cart_totals ">
                                                             <div class="allcost" style="text-align: right;">
-                                                                <div>Итого <b> <span><strong><span class="woocommerce-Price-amount amount">{{ cart.total_price|floatformat }}</span><span class="woocommerce-Price-currencySymbol"> ₴</span></strong></span></b></div>
+                                                                <div>Итого <b> <span><strong>
+                                                                    <span class="woocommerce-Price-amount amount">
+                                                                        {% change_currency cart.total_price CURRENCY_ACTIVE.abbreviation %}
+{#                                                                        {{ cart.total_price|floatformat }}#}
+                                                                    </span>
+                                                                    <span class="woocommerce-Price-currencySymbol"> {{ CURRENCY_ACTIVE.symbol }}</span></strong></span></b></div>
                                                             </div>
                                                             <a href="{% url 'orders:checkout' %}" class="checkout-button alt wc-forward submition-butt btn">
                                                                 <span>Перейти к оформлению</span>

@@ -11,11 +11,14 @@
     {% load staticfiles %}
     <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script type="text/javascript" src="{% static 'jquery-1.12.4.min.js' %}"></script>
 {#    <script type="text/javascript" src="{% static 'library.js' %}"></script>#}
     <script type="text/javascript" src="{% static 'main.js' %}"></script>
     <script type="text/javascript" src="{% static 'cart.js' %}"></script>
+
+    {% load cy %}
 
     {% block includefiles %}{% endblock %}
 
@@ -174,7 +177,7 @@
                     </div>
                 </div>
 
-{#                {% include 'cy/currency_base_template.html' %}#}
+                {% include 'cy/currency_base_template.html' %}
 {#                <div class="currency">#}
 {#                     <strong style="display:none">WMCS Currency Switcher 1</strong>#}
 {#                    <select class="wmcs_currency_switcher_dropdown">#}
