@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-19 07:26+0200\n"
+"POT-Creation-Date: 2017-04-15 05:24+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,51 +19,292 @@ msgstr ""
 "10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%"
 "100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: .\products\forms.py:11
+#: .\bloggiz\forms.py:18 .\contacts\forms.py:21 .\cy\models.py:6
+#: .\orders\forms.py:24 .\products\forms.py:11
 msgid "Name"
 msgstr "Имя"
 
+#: .\bloggiz\forms.py:21 .\contacts\forms.py:24 .\orders\forms.py:33
 #: .\products\forms.py:12
 msgid "Email"
+msgstr "Адрес єлектронной почты"
+
+#: .\bloggiz\forms.py:24 .\bloggiz\models.py:90 .\bloggiz\models.py:97
+msgid "Comment"
+msgstr "Комментарий"
+
+#: .\bloggiz\models.py:56
+msgid "Published"
+msgstr "Опубликован"
+
+#: .\bloggiz\models.py:57
+msgid "Draft"
+msgstr "Черновик"
+
+#: .\bloggiz\models.py:59
+msgid "Title"
+msgstr "Название"
+
+#: .\bloggiz\models.py:63
+msgid "Is published"
+msgstr "Опубликовано"
+
+#: .\bloggiz\models.py:64
+msgid "Short content"
+msgstr "Короткое описание"
+
+#: .\bloggiz\models.py:65
+#, fuzzy
+#| msgid "Contacts"
+msgid "Content"
+msgstr "Контакты"
+
+#: .\bloggiz\models.py:66 .\bloggiz\models.py:88
+msgid "Author"
 msgstr ""
 
-#: .\products\templates\products\detail.html:31
-#: .\templates\layout\layout.html:137
-msgid "Home"
-msgstr "Главная"
+#: .\bloggiz\models.py:68 .\bloggiz\models.py:93
+msgid "Date of creation"
+msgstr "Дата создания"
 
-#: .\products\templates\products\detail.html:33
-#: .\products\templates\products\list.html:36
-#: .\products\templates\products\products_by_category.html:38
-msgid "All"
-msgstr "Все"
+#: .\bloggiz\models.py:72
+msgid "Post"
+msgstr "Пост"
 
-#: .\products\templates\products\detail.html:98
-msgid "Add to cart"
-msgstr "Добавить в корзину"
+#: .\bloggiz\models.py:73
+#, fuzzy
+#| msgid "Products"
+msgid "Posts"
+msgstr "Продукты"
 
-#: .\products\templates\products\detail.html:116
-msgid "SKU"
-msgstr "Артикул"
+#: .\bloggiz\models.py:83
+msgid "Is published?"
+msgstr "Опубликовано?"
 
-#: .\products\templates\products\detail.html:146
-#: .\products\templates\products\detail.html:196
-msgid "Reviews"
-msgstr "Отзывы"
+#: .\bloggiz\models.py:91
+msgid "Parent"
+msgstr "Родительский"
 
-#: .\products\templates\products\detail.html:148
-msgid "No reviews"
-msgstr "Нет отзывов"
+#: .\bloggiz\models.py:92
+msgid "User"
+msgstr "Пользователь"
 
-#: .\products\templates\products\detail.html:172
-msgid "Add your review"
-msgstr "Добавить отзыв"
+#: .\bloggiz\models.py:98 .\bloggiz\templates\bloggiz\detail.html:82
+#, fuzzy
+#| msgid "Contacts"
+msgid "Comments"
+msgstr "Контакты"
 
-#: .\products\templates\products\detail.html:186
+#: .\bloggiz\templates\bloggiz\detail.html:87
+#: .\products\templates\products\detail.html:221
+msgid "SHARE"
+msgstr "Поделиться"
+
+#: .\bloggiz\templates\bloggiz\detail.html:141
+msgid "Comment added"
+msgstr "Комментарий добален"
+
+#: .\bloggiz\templates\bloggiz\detail.html:144
+#: .\bloggiz\templates\bloggiz\detail.html:168
+msgid "Reply"
+msgstr "Ответить"
+
+#: .\bloggiz\templates\bloggiz\detail.html:165
+msgid "Reply added"
+msgstr "Ответ добавлен"
+
+#: .\bloggiz\templates\bloggiz\detail.html:185
+msgid "pass your comment"
+msgstr "Оставте свой комментарий"
+
+#: .\bloggiz\templates\bloggiz\detail.html:213
+#: .\contacts\templates\contacts\index.html:36
+#: .\products\templates\products\detail.html:203
 msgid "Submit"
 msgstr "Отправить"
 
-#: .\products\templates\products\detail.html:194
+#: .\bloggiz\templates\bloggiz\list.html:7
+#: .\bloggiz\templates\bloggiz\list.html:23 .\templates\index.html:276
+#: .\templates\layout\layout.html:100
+msgid "Blog"
+msgstr "Блог"
+
+#: .\bloggiz\templates\bloggiz\list.html:45 .\templates\index.html:296
+msgid "Read"
+msgstr "Читать"
+
+#: .\bloggiz\templates\bloggiz\list.html:59
+msgid "previous"
+msgstr "предыдущий"
+
+#: .\bloggiz\templates\bloggiz\list.html:62
+msgid "Page"
+msgstr "Страница"
+
+#: .\bloggiz\templates\bloggiz\list.html:62
+msgid "of"
+msgstr "из"
+
+#: .\bloggiz\templates\bloggiz\list.html:65
+msgid "next"
+msgstr "следующий"
+
+#: .\bloggiz\templates\bloggiz\list.html:74
+msgid "No posts found"
+msgstr "Посты не найдены"
+
+#: .\cart\templates\cart\detail.html:11
+msgid "Cart"
+msgstr "Корзина"
+
+#: .\contacts\forms.py:15 .\contacts\forms.py:27
+msgid "Message"
+msgstr "Сообщение"
+
+#: .\contacts\templates\contacts\index.html:7
+#: .\contacts\templates\contacts\index.html:17
+#: .\templates\layout\layout.html:101
+msgid "Contacts"
+msgstr "Контакты"
+
+#: .\contacts\views.py:20
+#, fuzzy
+#| msgid "Contacts"
+msgid "contacts:index"
+msgstr "Контакты"
+
+#: .\cy\models.py:7
+msgid "Abbreviation"
+msgstr "Аббревиатура"
+
+#: .\cy\models.py:8
+msgid "Symbol"
+msgstr "Символ"
+
+#: .\cy\models.py:9
+#, fuzzy
+#| msgid "Description"
+msgid "Dimension"
+msgstr "Описание"
+
+#: .\cy\models.py:10
+msgid "Base"
+msgstr "Базовый"
+
+#: .\cy\models.py:11
+msgid "Active"
+msgstr "Автивный"
+
+#: .\cy\models.py:14
+msgid "Currency"
+msgstr "Валюта"
+
+#: .\cy\models.py:15
+msgid "Currencies"
+msgstr "Валюты"
+
+#: .\cy\models.py:25
+msgid "Is active?"
+msgstr "Активен?"
+
+#: .\orders\forms.py:25
+msgid "Surname"
+msgstr "Фамилия"
+
+#: .\orders\forms.py:26
+msgid "Delivery"
+msgstr "Доставка"
+
+#: .\orders\forms.py:27
+msgid "City"
+msgstr "Город"
+
+#: .\orders\forms.py:28
+msgid "Departament"
+msgstr "Отделение"
+
+#: .\orders\forms.py:29
+msgid "Home delivery"
+msgstr "Доставка надом"
+
+#: .\orders\forms.py:30
+msgid "Street"
+msgstr "Улица"
+
+#: .\orders\forms.py:31
+msgid "Home number, flat number"
+msgstr "Номер дома, номер квартиры"
+
+#: .\orders\forms.py:32
+msgid "Phone"
+msgstr "Номер телефона"
+
+#: .\orders\forms.py:34
+msgid "How do you plan to pay?"
+msgstr "Как вы собираетесь оплатить?"
+
+#: .\orders\forms.py:38
+msgid "This name is too long. Max number of letters is 100"
+msgstr "Это имя слишком длинное. Максимальное количество символов 100"
+
+#: .\orders\forms.py:41
+msgid "This surname is too long. Max number of letters is 100"
+msgstr "Эта фамилия слишком длинная. Максимальное количество символов 100"
+
+#: .\orders\templates\orders\checkout.html:13
+#: .\orders\templates\orders\created.html:20
+msgid "Ordering"
+msgstr "Оформление заказа"
+
+#: .\orders\templates\orders\created.html:11
+msgid "Thank You"
+msgstr "Спасибо"
+
+#: .\orders\templates\orders\created.html:120
+msgid "Thank You for order"
+msgstr "Спасибо за Ваш заказ"
+
+#: .\orders\templates\orders\created.html:123
+msgid "Your application has been sent to our manager"
+msgstr "Ваша заявка была отправлена нашему менеджеру"
+
+#: .\orders\templates\orders\created.html:124
+msgid "Soon he will call you back to clarify the delivery"
+msgstr "Скоро он свяжется с вами, чтобы уточнить делати доставки"
+
+#: .\products\templates\products\detail.html:33 .\templates\index.html:87
+#: .\templates\layout\layout.html:97
+msgid "Home"
+msgstr "Главная"
+
+#: .\products\templates\products\detail.html:35
+#: .\products\templates\products\list.html:38
+#: .\products\templates\products\products_by_category.html:40
+msgid "All"
+msgstr "Все"
+
+#: .\products\templates\products\detail.html:110
+msgid "Add to cart"
+msgstr "Добавить в корзину"
+
+#: .\products\templates\products\detail.html:129
+msgid "SKU"
+msgstr "Артикул"
+
+#: .\products\templates\products\detail.html:163
+#: .\products\templates\products\detail.html:213
+msgid "Reviews"
+msgstr "Отзывы"
+
+#: .\products\templates\products\detail.html:165
+msgid "No reviews"
+msgstr "Нет отзывов"
+
+#: .\products\templates\products\detail.html:189
+msgid "Add your review"
+msgstr "Добавить отзыв"
+
+#: .\products\templates\products\detail.html:211
 msgid "Description"
 msgstr "Описание"
 
@@ -74,7 +315,7 @@ msgstr "Описание"
 msgid "All products"
 msgstr "Продукты"
 
-#: .\products\templates\products\list.html:19
+#: .\products\templates\products\list.html:21
 #, fuzzy
 #| msgid ""
 #| "                    <h1 class=\"h1\">The Organic Face</h1>\n"
@@ -87,32 +328,41 @@ msgstr ""
 "<h1 class=\"h1\">Органическая косметика</h1>\n"
 "                <div class=\"title\">ДЛЯ ЛИЦА</div>"
 
-#: .\products\templates\products\list.html:30
-#: .\products\templates\products\products_by_category.html:34
+#: .\products\templates\products\list.html:32
+#: .\products\templates\products\products_by_category.html:36
 msgid "Filter"
 msgstr "Фильтр"
 
-#: .\products\templates\products\list.html:75
-#: .\products\templates\products\products_by_category.html:83
+#: .\products\templates\products\list.html:82
+#: .\products\templates\products\products_by_category.html:87
+#: .\templates\index.html:175
 msgid "view more"
 msgstr "смотреть еще"
 
-#: .\templates\layout\layout.html:138
+#: .\templates\index.html:142
+#, fuzzy
+#| msgid "Products"
+msgid "New products"
+msgstr "Продукты"
+
+#: .\templates\index.html:189
+msgid "Learn More"
+msgstr "Подробнее"
+
+#: .\templates\index.html:304
+#, fuzzy
+#| msgid "view more"
+msgid "Read more"
+msgstr "смотреть еще"
+
+#: .\templates\layout\layout.html:98
 msgid "About us"
 msgstr "О нас"
 
-#: .\templates\layout\layout.html:139
+#: .\templates\layout\layout.html:99
 msgid "Products"
 msgstr "Продукты"
 
-#: .\templates\layout\layout.html:140
-msgid "Blog"
-msgstr "Блог"
-
-#: .\templates\layout\layout.html:141
-msgid "Contacts"
-msgstr "Контакты"
-
-#: .\templates\layout\layout.html:204
+#: .\templates\layout\layout.html:146
 msgid "All Rights Reserved"
 msgstr "Все права защищены"

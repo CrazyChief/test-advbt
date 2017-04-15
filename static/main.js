@@ -1,7 +1,7 @@
 (function() {
     $(document).ready(function() {
         // box_operation();
-        // fancyboxs();
+        fancyboxs();
         // owlCarousel();
         // form();
         // click();
@@ -156,33 +156,33 @@
     //         navigation: true
     //     });
     // }
-    // function fancyboxs() {
-    //     $(".fancybox-products").fancybox({
-    //         openEffect: 'elastic',
-    //         closeEffect: 'elastic',
-    //
-    //         helpers: {
-    //             title: {
-    //                 type: 'inside'
-    //             }
-    //         }
-    //     });
-    //     /*$(".fancybox-media").fancybox({
-    //         helpers: {
-    //             media: true
-    //         },
-    //         openEffect  : 'elastic',
-    //         closeEffect : 'elastic',
-    //     });*/
-    //
-    //     $(".fancybox-media").fancybox({
-    //         openEffect  : 'none',
-    //         closeEffect : 'none',
-    //         helpers : {
-    //             media : {}
-    //         }
-    //     });
-    // }
+    function fancyboxs() {
+        $(".fancybox-products").fancybox({
+            openEffect: 'elastic',
+            closeEffect: 'elastic',
+
+            helpers: {
+                title: {
+                    type: 'inside'
+                }
+            }
+        });
+        /*$(".fancybox-media").fancybox({
+            helpers: {
+                media: true
+            },
+            openEffect  : 'elastic',
+            closeEffect : 'elastic',
+        });*/
+
+        $(".fancybox-media").fancybox({
+            openEffect  : 'none',
+            closeEffect : 'none',
+            helpers : {
+                media : {}
+            }
+        });
+    }
     //
     // function form() {
     //     $("#form-contacts").validate({

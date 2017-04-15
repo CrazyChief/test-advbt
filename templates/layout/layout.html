@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script type="text/javascript" src="{% static 'jquery-1.12.4.min.js' %}"></script>
-{#    <script type="text/javascript" src="{% static 'library.js' %}"></script>#}
+    <script type="text/javascript" src="{% static 'library.js' %}"></script>
     <script type="text/javascript" src="{% static 'main.js' %}"></script>
     <script type="text/javascript" src="{% static 'cart.js' %}"></script>
 
@@ -72,71 +72,19 @@
     </div>
     <!-- !PRELOADER -->
 
-{#    <script>#}
-{#        $('body').addClass('js');#}
-{#        var new_footer = $('body.js .footer').html();#}
-{#        /*$('body.js #footer').html(new_footer).addClass('footer');#}
-{#        $('#end-section').remove();*/#}
-{#        $('li.go a').attr('data-href','off');#}
-{#        var main_outerwidth = $(window).outerWidth();#}
-{#        var main_outerHeight = $(window).outerHeight();#}
-{#        if (main_outerwidth > 992 ) {#}
-{#            $('.body').addClass('main');#}
-{#            document.write('<link rel="stylesheet" href="https://www.adavibeauty.com/wp-content/themes/templebeauty/media-md.css" />');#}
-{#            $(document).ready(function ($) {#}
-{#                $(".main").onepage_scroll({#}
-{#                    sectionContainer: "section", // контейнер, к которому будет применяться скролл#}
-{#                    easing: "ease-in-out", // Тип анимации "ease", "linear", "ease-in", "ease-out", "ease-in-out"#}
-{#                    animationTime: 500, // время анимации#}
-{#                    pagination: true, // скрыть или отобразить пагинатор#}
-{#                    updateURL: true // обновлять URL или нет#}
-{#                });#}
-{#            });#}
-{#            $('li.go a').click(function(){#}
-{#                var url = $(this).attr('href');#}
-{#                //url = url.substring(4);#}
-{#                url = '2';#}
-{#                $('.onepage-pagination a[href="#'+url+'"]').trigger('click');#}
-{#                return false#}
-{#            });#}
-{#            //$('.li.go a').attr('herf','');#}
-{#        } else {#}
-{#            $('.box-blog').addClass('owl2');#}
-{#            $('.go').click(function(event) {#}
-{#                event.preventDefault();#}
-{#                var target = $(this).find('>a').prop('hash');#}
-{#                $('html, body').animate({#}
-{#                    scrollTop: $(target).offset().top#}
-{#                }, 500);#}
-{#            });#}
-{#        }#}
-{#        $('.box-blog .col-xs-12:first-child').addClass('col-1');#}
-{#        $('.box-blog .col-xs-12:last-child').addClass('col-2');#}
-{#        $('li.go').removeClass('current-menu-item');#}
-{#        $('li.go a[data-href]').attr('href','/#d2');#}
-{##}
-{#        $('.widget_wysija').addClass('form max-width280');#}
-{#        $('.wysija-paragraph').addClass('form-group');#}
-{#        $('.wysija-input').addClass('form-control');#}
-{#        $('.wysija-submit').addClass('btn');#}
-{#        $('.widget_wysija_cont').addClass('min-height-form');#}
-{#    </script>#}
-
-{#    <link rel="stylesheet" href="https://www.adavibeauty.com/wp-content/themes/templebeauty/media-md.css">#}
-
-{#    <style type="text/css">#}
-{#        .box-blog img {#}
-{#            max-height: 380px;#}
-{#        }#}
-{#    </style>#}
-{#    <div style="display:none"></div>#}
-{#    <style type="text/css">#}
-{#        body.wp-admin.upload-php #wpbody-content {#}
-{#            width: calc(100% - 250px);#}
-{#        }.rml-container.rml-no-dummy {#}
-{#            width: 250px;#}
-{#        }#}
-{#    </style>#}
+    <style type="text/css">
+        .box-blog img {
+            max-height: 380px;
+        }
+    </style>
+    <div style="display:none"></div>
+    <style type="text/css">
+        body.wp-admin.upload-php #wpbody-content {
+            width: calc(100% - 250px);
+        }.rml-container.rml-no-dummy {
+            width: 250px;
+        }
+    </style>
 
     <div class="bar-menu">
         <div class="container">
@@ -166,37 +114,18 @@
                     <span>{{ cart.item_count }}</span>
                 </a>
 
-                <div class="lang">
-                    <div class="rezult"><span>RUS</span>
-                        <ul class="language-chooser language-chooser-both qtranxs_language_chooser" id="qtranslate-chooser">
-                            <li class="active"><a href="https://www.adavibeauty.com/ru/" class="qtranxs_flag_ru qtranxs_flag_and_text" title="RUS (ru)"><span>RUS</span></a></li>
-                            <li><a href="https://www.adavibeauty.com/ua/" class="qtranxs_flag_ua qtranxs_flag_and_text" title="UKR (ua)"><span>UKR</span></a></li>
-                            <li><a href="https://www.adavibeauty.com/en/" class="qtranxs_flag_en qtranxs_flag_and_text" title="ENG (en)"><span>ENG</span></a></li>
-                        </ul>
-                        <div class="qtranxs_widget_end"></div>
-                    </div>
-                </div>
+{#                <div class="lang">#}
+{#                    <div class="rezult"><span>RUS</span>#}
+{#                        <ul class="language-chooser language-chooser-both qtranxs_language_chooser" id="qtranslate-chooser">#}
+{#                            <li><a href="/ru/" class="qtranxs_flag_ru qtranxs_flag_and_text" title="RUS (ru)"><span>RUS</span></a></li>#}
+{#                            <li><a href="/uk/" class="qtranxs_flag_ua qtranxs_flag_and_text" title="UKR (ua)"><span>UKR</span></a></li>#}
+{#                            <li><a href="/en-us/" class="qtranxs_flag_en qtranxs_flag_and_text" title="ENG (en)"><span>ENG</span></a></li>#}
+{#                        </ul>#}
+{#                        <div class="qtranxs_widget_end"></div>#}
+{#                    </div>#}
+{#                </div>#}
 
                 {% include 'cy/currency_base_template.html' %}
-{#                <div class="currency">#}
-{#                     <strong style="display:none">WMCS Currency Switcher 1</strong>#}
-{#                    <select class="wmcs_currency_switcher_dropdown">#}
-{#                        <option value="/?wmcs_set_currency=USD">$</option>#}
-{#                        <option value="/?wmcs_set_currency=UAH" selected="selected">₴</option>#}
-{#                        <option value="/?wmcs_set_currency=EUR">€</option>#}
-{#                    </select>#}
-{#                    <script>#}
-{#                        jQuery(document).ready(function(){#}
-{#                            jQuery('.wmcs_currency_switcher_dropdown').on('change', function () {#}
-{#                                var url = jQuery(this).val();#}
-{#                                if (url) {#}
-{#                                    window.location = url;#}
-{#                                }#}
-{#                                return false;#}
-{#                            });#}
-{#                        });#}
-{#                    </script>#}
-{#                </div>#}
             </div><!-- box-cart -->
 
             <div class="clear"></div>

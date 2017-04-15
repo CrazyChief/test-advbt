@@ -1938,9 +1938,8 @@ div.tab button.active {
 .status {border-radius: 3px; padding: 2px; background-color: #ff887b; color: #ebebeb;}
 
 .dropbtn {
-    background-color: #ff887b;
-    color: white;
-    /*padding: 16px;*/
+    background-color: transparent;
+    color: black;
     font-size: 16px;
     border: none;
     cursor: pointer;

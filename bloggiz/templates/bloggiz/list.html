@@ -38,7 +38,7 @@
                                     </a>
                                     <div class="text">
         {#    							<span class="pull-left cat"><a href="https://www.adavibeauty.com/blog/interesting" rel="category tag">Interesting</a></span> << Blog category here#}
-                                        <span class="pull-right data">{{ post.date_added }}</span> {# << Date of post #}
+                                        <span class="pull-right data">{{ post.date_added|date }}</span> {# << Date of post #}
                                         <p class="clear"></p>
                                         <h2 class="title">{{ post.title }}</h2> {# Title of post #}
                                         {{ post.pretext|safe }} {# Mini content of post #}
