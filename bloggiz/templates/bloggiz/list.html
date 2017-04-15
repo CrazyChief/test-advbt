@@ -1,0 +1,83 @@
+{% extends 'layout/layout.html' %}
+
+{% load i18n %}
+
+{% get_available_languages as languages %}
+
+{% block title %}{% trans "Blog" %}{% endblock %}
+
+{% load staticfiles %}
+
+{% block includefiles %}{% endblock %}
+
+{% block content %}
+
+    <div class="body page">
+        <div class="block-left-fon" style="width: calc(381.5px + 225px); height: 100%"></div>
+        <section class="sector blog page">
+            <div class="container">
+                <div class="title style-4">
+                    <div class="col-xs-6">
+{#                        <div class="nav"><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="https://www.adavibeauty.com/" itemprop="url"><span itemprop="title">Главная</span></a></span> <span class="line-bg">›</span> <span class="current">Блог</span></div><!-- .nav -->#}
+                    </div>
+                    <h1 class="h2 col-xs-6">{% trans "Blog" %}</h1>
+                    <div class="clear"></div>
+                </div><!-- title -->
+                <div class="row box-blog wauto">
+
+                {% if post_list %}
+
+                    {% for post in post_list %}
+
+                        {% if post.is_published %}
+
+                            <div class="col-md-6 col">
+                                <div class="item-blog">
+                                    <a href="{% url 'bloggiz:detail' post.slug %}">
+                                        <img src="{{ post.cover_picture.url }}" alt="{{ post.title }}" height="430px" width="300px">
+                                    </a>
+                                    <div class="text">
+        {#    							<span class="pull-left cat"><a href="https://www.adavibeauty.com/blog/interesting" rel="category tag">Interesting</a></span> << Blog category here#}
+                                        <span class="pull-right data">{{ post.date_added|date }}</span> {# << Date of post #}
+                                        <p class="clear"></p>
+                                        <h2 class="title">{{ post.title }}</h2> {# Title of post #}
+                                        {{ post.pretext|safe }} {# Mini content of post #}
+                                        <a href="{% url 'bloggiz:detail' post.slug %}" class="read-more">{% trans "Read" %}</a> {# Link to post #}
+                                    </div><!-- text -->
+                                </div><!-- item-blog -->
+                            </div><!-- col -->
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    <div class="container">
+                        {% if is_paginated %}
+                            <div class="pagination">
+                                <span class="page-links">
+                                    {% if page_obj.has_previous %}
+                                        <a href="?page={{ page_obj.previous_page_number }}">{% trans "previous" %}</a>
+                                    {% endif %}
+                                    <span class="page-current">
+                                        {% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.
+                                    </span>
+                                    {% if page_obj.has_next %}
+                                        <a href="?page={{ page_obj.next_page_number }}">{% trans "next" %}</a>
+                                    {% endif %}
+                                </span>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                {% else %}
+
+                    <p class="text-center">{% trans "No posts found" %}</p>
+
+                {% endif %}
+
+                </div><!-- box-blog -->
+            </div>
+        </section><!-- section blog -->
+    </div>
+
+{% endblock %}

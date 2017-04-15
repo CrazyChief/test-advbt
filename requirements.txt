@@ -1,0 +1,7 @@
+django-modeltranslation==0.12
+django-ckeditor==5.2.1
+django-colorfield==0.1.12
+django-star-ratings==0.5.4
+django-easycart==0.4.0
+celery==4.0.2
+flower==0.9.1

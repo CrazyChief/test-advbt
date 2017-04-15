@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import PIL
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,11 +42,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'products.apps.ProductsConfig',
-    'cart',
-    'contacts',
+    'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
+    'contacts.apps.ContactsConfig',
+    'bloggiz.apps.BloggizConfig',
+    'cy.apps.CyConfig',
     'ckeditor',
+    'ckeditor_uploader',
     'colorfield',
     'star_ratings',
+    'easycart',
 ]
 
 MIDDLEWARE = [
@@ -75,6 +81,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cy.context_processors.currency',
+                'easycart.context_processors.cart',
             ],
         },
     },
@@ -136,9 +144,6 @@ CKEDITOR_CONFIGS = {
             {'name': 'document', 'items': ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
             {'name': 'clipboard', 'items': ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
             {'name': 'editing', 'items': ['Find', 'Replace', '-', 'SelectAll']},
-            {'name': 'forms',
-             'items': ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton',
-                       'HiddenField']},
             '/',
             {'name': 'basicstyles',
              'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
@@ -187,8 +192,55 @@ CKEDITOR_CONFIGS = {
                 'dialogui',
                 'elementspath'
             ]),
-    }
+    },
+    # 'comment': {
+    #     # 'skin': 'moono',
+    #     'toolbar_Basic': [
+    #         ['Source', '-', 'Bold', 'Italic']
+    #     ],
+    #     'toolbar_YourCustomToolbarConfig': [
+    #         {'name': 'basicstyles',
+    #          'items': ['Bold', 'Italic', 'Underline', 'Strike', '-']},
+    #         {'name': 'paragraph',
+    #          'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft',
+    #              'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', ]},
+    #         {'name': 'styles', 'items': ['Styles', 'Font', 'FontSize']},
+    #         {'name': 'colors', 'items': ['TextColor', 'BGColor']},
+    #         {'name': 'about', 'items': ['About']},
+    #     ],
+    #     'toolbar': 'YourCustomToolbarConfig',
+    #     'tabSpaces': 2,
+    #     'extraPlugins': ','.join(
+    #         [
+    #             # your extra plugins here
+    #             'div',
+    #             'autolink',
+    #             'autoembed',
+    #             'embedsemantic',
+    #             'autogrow',
+    #             # 'devtools',
+    #             'widget',
+    #             'lineutils',
+    #             # 'clipboard',
+    #             'dialog',
+    #             'dialogui',
+    #             'elementspath'
+    #         ]),
+    # }
 }
+
+# Email
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'danilovdmitry94@gmail.com'
+EMAIL_HOST_PASSWORD = '609NumberOne$$123'
+DEFAULT_FROM_EMAIL = 'danilovdmitry94@gmail.com'
+# DEFAULT_TO_EMAIL = 'to email'
 
 
 # Internationalization
@@ -231,6 +283,11 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+CKEDITOR_IMAGE_BACKEND = PIL
+CKEDITOR_UPLOAD_PATH = "ckeditor/uploads/"
+
+EASYCART_CART_CLASS = 'cart.views.Cart'
 
 CART_SESSION_ID = 'cart'
 

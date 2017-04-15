@@ -11,6 +11,8 @@
     {% if category %} {{ category.title|capfirst }} {% else %} {% trans "All products" %} {% endif %}
 {% endblock %}
 
+{% load cy %}
+
 {% block content %}
 
     <div class="body woocomerce woocommerce">
@@ -57,9 +59,8 @@
 
                             {% if products_list %}
                                 <ul class="products">
-
                                     {% for product in products_list %}
-                                        {% if product.is_available %}
+                                        {% if product.status %}
                                             <li class="col product">
                                                 <a href="{% url 'products:detail' category.id product.id %}" class="item">
                                                     {% for image in product_image_list %}
@@ -73,8 +74,11 @@
                                                     <span>{{ product.title }}</span>
                                                     <span>
                                                         <span class="price">
-                                                            <span class="amount">{{ product.price }}
-                                                                <span class="woocommerce-Price-currencySymbol">₴</span>
+                                                            <span class="amount">
+                                                                {% change_currency product.price CURRENCY_ACTIVE.abbreviation %}
+                                                                <span class="woocommerce-Price-currencySymbol">
+                                                                    {{ CURRENCY_ACTIVE.symbol }}
+                                                                </span>
                                                             </span>
                                                         </span>
                                                     </span>

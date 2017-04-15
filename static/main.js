@@ -183,65 +183,66 @@
             }
         });
     }
-
-    function form() {
-        $("#form-contacts").validate({
-            rules: {
-                sendto: {
-                    required: true
-                },
-                textarea: {
-                    required: true
-                },
-                name: {
-                    required: true
-                },
-                email: {
-                    required: true
-                }
-            },
-            messages: {
-                sendto: '',
-                textarea: '',
-                name: '',
-                email: ''
-            },
-            errorPlacement: function(error, element) {},
-            submitHandler: function(form) {
-                var forma = $(form);
-                $.ajax({
-                    type: 'POST',
-                    url: '/wp-content/themes/templebeauty/sendmessage.php',
-                    data: forma.serialize(),
-                    success: function(data) {
-                        $("form").find('input,textarea').val('');
-                        if (data == "true") {
-                            $.fancybox.close()
-                            $.fancybox(
-                                '<div class="thenks-fancybox text-center" style="max-width:550px"><p class="img-text-2"><h2>' + title_form + '</h2> <p>' + text_form + '</p></p></div>', {
-                                    'autoDimensions': false,
-                                    'height': 'auto',
-                                    'transitionIn': 'none',
-                                    'transitionOut': 'none'
-                                }
-                            );
-                            setTimeout("$.fancybox.close()", 4000);
-                        }
-                    }
-                });
-            },
-            success: function() {},
-            highlight: function(element, errorClass) {
-                $(element).addClass('error');
-            },
-            unhighlight: function(element, errorClass, validClass) {
-                $(element).removeClass('error');
-            }
-        });
-        $(function() {
-            $("[name='phone']").mask("+38 (999) 999 - 9999");
-        });
-    }
+    //
+    // function form() {
+    //     $("#form-contacts").validate({
+    //         rules: {
+    //             sendto: {
+    //                 required: true
+    //             },
+    //             textarea: {
+    //                 required: true
+    //             },
+    //             name: {
+    //                 required: true
+    //             },
+    //             email: {
+    //                 required: true
+    //             }
+    //         },
+    //         messages: {
+    //             sendto: '',
+    //             textarea: '',
+    //             name: '',
+    //             email: ''
+    //         },
+    //         errorPlacement: function(error, element) {},
+    //         submitHandler: function(form) {
+    //             var forma = $(form);
+    //             $.ajax({
+    //                 type: 'POST',
+    //                 url: '/wp-content/themes/templebeauty/sendmessage.php',
+    //                 data: forma.serialize(),
+    //                 success: function(data) {
+    //                     $("form").find('input,textarea').val('');
+    //                     if (data == "true") {
+    //                         $.fancybox.close()
+    //                         $.fancybox(
+    //                             '<div class="thenks-fancybox text-center" style="max-width:550px"><p class="img-text-2"><h2>' + title_form + '</h2> <p>' + text_form + '</p></p></div>', {
+    //                                 'autoDimensions': false,
+    //                                 'height': 'auto',
+    //                                 'transitionIn': 'none',
+    //                                 'transitionOut': 'none'
+    //                             }
+    //                         );
+    //                         setTimeout("$.fancybox.close()", 4000);
+    //                     }
+    //                 }
+    //             });
+    //         },
+    //         success: function() {},
+    //         highlight: function(element, errorClass) {
+    //             $(element).addClass('error');
+    //         },
+    //         unhighlight: function(element, errorClass, validClass) {
+    //             $(element).removeClass('error');
+    //         }
+    //     });
+    //     $(function() {
+    //         $("[name='phone']").mask("+38 (999) 999 - 9999");
+    //     });
+    // }
+    //
 })();
 
 function setEqualHeight(columns) {
@@ -262,141 +263,120 @@ function setEqualHeight(columns) {
         setEqualHeight($(".col.product.type-product  .title"));
     });
 
+// function validate(form, options){
+//     var setings = {
+//         errorFunction:null,
+//         submitFunction:null,
+//         highlightFunction:null,
+//         unhighlightFunction:null
+//     };
+//     $.extend(setings, options);
+//
+//     var $form = $(form);
+//
+//     if ($form.length && $form.attr('novalidate') === undefined) {
+//         $form.on('submit', function(e) {
+//             e.preventDefault();
+//         });
+//         $form.validate({
+//             errorClass : 'errorText',
+//             focusCleanup : true,
+//             focusInvalid : false,
+//             invalidHandler: function(event, validator) {
+//                 if(typeof(setings.errorFunction) === 'function'){
+//                     setings.errorFunction(form);
+//                 }
+//             },
+//             errorPlacement: function(error, element) {
+//                 error.appendTo( element.closest('.form_input'));
+//             },
+//             highlight: function(element, errorClass, validClass) {
+//                 $(element).addClass('error');
+//                 $(element).closest('.form_row').addClass('error').removeClass('valid');
+//                 if( typeof(setings.highlightFunction) === 'function' ) {
+//                     setings.highlightFunction(form);
+//                 }
+//             },
+//             unhighlight: function(element, errorClass, validClass) {
+//                 $(element).removeClass('error');
+//                 if($(element).closest('.form_row').is('.error')){
+//                     $(element).closest('.form_row').removeClass('error').addClass('valid');
+//                 }
+//                 if( typeof(setings.unhighlightFunction) === 'function' ) {
+//                     setings.unhighlightFunction(form);
+//                 }
+//             },
+//             submitHandler: function(form) {
+//                 if( typeof(setings.submitFunction) === 'function' ) {
+//                     setings.submitFunction(form);
+//                 } else {
+//                     $form[0].submit();
+//                 }
+//             }
+//         });
+//         $('[required]',$form).each(function(){
+//             $(this).rules( "add", {
+//                 required: true,
+//                 messages: {
+//                     required: "Вы пропустили"
+//                 }
+//             });
+//         });
+//         if($('[type="email"]',$form).length) {
+//             $('[type="email"]',$form).rules( "add",
+//             {
+//                 messages: {
+//                     email: "Невалидный email"
+//                  }
+//             });
+//         }
+//         if($('.tel-mask[required]',$form).length){
+//             $('.tel-mask[required]',$form).rules("add",
+//             {
+//                 messages:{
+//                     required:"Введите номер мобильного телефона."
+//                 }
+//             });
+//         }
+//         $('[type="password"]',$form).each(function(){
+//             if($(this).is("#re_password") == true){
+//                 $(this).rules("add", {
+//                     minlength:3,
+//                     equalTo:"#password",
+//                     messages:{
+//                         equalTo:"Неверный пароль.",
+//                         minlength:"Недостаточно символов."
+//                     }
+//                 });
+//             }
+//         })
+//     }
+// }
 
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
-function setCookie(cname, cvalue) {
-    document.cookie = cname + "=" + cvalue + ";" ;
-}
-
-function validate(form, options){
-    var setings = {
-        errorFunction:null,
-        submitFunction:null,
-        highlightFunction:null,
-        unhighlightFunction:null
-    };
-    $.extend(setings, options);
-
-    var $form = $(form);
-
-    if ($form.length && $form.attr('novalidate') === undefined) {
-        $form.on('submit', function(e) {
-            e.preventDefault();
-        });
-        $form.validate({
-            errorClass : 'errorText',
-            focusCleanup : true,
-            focusInvalid : false,
-            invalidHandler: function(event, validator) {
-                if(typeof(setings.errorFunction) === 'function'){
-                    setings.errorFunction(form);
-                }
-            },
-            errorPlacement: function(error, element) {
-                error.appendTo( element.closest('.form_input'));
-            },
-            highlight: function(element, errorClass, validClass) {
-                $(element).addClass('error');
-                $(element).closest('.form_row').addClass('error').removeClass('valid');
-                if( typeof(setings.highlightFunction) === 'function' ) {
-                    setings.highlightFunction(form);
-                }
-            },
-            unhighlight: function(element, errorClass, validClass) {
-                $(element).removeClass('error');
-                if($(element).closest('.form_row').is('.error')){
-                    $(element).closest('.form_row').removeClass('error').addClass('valid');
-                }
-                if( typeof(setings.unhighlightFunction) === 'function' ) {
-                    setings.unhighlightFunction(form);
-                }
-            },
-            submitHandler: function(form) {
-                if( typeof(setings.submitFunction) === 'function' ) {
-                    setings.submitFunction(form);
-                } else {
-                    $form[0].submit();
-                }
-            }
-        });
-        $('[required]',$form).each(function(){
-            $(this).rules( "add", {
-                required: true,
-                messages: {
-                    required: "Вы пропустили"
-                }
-            });
-        });
-        if($('[type="email"]',$form).length) {
-            $('[type="email"]',$form).rules( "add",
-            {
-                messages: {
-                    email: "Невалидный email"
-                 }
-            });
-        }
-        if($('.tel-mask[required]',$form).length){
-            $('.tel-mask[required]',$form).rules("add",
-            {
-                messages:{
-                    required:"Введите номер мобильного телефона."
-                }
-            });
-        }
-        $('[type="password"]',$form).each(function(){
-            if($(this).is("#re_password") == true){
-                $(this).rules("add", {
-                    minlength:3,
-                    equalTo:"#password",
-                    messages:{
-                        equalTo:"Неверный пароль.",
-                        minlength:"Недостаточно символов."
-                    }
-                });
-            }
-        })
-    }
-}
-
-function validationCall(form){
-
-  var thisForm = $(form);
-  var formSur = thisForm.serialize();
-
-    $.ajax({
-        url : thisForm.attr('action'),
-        data: formSur,
-        method:'POST',
-        error: function(){
-          /*  popNext("#error-popup", "fancybox-form-error"); */
-        },
-        success : function(data){
-            if ( data.trim() == 'true') {
-                thisForm.trigger("reset");
-               /* popNext("#call_success", "fancybox-form-error");*/
-            }
-            else {
-               thisForm.trigger('reset');
-            }
-
-        }
-    });
-}
+// function validationCall(form){
+//
+//   var thisForm = $(form);
+//   var formSur = thisForm.serialize();
+//
+//     $.ajax({
+//         url : thisForm.attr('action'),
+//         data: formSur,
+//         method:'POST',
+//         error: function(){
+//           /*  popNext("#error-popup", "fancybox-form-error"); */
+//         },
+//         success : function(data){
+//             if ( data.trim() == 'true') {
+//                 thisForm.trigger("reset");
+//                /* popNext("#call_success", "fancybox-form-error");*/
+//             }
+//             else {
+//                thisForm.trigger('reset');
+//             }
+//
+//         }
+//     });
+// }
 
 function openDesc(evt, descName) {
         var i, tabcontent, tablinks;
@@ -419,10 +399,14 @@ $(document).ready(function(){
     document.getElementById('copyrightTime').innerHTML = d;
     /* !Time */
 
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
+    /* Get the element with id="defaultOpen" and click on it */
+    if (window.location.pathname.match(/\/products\/([0-9]+)\/([0-9]+)\//)) {
+        document.getElementById("defaultOpen").click();
+    }
 
-
+    $('#curr_dropdown').on('click', function () {
+        $('#curr_dropdown_container').toggleClass('show');
+    });
 
   //   // Add smooth scrolling to all links in navbar + footer link
   // $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
@@ -452,15 +436,100 @@ $(document).ready(function(){
   //       menu: '#myMenu'
   //   });
 
-    var redFlag = false ;
 
-    $('.form-part form input').on('keyup', function(){
-        if( $(this).val() != '' ){
-            $(this).addClass('error');
-        } else {
-            $(this).removeClass('error');
+
+
+    function csrfSafeMethod(method) {
+        /* these HTTP methods do not require CSRF protection */
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
         }
     });
 
-    validate('.form-part form', {submitFunction:validationCall});
+    $("#addToCart").on('click', function () {
+        var pk = $(this).siblings("input[name='add-to-cart']").val(),
+            quantity = $(this).siblings("div").find("input[name='quantity']").val();
+        console.log("PK: " + pk);
+        console.log("quantity: " + quantity);
+        cart.add(pk, quantity);
+        console.log("success!");
+    });
+
+    $(".deleter button").on('click', function () {
+        var bt = $(this),
+            pk = bt.attr('data-product_id');
+        cart.removeProd(pk);
+        console.log(pk);
+    });
+
+    // $("a[href='#comment_form']").on('click', function () {
+    $("button").on('click', function () {
+        if (this.id.match(/comment_reply_([0-9]+)/)) {
+            var cForm = $("#comment_form"),
+                pos = cForm.position();
+            console.log(this.id);
+            var elem = this,
+                parent_id = this.id.match(/([0-9]+)/)[0],
+                parent_name = elem.parentNode.previousSibling.previousSibling.previousSibling.previousSibling.childNodes[3].innerText;
+            console.log(parent_id);
+            console.log(parent_name);
+            $('body').animate({scrollTop: pos.top}, 600); /* animating of scroll to form */
+            cForm.find('input[id="id_parent"]').val(parent_id);
+            $('textarea[id="id_comment"]').text("<b>" + parent_name + "</b>, ");
+        }
+    });
 });
+
+/* using jQuery */
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            /* Does this cookie string begin with the name we want? */
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+function incr(e) {
+    var field = $(e).siblings('input'),
+        pk = field.attr('data-product_id'),
+        mVal = field.attr("max"),
+        vl = field.val(),
+        btn = $('.checkout-button');
+    btn.addClass('disabled');
+    if (+vl >= +mVal) {
+        alert("This is the largest quantity of product you can order.");
+        btn.removeClass('disabled');
+    } else {
+        vl++;
+    }
+    cart.changeQuantity(pk, vl);
+}
+
+function decr(e) {
+    var field = $(e).siblings('input'),
+        pk = field.attr('data-product_id'),
+        vl = field.val(),
+        btn = $('.checkout-button');
+    btn.addClass('disabled');
+    if (+vl == 1) {
+        alert("This is the least quantity of product you can order.");
+        btn.removeClass('disabled');
+    } else {
+        vl--;
+    }
+    cart.changeQuantity(pk, vl);
+}

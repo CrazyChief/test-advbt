@@ -1,0 +1,231 @@
+{% extends 'layout/layout.html' %}
+
+{% load i18n %}
+
+{% get_available_languages as languages %}
+
+{% block title %}{{ single_post.title }}{% endblock %}
+
+{% load staticfiles %}
+
+{% block includefiles %}
+{#    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>#}
+{#    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>#}
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.js' %}"></script>
+    <link rel="stylesheet" id="sss-base-css" href="https://www.adavibeauty.com/wp-content/plugins/social-share-buttons-by-supsystic/src/SocialSharing/Projects/assets/css/base.css?ver=58cb77066fd31" type="text/css" media="all">
+{% endblock %}
+
+{% load ratings %}
+
+{% block content %}
+
+    <div data-spy="scroll" data-target=".replies" class="body page height-2" style="min-height:855px">
+        <div class="block-left-fon" style="width: calc(381.5px + 225px); height: 3041px"></div>
+        <section class="sector blog page single">
+            <div class="container">
+                <div class="title style-4 row">
+                    <div class="col-xs-12">
+{#                        <div class="nav"><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="https://www.adavibeauty.com/" itemprop="url"><span itemprop="title">Главная</span></a></span> <span class="line-bg">›</span> <span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="https://www.adavibeauty.com/blog" itemprop="url"><span itemprop="title">Блог</span></a></span> <span class="line-bg">›</span> <span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="https://www.adavibeauty.com/blog/interesting" itemprop="url"><span itemprop="title">Interesting</span></a></span> <span class="line-bg">›</span> <span class="current">6 причин отказаться от химии в косметике</span></div><!-- .nav -->#}
+                    </div>
+                    <div class="clear"></div>
+                </div><!-- title -->
+                <div class="row box-blog wauto">
+{#                    <div class="col-lg-6 col-md-5 col-xs-12 text-center m20"></div><!-- col -->#}
+                    <div class="col-xs-12">
+                        <div class="cat cat2 name-article-tree">
+{#                            <a href="https://www.adavibeauty.com/blog/interesting" rel="category tag">Interesting</a>#}
+                        </div>
+                        <div class="headrow">
+                            <div class="named">
+                                <h1>{{ single_post.title }}</h1>
+                            </div>
+                            <div class="col-md-6 info">
+                                <div><span class="data data2">{{ single_post.date_added }}</span></div>
+                                <div class="maker">
+                                    <span>by</span>
+                                    <b>{{ single_post.author }}</b>
+                                </div>
+                                <div class="looker">
+                                    <img src="{% static 'img/looker.png' %}" alt="">
+                                    <span>119</span>
+                                </div>
+                                <div class="typers">
+                                    <img src="{% static 'img/typer.png' %}" alt="">
+                                    <span>{{ comments|length }}</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <!-- STAR RATING HERE -->
+                                {% ratings object %}
+                            </div>
+
+                        </div>
+
+                        <div class="content2">
+                            <div class="ctext">
+                                {{ single_post.content|safe }}
+                            </div>
+                        </div>
+{#                        <div class="pagination-row">#}
+{#                            <a href="https://www.adavibeauty.com/blog/interesting/orhanichna-kosmetyka-korinnykh-zhyteliv-madahaskaru" class="prew left-post post-all">#}
+{#                                <img src="{% static 'img/post-left.png' %}">#}
+{#                                <span>Prew Post</span>#}
+{#                            </a>#}
+{#                        </div>#}
+
+                        <div class="conteiner-comments">
+
+                            <div class="share-row" id="supsystic">
+                                <div class="comment-part">
+                                    <span>{% trans "Comments" %}</span>
+                                    <b>{{ comments|length }}</b>
+                                </div>
+
+                                <div class="share-part">
+                                    <span>{% trans "SHARE" %}:</span>
+                                    <div data-animation="no-animation" data-icons-animation="no-animation" data-overlay="" data-change-size="" data-button-size="1" style="font-size: 1em;" class="supsystic-social-sharing supsystic-social-sharing-package-flat supsystic-social-sharing-content supsystic-social-sharing-content-align-left supsystic-social-sharing-init supsystic-social-sharing-loaded">
+                                        <a class="social-sharing-button sharer-flat sharer-flat-1 counter-standard without-counter facebook" target="_blank" title="Facebook" href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.adavibeauty.com%2Fblog%2Finteresting%2F6-prichin-otkazatsya-ot-khimii-v-kosmetike" data-nid="1" data-pid="1" data-post-id="1370" data-url="https://www.adavibeauty.com/wp-admin/admin-ajax.php" data-description="6 причин отказаться от химии в косметике" rel="nofollow">
+                                            <i class="fa fa-fw fa-facebook"></i>
+                                            <div class="counter-wrap standard">
+                                                <span class="counter">0</span>
+                                            </div>
+                                        </a>
+                                        <a class="social-sharing-button sharer-flat sharer-flat-1 counter-standard without-counter googleplus" target="_blank" title="Google+" href="https://plus.google.com/share?url=https%3A%2F%2Fwww.adavibeauty.com%2Fblog%2Finteresting%2F6-prichin-otkazatsya-ot-khimii-v-kosmetike" data-nid="3" data-pid="1" data-post-id="1370" data-url="https://www.adavibeauty.com/wp-admin/admin-ajax.php" data-description="6 причин отказаться от химии в косметике" rel="nofollow">
+                                            <i class="fa fa-fw fa-google-plus"></i>
+                                            <div class="counter-wrap standard">
+                                                <span class="counter">0</span>
+                                            </div>
+                                        </a>
+                                        <a class="social-sharing-button sharer-flat sharer-flat-1 counter-standard without-counter vk" target="_blank" title="VKontakte" href="http://vk.com/share.php?url=https%3A%2F%2Fwww.adavibeauty.com%2Fblog%2Finteresting%2F6-prichin-otkazatsya-ot-khimii-v-kosmetike" data-nid="4" data-pid="1" data-post-id="1370" data-url="https://www.adavibeauty.com/wp-admin/admin-ajax.php" data-description="6 причин отказаться от химии в косметике" rel="nofollow">
+                                            <i class="fa fa-fw fa-vk"></i>
+                                            <div class="counter-wrap standard">
+                                                <span class="counter">0</span>
+                                            </div>
+                                        </a>
+                                        <a class="social-sharing-button sharer-flat sharer-flat-1 counter-standard without-counter odnoklassniki" target="_blank" title="Odnoklassniki" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&amp;st.s=1&amp;st.comments=6+%D0%BF%D1%80%D0%B8%D1%87%D0%B8%D0%BD+%D0%BE%D1%82%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%D1%81%D1%8F+%D0%BE%D1%82+%D1%85%D0%B8%D0%BC%D0%B8%D0%B8+%D0%B2+%D0%BA%D0%BE%D1%81%D0%BC%D0%B5%D1%82%D0%B8%D0%BA%D0%B5&amp;st._surl=https%3A%2F%2Fwww.adavibeauty.com%2Fblog%2Finteresting%2F6-prichin-otkazatsya-ot-khimii-v-kosmetike" data-nid="12" data-pid="1" data-post-id="1370" data-url="https://www.adavibeauty.com/wp-admin/admin-ajax.php" data-description="6 причин отказаться от химии в косметике" rel="nofollow">
+                                            <i class="fa fa-fw fa-odnoklassniki"></i>
+                                            <div class="counter-wrap standard">
+                                                <span class="counter">0</span>
+                                            </div>
+                                        </a>
+                                        <a class="social-sharing-button sharer-flat sharer-flat-1 counter-standard without-counter twitter" target="_blank" title="Twitter" href="https://twitter.com/share?url=https%3A%2F%2Fwww.adavibeauty.com%2Fblog%2Finteresting%2F6-prichin-otkazatsya-ot-khimii-v-kosmetike&amp;text=6+%D0%BF%D1%80%D0%B8%D1%87%D0%B8%D0%BD+%D0%BE%D1%82%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%D1%81%D1%8F+%D0%BE%D1%82+%D1%85%D0%B8%D0%BC%D0%B8%D0%B8+%D0%B2+%D0%BA%D0%BE%D1%81%D0%BC%D0%B5%D1%82%D0%B8%D0%BA%D0%B5" data-nid="2" data-pid="1" data-post-id="1370" data-url="https://www.adavibeauty.com/wp-admin/admin-ajax.php" data-description="6 причин отказаться от химии в косметике" rel="nofollow">
+                                            <i class="fa fa-fw fa-twitter"></i>
+                                            <div class="counter-wrap standard">
+                                                <span class="counter">0</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            {% if comments %}
+                                <ul class="replies">
+                                    {% for comment in comments %}
+                                        <li class="reply" id="reply{{ comment.id }}">
+                                            <div class="comment-info">
+                                                <img src="{% static 'img/user.svg' %}" alt="user">
+                                                {% if comment.user %}
+                                                    <span class="name">{{ comment.user.username }}</span>
+                                                    <span class="status">{{ comment.user.groups.get.name }}</span>
+                                                {% else %}
+                                                    <span class="name">{{ comment.name }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <div class="comment-content">
+                                                <blockquote>{{ comment.comment|safe }}</blockquote>
+                                            </div>
+                                            <div class="bottom-comment-pannel">
+                                                <p>{% trans "Comment added" %}: <time>{{ comment.date_added|timesince }}</time></p>
+                                                <button class="btn btn-xs" id="comment_reply_{{ comment.id }}">
+                                                    <span class="fa fa-reply"> {{ comment.children|length }}</span>
+                                                    {% trans "Reply" %}
+                                                </button>
+                                            </div>
+
+                                            {% if comment.children %}
+                                                <ul class="replies">
+                                                    {% for child in comment.children %}
+                                                        <li class="reply">
+                                                            <div class="comment-info">
+                                                                <img src="{% static 'img/user.svg' %}" alt="user">
+                                                                {% if child.user %}
+                                                                    <span class="name">{{ child.user.username }}</span>
+                                                                    <span class="status">{{ child.user.groups.get.name }}</span>
+                                                                {% else %}
+                                                                    <span class="name">{{ child.name }}</span>
+                                                                {% endif %}
+                                                            </div>
+                                                            <div class="comment-content">
+                                                                <blockquote>{{ child.comment|safe }}</blockquote>
+                                                            </div>
+                                                            <div class="bottom-comment-pannel">
+                                                                <p>{% trans "Reply added" %}: <time>{{ child.date_added|timesince }}</time></p>
+                                                                <button class="btn btn-xs" id="comment_reply_{{ child.id }}">
+                                                                    <span class="fa fa-reply"></span>
+                                                                    {% trans "Reply" %}
+                                                                </button>
+                                                            </div>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+
+                            <div class="form-part" id="comment_form">
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <div class="row-name">
+                                        <div class="name">{% trans "pass your comment" %}</div>
+                                        {% if user %}
+                                            <div class="hidden">
+                                                {{ form.name }}
+                                                {{ form.email }}
+                                            </div>
+                                        {% else %}
+                                            <div class="input-convert">
+                                                {{ form.name }}
+                                            <span class="text-danger small">{{ form.name.errors }}</span>
+                                            </div>
+                                            <div class="input-convert">
+                                                {{ form.email }}
+                                            <span class="text-danger small">{{ form.email.errors }}</span>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="contein-text">
+                                        {{ form.comment }}
+                                        <span class="text-danger small">{{ form.comment.errors }}</span>
+                                    </div>
+                                    <input type="hidden" id="id_parent" name="parent">
+                                    {% for field in form %}
+                                        {{ field.errors }}
+                                    {% endfor %}
+
+                                    <div class="submition-row">
+                                        <button type="submit">
+                                            <span>{% trans "Submit" %}</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                        </div><!-- col -->
+                    <div class="col-xs-12 constructor-b"></div><!-- row -->
+                </div><!-- col -->
+            </div><!-- box-blog -->
+        </section>
+    </div>
+
+{% endblock %}
+
+
+
+

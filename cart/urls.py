@@ -1,12 +1,11 @@
-from django.conf.urls import url
-from . import views
+from django.conf.urls import include, url
+from cart import views
 
 
-appname = 'cart'
+# app_name = 'cart'
 urlpatterns = [
-    url(r'^$', views.CartDetail.as_view(), name='detail'),
-    url(r'^remove/(?P<product_id>\d+)/', views.CartDelete.as_view(), name='delete'),
-    url(r'^add/(?P<product_id>\d+)/', views.CartAdd.as_view(), name='add'),
+    url('',  include('easycart.urls')),
+    url('^$', views.CartDetail.as_view(), name='detail'),
 ]
 
 

@@ -1,0 +1,51 @@
+<!-- NOW variant -->
+<div class="body page height-2" style="min-height:855px">
+	<div class="block-left-fon" style="width: calc(390px + 225px); height: 950px"></div>
+	<section class="sector blog page">
+		<div class="container">
+			<div class="title style-4">
+                <h1 class="h2">Оформление заказа</h1>
+				<div class="clear"></div>
+			</div><!-- title -->
+			<div class="row box-blog">
+                <div class="col-xs-12">
+                    <div class="woocommerce">
+                        <ul class="order_details">
+                            <li class="order">
+                                Номер заказа:
+                                <strong>1428</strong>
+                            </li>
+                            <li class="date">
+                                Дата:
+                                <strong>06/04/2017</strong>
+                            </li>
+                            <li class="total">
+                                Всего:
+                                <strong>
+                                    <span class="woocommerce-Price-amount amount">
+                                        1,081.2
+                                        <span class="woocommerce-Price-currencySymbol">
+                                            ₴
+                                        </span>
+                                    </span>
+                                </strong>
+                            </li>
+                            <li class="method">
+                                Способ оплаты:
+                                <strong>Сейчас</strong>
+                            </li>
+                        </ul>
+                        <p></p><br>
+                        <form method="POST" action="https://www.liqpay.com/api/checkout" accept-charset="utf-8">
+                            <input type="hidden" name="data" value="eyJ2ZXJzaW9uIjoiMyIsImFtb3VudCI6IjEwODEuMiIsImN1cnJlbmN5IjoiVUFIIiwiZGVzY3JpcHRpb24iOiJcdTA0MWVcdTA0M2ZcdTA0M2JcdTA0MzBcdTA0NDJcdTA0MzAgXHUwNDM3XHUwNDMwIFx1MDQzN1x1MDQzMFx1MDQzYVx1MDQzMFx1MDQzNyAtIDE0MjgiLCJvcmRlcl9pZCI6IjE0MjgiLCJyZXN1bHRfdXJsIjoiaHR0cHM6XC9cL3d3dy5hZGF2aWJlYXV0eS5jb21cL2NoZWNrb3V0XC9vcmRlci1yZWNlaXZlZFwvMTQyOD9rZXk9d2Nfb3JkZXJfNThlNjkzNzAzYmVkNiIsInNlcnZlcl91cmwiOiJodHRwczpcL1wvd3d3LmFkYXZpYmVhdXR5LmNvbVwvP3djLWFwaT13Y19nYXRld2F5X2xpcXBheSIsImxhbmd1YWdlIjoicnUiLCJzYW5kYm94IjowLCJwdWJsaWNfa2V5IjoiaTEyMjUyMjQ4NDE4In0=">
+                            <input type="hidden" name="signature" value="12FZCGdwItQXuU9+/qcLg9XwFgM=">
+                            <input type="image" style="width: 160px" src="//static.liqpay.com/buttons/p1ru.radius.png" name="btn_text">
+                        </form>
+                        <div class="clear"></div>
+                    </div>
+                </div><!-- col -->
+            </div><!-- box-blog -->
+        </div>
+	</section><!-- section blog -->
+</div>
+<!-- !NOW variant -->
