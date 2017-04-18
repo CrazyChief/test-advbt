@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'colorfield',
     'star_ratings',
     'easycart',
+    'django_social_share',
 ]
 
 MIDDLEWARE = [

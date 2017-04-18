@@ -1980,6 +1980,8 @@ div.tab button.active {
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
 
+div[class*="-this"] {display: inline-block;}
+
 @media screen and (max-width: 991px){
   .conteiner-comments .replies {width: 90%!important; margin: auto;}
 }
