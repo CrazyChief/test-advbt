@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'contacts.apps.ContactsConfig',
     'bloggiz.apps.BloggizConfig',
     'cy.apps.CyConfig',
+    'subscribers.apps.SubscribersConfig',
     'ckeditor',
     'ckeditor_uploader',
     'colorfield',
