@@ -55,11 +55,14 @@
         });
     </script>
     <script>
-        var URLS ={
+        var URLS = {
             addItem: '{% url "cart:cart-add" %}',
             removeItem: '{% url "cart:cart-remove" %}',
             changeQuantity: '{% url "cart:cart-change-quantity" %}',
             emptyCart: '{% url "cart:cart-empty" %}',
+        };
+        var SUBURL = {
+            add: '{% url "subscribers:subscriber-add" %}'
         }
     </script>
 
