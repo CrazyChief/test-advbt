@@ -47,11 +47,13 @@ INSTALLED_APPS = [
     'contacts.apps.ContactsConfig',
     'bloggiz.apps.BloggizConfig',
     'cy.apps.CyConfig',
+    'subscribers.apps.SubscribersConfig',
     'ckeditor',
     'ckeditor_uploader',
     'colorfield',
     'star_ratings',
     'easycart',
+    'django_social_share',
 ]
 
 MIDDLEWARE = [
@@ -274,12 +276,12 @@ LOCALE_PATHS = (
 
 CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-    '/static/',
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),
+#     '/static/',
+# ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

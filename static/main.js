@@ -408,6 +408,30 @@ $(document).ready(function(){
         $('#curr_dropdown_container').toggleClass('show');
     });
 
+    $('.tcon1').on('click', function() {
+        $(this).toggleClass('tcon-transform');
+        $('.menu-scroll').toggleClass('active');
+        $('body').toggleClass('active-menu-scroll');
+    });
+
+    // if (window.location.pathname.match(/\//)) {
+    //     document.getElementById("addSubscriber").addEventListener("click", showSnackbar);
+    // }
+
+    // $('.filter-min .btn').on('click', function() {
+    //     $('.filter').toggleClass('active');
+    // });
+
+    // $('.tcon2').click(function() {
+    //     $('.menu-filter-min.active').removeClass('active');
+    // });
+    // $('.cart').click(function() {
+    //     $('.box-cart .box').toggleClass('active');
+    // });
+    // $('.rezult').click(function() {
+    //     $('ul.language-chooser').toggleClass('active');
+    // });
+
   //   // Add smooth scrolling to all links in navbar + footer link
   // $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
   //
@@ -454,17 +478,23 @@ $(document).ready(function(){
     $("#addToCart").on('click', function () {
         var pk = $(this).siblings("input[name='add-to-cart']").val(),
             quantity = $(this).siblings("div").find("input[name='quantity']").val();
-        console.log("PK: " + pk);
-        console.log("quantity: " + quantity);
+        // console.log("PK: " + pk);
+        // console.log("quantity: " + quantity);
         cart.add(pk, quantity);
-        console.log("success!");
+        // console.log("success!");
     });
 
     $(".deleter button").on('click', function () {
         var bt = $(this),
             pk = bt.attr('data-product_id');
         cart.removeProd(pk);
-        console.log(pk);
+        // console.log(pk);
+    });
+
+    $('#addSubscriber').on('click', function () {
+        var emailVal = $("#subscr_email_field").val(),
+            nameVal = $("#subscr_name_field").val();
+        subscribers.addSubscriber(emailVal, nameVal);
     });
 
     // $("a[href='#comment_form']").on('click', function () {
@@ -472,12 +502,12 @@ $(document).ready(function(){
         if (this.id.match(/comment_reply_([0-9]+)/)) {
             var cForm = $("#comment_form"),
                 pos = cForm.position();
-            console.log(this.id);
+            // console.log(this.id);
             var elem = this,
                 parent_id = this.id.match(/([0-9]+)/)[0],
                 parent_name = elem.parentNode.previousSibling.previousSibling.previousSibling.previousSibling.childNodes[3].innerText;
-            console.log(parent_id);
-            console.log(parent_name);
+            // console.log(parent_id);
+            // console.log(parent_name);
             $('body').animate({scrollTop: pos.top}, 600); /* animating of scroll to form */
             cForm.find('input[id="id_parent"]').val(parent_id);
             $('textarea[id="id_comment"]').text("<b>" + parent_name + "</b>, ");
@@ -532,4 +562,16 @@ function decr(e) {
         vl--;
     }
     cart.changeQuantity(pk, vl);
+}
+
+function showSnackbar(param) {
+    var strName = "snackbar";
+    if (param == true) {
+        strName = strName;
+    } else if (param == false) {
+        strName = "error_" + strName;
+    }
+    var x = document.getElementById(strName);
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }

@@ -7,80 +7,58 @@
 {% load staticfiles %}
 
 {% block includefiles %}
-{#    <link rel="stylesheet" type="text/css" href="{% static 'jquery.pagepiling.css' %}">#}
-{#    <script type="text/javascript" src="{% static 'jquery.pagepiling.min.js' %}"></script>#}
-{#    <script type="text/javascript" src="{% static 'pagepilingconf.js' %}"></script>#}
-    <link rel="stylesheet" type="text/css" href="{% static 'media-md.css' %}">
-{#    <link rel="stylesheet" type="text/css" href="{% static 'onepage-scroll.css' %}">#}
-{#    <script type="text/javascript" src="{% static 'jquery.onepage-scroll.min.js' %}"></script>#}
+    <script type="text/javascript" src="{% static 'subscribers/subscribers.js' %}"></script>
+{#    <link rel="stylesheet" type="text/css" href="{% static 'media-md.css' %}">#}
+
 {#    <script>#}
-{#    $(".main").onepage_scroll({#}
-{#       sectionContainer: "section",     // sectionContainer accepts any kind of selector in case you don't want to use section#}
-{#       easing: "ease",                  // Easing options accepts the CSS3 easing animation such "ease", "linear", "ease-in",#}
-{#                                        // "ease-out", "ease-in-out", or even cubic bezier value such as "cubic-bezier(0.175, 0.885, 0.420, 1.310)"#}
-{#       animationTime: 1000,             // AnimationTime let you define how long each section takes to animate#}
-{#       pagination: true,                // You can either show or hide the pagination. Toggle true for show, false for hide.#}
-{#       updateURL: true,                // Toggle this true if you want the URL to be updated automatically when the user scroll to each page.#}
-{#       beforeMove: function() {},  // This option accepts a callback function. The function will be called before the page moves.#}
-{#       afterMove: function() {},   // This option accepts a callback function. The function will be called after the page moves.#}
-{#       loop: false,                     // You can have the page loop back to the top/bottom when the user navigates at up/down on the first/last page.#}
-{#       keyboard: true,                  // You can activate the keyboard controls#}
-{#       responsiveFallback: false,        // You can fallback to normal page scroll by defining the width of the browser in which#}
-{#                                        // you want the responsive fallback to be triggered. For example, set this to 600 and whenever#}
-{#                                        // the browser's width is less than 600, the fallback will kick in.#}
-{#       direction: "vertical"            // You can now define the direction of the One Page Scroll animation. Options available are "vertical" and "horizontal". The default value is "vertical".#}
-{#    });#}
+{#        $('body').addClass('js');#}
+{#        var new_footer = $('body.js .footer').html();#}
+{#        /*$('body.js #footer').html(new_footer).addClass('footer');#}
+{#        $('#end-section').remove();*/#}
+{#        $('li.go a').attr('data-href','off');#}
+{#        var main_outerwidth = $(window).outerWidth();#}
+{#        var main_outerHeight = $(window).outerHeight();#}
+{#        if (main_outerwidth > 992 ) {#}
+{#            $('.body').addClass('main');#}
+{#            document.write('<link rel="stylesheet" href="https://www.adavibeauty.com/wp-content/themes/templebeauty/media-md.css" />');#}
+{#            $(document).ready(function ($) {#}
+{#                $(".main").onepage_scroll({#}
+{#                    sectionContainer: "section", // контейнер, к которому будет применяться скролл#}
+{#                    easing: "ease-in-out", // Тип анимации "ease", "linear", "ease-in", "ease-out", "ease-in-out"#}
+{#                    animationTime: 500, // время анимации#}
+{#                    pagination: true, // скрыть или отобразить пагинатор#}
+{#                    updateURL: true // обновлять URL или нет#}
+{#                });#}
+{#            });#}
+{#            $('li.go a').click(function(){#}
+{#                var url = $(this).attr('href');#}
+{#                //url = url.substring(4);#}
+{#                url = '2';#}
+{#                $('.onepage-pagination a[href="#'+url+'"]').trigger('click');#}
+{#                return false#}
+{#            });#}
+{#            //$('.li.go a').attr('herf','');#}
+{#        } else {#}
+{#            $('.box-blog').addClass('owl2');#}
+{#            $('.go').click(function(event) {#}
+{#                event.preventDefault();#}
+{#                var target = $(this).find('>a').prop('hash');#}
+{#                $('html, body').animate({#}
+{#                    scrollTop: $(target).offset().top#}
+{#                }, 500);#}
+{#            });#}
+{#        }#}
+{#        $('.box-blog .col-xs-12:first-child').addClass('col-1');#}
+{#        $('.box-blog .col-xs-12:last-child').addClass('col-2');#}
+{#        $('li.go').removeClass('current-menu-item');#}
+{#        $('li.go a[data-href]').attr('href','/#d2');#}
+{##}
+{#        $('.widget_wysija').addClass('form max-width280');#}
+{#        $('.wysija-paragraph').addClass('form-group');#}
+{#        $('.wysija-input').addClass('form-control');#}
+{#        $('.wysija-submit').addClass('btn');#}
+{#        $('.widget_wysija_cont').addClass('min-height-form');#}
 {#    </script>#}
-
-    <script>
-        $('body').addClass('js');
-        var new_footer = $('body.js .footer').html();
-        /*$('body.js #footer').html(new_footer).addClass('footer');
-        $('#end-section').remove();*/
-        $('li.go a').attr('data-href','off');
-        var main_outerwidth = $(window).outerWidth();
-        var main_outerHeight = $(window).outerHeight();
-        if (main_outerwidth > 992 ) {
-            $('.body').addClass('main');
-            document.write('<link rel="stylesheet" href="https://www.adavibeauty.com/wp-content/themes/templebeauty/media-md.css" />');
-            $(document).ready(function ($) {
-                $(".main").onepage_scroll({
-                    sectionContainer: "section", // контейнер, к которому будет применяться скролл
-                    easing: "ease-in-out", // Тип анимации "ease", "linear", "ease-in", "ease-out", "ease-in-out"
-                    animationTime: 500, // время анимации
-                    pagination: true, // скрыть или отобразить пагинатор
-                    updateURL: true // обновлять URL или нет
-                });
-            });
-            $('li.go a').click(function(){
-                var url = $(this).attr('href');
-                //url = url.substring(4);
-                url = '2';
-                $('.onepage-pagination a[href="#'+url+'"]').trigger('click');
-                return false
-            });
-            //$('.li.go a').attr('herf','');
-        } else {
-            $('.box-blog').addClass('owl2');
-            $('.go').click(function(event) {
-                event.preventDefault();
-                var target = $(this).find('>a').prop('hash');
-                $('html, body').animate({
-                    scrollTop: $(target).offset().top
-                }, 500);
-            });
-        }
-        $('.box-blog .col-xs-12:first-child').addClass('col-1');
-        $('.box-blog .col-xs-12:last-child').addClass('col-2');
-        $('li.go').removeClass('current-menu-item');
-        $('li.go a[data-href]').attr('href','/#d2');
-
-        $('.widget_wysija').addClass('form max-width280');
-        $('.wysija-paragraph').addClass('form-group');
-        $('.wysija-input').addClass('form-control');
-        $('.wysija-submit').addClass('btn');
-        $('.widget_wysija_cont').addClass('min-height-form');
-    </script>
 
 {% endblock %}
 
@@ -90,72 +68,72 @@
 
 {% block content %}
 
-    <ul class="onepage-pagination">
-        <li><a data-index="1" href="#1" class="active"></a></li>
-        <li><a data-index="2" href="#2"></a></li>
-        {% if products %}
-            <li><a data-index="3" href="#3"></a></li>
-        {% endif %}
-        <li><a data-index="4" href="#4"></a></li>
-        {% if posts %}
-            <li><a data-index="5" href="#5"></a></li>
-        {% endif %}
-    </ul>
+{#    <ul class="onepage-pagination">#}
+{#        <li><a data-index="1" href="#1" class="active"></a></li>#}
+{#        <li><a data-index="2" href="#2"></a></li>#}
+{#        {% if products %}#}
+{#            <li><a data-index="3" href="#3"></a></li>#}
+{#        {% endif %}#}
+{#        <li><a data-index="4" href="#4"></a></li>#}
+{#        {% if posts %}#}
+{#            <li><a data-index="5" href="#5"></a></li>#}
+{#        {% endif %}#}
+{#    </ul>#}
 
 
 
 
+{#    <div class="main body js onepage-wrapper" style="position: relative;">#}
     <div class="main body js onepage-wrapper" style="position: relative;">
-        <section class="header section active" style="height: 950px; position: absolute; top: 0%;" data-index="1">
+        <section class="header section active" style="height: 950px; top: 0%;" data-index="1">
             <div class="box-header">
                 <span class="before-object" style="left: calc(50% + 474px);"></span>
                 <span class="after-object" style="border-width:950px 950px"></span>
                 <span class="slide-object"></span>
                 <div class="header-logo">
-                    <img src="{% static 'img/logo-slide.png' %}" alt="">
+                    <img src="{% static 'img/logo-slide.png' %}" alt="logo-slide">
                 </div>
                 <h1 class="h1">Органическая косметика</h1>
                 <h2 class="title">Официальный сайт The Organic Face в Европе</h2>
             </div><!-- box-header -->
         </section><!-- header -->
 
-        <section class="sector pos-sm section" data-index="2" style="position: absolute; top: 100%;">
+        <section class="sector pos-sm section" data-index="2" style="top: 100%;">
             <div class="line-1"></div>
             <div class="line-2"></div>
             <div class="container flexbox">
                 <div class="title style-1">
-                    <img src="https://www.adavibeauty.com/wp-content/uploads/2016/09/fon-logo.png" alt="">
+                    <img src="{% static 'img/fon-logo.png' %}" alt="fon-logo">
                     <h2 class="h2 ttnone">Органическая 95% Натуральная 100%</h2>
                 </div><!-- title -->
                 <div class="content text-center max-w850">
                     <p>Добро пожаловать на сайт&nbsp;Adavi Beauty. Нашей главной гордостью является професиональная <strong>органическая косметика</strong> The Organic Face. Начиная с начала 2016 года Алена Мевша-Adavi подписала договор с американским производителем этой органической косметики на эксклюзивную продажу и распространение на территории всей Европы. Частое, професиональное использование даже на чувствительной коже – это главная задача которую ставила перед собой создательница The Organic Face – Норин Диани, работая професиональным визажистом, и добилась своей цели. Используя только натуральные составляющие, Норин&nbsp;воплотила в жизнь то что считала своей главной задачей как визажиста – создать органическую косметику которая качественно работает при интенсивных и длительных фото&nbsp;и виде сьемках и, при этом, сохраняя кожу от негативного воздействия химических веществ, которые содержаться в неорганической косметике. Высокое качество косметики оценила компания Амазон, и на основании отличных отзывов покупателей и продаж подписала договор о покупке продуктов The Organic Face напрямую для компании Amazon, фактически создав себе монополию по продаже этой органической косметики на всей территории США (С Амазона в Украину продукция не поставляется).
-                        <img class="size-full wp-image-867 aligncenter" src="http://www.adavibeauty.com/wp-content/uploads/flovers.png" alt="flovers" width="728" height="200" srcset="https://www.adavibeauty.com/wp-content/uploads/flovers.png 728w, https://www.adavibeauty.com/wp-content/uploads/flovers-600x165.png 600w, https://www.adavibeauty.com/wp-content/uploads/flovers-400x110.png 400w, https://www.adavibeauty.com/wp-content/uploads/flovers-210x58.png 210w" sizes="(max-width: 728px) 100vw, 728px">
+                        <img class="size-full wp-image-867 aligncenter" src="{% static 'img/flovers.png' %}" alt="flovers" width="728" height="200" sizes="(max-width: 728px) 100vw, 728px">
                     </p>
                 </div><!-- content -->
             </div>
         </section><!-- section id="d2" -->
 
     {% if products %}
-        <section class="sector product section" data-index="3" style="position: absolute; top: 200%;">
+        <section class="sector product section" data-index="3" style="top: 200%;">
             <div class="container flexbox">
                 <div class="title style-2">
                     <h2 class="h2">{% trans "New products" %}</h2>
                 </div><!-- title -->
                 <div class="new-product row home">
-                    <div class="owl1" style="width: 1140px;">
+                    <div class="owl1">
                         <div class="woocommerce columns-4">
-                            <ul class="products owl-carousel owl-theme" style="opacity: 1; display: block;">
+                            <ul class="products" style="opacity: 1; display: block;">
                                 <div class="owl-wrapper-outer">
-                                    <div class="owl-wrapper" style="width: 2280px; left: 0px; display: block; transition: all 0ms ease; transform: translate3d(0px, 0px, 0px);">
+                                    <div class="owl-wrapper" style="width: 100%; transition: all 0ms ease; transform: translate3d(0px, 0px, 0px);">
 
                                         {% for product in products %}
-                                            <div class="owl-item" style="width: 380px;">
+                                            <div class="owl-item">
                                                 <li class="col post-964 product">
                                                     <a href="{% url 'products:detail' product.product.category.id product.id %}" class="item">
                                                         <span class="img"></span>
                                                         <img width="115" height="240" src="{{ product.get_main_image.url }}"
                                                              class="size-shop_catalog wp-post-image" alt="{{ product.title }}" title="{{ product.title }}"
-{#                                                             srcset="https://www.adavibeauty.com/wp-content/uploads/Ivory-115x240.png 115w, https://www.adavibeauty.com/wp-content/uploads/Ivory-600x1254.png 600w, https://www.adavibeauty.com/wp-content/uploads/Ivory-220x460.png 220w, https://www.adavibeauty.com/wp-content/uploads/Ivory-287x600.png 287w, https://www.adavibeauty.com/wp-content/uploads/Ivory.png 980w"#}
                                                              sizes="(max-width: 115px) 100vw, 115px">
                                                     </a>
                                                     <h2 class="title" style="height: 45px;">
@@ -171,9 +149,9 @@
                                                             </span>
                                                         </span>
                                                     </h2>
-                                                    <p class="box-btn">
-                                                        <a href="{% url 'products:detail' product.product.category.id product.id %}" class="btn btn-1 w234">{% trans "view more" %}</a>
-                                                    </p>
+{#                                                    <p class="box-btn">#}
+{#                                                        <a href="{% url 'products:detail' product.product.category.id product.id %}" class="btn btn-1 w234">{% trans "view more" %}</a>#}
+{#                                                    </p>#}
                                                 </li>
                                             </div>
                                         {% endfor %}
@@ -192,18 +170,18 @@
         </section><!-- section product -->
     {% endif %}
 
-        <section class="sector form section" data-index="4" style="position: absolute; top: 300%;">
+        <section class="sector form section" data-index="4" style="top: 300%;">
             <div class="container flexbox">
                 <div class="box-form">
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="title">
                                 <h2 class="title-1 h1">
-                                    <p>Подпишись<br>
-                                        на обновления!</p>
+                                    <p>{% trans "Subscribe" %}<br>
+                                        {% trans "on updates" %}!</p>
                                 </h2>
                                 <h3 class="title-2">
-                                    <p>Будь в курсе всех интересностей</p>
+                                    <p>{% blocktrans %}BE IN THE COURSE OF ALL INTERESTS{% endblocktrans %}</p>
                                 </h3>
                             </div>
                             <div class="col-lg-6 col-lg-offset-6 col-md-5 col-md-offset-7">
@@ -211,28 +189,43 @@
                                     <div class="widget_wysija_cont shortcode_wysija min-height-form">
                                         <div id="mailerlite-form_1" data-temp-id="58a97cb3d28b7">
                                             <div class="mailerlite-form">
-                                                <form action="" method="post" class="form  max-width280" novalidate="novalidate">
+                                                <form action="javascript:void(0)" method="post" class="form max-width280">
                                                     <div class="mailerlite-form-inputs">
                                                         <div class="mailerlite-form-field">
-                                                            <input id="mailerlite-1-field-email" class="form-control" placeholder="E-mail" type="email" required="required" name="form_fields[email]" aria-required="true">
+                                                            <input id="subscr_email_field" class="form-control" placeholder="{% trans 'Email' %}" type="email" required="required" name="subscr_email">
                                                         </div>
                                                         <div class="mailerlite-form-field">
-                                                            <input id="mailerlite-1-field-name" class="form-control" placeholder="Имя" type="text" required="required" name="form_fields[name]" aria-required="true">
+                                                            <input id="subscr_name_field" class="form-control" placeholder="{% trans 'Name' %}" type="text" required="required" name="subscr_name">
                                                         </div>
 {#                                                        <div class="mailerlite-form-loader">Подождите....</div>#}
                                                         <div class="mailerlite-subscribe-button-container">
-                                                            <input class="mailerlite-subscribe-submit btn" type="submit" value="Подписаться">
+                                                            <button type="button" id="addSubscriber" class="mailerlite-subscribe-submit btn">{% trans "Subscribe" %}</button>
                                                         </div>
-                                                        <input type="hidden" name="form_id" value="1">
-                                                        <input type="hidden" name="action" value="mailerlite_subscribe_form">
+{#                                                        <input type="hidden" name="form_id" value="1">#}
+{#                                                        <input type="hidden" name="action" value="mailerlite_subscribe_form">#}
                                                     </div>
-{#                                                    <div class="mailerlite-form-response">#}
-{#                                                        <h4>#}
-{#                                                            <p>#}
-{#                                                                <span style="color: #339966;">Спасибо за подписку. На ваш Email отправлено письмо с подтверждением. Проверьте свою почту.</span>#}
-{#                                                            </p>#}
-{#                                                        </h4>#}
-{#                                                    </div>#}
+                                                    <div id="snackbar" class="mailerlite-form-response">
+                                                        <h4>
+                                                            <p>
+                                                                <span style="color: #339966;">
+                                                                    {% blocktrans %}
+                                                                        Thank you for subscribing. A confirmation letter has been sent to you. Check your email.
+                                                                    {% endblocktrans %}
+                                                                </span>
+                                                            </p>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="error_snackbar">
+                                                        <h4>
+                                                            <p>
+                                                                <span style="color: #991010;">
+                                                                    {% blocktrans %}
+                                                                        You passed incorrect email address or this email already exists. Please, check your email address. Or you use incognito profile.
+                                                                    {% endblocktrans %}
+                                                                </span>
+                                                            </p>
+                                                        </h4>
+                                                    </div>
                                                 </form>
                                             </div>
                                         </div>
@@ -270,7 +263,7 @@
         </section><!-- section -->
 
     {% if posts %}
-        <section class="sector blog section" data-index="5" style="position: absolute; top: 400%;">
+        <section class="sector blog section" data-index="5" style="top: 400%;">
             <div class="container flexbox">
                 <div class="title style-3">
                     <h2 class="h2">{% trans "Blog" %}</h2>
