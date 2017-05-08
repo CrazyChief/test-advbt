@@ -7,6 +7,7 @@
 {% load staticfiles %}
 
 {% block includefiles %}
+    <script type="text/javascript" src="{% static 'subscribers/subscribers.js' %}"></script>
 {#    <link rel="stylesheet" type="text/css" href="{% static 'media-md.css' %}">#}
 
 {#    <script>#}
@@ -176,11 +177,11 @@
                         <div class="col-xs-12">
                             <div class="title">
                                 <h2 class="title-1 h1">
-                                    <p>Подпишись<br>
-                                        на обновления!</p>
+                                    <p>{% trans "Subscribe" %}<br>
+                                        {% trans "on updates" %}!</p>
                                 </h2>
                                 <h3 class="title-2">
-                                    <p>Будь в курсе всех интересностей</p>
+                                    <p>{% blocktrans %}BE IN THE COURSE OF ALL INTERESTS{% endblocktrans %}</p>
                                 </h3>
                             </div>
                             <div class="col-lg-6 col-lg-offset-6 col-md-5 col-md-offset-7">
@@ -188,28 +189,43 @@
                                     <div class="widget_wysija_cont shortcode_wysija min-height-form">
                                         <div id="mailerlite-form_1" data-temp-id="58a97cb3d28b7">
                                             <div class="mailerlite-form">
-                                                <form action="" method="post" class="form  max-width280" novalidate="novalidate">
+                                                <form action="javascript:void(0)" method="post" class="form max-width280">
                                                     <div class="mailerlite-form-inputs">
                                                         <div class="mailerlite-form-field">
-                                                            <input id="mailerlite-1-field-email" class="form-control" placeholder="E-mail" type="email" required="required" name="form_fields[email]" aria-required="true">
+                                                            <input id="subscr_email_field" class="form-control" placeholder="{% trans 'Email' %}" type="email" required="required" name="subscr_email">
                                                         </div>
                                                         <div class="mailerlite-form-field">
-                                                            <input id="mailerlite-1-field-name" class="form-control" placeholder="Имя" type="text" required="required" name="form_fields[name]" aria-required="true">
+                                                            <input id="subscr_name_field" class="form-control" placeholder="{% trans 'Name' %}" type="text" required="required" name="subscr_name">
                                                         </div>
 {#                                                        <div class="mailerlite-form-loader">Подождите....</div>#}
                                                         <div class="mailerlite-subscribe-button-container">
-                                                            <input class="mailerlite-subscribe-submit btn" type="submit" value="Подписаться">
+                                                            <button type="button" id="addSubscriber" class="mailerlite-subscribe-submit btn">{% trans "Subscribe" %}</button>
                                                         </div>
-                                                        <input type="hidden" name="form_id" value="1">
-                                                        <input type="hidden" name="action" value="mailerlite_subscribe_form">
+{#                                                        <input type="hidden" name="form_id" value="1">#}
+{#                                                        <input type="hidden" name="action" value="mailerlite_subscribe_form">#}
                                                     </div>
-{#                                                    <div class="mailerlite-form-response">#}
-{#                                                        <h4>#}
-{#                                                            <p>#}
-{#                                                                <span style="color: #339966;">Спасибо за подписку. На ваш Email отправлено письмо с подтверждением. Проверьте свою почту.</span>#}
-{#                                                            </p>#}
-{#                                                        </h4>#}
-{#                                                    </div>#}
+                                                    <div id="snackbar" class="mailerlite-form-response">
+                                                        <h4>
+                                                            <p>
+                                                                <span style="color: #339966;">
+                                                                    {% blocktrans %}
+                                                                        Thank you for subscribing. A confirmation letter has been sent to you. Check your email.
+                                                                    {% endblocktrans %}
+                                                                </span>
+                                                            </p>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="error_snackbar">
+                                                        <h4>
+                                                            <p>
+                                                                <span style="color: #991010;">
+                                                                    {% blocktrans %}
+                                                                        You passed incorrect email address or this email already exists. Please, check your email address. Or you use incognito profile.
+                                                                    {% endblocktrans %}
+                                                                </span>
+                                                            </p>
+                                                        </h4>
+                                                    </div>
                                                 </form>
                                             </div>
                                         </div>

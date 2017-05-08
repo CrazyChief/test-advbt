@@ -62,7 +62,7 @@
             emptyCart: '{% url "cart:cart-empty" %}',
         };
         var SUBURL = {
-            add: '{% url "subscribers:subscriber-add" %}'
+            addSubscriber: '{% url "subscribers:subscriber-add" %}',
         }
     </script>
 
@@ -89,6 +89,16 @@
         }
     </style>
 
+    <div class="menu-scroll">
+        <ul>
+            <li class="menu-item current-menu-item page-item-56 current_page_item menu-item-688"><a href="/">{% trans "Home" %}</a></li>
+            <li class="go menu-item current_page_item menu-item-692"><a href="/#d2" data-href="off">{% trans "About us" %}</a></li>
+            <li class="menu-item menu-item-835"><a href="{% url 'products:index' %}">{% trans "Products" %}</a></li>
+            <li class="menu-item menu-item-733"><a href="{% url 'bloggiz:list' %}">{% trans "Blog" %}</a></li>
+            <li class="menu-item menu-item-724"><a href="{% url 'contacts:index' %}">{% trans "Contacts" %}</a></li>
+        </ul>
+    </div>
+
     <div class="bar-menu">
         <div class="container">
             <div class="logo">
@@ -98,7 +108,7 @@
             <div class="menu">
                 <ul class="hidden-md hidden-sm hidden-xs">
                     <li><a href="/">{% trans "Home" %}</a></li>
-                    <li class="go current_page_item"><a href="#second" data-href="off">{% trans "About us" %}</a></li>
+                    <li class="go current_page_item"><a href="/#second" data-href="off">{% trans "About us" %}</a></li>
                     <li><a href="{% url 'products:index' %}">{% trans "Products" %}</a></li>
                     <li><a href="{% url 'bloggiz:list' %}">{% trans "Blog" %}</a></li>
                     <li><a href="{% url 'contacts:index' %}">{% trans "Contacts" %}</a></li>
@@ -107,7 +117,7 @@
             </div><!-- menu -->
 
             <div class="box-cart">
-                <button type="button" class="tcon tcon1 tcon-menu--xcross hidden-lg pull-right" aria-label="toggle menu">
+                <button type="button" id="tcon1" class="tcon tcon1 tcon-menu--xcross hidden-lg pull-right" aria-label="toggle menu">
                     <span class="tcon-menu__lines" aria-hidden="true"></span>
                     <span class="tcon-visuallyhidden">toggle menu</span>
                 </button>

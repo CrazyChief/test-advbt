@@ -1,5 +1,5 @@
 html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
-body{margin:0}
+body{margin:0;height: 100%!important;}
 article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}
 audio,canvas,progress,video{display:inline-block;vertical-align:baseline}
 audio:not([controls]){display:none;height:0}
@@ -1071,7 +1071,7 @@ body.viewing-page-1 .bar-menu{padding-top:30px;padding-bottom:30px;background-co
 body.viewing-page-1 .onepage-pagination li a:before{background:#fff;border:1px solid #ffd0cc}
 body.viewing-page-1 .onepage-pagination li a.active:before{background:#ff887b;border:1px solid #ff887b}
 body.viewing-page-1 .menu-scroll{top:0}
-body .menu-scroll{-o-transition:all 1s ease;-moz-transition:all 1s ease;-webkit-transition:all 1s ease;transition:all 1s ease;justify-content:space-between;flex-direction:row;align-items:center;display:flex;text-align:center;background-color:rgba(255,255,255,0.85);position:fixed;left:0;right:0;top:68px;bottom:0;z-index:-1;opacity:0}
+body .menu-scroll{-o-transition:all 1s ease;-moz-transition:all 1s ease;-webkit-transition:all 1s ease;transition:all 1s ease;justify-content:space-between;flex-direction:row;align-items:center;display:flex;text-align:center;background-color:rgba(255,255,255,0.85);position:fixed;left:0;right:0;top:0%;bottom:0;z-index:-1;opacity:0}
 body .menu-scroll.active{z-index:10;opacity:1}
 body .menu-scroll ul{padding:0;margin:0;width:100%;list-style:none}
 body .menu-scroll ul li.active a{color:#ff887b;font-weight:700;font-size:265%;text-decoration:none}
@@ -1172,7 +1172,7 @@ body .body section.sector .content{width:100%;margin-top:20px; color: #000;}
 body .body section.sector .content img{max-width:100%; height: auto;}
 body .body section.sector.product .filter-min{text-align:center}
 body .body section.sector.product .filter-min .btn{padding:14px 25px}
-body .body section.sector.product .filter{z-index:1;justify-content:space-between;align-items:center;display:flex;flex-direction:row;position:relative;width:100%}
+body .body section.sector.product .filter{z-index:100;justify-content:space-between;align-items:center;display:flex;flex-direction:row;position:relative;width:100%}
 body .body section.sector.product .filter:before{border-bottom:1px solid #e6e6e6;content:'';bottom:-40px;position:absolute;width:100%;left:0;right:0}
 body .body section.sector.product .filter .item{position:relative}
 body .body section.sector.product .filter .item:hover{color:#f98a82}
@@ -1225,7 +1225,7 @@ body .body section.sector.contacts .box ul li.ico.local{background-image:url(img
 body .body section.sector.contacts .box ul li.ico.phone{background-image:url(img/ico-phone.png);background-size:20px auto}
 body .body section.sector.contacts .box ul li.ico.email{background-image:url(img/ico-email.png);background-size:21px auto}
 body .body section.sector.contacts .box .box-ico{margin-top:40px;margin-bottom:40px}
-body .footer{padding:26px 0;color:#f7fafb;position:relative;left:0;right:0;bottom:0;margin:0 auto;z-index:2;background-color:#f7fafb}
+body .footer{padding:26px 0;color:#f7fafb;position:relative;left:0;right:0;bottom:0;margin:0 auto;z-index:2;background-color:#f7fafb;flex: 0 0 auto;}
 body .footer .copyright{color:#2c2c2c;padding:10px;margin:0;letter-spacing:.025em}
 .post-ratings strong{color:#e5e5e5;margin-right:10px;font-weight:500;font-size:15px}
 .times-new-roman {font-family: "Times New Roman"; }
@@ -1997,4 +1997,49 @@ div[class*="-this"] {display: inline-block;}
   .comment-info {width: 100%; vertical-align: top}
   .comment-content {width: 100%;}
   .reply img {width: 40px; height: 40px; margin: 3px auto}
+}
+
+#snackbar, #error_snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  /*margin: 0 auto;*/
+  bottom: 30px;
+}
+
+#snackbar.show, #error_snackbar.show {
+  visibility: visible;
+
+/* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+However, delay the fade out process for 5.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 5.5s;
+  animation: fadein 0.5s, fadeout 0.5s 5.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
 }
