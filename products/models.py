@@ -4,6 +4,7 @@ from django.db import models
 from django.utils import timezone
 # from django.urls import reverse
 from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext_lazy as _
 
 from ckeditor.fields import RichTextField
 from colorfield.fields import ColorField
@@ -45,6 +46,9 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     date_added = models.DateTimeField(auto_now_add=True)
     status = models.BooleanField(choices=STATUSES, default=DRAFT)
+    details = RichTextField(verbose_name=_("Details"), blank=True)
+    htu = RichTextField(verbose_name=_("How to use"), blank=True)
+    composition = RichTextField(verbose_name=_("Composition"), blank=True)
 
     class Meta:
         verbose_name = "Product"
@@ -85,7 +89,7 @@ class ProductVariation(models.Model):
     is_available = models.BooleanField(default=False)
     status = models.BooleanField(choices=STATUSES, default=DRAFT)
     date_added = models.DateTimeField(auto_now_add=True)
-    description = RichTextField()
+    # description = RichTextField()
 
     class Meta:
         verbose_name = "Product variation"
@@ -169,6 +173,31 @@ class ProductReview(models.Model):
 
     def __str__(self):
         return self.reviewer_name + " - " + self.reviewer_email
+
+    def product_name(self):
+        return self.product
+
+    product_name.admin_order_field = 'product'
+    product_name.short_description = 'Review for product'
+
+
+class ProductAnswer(models.Model):
+    """
+    Answers for every product
+    """
+    product = models.ForeignKey(ProductVariation, on_delete=models.CASCADE)
+    answer = models.TextField()
+    name = models.CharField(max_length=240)
+    email = models.CharField(max_length=240)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-date_added"]
+        verbose_name = _("Product Answer")
+        verbose_name_plural = _("Product Answers")
+
+    def __str__(self):
+        return self.name + " - " + self.email
 
     def product_name(self):
         return self.product

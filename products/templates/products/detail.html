@@ -165,89 +165,152 @@
                     $('.varieble-box a[href="'+href+'"]').addClass('active');
                 </script>
 
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="tab tabs ws-tabs">
-                    <button class="tablinks" onclick="openDesc(event, 'details')" id="defaultOpen">
-                        {% trans "Details" %}
-                    </button>
-                    <button class="tablinks" onclick="openDesc(event, 'htu')">
-                        {% trans "How to use" %}
-                    </button>
-                    <button class="tablinks" onclick="openDesc(event, 'composition')">
-                        {% trans "Composition" %}
-                    </button>
-{#                                        <button class="tablinks" onclick="openDesc(event, 'description')" id="defaultOpen">#}
-{#                                            {% trans "Description" %}#}
-{#                                        </button>#}
-                    <button class="tablinks" onclick="openDesc(event, 'reviews')">
-                        {% trans "Reviews" %} ({{ product_reviews|length }})
-                    </button>
-                    <button class="tablinks" onclick="openDesc(event, 'answers')">
-                        {% trans "Answers" %}
-                    </button>
-                </div>
-            </div>
-
-            <div class="box-desc col-lg-12 col-md-12 col-sm-12">
-                <div class="desc">
-                    <div id="description" class="tabcontent">
-                        {{ productvariation.description|safe }}
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="tab tabs ws-tabs">
+                        <button class="tablinks" onclick="openDesc(event, 'details')" id="defaultOpen">
+                            {% trans "Details" %}
+                        </button>
+                        <button class="tablinks" onclick="openDesc(event, 'htu')">
+                            {% trans "How to use" %}
+                        </button>
+                        <button class="tablinks" onclick="openDesc(event, 'composition')">
+                            {% trans "Composition" %}
+                        </button>
+    {#                                        <button class="tablinks" onclick="openDesc(event, 'description')" id="defaultOpen">#}
+    {#                                            {% trans "Description" %}#}
+    {#                                        </button>#}
+                        <button class="tablinks" onclick="openDesc(event, 'reviews')">
+                            {% trans "Reviews" %} ({{ product_reviews|length }})
+                        </button>
+                        <button class="tablinks" onclick="openDesc(event, 'answers')">
+                            {% trans "Answers" %}
+                        </button>
                     </div>
-                    <div id="details" class="tabcontent"></div>
-                    <div id="htu" class="tabcontent"></div>
-                    <div id="composition" class="tabcontent"></div>
-                    <div id="reviews" class="tabcontent">
-                        <h2 class="woocommerce-Reviews-title">{% trans "Reviews" %}</h2>
-                        {% if not product_reviews %}
-                            <p class="woocommerce-noreviews">{% trans "No reviews" %}</p>
-                        {% else %}
-                            <!-- REVIEWS -->
-                            {% for review in product_reviews %}
-                                <div class="conteiner-comments">
-                                    <div class="authorInfo">
-                                        <strong itemprop="author">Author: {{ review.reviewer_name }}</strong>
-                                        <strong>( {{ review.reviewer_email }} )</strong>
-                                    </div>
-                                    <div itemprop="description" class="description">
-                                        <p>{{ review.review|safe }}</p>
-                                    </div>
-                                    <div class="time">
-                                        <time itemprop="datePublished" datetime="{{ review.review_added }}">
-                                                {{ review.review_added|date }}
-                                        </time>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                            <!-- !REVIEWS -->
-                        {% endif %}
+                </div>
 
-                    <!-- REVIEW_FORM -->
-                        <div class="review-form">
-                            <h3 class="text-center">{% trans "Add your review" %}:</h3>
-                            <form class="form-horizontal" action="" method="post">
-                                {% csrf_token %}
-                                {% for field in form %}
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-4 col-sm-8">
-                                            <span class="text-danger small">{{ field.errors }}</span>
+                <div class="box-desc col-lg-12 col-md-12 col-sm-12">
+                    <div class="desc">
+    {#                    <div id="description" class="tabcontent">#}
+    {#                        {{ productvariation.description|safe }}#}
+    {#                    </div>#}
+                        <div id="details" class="tabcontent">
+                            {{ productvariation.product.details|safe }}
+                        </div>
+                        <div id="htu" class="tabcontent">
+                            {{ productvariation.product.htu|safe }}
+                        </div>
+                        <div id="composition" class="tabcontent">
+                            {{ productvariation.product.composition|safe }}
+                        </div>
+                        <div id="reviews" class="tabcontent">
+                            <h2 class="woocommerce-Reviews-title">{% trans "Reviews" %}</h2>
+                            {% if not product_reviews %}
+                                <p class="woocommerce-noreviews">{% trans "No reviews" %}</p>
+                            {% else %}
+                                <!-- REVIEWS -->
+                                {% for review in product_reviews %}
+                                    <div class="conteiner-comments">
+                                        <div class="authorInfo">
+                                            <strong itemprop="author">Author: {{ review.reviewer_name }}</strong>
+                                            <strong>( {{ review.reviewer_email }} )</strong>
                                         </div>
-                                        <label class="control-label col-sm-2">{{ field.label_tag }}</label>
-                                        <div class="col-sm-10">{{ field }}</div>
+                                        <div itemprop="description" class="description">
+                                            <p>{{ review.review|safe }}</p>
+                                        </div>
+                                        <div class="time">
+                                            <time itemprop="datePublished" datetime="{{ review.review_added }}">
+                                                    {{ review.review_added|date }}
+                                            </time>
+                                        </div>
                                     </div>
                                 {% endfor %}
-                                <div class="form-group">
-                                    <div class="col-sm-offset-4 col-sm-8">
-                                        <button type="submit" class="btn btn-1">{% trans "Submit" %}</button>
+                                <!-- !REVIEWS -->
+                            {% endif %}
+
+                            <!-- REVIEW_FORM -->
+                            <div class="review-form">
+                                <h3 class="text-center">{% trans "Add your review" %}:</h3>
+                                <form class="form-horizontal" action="" method="post">
+                                    {% csrf_token %}
+                                    {% for field in form %}
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-4 col-sm-8">
+                                                <span class="text-danger small">{{ field.errors }}</span>
+                                            </div>
+                                            <label class="control-label col-sm-2">{{ field.label_tag }}</label>
+                                            <div class="col-sm-10">{{ field }}</div>
+                                        </div>
+                                    {% endfor %}
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-4 col-sm-8">
+                                            <button type="submit" class="btn btn-1">{% trans "Submit" %}</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
+                            <!-- !REVIEW_FORM -->
                         </div>
-                    <!-- !REVIEW_FORM -->
-                    <div id="answers" class="tabcontent"></div>
+                        <!-- ANSWERS -->
+                        <div id="answers" class="tabcontent">
+                            <!-- ANSWER_FORM -->
+                            <!-- !ANSWER_FORM -->
+                        </div>
+                        <!-- !ANSWERS -->
+
                     </div>
 
                 </div>
-                <!-- SOCIAL'S SHARE -->
+
+            </div>
+
+            <div class="same_products">
+                <h3 class="text-center">
+                    {% trans "Same products" %}
+                </h3>
+
+                {% if product_variation_list %}
+                    <ul class="products">
+                        {% for product in product_variation_list %}
+                            {% if product.status %}
+                                <li class="col product">
+                                    <a href="{% url 'products:detail' category.get.id product.id %}" class="item">
+{#                                        {% for image in product_image_list %}#}
+{#                                            {% if image.product == product and image.is_main %}#}
+                                                <span class="img"></span>
+                                                <img width="200" height="240" src="{{ product.get_main_image.url }}" alt="{{ product.get_main_image.description }}" sizes="(max-width: 200px) 100vw, 200px">
+{#                                            {% endif %}#}
+{#                                        {% endfor %}#}
+                                    </a>
+                                    <h2 class="title">
+                                        <span>{{ product.title }}</span>
+                                        <span>
+                                            <span class="price">
+                                                <span class="amount">
+                                                    {% change_currency product.price CURRENCY_ACTIVE.abbreviation %}
+                                                    <span class="woocommerce-Price-currencySymbol">
+                                                        {{ CURRENCY_ACTIVE.symbol }}
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </h2>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+		</div>
+	</section><!-- section blog -->
+</div>
+
+{% endblock %}
+
+
+
+
+<!-- SOCIAL'S SHARE -->
 {#                                <div id="supsystic" class="text-center">#}
 {#                                    <div class="row">#}
 {#                                        <div class="col-min-12 col-xs-4 text-left">#}
@@ -265,20 +328,7 @@
 {#                                        </div>#}
 {#                                    </div>#}
 {#                                </div>#}
-                <!-- !SOCIAL'S SHARE -->
-            </div>
-
-            </div>
-		</div>
-	</section><!-- section blog -->
-</div>
-
-{% endblock %}
-
-
-
-
-
+<!-- !SOCIAL'S SHARE -->
 
 
 

@@ -7,11 +7,11 @@ class CategoryTranslationOptions(TranslationOptions):
 
 
 class ProductTranslationOptions(TranslationOptions):
-    fields = ('title',)
+    fields = ('title', 'details', 'htu', 'composition',)
 
 
 class ProductVariationTranslationOptions(TranslationOptions):
-    fields = ('title', 'color_description', 'description',)
+    fields = ('title', 'color_description',)
 
 
 class ProductImageTranslationOptions(TranslationOptions):
