@@ -12,6 +12,7 @@ from cart.forms import CartAddProductForm
 class IndexView(ListView):
     template_name = 'products/list.html'
     context_object_name = 'category_list'
+    paginate_by = 10
 
     def get_queryset(self):
         return Category.objects.all()
@@ -30,6 +31,7 @@ class ProductCategoryView(TemplateView):
     template_name = 'products/products_by_category.html'
     # queryset = Category.objects.all()
     context_object_name = 'category'
+    paginate_by = 20
 
     def get(self, request, *args, **kwargs):
         self.category = self.get_category()
