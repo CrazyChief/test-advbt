@@ -27,7 +27,7 @@ SECRET_KEY = 't0fd&$z^=g5kwn%^obiwpcrzs%o3!s@b3@$413%4ye@nib97bm'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    # 'crazycat.pythonanywhere.com'
+    # 'crazychief.pythonanywhere.com'
     ]
 
 
@@ -109,10 +109,10 @@ DATABASES = {
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'CrazyCat$adavibeauty',
-#         'USER': 'CrazyCat',
+#         'NAME': 'CrazyChief$adavibeauty',
+#         'USER': 'CrazyChief',
 #         'PASSWORD': 'numberone123',
-#         'HOST': 'CrazyCat.mysql.pythonanywhere-services.com',
+#         'HOST': 'CrazyChief.mysql.pythonanywhere-services.com',
 #     }
 # }
 
