@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db.models import TextField
 from modeltranslation.admin import TranslationAdmin, TabbedTranslationAdmin, TranslationTabularInline
-from .models import Category, Product, ProductVariation, ProductImage, ProductReview, Discount
+from .models import Category, Product, ProductVariation, ProductImage, ProductReview, ProductQuestion, Discount
 from ckeditor.widgets import CKEditorWidget
 
 
@@ -69,6 +69,19 @@ class ProductReviewAdmin(admin.ModelAdmin):
     formfield_overrides = {TextField: {'widget': CKEditorWidget}}
 
 
+class ProductQuestionAdmin(admin.ModelAdmin):
+    list_display = (
+        'product_name',
+        'name',
+        'email',
+        'date_added',
+    )
+    list_filter = [
+        'date_added',
+    ]
+    formfield_overrides = {TextField: {'widget': CKEditorWidget}}
+
+
 class DiscountAdmin(TabbedTranslationAdmin):
     list_display = (
         'discount_title',
@@ -91,5 +104,6 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductVariation, ProduvtVariationAdmin)
 admin.site.register(ProductReview, ProductReviewAdmin)
+admin.site.register(ProductQuestion, ProductQuestionAdmin)
 admin.site.register(Discount, DiscountAdmin)
 

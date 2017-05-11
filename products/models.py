@@ -182,12 +182,12 @@ class ProductReview(models.Model):
     product_name.short_description = 'Review for product'
 
 
-class ProductAnswer(models.Model):
+class ProductQuestion(models.Model):
     """
-    Answers for every product
+    Questions for every product
     """
     product = models.ForeignKey(ProductVariation, on_delete=models.CASCADE)
-    answer = models.TextField()
+    question = models.TextField()
     name = models.CharField(max_length=240)
     email = models.CharField(max_length=240)
     parent = models.ForeignKey('self', null=True, blank=True, verbose_name=_('Parent'))
@@ -196,8 +196,8 @@ class ProductAnswer(models.Model):
 
     class Meta:
         ordering = ["-date_added"]
-        verbose_name = _("Product Answer")
-        verbose_name_plural = _("Product Answers")
+        verbose_name = _("Product Question")
+        verbose_name_plural = _("Product Questions")
 
     def __str__(self):
         return self.name + " - " + self.email
@@ -206,7 +206,7 @@ class ProductAnswer(models.Model):
         return self.product
 
     def children(self):     # replies
-        return ProductAnswer.objects.filter(parent=self)
+        return ProductQuestion.objects.filter(parent=self)
 
     @property
     def is_parent(self):
@@ -215,7 +215,7 @@ class ProductAnswer(models.Model):
         return True
 
     product_name.admin_order_field = 'product'
-    product_name.short_description = 'Review for product'
+    product_name.short_description = 'Question for product'
 
 
 class Discount(models.Model):
