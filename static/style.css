@@ -2082,14 +2082,7 @@ However, delay the fade out process for 5.5 seconds */
   display: inline-block;
   height: auto;
   width: auto;
-  /*max-width: 420px;*/
-  /*min-height: 460px;*/
   text-align: center;
-
-  /*display: -webkit-flex; !* Safari *!*/
-  /*display: flex;*/
-  /*justify-content: space-around;*/
-  /*-webkit-justify-content: space-around; !* Safari 6.1+ *!*/
 }
 .same_products .products li:before {
   content: '';
@@ -2112,9 +2105,37 @@ However, delay the fade out process for 5.5 seconds */
   left: -12px;
   z-index: 1;
   border-bottom: 12px solid #e3edf0;
-  /*border: 6px solid red;*/
-  /*border-right: 6px solid red;*/
-  /*border-bottom-width: 60px;*/
+}
+.back_piece {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: -12px;
+  background-color: #e3edf0;
+  width: 60%;
+  height: 120%;
+}
+.same_products .products li img {
+  position: relative;
+}
+.same_products .products li h2 span.prod-title {
+  font-family: "Times New Roman";
+  font-style: italic;
+  font-weight: 400;
+  color: #f37f78;
+}
+.same_products .products li h2 span.prod-title, .same_products .products li h2 span.main-product {
+  display: block;
+  text-align: left;
+}
+.same_products .products li h2 span.main-product {
+  font-weight: 400;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.same_products .products li h2 span.amount {
+  text-align: end;
+  color: #f37f78;
 }
 
 @media screen and (max-width: 768px) {

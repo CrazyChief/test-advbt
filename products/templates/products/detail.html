@@ -378,6 +378,7 @@
                         {% for product in same_products %}
                             {% if product.status and product != productvariation %}
                                 <li class="col product">
+                                    <div class="back_piece"></div>
                                     <a href="{% url 'products:detail' category.get.id product.id %}" class="item">
 {#                                        {% for image in product_image_list %}#}
 {#                                            {% if image.product == product and image.is_main %}#}
@@ -387,7 +388,8 @@
 {#                                        {% endfor %}#}
                                     </a>
                                     <h2 class="title">
-                                        <span>{{ product.title }}</span>
+                                        <span class="prod-title">{{ product.title }}</span>
+                                        <span class="main-product">{{ product.product }}</span>
                                         <span>
                                             <span class="price">
                                                 <span class="amount">

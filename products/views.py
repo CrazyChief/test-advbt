@@ -4,8 +4,9 @@ from django.views.generic.edit import FormMixin
 from django.http import Http404, HttpResponseForbidden
 from django.urls import reverse
 
+from django.contrib.auth.models import User
 from .models import Category, Product, ProductVariation, ProductImage, ProductReview, ProductAnswer
-from .forms import ReviewForm
+from .forms import ReviewForm, AnswerForm
 from cart.forms import CartAddProductForm
 
 
@@ -62,7 +63,7 @@ class ProductView(DetailView, FormMixin):
     model = ProductVariation
     template_name = 'products/detail.html'
     form_class = ReviewForm
-    # answer_form_class = CartAddProductForm
+    answer_form_class = AnswerForm
 
     def get(self, request, *args, **kwargs):
         # self.category = self.get_category()
@@ -80,13 +81,13 @@ class ProductView(DetailView, FormMixin):
             return get_object_or_404(Product, pk=self.prod_var.get().product.pk)
         raise Http404
 
-    # def get_answer_form_class(self):
-    #     return self.answer_form_class
-    #
-    # def get_answer_form(self, form_class=None):
-    #     if form_class is None:
-    #         form_class = self.get_answer_form_class()
-    #     return form_class(**self.get_form_kwargs())
+    def get_answer_form_class(self):
+        return self.answer_form_class
+
+    def get_answer_form(self, form_class=None):
+        if form_class is None:
+            form_class = self.get_answer_form_class()
+        return form_class(**self.get_form_kwargs())
 
     def get_context_data(self, **kwargs):
         context = super(ProductView, self).get_context_data(**kwargs)
@@ -98,7 +99,11 @@ class ProductView(DetailView, FormMixin):
         context['answers'] = ProductAnswer.objects.filter(product=self.kwargs['pk'])
         context['same_products'] = ProductVariation.objects.filter(product=self.get_product())[:4]
         context['form'] = self.get_form()
-        # context['answer_form'] = self.get_answer_form(form_class=self.answer_form_class)
+        if self.request.user.is_authenticated:
+            context['user'] = User.objects.get(pk=self.request.user.id)
+        else:
+            context['user'] = None
+        context['answer_form'] = self.get_answer_form(form_class=self.answer_form_class)
         return context
 
     def post(self, request, *args, **kwargs):
