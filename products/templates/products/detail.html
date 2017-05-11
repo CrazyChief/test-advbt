@@ -268,10 +268,10 @@
                     {% trans "Same products" %}
                 </h3>
 
-                {% if product_variation_list %}
+                {% if same_products %}
                     <ul class="products">
-                        {% for product in product_variation_list %}
-                            {% if product.status %}
+                        {% for product in same_products %}
+                            {% if product.status and product != productvariation %}
                                 <li class="col product">
                                     <a href="{% url 'products:detail' category.get.id product.id %}" class="item">
 {#                                        {% for image in product_image_list %}#}

@@ -87,6 +87,7 @@ class ProductView(DetailView, FormMixin):
         context['product_images'] = ProductImage.objects.filter(product=self.kwargs['pk'])
         context['product_reviews'] = ProductReview.objects.filter(product=self.kwargs['pk'])
         context['product_variation_list'] = ProductVariation.objects.filter(product=self.get_product())
+        context['same_products'] = ProductVariation.objects.filter(product=self.get_product())[:4]
         context['form'] = self.get_form()
         return context
 

@@ -2070,47 +2070,51 @@ However, delay the fade out process for 5.5 seconds */
 
 .same_products {width: 100%;margin-top:40px;}
 .same_products h3 {font-size: 30px;text-transform: uppercase;font-weight: 400;}
+.same_products ul.products {margin-top: 40px;}
 .same_products .products li {
+  position: relative;
   border: 12px solid #f7fafb;
   border-top: 12px solid #f7fafb;
   border-bottom: 12px solid #f7fafb;
   border-left: 12px solid #e3edf0;
   border-right: 12px solid #f7fafb;
   list-style-type: none;
-  /*display: inline-block;*/
-  height: 100%;
-  width: 100%;
-    max-width: 420px;
-    min-height: 460px;
-    text-align: center;
-/*display: -webkit-flex; !* Safari *!*/
-  /*-webkit-justify-content: space-around; !* Safari 6.1+ *!*/
+  display: inline-block;
+  height: auto;
+  width: auto;
+  /*max-width: 420px;*/
+  /*min-height: 460px;*/
+  text-align: center;
+
+  /*display: -webkit-flex; !* Safari *!*/
   /*display: flex;*/
   /*justify-content: space-around;*/
+  /*-webkit-justify-content: space-around; !* Safari 6.1+ *!*/
 }
-.same_products .products li::before {
+.same_products .products li:before {
   content: '';
   height: 12px;
-  width: 225px;
-  color: red;
-  /*position: absolute;*/
-  /*top: -12px;*/
-  /*left: -12px;*/
+  width: 50%;
+  color: #e3edf0;
+  position: absolute;
+  top: -12px;
+  left: -12px;
   z-index: 1;
+  border-top: 12px solid #e3edf0;
 }
-.same_products .products li::after {
+.same_products .products li:after {
   content: '';
   height: 12px;
-  width: 225px;
-  color: red;
-  /*position: absolute;*/
-  /*bottom: -12px;*/
-  /*left: -12px;*/
+  width: 50%;
+  color: #e3edf0;
+  position: absolute;
+  bottom: -12px;
+  left: -12px;
   z-index: 1;
-  border-left: 6px solid #e6132b;
+  border-bottom: 12px solid #e3edf0;
   /*border: 6px solid red;*/
   /*border-right: 6px solid red;*/
-  /*border-bottom-width: 6px;*/
+  /*border-bottom-width: 60px;*/
 }
 
 @media screen and (max-width: 768px) {
