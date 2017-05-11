@@ -5,6 +5,7 @@ from django.utils import timezone
 # from django.urls import reverse
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import User
 
 from ckeditor.fields import RichTextField
 from colorfield.fields import ColorField
@@ -189,6 +190,8 @@ class ProductAnswer(models.Model):
     answer = models.TextField()
     name = models.CharField(max_length=240)
     email = models.CharField(max_length=240)
+    parent = models.ForeignKey('self', null=True, blank=True, verbose_name=_('Parent'))
+    user = models.ForeignKey(User, null=True, blank=True, verbose_name=_('User'))
     date_added = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -201,6 +204,15 @@ class ProductAnswer(models.Model):
 
     def product_name(self):
         return self.product
+
+    def children(self):     # replies
+        return ProductAnswer.objects.filter(parent=self)
+
+    @property
+    def is_parent(self):
+        if self.parent is not None:
+            return False
+        return True
 
     product_name.admin_order_field = 'product'
     product_name.short_description = 'Review for product'

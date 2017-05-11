@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
-from .models import ProductReview
+from .models import ProductReview, ProductAnswer
 
 
 class ReviewForm(ModelForm):
@@ -12,6 +12,11 @@ class ReviewForm(ModelForm):
             'reviewer_email': _('Email'),
         }
 
+
+class AnswerForm(ModelForm):
+    class Meta:
+        model = ProductAnswer
+        fields = ['answer', 'name', 'email']
 
 
 
