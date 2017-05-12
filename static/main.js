@@ -518,7 +518,7 @@ $(document).ready(function(){
         if (this.id.match(/question_reply_([0-9]+)/)) {
             var cForm = $("#question_form"),
                 pos = cForm.position();
-            console.log(this.id);
+            // console.log(this.id);
             var elem = this,
                 parent_id = this.id.match(/([0-9]+)/)[0],
                 parent_name = elem.parentNode.previousSibling.previousSibling.previousSibling.previousSibling.childNodes[3].innerText;
@@ -529,6 +529,8 @@ $(document).ready(function(){
             $('textarea[id="id_question"]').text("<b>" + parent_name + "</b>, ");
         }
     });
+    $("#slider").slider();
+
 });
 
 /* using jQuery */

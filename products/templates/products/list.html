@@ -6,6 +6,13 @@
 
 {% load staticfiles %}
 
+{% block includefiles %}
+    <link rel="stylesheet" href="{% static "jquery-ui.min.css" %}">
+    <link rel="stylesheet" href="{% static "jquery-ui.structure.min.css" %}">
+    <link rel="stylesheet" href="{% static "jquery-ui.theme.min.css" %}">
+    <script type="text/javascript" src="{% static "jquery-ui.min.js" %}"></script>
+{% endblock %}
+
 {% block title %}
     {% trans "All products" %}
 {% endblock %}
@@ -16,39 +23,110 @@
 
     <div class="body woocomerce woocommerce">
 
-        <section class="header" style="max-height: 750px; background-repeat: no-repeat; background-image: url(&quot;https://www.adavibeauty.com/wp-content/uploads/2016/10/slide.png&quot;); background-color: rgb(230, 230, 230); color: rgb(255, 255, 255); height: 950px;">
-            <div class="box-header">
-                {% blocktrans %}<h1 class="h1">The Organic Face</h1>
-                <div class="title">PRODUCTS</div>{% endblocktrans %}
-            </div><!-- box-header -->
-        </section><!-- header -->
+{#        <section class="header" style="max-height: 750px; background-repeat: no-repeat; background-image: url(&quot;https://www.adavibeauty.com/wp-content/uploads/2016/10/slide.png&quot;); background-color: rgb(230, 230, 230); color: rgb(255, 255, 255); height: 950px;">#}
+{#            <div class="box-header">#}
+{#                {% blocktrans %}<h1 class="h1">The Organic Face</h1>#}
+{#                <div class="title">PRODUCTS</div>{% endblocktrans %}#}
+{#            </div><!-- box-header -->#}
+{#        </section><!-- header -->#}
 
         <section id="category-box" class="sector product">
-            <div class="line-1"></div>
-            <div class="line-2"></div>
+{#            <div class="line-1"></div>#}
+{#            <div class="line-2"></div>#}
 
-            <div class="container h120px">
-                <div class="filter-min hidden-md hidden-lg">
-                    <span class="btn">{% trans "Filter" %}</span>
+{#            <div class="container h120px">#}
+{#                <div class="filter-min hidden-md hidden-lg">#}
+{#                    <span class="btn">{% trans "Filter" %}</span>#}
+{#                </div>#}
+{##}
+{#                {% if category_list %}#}
+{#                    <ul class="filter hidden-xs hidden-sm">#}
+{#                        <li class="item menu-item current-menu-item">#}
+{#                            <a href="{% url 'products:index' %}">{% trans "All" %}</a>#}
+{#                        </li>#}
+{#                        {% for category in category_list %}#}
+{#                            <li class="item menu-item">#}
+{#                                <a href="{% url 'products:products_by_category' category.id %}">{{ category.title|capfirst }}</a>#}
+{#                            </li>#}
+{#                        {% endfor %}#}
+{#                    </ul>#}
+{#                {% endif %}#}
+{#            </div>#}
+
+            <div class="first_back_line"></div>
+            <div class="second_back_line"></div>
+
+            <div class="container content_wrapper">
+                <div class="filters_wrapper col-lg-2 col-md-2">
+                    <div class="currency_wrapper">
+                        <p class="price">
+                            {% trans "Price" %}
+                        </p>
+                        <div id="rangePrice" class="range ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-range-maxvalue="500" data-range-values="10,250" aria-disabled="false">
+                            <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 16%;"></a>
+                            <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 16%; width: 34%;"></div>
+                            <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 50%;"></a>
+                            <script>
+                                var $rangePrice = $("#rangePrice");
+                                    $rangePrice.on("slide", function( event, ui ) {
+                                        $("#amountPrice").text(
+                                            "$" + $rangePrice.slider("values", 0) +
+                                            " - " +
+                                            "$" + $rangePrice.slider("values", 1)
+                                        );
+                                    });
+                            </script>
+                        </div>
+                        <div class="range_tips">
+                            <span>{% trans "From" %}</span>
+                            <span>{% trans "Till" %}</span>
+                        </div>
+{#                        <div id="slider"></div>#}
+                    </div>
+                    <div class="categories_wrapper">
+                        <ul class="categories">
+                            <li class="category">
+                                <a href="{% url 'products:index' %}">{% trans "All" %}</a>
+                            </li>
+                            {% for category in category_list %}
+                                <li class="category">
+                                    <a href="{% url 'products:products_by_category' category.id %}">{{ category.title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
 
-                {% if category_list %}
-                    <ul class="filter hidden-xs hidden-sm">
-                        <li class="item menu-item current-menu-item">
-                            <a href="{% url 'products:index' %}">{% trans "All" %}</a>
-                        </li>
-                        {% for category in category_list %}
-                            <li class="item menu-item">
-                                <a href="{% url 'products:products_by_category' category.id %}">{{ category.title|capfirst }}</a>
+                <div class="products_wrapper col-lg-10 col-md-10">
+                    <ul>
+                        {% for product in product_variation_list %}
+                            <li>
+                                {{ product.title }}
                             </li>
                         {% endfor %}
                     </ul>
-                {% endif %}
+                </div>
             </div>
 
             <div class="container flexbox">
                 <div class="new-product row">
                     <div class="woocomerce-box">
+
+{#                        {% if product_variation_list %}#}
+{##}
+{#                            <ul class="list_products">#}
+{#                                {% for product in product_variation_list %}#}
+{#                                    <li class="product_item">#}
+{#                                        <a href="{% url 'products:detail' product.product.category.id product.id %}">#}
+{#                                            <div class="wrap">#}
+{#                                                <div class="back_piece"></div>#}
+{#                                            </div>#}
+{#                                        </a>#}
+{#                                    </li>#}
+{#                                {% endfor %}#}
+{#                            </ul>#}
+{##}
+{#                        {% endif %}#}
 
                         {% if products_list %}
                             <ul class="products">
@@ -78,31 +156,28 @@
                                                     </span>
                                                 </span>
                                             </h2>
-                                            <p class="box-btn">
-                                                <a href="{% url 'products:detail' product.product.category.id product.id %}" class="btn btn-1 w234">{% trans "view more" %}</a>
-                                            </p>
                                         </li>
                                     {% endif %}
                                 {% endfor %}
                             </ul>
 
-                            <div class="container">
-                                {% if is_paginated %}
-                                    <div class="pagination">
-                                        <span class="page-links">
-                                            {% if page_obj.has_previous %}
-                                                <a href="?page={{ page_obj.previous_page_number }}">{% trans "previous" %}</a>
-                                            {% endif %}
-                                            <span class="page-current">
-                                                {% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.
-                                            </span>
-                                            {% if page_obj.has_next %}
-                                                <a href="?page={{ page_obj.next_page_number }}">{% trans "next" %}</a>
-                                            {% endif %}
-                                        </span>
-                                    </div>
-                                {% endif %}
-                            </div>
+{#                            <div class="container">#}
+{#                                {% if is_paginated %}#}
+{#                                    <div class="pagination">#}
+{#                                        <span class="page-links">#}
+{#                                            {% if page_obj.has_previous %}#}
+{#                                                <a href="?page={{ page_obj.previous_page_number }}">{% trans "previous" %}</a>#}
+{#                                            {% endif %}#}
+{#                                            <span class="page-current">#}
+{#                                                {% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.#}
+{#                                            </span>#}
+{#                                            {% if page_obj.has_next %}#}
+{#                                                <a href="?page={{ page_obj.next_page_number }}">{% trans "next" %}</a>#}
+{#                                            {% endif %}#}
+{#                                        </span>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
+{#                            </div>#}
                         {% else %}
 
                             <p class="text-center">{% trans "No products found" %}</p>

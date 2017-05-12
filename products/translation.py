@@ -1,8 +1,12 @@
 from modeltranslation.translator import translator, TranslationOptions
-from products.models import Category, Product, ProductVariation, ProductImage, Discount
+from products.models import Category, SubCategory, Product, ProductVariation, ProductImage, Discount
 
 
 class CategoryTranslationOptions(TranslationOptions):
+    fields = ('title',)
+
+
+class SubCategoryTranslationOptions(TranslationOptions):
     fields = ('title',)
 
 
@@ -23,6 +27,7 @@ class DiscountTranslationOptions(TranslationOptions):
 
 
 translator.register(Category, CategoryTranslationOptions)
+translator.register(SubCategory, SubCategoryTranslationOptions)
 translator.register(Product, ProductTranslationOptions)
 translator.register(ProductVariation, ProductVariationTranslationOptions)
 translator.register(ProductImage, ProductImageTranslationOptions)

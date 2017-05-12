@@ -2113,7 +2113,7 @@ However, delay the fade out process for 5.5 seconds */
   left: -12px;
   background-color: #e3edf0;
   width: 60%;
-  height: 120%;
+  height: 90%;
 }
 .same_products .products li img {
   position: relative;
@@ -2136,6 +2136,36 @@ However, delay the fade out process for 5.5 seconds */
 .same_products .products li h2 span.amount {
   text-align: end;
   color: #f37f78;
+}
+
+.first_back_line, .second_back_line {height: 100%!important;position: fixed;top:0;z-index: -1;}
+.first_back_line {width: 30%; background-color: #f6f6f6;}
+.second_back_line {width: 70%;}
+
+.content_wrapper {color: black; z-index: 2;}
+.filters_wrapper, .products_wrapper {height: 100%;}
+.filters_wrapper {
+  width: 30%;
+}
+
+.currency_wrapper p.price {font-weight: 400; font-size: 22px;text-align: left;}
+.range_tips {position: relative;width: 300px;display: flex; justify-content: space-between;}
+.categories_wrapper {  margin-top: 20px;}
+ul.categories {list-style-type: none; font-size: 22px; font-weight: 500;}
+li.category {text-transform: capitalize;}
+.products_wrapper {width: 70%;}
+
+
+.list_products {
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+}
+.list_products li {
+  width: 30%;
+  height: 100px;
+  background-color: red;
+  display: inline-block;
 }
 
 @media screen and (max-width: 768px) {
