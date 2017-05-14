@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
-from .models import ProductReview, ProductAnswer
+from .models import ProductReview, ProductQuestion
 
 
 class ReviewForm(ModelForm):
@@ -13,10 +13,22 @@ class ReviewForm(ModelForm):
         }
 
 
-class AnswerForm(ModelForm):
+class QuestionForm(ModelForm):
     class Meta:
-        model = ProductAnswer
-        fields = ['answer', 'name', 'email']
+        model = ProductQuestion
+        fields = ['question', 'name', 'email']
+
+    def __init__(self, *args, **kwargs):
+        super(QuestionForm, self).__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs.update({
+            'placeholder': _('Name'),
+        })
+        self.fields['email'].widget.attrs.update({
+            'placeholder': _('Email'),
+        })
+        self.fields['question'].widget.attrs.update({
+            'placeholder': _('Question'),
+        })
 
 
 

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db.models import TextField
 from modeltranslation.admin import TranslationAdmin, TabbedTranslationAdmin, TranslationTabularInline
-from .models import Category, Product, ProductVariation, ProductImage, ProductReview, Discount
+from .models import Category, SubCategory, Product, ProductVariation, ProductImage, ProductReview, ProductQuestion, Discount
 from ckeditor.widgets import CKEditorWidget
 
 
@@ -14,7 +14,18 @@ class CategoryAdmin(TabbedTranslationAdmin):
         'title',
         'is_active',
     ]
-    # pass
+
+
+class SubCategoryAdmin(TabbedTranslationAdmin):
+    list_display = (
+        'title',
+        'is_sub_category_active',
+    )
+    list_filter = [
+        'title',
+        'status',
+    ]
+    filter_horizontal = ('category',)
 
 
 class ProductImageInline(TranslationTabularInline):
@@ -52,6 +63,7 @@ class ProduvtVariationAdmin(TabbedTranslationAdmin):
         'status',
     ]
     formfield_overrides = {TextField: {'widget': CKEditorWidget}}
+    filter_horizontal = ('sub_categories',)
 
 
 class ProductReviewAdmin(admin.ModelAdmin):
@@ -65,6 +77,19 @@ class ProductReviewAdmin(admin.ModelAdmin):
         'reviewer_name',
         'reviewer_email',
         'review_added',
+    ]
+    formfield_overrides = {TextField: {'widget': CKEditorWidget}}
+
+
+class ProductQuestionAdmin(admin.ModelAdmin):
+    list_display = (
+        'product_name',
+        'name',
+        'email',
+        'date_added',
+    )
+    list_filter = [
+        'date_added',
     ]
     formfield_overrides = {TextField: {'widget': CKEditorWidget}}
 
@@ -88,8 +113,10 @@ class DiscountAdmin(TabbedTranslationAdmin):
 
 
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(SubCategory, SubCategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductVariation, ProduvtVariationAdmin)
 admin.site.register(ProductReview, ProductReviewAdmin)
+admin.site.register(ProductQuestion, ProductQuestionAdmin)
 admin.site.register(Discount, DiscountAdmin)
 

@@ -2,7 +2,6 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
-# from django.urls import reverse
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
@@ -33,6 +32,35 @@ class Category(models.Model):
     is_category_active.short_description = 'Is active?'
 
 
+class SubCategory(models.Model):
+    """
+    Sub categories for products
+    """
+    PUBLISHED = True
+    DRAFT = False
+    STATUSES = (
+        (PUBLISHED, 'Published'),
+        (DRAFT, 'Draft'),
+    )
+    title = models.CharField(max_length=100, unique=True, verbose_name=_('Title'))
+    category = models.ManyToManyField(Category, verbose_name=_("Category"))
+    status = models.BooleanField(choices=STATUSES, default=DRAFT, verbose_name=_('Status'))
+
+    class Meta:
+        verbose_name = _("Sub Category")
+        verbose_name_plural = _("Sub Categories")
+
+    def __str__(self):
+        return self.title
+
+    def is_sub_category_active(self):
+        return self.status
+
+    is_sub_category_active.admin_order_field = 'status'
+    is_sub_category_active.boolean = True
+    is_sub_category_active.short_description = 'Is active?'
+
+
 class Product(models.Model):
     """
     Product body
@@ -43,10 +71,10 @@ class Product(models.Model):
         (PUBLISHED, 'Published'),
         (DRAFT, 'Draft'),
     )
-    title = models.CharField(max_length=100)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100, verbose_name=_("Title"))
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=_("Category"))
     date_added = models.DateTimeField(auto_now_add=True)
-    status = models.BooleanField(choices=STATUSES, default=DRAFT)
+    status = models.BooleanField(choices=STATUSES, default=DRAFT, verbose_name=_("Status"))
     details = RichTextField(verbose_name=_("Details"), blank=True)
     htu = RichTextField(verbose_name=_("How to use"), blank=True)
     composition = RichTextField(verbose_name=_("Composition"), blank=True)
@@ -79,18 +107,18 @@ class ProductVariation(models.Model):
         (PUBLISHED, 'Published'),
         (DRAFT, 'Draft'),
     )
-    title = models.CharField(max_length=150)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    title = models.CharField(max_length=150, verbose_name=_("Title"))
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_("Product"))
     sku = models.CharField(max_length=20, unique=True, null=True)
-    price = models.FloatField(default=0)
-    quantity = models.IntegerField(default=0)
-    color_description = models.CharField(max_length=50, blank=True)
-    color_value = ColorField(default='#FF0000')
-    is_new = models.BooleanField(default=False)
-    is_available = models.BooleanField(default=False)
-    status = models.BooleanField(choices=STATUSES, default=DRAFT)
+    price = models.FloatField(default=0, verbose_name=_("Price"))
+    quantity = models.IntegerField(default=0, verbose_name=_("Quantity"))
+    color_description = models.CharField(max_length=50, blank=True, verbose_name=_("Color description"))
+    color_value = ColorField(default='#FF0000', verbose_name=_("Color value"))
+    is_new = models.BooleanField(default=False, verbose_name=_("Is new"))
+    is_available = models.BooleanField(default=False, verbose_name=_("Is available"))
+    status = models.BooleanField(choices=STATUSES, default=DRAFT, verbose_name=_("Status"))
+    sub_categories = models.ManyToManyField(SubCategory, verbose_name=_("Sub categories"))
     date_added = models.DateTimeField(auto_now_add=True)
-    # description = RichTextField()
 
     class Meta:
         verbose_name = "Product variation"
@@ -147,7 +175,6 @@ class ProductImage(models.Model):
     image = models.FileField(upload_to=upload_path)
     description = models.CharField(null=True, max_length=200)
     is_main = models.BooleanField(default=False)
-    # main_product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name = "Product image"
@@ -182,12 +209,12 @@ class ProductReview(models.Model):
     product_name.short_description = 'Review for product'
 
 
-class ProductAnswer(models.Model):
+class ProductQuestion(models.Model):
     """
-    Answers for every product
+    Questions for every product
     """
     product = models.ForeignKey(ProductVariation, on_delete=models.CASCADE)
-    answer = models.TextField()
+    question = models.TextField()
     name = models.CharField(max_length=240)
     email = models.CharField(max_length=240)
     parent = models.ForeignKey('self', null=True, blank=True, verbose_name=_('Parent'))
@@ -196,8 +223,8 @@ class ProductAnswer(models.Model):
 
     class Meta:
         ordering = ["-date_added"]
-        verbose_name = _("Product Answer")
-        verbose_name_plural = _("Product Answers")
+        verbose_name = _("Product Question")
+        verbose_name_plural = _("Product Questions")
 
     def __str__(self):
         return self.name + " - " + self.email
@@ -206,7 +233,7 @@ class ProductAnswer(models.Model):
         return self.product
 
     def children(self):     # replies
-        return ProductAnswer.objects.filter(parent=self)
+        return ProductQuestion.objects.filter(parent=self)
 
     @property
     def is_parent(self):
@@ -215,7 +242,7 @@ class ProductAnswer(models.Model):
         return True
 
     product_name.admin_order_field = 'product'
-    product_name.short_description = 'Review for product'
+    product_name.short_description = 'Question for product'
 
 
 class Discount(models.Model):

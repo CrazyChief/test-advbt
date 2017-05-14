@@ -27,7 +27,7 @@
 
     <div class="body woocomerce page">
 	<div class="block-left-fon" style="width: calc(20% + 11.9%); height: 1977px"></div>
-	<section class="sector cat">
+	<section class="sector cat" data-spy="scroll" data-target=".replies">
 		<div class="container">
 
 			<div class="nav">
@@ -154,6 +154,27 @@
                                 {% endif %}
                             </div><!-- box-desc -->
                             <!-- !ADD TO CARD FORM -->
+
+                            <!-- SOCIAL'S SHARE -->
+                                <div id="supsystic" class="text-center">
+                                    <div class="row">
+                                        <div class="col-min-12 col-xs-4 text-left">
+                                            <strong>{% trans "SHARE" %}</strong>
+                                        </div>
+                                        <div class="col-min-12 col-xs-8 text-right">
+                                            <div data-animation="no-animation" data-icons-animation="no-animation"
+                                                 data-overlay="" data-change-size="" data-button-size="1"
+                                                 style="font-size: 1em;"
+                                                 class="supsystic-social-sharing supsystic-social-sharing-package-flat supsystic-social-sharing-content supsystic-social-sharing-content-align-left supsystic-social-sharing-init supsystic-social-sharing-loaded">
+                                                {% post_to_facebook object_or_url '' %}
+                                                {% post_to_twitter "Product: {{productvariation.title}}. Check it out!" object_or_url "" %}
+                                                {% post_to_gplus object_or_url "" %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+<!-- !SOCIAL'S SHARE -->
+
                         </div><!-- box-content -->
 
                         </div>
@@ -176,23 +197,17 @@
                         <button class="tablinks" onclick="openDesc(event, 'composition')">
                             {% trans "Composition" %}
                         </button>
-    {#                                        <button class="tablinks" onclick="openDesc(event, 'description')" id="defaultOpen">#}
-    {#                                            {% trans "Description" %}#}
-    {#                                        </button>#}
                         <button class="tablinks" onclick="openDesc(event, 'reviews')">
                             {% trans "Reviews" %} ({{ product_reviews|length }})
                         </button>
-                        <button class="tablinks" onclick="openDesc(event, 'answers')">
-                            {% trans "Answers" %}
+                        <button class="tablinks" onclick="openDesc(event, 'questions')">
+                            {% trans "Questions" %} ({{ questions|length }})
                         </button>
                     </div>
                 </div>
 
                 <div class="box-desc col-lg-12 col-md-12 col-sm-12">
                     <div class="desc">
-    {#                    <div id="description" class="tabcontent">#}
-    {#                        {{ productvariation.description|safe }}#}
-    {#                    </div>#}
                         <div id="details" class="tabcontent">
                             {{ productvariation.product.details|safe }}
                         </div>
@@ -212,7 +227,6 @@
                                     <div class="conteiner-comments">
                                         <div class="authorInfo">
                                             <strong itemprop="author">Author: {{ review.reviewer_name }}</strong>
-                                            <strong>( {{ review.reviewer_email }} )</strong>
                                         </div>
                                         <div itemprop="description" class="description">
                                             <p>{{ review.review|safe }}</p>
@@ -243,52 +257,47 @@
                                     {% endfor %}
                                     <div class="form-group">
                                         <div class="col-sm-offset-4 col-sm-8">
-                                            <button type="submit" class="btn btn-1">{% trans "Submit" %}</button>
+                                            <button type="submit" name="form" class="btn btn-1">{% trans "Submit" %}</button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                             <!-- !REVIEW_FORM -->
                         </div>
-                        <!-- ANSWERS -->
-                        <div id="answers" class="tabcontent">
-                            <!-- ANSWER_FORM -->
+                        <!-- QUESTIONS -->
+                        <div id="questions" class="tabcontent">
+                            <!-- QUESTION_FORM -->
                             <div class="conteiner-comments">
 
-                                <div class="share-row" id="supsystic">
-                                    <div class="comment-part">
-                                        <span>{% trans "Answers" %}</span>
-                                        <b>{{ answers|length }}</b>
-                                    </div>
-                                </div>
+                                <h2>{% trans "Questions" %}</h2>
 
-                                {% if answers %}
+                                {% if questions %}
                                     <ul class="replies">
-                                        {% for answer in answers %}
-                                            <li class="reply" id="reply{{ answer.id }}">
+                                        {% for question in questions %}
+                                            <li class="reply" id="reply{{ question.id }}">
                                                 <div class="comment-info">
                                                     <img src="{% static 'img/user.svg' %}" alt="user">
-                                                    {% if answer.user %}
-                                                        <span class="name">{{ answer.user.username }}</span>
-                                                        <span class="status">{{ answer.user.groups.get.name }}</span>
+                                                    {% if question.user %}
+                                                        <span class="name">{{ question.user.username }}</span>
+                                                        <span class="status">{{ question.user.groups.get.name }}</span>
                                                     {% else %}
-                                                        <span class="name">{{ answer.name }}</span>
+                                                        <span class="name">{{ question.name }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="comment-content">
-                                                    <blockquote>{{ answer.answer|safe }}</blockquote>
+                                                    <blockquote>{{ question.question|safe }}</blockquote>
                                                 </div>
                                                 <div class="bottom-comment-pannel">
-                                                    <p>{% trans "Comment added" %}: <time>{{ answer.date_added|timesince }}</time></p>
-                                                    <button class="btn btn-xs" id="comment_reply_{{ answer.id }}">
-                                                        <span class="fa fa-reply"> {{ answer.children|length }}</span>
+                                                    <p>{% trans "Added" %}: <time>{{ question.date_added|timesince }}</time></p>
+                                                    <button class="btn btn-xs" id="question_reply_{{ question.id }}">
+                                                        <span class="fa fa-reply"> {{ question.children|length }}</span>
                                                         {% trans "Reply" %}
                                                     </button>
                                                 </div>
 
-                                                {% if answer.children %}
+                                                {% if question.children %}
                                                     <ul class="replies">
-                                                        {% for child in answer.children %}
+                                                        {% for child in question.children %}
                                                             <li class="reply">
                                                                 <div class="comment-info">
                                                                     <img src="{% static 'img/user.svg' %}" alt="user">
@@ -300,11 +309,11 @@
                                                                     {% endif %}
                                                                 </div>
                                                                 <div class="comment-content">
-                                                                    <blockquote>{{ child.answer|safe }}</blockquote>
+                                                                    <blockquote>{{ child.question|safe }}</blockquote>
                                                                 </div>
                                                                 <div class="bottom-comment-pannel">
                                                                     <p>{% trans "Reply added" %}: <time>{{ child.date_added|timesince }}</time></p>
-                                                                    <button class="btn btn-xs" id="comment_reply_{{ child.id }}">
+                                                                    <button class="btn btn-xs" id="question_reply_{{ child.id }}">
                                                                         <span class="fa fa-reply"></span>
                                                                         {% trans "Reply" %}
                                                                     </button>
@@ -317,40 +326,42 @@
                                             </li>
                                         {% endfor %}
                                     </ul>
+                                {% else %}
+                                    <p class="woocommerce-noreviews">{% trans "No questions" %}</p>
                                 {% endif %}
 
-                                <div class="form-part" id="comment_form">
+                                <div class="form-part" id="question_form">
                                     <form action="" method="post">
                                         {% csrf_token %}
                                         <div class="row-name">
-                                            <div class="name">{% trans "pass your answer" %}</div>
+                                            <div class="name">{% trans "pass your question" %}</div>
                                             {% if user %}
                                                 <div class="hidden">
-                                                    {{ answer_form.name }}
-                                                    {{ answer_form.email }}
+                                                    {{ question_form.name }}
+                                                    {{ question_form.email }}
                                                 </div>
                                             {% else %}
                                                 <div class="input-convert">
-                                                    {{ answer_form.name }}
-                                                <span class="text-danger small">{{ answer_form.name.errors }}</span>
+                                                    {{ question_form.name }}
+                                                <span class="text-danger small">{{ question_form.name.errors }}</span>
                                                 </div>
                                                 <div class="input-convert">
-                                                    {{ answer_form.email }}
-                                                <span class="text-danger small">{{ answer_form.email.errors }}</span>
+                                                    {{ question_form.email }}
+                                                <span class="text-danger small">{{ question_form.email.errors }}</span>
                                                 </div>
                                             {% endif %}
                                         </div>
                                         <div class="contein-text">
-                                            {{ answer_form.answer }}
-                                            <span class="text-danger small">{{ answer_form.answer.errors }}</span>
+                                            {{ question_form.question }}
+                                            <span class="text-danger small">{{ question_form.question.errors }}</span>
                                         </div>
                                         <input type="hidden" id="id_parent" name="parent">
-                                        {% for field in answer_form %}
+                                        {% for field in question_form %}
                                             {{ field.errors }}
                                         {% endfor %}
 
                                         <div class="submition-row">
-                                            <button type="submit">
+                                            <button type="submit" name="question_form">
                                                 <span>{% trans "Submit" %}</span>
                                             </button>
                                         </div>
@@ -358,9 +369,9 @@
                                 </div>
 
                             </div>
-                            <!-- !ANSWER_FORM -->
+                            <!-- !QUESTION_FORM -->
                         </div>
-                        <!-- !ANSWERS -->
+                        <!-- !QUESTIONS -->
 
                     </div>
 
@@ -368,28 +379,28 @@
 
             </div>
 
-            <div class="same_products">
+            {% if same_products %}
+            <div class="same_products products_wrapper">
                 <h3 class="text-center">
                     {% trans "Same products" %}
                 </h3>
 
-                {% if same_products %}
-                    <ul class="products">
-                        {% for product in same_products %}
-                            {% if product.status and product != productvariation %}
-                                <li class="col product">
-                                    <a href="{% url 'products:detail' category.get.id product.id %}" class="item">
-{#                                        {% for image in product_image_list %}#}
-{#                                            {% if image.product == product and image.is_main %}#}
-                                                <span class="img"></span>
-                                                <img width="200" height="240" src="{{ product.get_main_image.url }}" alt="{{ product.get_main_image.description }}" sizes="(max-width: 200px) 100vw, 200px">
-{#                                            {% endif %}#}
-{#                                        {% endfor %}#}
-                                    </a>
-                                    <h2 class="title">
-                                        <span>{{ product.title }}</span>
-                                        <span>
+                <ul class="products_items">
+                    {% for product in same_products %}
+                        {% if product.status and product != productvariation %}
+                            <li class="product_item">
+                                <div class="item">
+                                    <a href="{% url 'products:detail' product.product.category.id product.id %}">
+                                        <div>
+                                            <span class="img1"></span>
+                                            <span class="img2"></span>
+                                            <img width="200" height="220" src="{{ product.get_main_image.url }}" alt="{{ product.get_main_image.description }}">
+                                        </div>
+                                        <h2 class="title">
+                                            <span class="prod-title">{{ product.title }}</span>
+                                            <span class="main-product">{{ product.product }}</span>
                                             <span class="price">
+                                                <span class="old_amount">1000 {{ CURRENCY_ACTIVE.symbol }}</span>
                                                 <span class="amount">
                                                     {% change_currency product.price CURRENCY_ACTIVE.abbreviation %}
                                                     <span class="woocommerce-Price-currencySymbol">
@@ -397,43 +408,51 @@
                                                     </span>
                                                 </span>
                                             </span>
-                                        </span>
-                                    </h2>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                {% endif %}
+                                        </h2>
+                                    </a>
+                                </div>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+
+{#                <ul class="products">#}
+{#                    {% for product in same_products %}#}
+{#                        {% if product.status and product != productvariation %}#}
+{#                            <li class="col product">#}
+{#                                <div class="back_piece"></div>#}
+{#                                <a href="{% url 'products:detail' category.get.id product.id %}" class="item">#}
+{#                                    <span class="img"></span>#}
+{#                                    <img width="200" height="240" src="{{ product.get_main_image.url }}" alt="{{ product.get_main_image.description }}" sizes="(max-width: 200px) 100vw, 200px">#}
+{#                                </a>#}
+{#                                <h2 class="title">#}
+{#                                    <span class="prod-title">{{ product.title }}</span>#}
+{#                                    <span class="main-product">{{ product.product }}</span>#}
+{#                                    <span>#}
+{#                                        <span class="price">#}
+{#                                            <span class="amount">#}
+{#                                                {% change_currency product.price CURRENCY_ACTIVE.abbreviation %}#}
+{#                                                <span class="woocommerce-Price-currencySymbol">#}
+{#                                                    {{ CURRENCY_ACTIVE.symbol }}#}
+{#                                                </span>#}
+{#                                            </span>#}
+{#                                        </span>#}
+{#                                    </span>#}
+{#                                </h2>#}
+{#                            </li>#}
+{#                        {% endif %}#}
+{#                    {% endfor %}#}
+{#                </ul>#}
             </div>
+            {% endif %}
+
+
 
 		</div>
 	</section><!-- section blog -->
 </div>
 
 {% endblock %}
-
-
-
-
-<!-- SOCIAL'S SHARE -->
-{#                                <div id="supsystic" class="text-center">#}
-{#                                    <div class="row">#}
-{#                                        <div class="col-min-12 col-xs-4 text-left">#}
-{#                                            <strong>{% trans "SHARE" %}</strong>#}
-{#                                        </div>#}
-{#                                        <div class="col-min-12 col-xs-8 text-right">#}
-{#                                            <div data-animation="no-animation" data-icons-animation="no-animation"#}
-{#                                                 data-overlay="" data-change-size="" data-button-size="1"#}
-{#                                                 style="font-size: 1em;"#}
-{#                                                 class="supsystic-social-sharing supsystic-social-sharing-package-flat supsystic-social-sharing-content supsystic-social-sharing-content-align-left supsystic-social-sharing-init supsystic-social-sharing-loaded">#}
-{#                                                {% post_to_facebook object_or_url '' %}#}
-{#                                                {% post_to_twitter "Product: {{productvariation.title}}. Check it out!" object_or_url "" %}#}
-{#                                                {% post_to_gplus object_or_url "" %}#}
-{#                                            </div>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </div>#}
-<!-- !SOCIAL'S SHARE -->
 
 
 
