@@ -20,9 +20,22 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 
-urlpatterns = i18n_patterns(
+# urlpatterns = i18n_patterns(
+#     url(r'^$', views.IndexView.as_view()),
+#     url(r'^i18n/', include('django.conf.urls.i18n')),
+#     url(r'^cart/', include('cart.urls', namespace='cart')),
+#     url(r'^checkout/', include('orders.urls', namespace='orders')),
+#     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+#     url(r'^contacts/', include('contacts.urls', namespace='contacts')),
+#     url(r'^cy/', include('cy.urls', namespace='cy')),
+#     url(r'^products/', include('products.urls', namespace='products')),
+#     url(r'^blog/', include('bloggiz.urls', namespace='bloggiz')),
+#     url(r'^subscribers/', include('subscribers.urls', namespace='subscribers')),
+#     url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
+#     url(r'^admin/', admin.site.urls),
+# )
+urlpatterns = [
     url(r'^$', views.IndexView.as_view()),
-    url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^cart/', include('cart.urls', namespace='cart')),
     url(r'^checkout/', include('orders.urls', namespace='orders')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
@@ -33,14 +46,7 @@ urlpatterns = i18n_patterns(
     url(r'^subscribers/', include('subscribers.urls', namespace='subscribers')),
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
     url(r'^admin/', admin.site.urls),
-)
-# [
-#     url(r'^$', views.IndexView.as_view()),
-#     url(r'^cart/', include('cart.urls', namespace='cart')),
-#     url(r'^products/', include('products.urls', namespace='products')),
-#     url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
-#     url(r'^admin/', admin.site.urls),
-# ]
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

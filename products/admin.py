@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.db.models import TextField
-from modeltranslation.admin import TranslationAdmin, TabbedTranslationAdmin, TranslationTabularInline
+# from modeltranslation.admin import TranslationAdmin, TabbedTranslationAdmin, TranslationTabularInline
 from .models import Category, SubCategory, Product, ProductVariation, ProductImage, ProductReview, ProductQuestion, Discount
 from ckeditor.widgets import CKEditorWidget
 
 
-class CategoryAdmin(TabbedTranslationAdmin):
+# class CategoryAdmin(TabbedTranslationAdmin):
+class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'is_category_active',
@@ -16,7 +17,8 @@ class CategoryAdmin(TabbedTranslationAdmin):
     ]
 
 
-class SubCategoryAdmin(TabbedTranslationAdmin):
+# class SubCategoryAdmin(TabbedTranslationAdmin):
+class SubCategoryAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'is_sub_category_active',
@@ -28,12 +30,14 @@ class SubCategoryAdmin(TabbedTranslationAdmin):
     filter_horizontal = ('category',)
 
 
-class ProductImageInline(TranslationTabularInline):
+# class ProductImageInline(TranslationTabularInline):
+class ProductImageInline(admin.TabularInline):
     model = ProductImage
     extra = 1
 
 
-class ProductAdmin(TabbedTranslationAdmin):
+# class ProductAdmin(TabbedTranslationAdmin):
+class ProductAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'date_added',
@@ -46,7 +50,8 @@ class ProductAdmin(TabbedTranslationAdmin):
     ]
 
 
-class ProduvtVariationAdmin(TabbedTranslationAdmin):
+# class ProduvtVariationAdmin(TabbedTranslationAdmin):
+class ProduvtVariationAdmin(admin.ModelAdmin):
     inlines = [ProductImageInline]
 
     list_display = (
@@ -94,7 +99,8 @@ class ProductQuestionAdmin(admin.ModelAdmin):
     formfield_overrides = {TextField: {'widget': CKEditorWidget}}
 
 
-class DiscountAdmin(TabbedTranslationAdmin):
+# class DiscountAdmin(TabbedTranslationAdmin):
+class DiscountAdmin(admin.ModelAdmin):
     list_display = (
         'discount_title',
         'discount_type',

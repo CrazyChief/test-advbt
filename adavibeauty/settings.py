@@ -34,7 +34,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
-    'modeltranslation',
+    # 'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -248,20 +248,20 @@ DEFAULT_FROM_EMAIL = 'danilovdmitry94@gmail.com'
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-MODELTRANSLATION_DEFAULT_LANGUAGE = 'en-us'
+# MODELTRANSLATION_DEFAULT_LANGUAGE = 'en-us'
 LANGUAGE_CODE = 'en-us'
-
-LANGUAGES = (
-    ('en-us', 'English'),
-    ('ru', 'Russian'),
-    ('uk', 'Ukrainian'),
-)
+#
+# LANGUAGES = (
+#     ('en-us', 'English'),
+#     ('ru', 'Russian'),
+#     ('uk', 'Ukrainian'),
+# )
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
+USE_I18N = False
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 

@@ -18,7 +18,7 @@
         <section class="sector blog page">
             <div class="container">
                 <div class="title style-4">
-                    <h1 class="h2">Корзина</h1>
+                    <h1 class="h2">{% trans "Cart" %}</h1>
                     <div class="clear"></div>
                 </div><!-- title -->
 
@@ -155,16 +155,16 @@
                                                                     {{ item.obj.title }}
                                                                 </a>
                                                                 <div class="articool">
-                                                                    Артикул::{{ item.obj.sku }}
+                                                                    {% trans "SKU" %}::{{ item.obj.sku }}
                                                                 </div>
                                                             </div>
                                                             <div class="botomer">
                                                                 <div class="color-type">
-                                                                    <div class="name">Цвет: </div>
+                                                                    <div class="name">{% trans "Color" %}: </div>
                                                                     <div class="cort" style="background-color: {{ item.obj.color_value }}"></div>
                                                                 </div>
                                                                 <div class="kilkist">
-                                                                    <div class="name">Количество:: </div>
+                                                                    <div class="name">{% trans "Quantity" %}:: </div>
                                                                     <div class="input-row">
                                                                         <input type="number" step="1" min="1" max="{{ item.obj.quantity }}" data-product_id="{{ item.obj.id }}" value="{{ item.quantity }}" class="input-text qty text">
                                                                         <span class="less" onclick="decr(this)"></span>
@@ -172,7 +172,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="price">
-                                                                    <div class="name">Цена:: </div>
+                                                                    <div class="name">{% trans "price" %}:: </div>
                                                                     <div class="prise">
                                                                         <span class="woocommerce-Price-amount amount">
                                                                             {% change_currency item.price CURRENCY_ACTIVE.abbreviation %}
@@ -215,7 +215,7 @@
                                                                     <span class="woocommerce-Price-currencySymbol"> {{ CURRENCY_ACTIVE.symbol }}</span></strong></span></b></div>
                                                             </div>
                                                             <a href="{% url 'orders:checkout' %}" class="checkout-button alt wc-forward submition-butt btn">
-                                                                <span>Перейти к оформлению</span>
+                                                                <span>{% trans "Proceed to checkout" %}</span>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -229,7 +229,7 @@
                     </div><!-- box-blog -->
 
                 {% else %}
-                    <p>Ваша корзина пока пуста.</p>
+                    <p>{% trans "Your cart is empty" %}.</p>
                 {% endif %}
             </div>
         </section>

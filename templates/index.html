@@ -85,7 +85,7 @@
 
 {#    <div class="main body js onepage-wrapper" style="position: relative;">#}
     <div class="main body js onepage-wrapper" style="position: relative;">
-        <section class="header section active" style="height: 950px; top: 0%;" data-index="1">
+        <section class="header section active" style="height: 950px;" data-index="1">
             <div class="box-header">
                 <span class="before-object" style="left: calc(50% + 474px);"></span>
                 <span class="after-object" style="border-width:950px 950px"></span>
@@ -93,21 +93,21 @@
                 <div class="header-logo">
                     <img src="{% static 'img/logo-slide.png' %}" alt="logo-slide">
                 </div>
-                <h1 class="h1">Органическая косметика</h1>
-                <h2 class="title">Официальный сайт The Organic Face в Европе</h2>
+                <h1 class="h1">{% trans "The Organic Face" %}</h1>
+                <h2 class="title">{% trans "Natural organic cosmetic" %}</h2>
             </div><!-- box-header -->
         </section><!-- header -->
 
-        <section class="sector pos-sm section" data-index="2" style="top: 100%;">
+        <section class="sector pos-sm section" data-index="2" style="min-height: 800px;">
             <div class="line-1"></div>
             <div class="line-2"></div>
             <div class="container flexbox">
                 <div class="title style-1">
                     <img src="{% static 'img/fon-logo.png' %}" alt="fon-logo">
-                    <h2 class="h2 ttnone">Органическая 95% Натуральная 100%</h2>
+                    <h2 class="h2 ttnone">{% trans "The Organic Face" %}</h2>
                 </div><!-- title -->
                 <div class="content text-center max-w850">
-                    <p>Добро пожаловать на сайт&nbsp;Adavi Beauty. Нашей главной гордостью является професиональная <strong>органическая косметика</strong> The Organic Face. Начиная с начала 2016 года Алена Мевша-Adavi подписала договор с американским производителем этой органической косметики на эксклюзивную продажу и распространение на территории всей Европы. Частое, професиональное использование даже на чувствительной коже – это главная задача которую ставила перед собой создательница The Organic Face – Норин Диани, работая професиональным визажистом, и добилась своей цели. Используя только натуральные составляющие, Норин&nbsp;воплотила в жизнь то что считала своей главной задачей как визажиста – создать органическую косметику которая качественно работает при интенсивных и длительных фото&nbsp;и виде сьемках и, при этом, сохраняя кожу от негативного воздействия химических веществ, которые содержаться в неорганической косметике. Высокое качество косметики оценила компания Амазон, и на основании отличных отзывов покупателей и продаж подписала договор о покупке продуктов The Organic Face напрямую для компании Amazon, фактически создав себе монополию по продаже этой органической косметики на всей территории США (С Амазона в Украину продукция не поставляется).
+                    <p>ADAVI Beauty is gift to all women who need a source for skincare and makeup that will be gentle and reliable. We’ve chosen to sell products with ingredients free of the most common skin irritants. Our products are free of parabens, SLS (sodium lauryl sulfate), phthlates, herbicide and pesticide residues, genetically modified ingredients, petroleum, and mineral oil to name a few. Our all natural, all organic, made in the U.S.A. products will make every day a spa day for your skin.
                         <img class="size-full wp-image-867 aligncenter" src="{% static 'img/flovers.png' %}" alt="flovers" width="728" height="200" sizes="(max-width: 728px) 100vw, 728px">
                     </p>
                 </div><!-- content -->
@@ -115,7 +115,7 @@
         </section><!-- section id="d2" -->
 
     {% if products %}
-        <section class="sector product section" data-index="3" style="top: 200%;">
+        <section class="sector product section" data-index="3" style="min-height: 800px;">
             <div class="container flexbox">
                 <div class="title style-2">
                     <h2 class="h2">{% trans "New products" %}</h2>
@@ -129,7 +129,7 @@
 
                                         {% for product in products %}
                                             <div class="owl-item">
-                                                <li class="col post-964 product">
+                                                <li class="col product">
                                                     <a href="{% url 'products:detail' product.product.category.id product.id %}" class="item">
                                                         <span class="img"></span>
                                                         <img width="115" height="240" src="{{ product.get_main_image.url }}"
@@ -263,7 +263,7 @@
         </section><!-- section -->
 
     {% if posts %}
-        <section class="sector blog section" data-index="5" style="top: 400%;">
+        <section class="sector blog section" data-index="5" style="min-height: 800px;">
             <div class="container flexbox">
                 <div class="title style-3">
                     <h2 class="h2">{% trans "Blog" %}</h2>

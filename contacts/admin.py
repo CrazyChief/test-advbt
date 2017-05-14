@@ -1,5 +1,5 @@
 from django.contrib import admin
-from modeltranslation.admin import TabbedTranslationAdmin
+# from modeltranslation.admin import TabbedTranslationAdmin
 from .models import Location, Email, Phone, Review
 
 
@@ -17,7 +17,8 @@ class EmailAdmin(admin.ModelAdmin):
     )
 
 
-class PhoneAdmin(TabbedTranslationAdmin):
+# class PhoneAdmin(TabbedTranslationAdmin):
+class PhoneAdmin(admin.ModelAdmin):
     list_display = (
         'country_prefix',
         'phone',
