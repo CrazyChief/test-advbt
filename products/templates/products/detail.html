@@ -380,38 +380,69 @@
             </div>
 
             {% if same_products %}
-            <div class="same_products">
+            <div class="same_products products_wrapper">
                 <h3 class="text-center">
                     {% trans "Same products" %}
                 </h3>
 
-                <ul class="products">
+                <ul class="products_items">
                     {% for product in same_products %}
                         {% if product.status and product != productvariation %}
-                            <li class="col product">
-                                <div class="back_piece"></div>
-                                <a href="{% url 'products:detail' category.get.id product.id %}" class="item">
-                                    <span class="img"></span>
-                                    <img width="200" height="240" src="{{ product.get_main_image.url }}" alt="{{ product.get_main_image.description }}" sizes="(max-width: 200px) 100vw, 200px">
-                                </a>
-                                <h2 class="title">
-                                    <span class="prod-title">{{ product.title }}</span>
-                                    <span class="main-product">{{ product.product }}</span>
-                                    <span>
-                                        <span class="price">
-                                            <span class="amount">
-                                                {% change_currency product.price CURRENCY_ACTIVE.abbreviation %}
-                                                <span class="woocommerce-Price-currencySymbol">
-                                                    {{ CURRENCY_ACTIVE.symbol }}
+                            <li class="product_item">
+                                <div class="item">
+                                    <a href="{% url 'products:detail' product.product.category.id product.id %}">
+                                        <div>
+                                            <span class="img1"></span>
+                                            <span class="img2"></span>
+                                            <img width="200" height="220" src="{{ product.get_main_image.url }}" alt="{{ product.get_main_image.description }}">
+                                        </div>
+                                        <h2 class="title">
+                                            <span class="prod-title">{{ product.title }}</span>
+                                            <span class="main-product">{{ product.product }}</span>
+                                            <span class="price">
+                                                <span class="old_amount">1000 {{ CURRENCY_ACTIVE.symbol }}</span>
+                                                <span class="amount">
+                                                    {% change_currency product.price CURRENCY_ACTIVE.abbreviation %}
+                                                    <span class="woocommerce-Price-currencySymbol">
+                                                        {{ CURRENCY_ACTIVE.symbol }}
+                                                    </span>
                                                 </span>
                                             </span>
-                                        </span>
-                                    </span>
-                                </h2>
+                                        </h2>
+                                    </a>
+                                </div>
                             </li>
                         {% endif %}
                     {% endfor %}
                 </ul>
+
+{#                <ul class="products">#}
+{#                    {% for product in same_products %}#}
+{#                        {% if product.status and product != productvariation %}#}
+{#                            <li class="col product">#}
+{#                                <div class="back_piece"></div>#}
+{#                                <a href="{% url 'products:detail' category.get.id product.id %}" class="item">#}
+{#                                    <span class="img"></span>#}
+{#                                    <img width="200" height="240" src="{{ product.get_main_image.url }}" alt="{{ product.get_main_image.description }}" sizes="(max-width: 200px) 100vw, 200px">#}
+{#                                </a>#}
+{#                                <h2 class="title">#}
+{#                                    <span class="prod-title">{{ product.title }}</span>#}
+{#                                    <span class="main-product">{{ product.product }}</span>#}
+{#                                    <span>#}
+{#                                        <span class="price">#}
+{#                                            <span class="amount">#}
+{#                                                {% change_currency product.price CURRENCY_ACTIVE.abbreviation %}#}
+{#                                                <span class="woocommerce-Price-currencySymbol">#}
+{#                                                    {{ CURRENCY_ACTIVE.symbol }}#}
+{#                                                </span>#}
+{#                                            </span>#}
+{#                                        </span>#}
+{#                                    </span>#}
+{#                                </h2>#}
+{#                            </li>#}
+{#                        {% endif %}#}
+{#                    {% endfor %}#}
+{#                </ul>#}
             </div>
             {% endif %}
 

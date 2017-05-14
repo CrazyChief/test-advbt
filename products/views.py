@@ -7,9 +7,9 @@ from django.conf import settings
 from django.core import mail
 
 from django.contrib.auth.models import User
-from .models import Category, Product, ProductVariation, ProductImage, ProductReview, ProductQuestion
+from .models import Category, SubCategory, Product, ProductVariation, ProductImage, ProductReview, ProductQuestion
 from .forms import ReviewForm, QuestionForm
-from cart.forms import CartAddProductForm
+# from cart.forms import CartAddProductForm
 
 
 class IndexView(ListView):
@@ -22,8 +22,8 @@ class IndexView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['products_list'] = Product.objects.all()
-        context['product_variation_list'] = ProductVariation.objects.all()
+        # context['products_list'] = Product.objects.filter(status__exact=True)
+        context['product_variation_list'] = ProductVariation.objects.filter(product__status__exact=True).filter(status__exact=True)
         context['product_image_list'] = ProductImage.objects.all()
         return context
 
@@ -56,6 +56,7 @@ class ProductCategoryView(TemplateView):
         context = super(ProductCategoryView, self).get_context_data(**kwargs)
         context['category'] = self.category
         context['category_list'] = Category.objects.all()
+        context['sub_category_list'] = SubCategory.objects.filter(category__exact=self.category.id)
         context['products_list'] = ProductVariation.objects.filter(product__category__pk=self.category.id)
         context['product_image_list'] = ProductImage.objects.filter(product__product__category__id=self.category.id)
         return context
