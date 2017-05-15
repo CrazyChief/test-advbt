@@ -73,8 +73,13 @@ class Product(models.Model):
     )
     title = models.CharField(max_length=100, verbose_name=_("Title"))
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=_("Category"))
-    date_added = models.DateTimeField(auto_now_add=True)
     status = models.BooleanField(choices=STATUSES, default=DRAFT, verbose_name=_("Status"))
+    price = models.FloatField(default=0, verbose_name=_("Price"))
+    sku = models.CharField(max_length=20, unique=True, null=True)
+    is_new = models.BooleanField(default=False, verbose_name=_("Is new"))
+    is_available = models.BooleanField(default=False, verbose_name=_("Is available"))
+    sub_categories = models.ManyToManyField(SubCategory, verbose_name=_("Sub categories"))
+    date_added = models.DateTimeField(auto_now_add=True)
     details = RichTextField(verbose_name=_("Details"), blank=True)
     htu = RichTextField(verbose_name=_("How to use"), blank=True)
     composition = RichTextField(verbose_name=_("Composition"), blank=True)
@@ -83,8 +88,11 @@ class Product(models.Model):
         verbose_name = "Product"
         verbose_name_plural = "Products"
 
+    def get_absolute_url(self):
+        return reverse('products:detail', kwargs={'pk': self.pk})
+
     def __str__(self):
-        return self.title
+        return self.title + " - " + str(self.sku)
 
     def is_posted(self):
         return self.status
@@ -92,9 +100,6 @@ class Product(models.Model):
     is_posted.admin_order_field = 'status'
     is_posted.boolean = True
     is_posted.short_description = 'Is posted?'
-
-    def get_absolute_url(self):
-        return reverse('products:detail', kwargs={'pk': self.pk})
 
 
 class ProductVariation(models.Model):
@@ -107,54 +112,29 @@ class ProductVariation(models.Model):
         (PUBLISHED, 'Published'),
         (DRAFT, 'Draft'),
     )
-    title = models.CharField(max_length=150, verbose_name=_("Title"))
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_("Product"))
-    sku = models.CharField(max_length=20, unique=True, null=True)
-    price = models.FloatField(default=0, verbose_name=_("Price"))
-    quantity = models.IntegerField(default=0, verbose_name=_("Quantity"))
     color_description = models.CharField(max_length=50, blank=True, verbose_name=_("Color description"))
     color_value = ColorField(default='#FF0000', verbose_name=_("Color value"))
-    is_new = models.BooleanField(default=False, verbose_name=_("Is new"))
-    is_available = models.BooleanField(default=False, verbose_name=_("Is available"))
     status = models.BooleanField(choices=STATUSES, default=DRAFT, verbose_name=_("Status"))
-    sub_categories = models.ManyToManyField(SubCategory, verbose_name=_("Sub categories"))
+
     date_added = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = "Product variation"
         verbose_name_plural = "Products variations"
 
-    def get_absolute_url(self):
-        return reverse('products:detail', kwargs={'pk': self.pk})
-
     def get_main_image(self):
         return self.productimage_set.get(is_main=True).image
 
-    def update_quantity(self, ordered_quantity):
-        self.quantity -= ordered_quantity
-        if self.quantity == 0:
-            self.is_available = False
-        return self.save()
-
     def __str__(self):
-        return str(self.product) + " - " + str(self.sku)
-
-    def is_product_available(self):
-        return self.is_available
+        return str(self.product) + " - " + str(self.color_description)
 
     def is_posted(self):
         return self.status
 
-    is_product_available.admin_order_field = 'is_available'
-    is_product_available.boolean = True
-    is_product_available.short_description = 'Is available?'
-
     is_posted.admin_order_field = 'status'
     is_posted.boolean = True
     is_posted.short_description = 'Is posted?'
-
-    # def get_absolute_url(self):
-    #     return reverse('products:ProductDetail', args=[self.product, self.vendor_code])
 
 
 def upload_path(instance, filename):

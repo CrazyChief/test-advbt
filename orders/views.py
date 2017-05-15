@@ -43,7 +43,7 @@ class CheckoutView(FormView):
         self.order = form.save()
         for item in self.cart.list_items(Cart(self.request)):
             OrderItem.objects.create(order=self.order, product=item.obj, price=item.obj.price, quantity=item.quantity)
-            ProductVariation.objects.get(pk=item.obj.pk).update_quantity(item.quantity)
+            # ProductVariation.objects.get(pk=item.obj.pk).update_quantity(item.quantity)
         self.cart.empty(Cart(self.request))
         return super(CheckoutView, self).form_valid(form)
 

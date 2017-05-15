@@ -48,27 +48,22 @@ class ProductAdmin(admin.ModelAdmin):
         'date_added',
         'status',
     ]
+    formfield_overrides = {TextField: {'widget': CKEditorWidget}}
+    filter_horizontal = ('sub_categories',)
 
 
 # class ProduvtVariationAdmin(TabbedTranslationAdmin):
-class ProduvtVariationAdmin(admin.ModelAdmin):
+class ProductVariationAdmin(admin.ModelAdmin):
     inlines = [ProductImageInline]
 
     list_display = (
-        'title',
-        'sku',
-        'is_product_available',
+        'product',
         'is_posted',
     )
     list_filter = [
-        'title',
-        'sku',
         'date_added',
-        'is_available',
         'status',
     ]
-    formfield_overrides = {TextField: {'widget': CKEditorWidget}}
-    filter_horizontal = ('sub_categories',)
 
 
 class ProductReviewAdmin(admin.ModelAdmin):
@@ -121,7 +116,7 @@ class DiscountAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)
 admin.site.register(Product, ProductAdmin)
-admin.site.register(ProductVariation, ProduvtVariationAdmin)
+admin.site.register(ProductVariation, ProductVariationAdmin)
 admin.site.register(ProductReview, ProductReviewAdmin)
 admin.site.register(ProductQuestion, ProductQuestionAdmin)
 admin.site.register(Discount, DiscountAdmin)
