@@ -61,6 +61,16 @@ class SubCategory(models.Model):
     is_sub_category_active.short_description = 'Is active?'
 
 
+def upload_path(instance, filename):
+    """
+    Path to files
+    :param instance:
+    :param filename:
+    :return:
+    """
+    return "products/{0}".format(filename)
+
+
 class Product(models.Model):
     """
     Product body
@@ -79,6 +89,7 @@ class Product(models.Model):
     is_new = models.BooleanField(default=False, verbose_name=_("Is new"))
     is_available = models.BooleanField(default=False, verbose_name=_("Is available"))
     sub_categories = models.ManyToManyField(SubCategory, verbose_name=_("Sub categories"))
+    image = models.FileField(upload_to=upload_path)
     date_added = models.DateTimeField(auto_now_add=True)
     details = RichTextField(verbose_name=_("Details"), blank=True)
     htu = RichTextField(verbose_name=_("How to use"), blank=True)
@@ -137,16 +148,6 @@ class ProductVariation(models.Model):
     is_posted.short_description = 'Is posted?'
 
 
-def upload_path(instance, filename):
-    """
-    Path to files
-    :param instance:
-    :param filename:
-    :return:
-    """
-    return "products/{0}".format(filename)
-
-
 class ProductImage(models.Model):
     """
     Store of images for all products
@@ -169,7 +170,7 @@ class ProductReview(models.Model):
     """
     Reviews of every product
     """
-    product = models.ForeignKey(ProductVariation, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     review = models.TextField()
     reviewer_name = models.CharField(max_length=100)
     reviewer_email = models.EmailField(max_length=254)
@@ -193,7 +194,7 @@ class ProductQuestion(models.Model):
     """
     Questions for every product
     """
-    product = models.ForeignKey(ProductVariation, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     question = models.TextField()
     name = models.CharField(max_length=240)
     email = models.CharField(max_length=240)
@@ -239,7 +240,7 @@ class Discount(models.Model):
     discount_range = models.IntegerField()
     discount_code = models.CharField(max_length=20)
     discount_type = models.CharField(max_length=20, choices=TYPES, default=FOR_ALL)
-    discount_product = models.ForeignKey(ProductVariation, on_delete=models.CASCADE, null=True)
+    discount_product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
     discount_start_period = models.DateTimeField()
     discount_end_period = models.DateTimeField()
     discount_description = models.TextField()

@@ -49,6 +49,18 @@ class ProductAdmin(admin.ModelAdmin):
         'status',
     ]
     formfield_overrides = {TextField: {'widget': CKEditorWidget}}
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'category', 'status', 'sku', 'price', 'is_new', 'is_available', 'sub_categories')
+        }),
+        ('Image', {
+            'fields': ('image',)
+        }),
+        ('Description', {
+            'classes': ('collapse',),
+            'fields': ('details', 'htu', 'composition'),
+        }),
+    )
     filter_horizontal = ('sub_categories',)
 
 

@@ -22,9 +22,9 @@ class IndexView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        # context['products_list'] = Product.objects.filter(status__exact=True)
-        context['product_variation_list'] = ProductVariation.objects.filter(product__status__exact=True).filter(status__exact=True)
-        context['product_image_list'] = ProductImage.objects.all()
+        context['products_list'] = Product.objects.filter(status__exact=True)
+        # context['product_variation_list'] = Product.objects.filter(status__exact=True)
+        # context['product_image_list'] = ProductImage.objects.all()
         return context
 
 
@@ -57,13 +57,13 @@ class ProductCategoryView(TemplateView):
         context['category'] = self.category
         context['category_list'] = Category.objects.all()
         context['sub_category_list'] = SubCategory.objects.filter(category__exact=self.category.id)
-        context['products_list'] = ProductVariation.objects.filter(product__category__pk=self.category.id)
-        context['product_image_list'] = ProductImage.objects.filter(product__product__category__id=self.category.id)
+        context['products_list'] = Product.objects.filter(category__pk=self.category.id)
+        # context['product_image_list'] = ProductImage.objects.filter(product__product__category__id=self.category.id)
         return context
 
 
 class ProductView(DetailView, FormMixin):
-    model = ProductVariation
+    model = Product
     template_name = 'products/detail.html'
     form_class = ReviewForm
     question_form_class = QuestionForm
@@ -85,8 +85,8 @@ class ProductView(DetailView, FormMixin):
 
     def get_product(self):
         if 'pk' in self.kwargs:
-            self.prod_var = ProductVariation.objects.filter(pk=self.kwargs['pk'])
-            return get_object_or_404(Product, pk=self.prod_var.get().product.pk)
+            # self.prod_var = Product.objects.filter(pk=self.kwargs['pk'])
+            return get_object_or_404(Product, pk=self.kwargs['pk'])
         raise Http404
 
     def get_question_form_class(self):
@@ -132,7 +132,7 @@ class ProductView(DetailView, FormMixin):
 
     def form_valid(self, form):
         obj = form.save(commit=False)
-        obj.product = ProductVariation.objects.get(pk=self.kwargs['pk'])
+        obj.product = Product.objects.get(pk=self.kwargs['pk'])
         if 'question_form' in self.request.POST:
             obj.parent = None
             try:

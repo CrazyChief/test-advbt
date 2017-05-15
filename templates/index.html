@@ -130,9 +130,9 @@
                                         {% for product in products %}
                                             <div class="owl-item">
                                                 <li class="col product">
-                                                    <a href="{% url 'products:detail' product.product.category.id product.id %}" class="item">
+                                                    <a href="{% url 'products:detail' product.category.id product.id %}" class="item">
                                                         <span class="img"></span>
-                                                        <img width="115" height="240" src="{{ product.get_main_image.url }}"
+                                                        <img width="115" height="240" src="{{ product.image.url }}"
                                                              class="size-shop_catalog wp-post-image" alt="{{ product.title }}" title="{{ product.title }}"
                                                              sizes="(max-width: 115px) 100vw, 115px">
                                                     </a>

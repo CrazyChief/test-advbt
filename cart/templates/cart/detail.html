@@ -146,12 +146,12 @@
 
                                                 {% for item in cart.list_items %}
                                                     <div class="item cart_item">
-                                                        <a href="{% url 'products:detail' item.obj.product.category.id item.obj.id %}" class="con">
-                                                            <img width="250" height="300" src="{{ item.obj.get_main_image.url }}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" sizes="(max-width: 250px) 100vw, 250px">
+                                                        <a href="{% url 'products:detail' item.obj.category.id item.obj.id %}" class="con">
+                                                            <img width="250" height="300" src="{{ item.obj.image.url }}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" sizes="(max-width: 250px) 100vw, 250px">
                                                         </a>
                                                         <div class="texter-part">
                                                             <div class="topper">
-                                                                <a href="{% url 'products:detail' item.obj.product.category.id item.obj.id %}" class="name">
+                                                                <a href="{% url 'products:detail' item.obj.category.id item.obj.id %}" class="name">
                                                                     {{ item.obj.title }}
                                                                 </a>
                                                                 <div class="articool">
@@ -166,7 +166,7 @@
                                                                 <div class="kilkist">
                                                                     <div class="name">{% trans "Quantity" %}:: </div>
                                                                     <div class="input-row">
-                                                                        <input type="number" step="1" min="1" max="{{ item.obj.quantity }}" data-product_id="{{ item.obj.id }}" value="{{ item.quantity }}" class="input-text qty text">
+                                                                        <input type="number" step="1" min="1" data-product_id="{{ item.obj.id }}" value="{{ item.quantity }}" class="input-text qty text">
                                                                         <span class="less" onclick="decr(this)"></span>
                                                                         <span class="more" onclick="incr(this)"></span>
                                                                     </div>
