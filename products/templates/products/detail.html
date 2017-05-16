@@ -46,7 +46,7 @@
                 <!-- Success message -->
                 <div class="wm">
                     <a href="{% url 'cart:detail' %}" class="button wc-forward">{% trans "Go to cart" %}</a>
-                    Вы отложили “{{ product.title }}” в свою корзину.
+                    {% trans "You put the" %} “{{ product.title }}” {% trans "in your shopping cart" %}.
                 </div>
                 <!-- Success message -->
 
@@ -58,13 +58,11 @@
                                 <div class="owl-wrapper-outer">
                                     <div class="owl-wrapper" style="width: 1576px; left: 0px;
                                      display: block; transition: all 0ms ease; transform: translate3d(0px, 0px, 0px);">
-                                        {% for image in product_images %}
-                                            <div class="owl-item" style="width: 394px;">
-                                                <a href="{{ image.image.url }}" class="zoom first item fancybox-products" title="" data-rel="prettyPhoto[product-gallery]" rel="rel1" fancybox="on">
-                                                    <img width="400" height="400" src="{{ image.image.url }}" alt="image.description" title="{{ image.description }}" caption="" sizes="(max-width: 400px) 100vw, 400px">
-                                                </a>
-                                            </div>
-                                        {% endfor %}
+                                        <div class="owl-item fade" style="width: 394px;">
+                                            <a href="{{ product.image.url }}" class="zoom first item fancybox-products" title="" data-rel="prettyPhoto[product-gallery]" rel="rel1" fancybox="on">
+                                                <img width="400" height="400" src="{{ product.image.url }}" alt="{{ product.title }}" title="{{ product.title }}" sizes="(max-width: 400px) 100vw, 400px">
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
 {#                                <div class="owl-controls clickable">#}
@@ -81,6 +79,13 @@
 {#                                        <div class="owl-next">next</div>#}
 {#                                    </div>#}
 {#                                </div>#}
+                            </div>
+                            <div class="thumb_wrapper">
+                                {% for img in product_variation_list %}
+                                    <div class="thumb_product">
+                                        <img height="80" width="70" src="{{ img.get_main_image.url }}" alt="{{ img.color_description }}" data-index="{{ img.id }}">
+                                    </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <!-- !IMAGES -->
@@ -128,14 +133,15 @@
                             <!-- VARIATION LINKS -->
                             <div class="varieble-box">
                                 {% for variation in product_variation_list %}
-                                    <a href="{% url 'products:detail' category.get.id variation.pk %}"
-                                       class="varieble {% if variation == product %}
+                                    <a data-href="{{ variation.get_main_image.url }}"
+                                       class="varieble dot {% if variation == product %}
                                        active
-                                       {% endif %}" title="{{ variation.color_description }}">
+                                       {% endif %}" title="{{ variation.color_description }}"
+                                       data-index="{{ variation.id }}" onclick="showThumb(this)">
                                         <span style="background-color: {{ variation.color_value }};"></span>
                                     </a>
                                 {% endfor %}
-                                <span class="color-description">{{ product.color_description }}</span>
+                                <span class="color-description">{% trans "Color" %}: <span></span></span>
                             </div>
                             <!-- !VARIATION LINKS -->
                             <!-- ADD TO CARD FORM -->
