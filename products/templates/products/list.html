@@ -70,6 +70,7 @@
                             </div>
                             <script>
                                 $("#slider").slider({
+                                    /* TODO: push and pull values to session (Danilov Dmitry) */
                                     min: 10,
                                     max: 200,
                                     values: [ 60, 100 ],
@@ -80,20 +81,21 @@
                                         "ui-slider-horizontal": "advbt-slider-horizontal",
                                         "ui-widget-content": "advbt-widget-content",
                                     },
-{#                                    create: function( event, ui ) {#}
-{#                                        for (var i = 0; i < this.childNodes.length; i++) {#}
-{#                                            var toolTipMin = document.createElement('span');#}
-{#                                            toolTipMin.setAttribute("class", "toolTip");#}
-{#                                            this.childNodes[i].appendChild(toolTipMin);#}
-{#                                        }#}
-{#                                        console.log(this.childNodes[0].childNodes[0].innerText = this.min);#}
-{#                                        console.log(ui);#}
-{#                                    },#}
+                                    create: function( event, ui ) {
+                                        for (var i = 0; i < this.childNodes.length; i++) {
+                                            var toolTipMin = document.createElement('span');
+                                            toolTipMin.setAttribute("class", "toolTip");
+                                            this.childNodes[i].appendChild(toolTipMin);
+                                        }
+                                        /* TODO: set value from session; static values are 60,100 (Danilov Dmitry) */
+                                        this.childNodes[0].childNodes[0].innerText = 60;
+                                        this.childNodes[1].childNodes[0].innerText = 100;
+                                    },
                                 });
-{#                                $("#slider").on("slidechange", function (event, ui) {#}
-{#                                    console.log(ui.values[0]);#}
-{#                                    console.log(ui.values[1]);#}
-{#                                });#}
+                                $("#slider").on("slidechange", function (event, ui) {
+                                    ui.handle.childNodes[0].innerText = ui.value;
+{#                                    console.log(ui.handle.childNodes[0].innerText = ui.value);#}
+                                });
                             </script>
                         </div>
                         {% if category_list %}
