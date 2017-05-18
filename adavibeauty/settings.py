@@ -74,7 +74,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             'templates',
-            # '/home/CrazyCat/test-advbt/templates/',
+            # '/home/CrazyChief/test-advbt/templates/',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'adavibeauty.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
+# Connection parameters for localhost
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -106,13 +106,15 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+# Connection parameters for hosting
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'CrazyChief$adavibeauty',
-#         'USER': 'CrazyChief',
-#         'PASSWORD': 'numberone123',
-#         'HOST': 'CrazyChief.mysql.pythonanywhere-services.com',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'adavibeauty',
+#         'USER': 'crazycat',
+#         'PASSWORD': 'NumberOne123',
+#         'HOST': 'CrazyChief-434.postgres.pythonanywhere-services.com',
+#         'PORT': '10434',
 #     }
 # }
 

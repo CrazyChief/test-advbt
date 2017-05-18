@@ -18,7 +18,7 @@
         <section class="sector blog page">
             <div class="container">
                 <div class="title style-4">
-                    <h1 class="h2">{% trans "Cart" %}</h1>
+                    <h1 class="h2">{% trans "Shopping bag" %}</h1>
                     <div class="clear"></div>
                 </div><!-- title -->
 
@@ -54,7 +54,7 @@
                                         background-color: white;
                                     }
                                     .woocommerce .cart-collaterals, .woocommerce-page .cart-collaterals {
-                                        max-width: 50%;
+{#                                        max-width: 50%;#}
                                         width: 100%;
                                     }
                                 </style>
@@ -164,7 +164,7 @@
                                                                     <div class="cort" style="background-color: {{ item.obj.color_value }}"></div>
                                                                 </div>
                                                                 <div class="kilkist">
-                                                                    <div class="name">{% trans "Quantity" %}:: </div>
+                                                                    <div class="name">{% trans "Quantity" %}: </div>
                                                                     <div class="input-row">
                                                                         <input type="number" step="1" min="1" data-product_id="{{ item.obj.id }}" value="{{ item.quantity }}" class="input-text qty text">
                                                                         <span class="less" onclick="decr(this)"></span>
@@ -172,7 +172,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="price">
-                                                                    <div class="name">{% trans "price" %}:: </div>
+                                                                    <div class="name">{% trans "Price" %}: </div>
                                                                     <div class="prise">
                                                                         <span class="woocommerce-Price-amount amount">
                                                                             {% change_currency item.price CURRENCY_ACTIVE.abbreviation %}
@@ -193,30 +193,37 @@
                                                 {% endfor %}
 
                                                 <div class="last-row-part">
-                                                    <div class="cupon actions">
-                                                        <div class="form-cupon coupon">
-                                                            <div class="row-input coupon">
-                                                                <input type="text" name="coupon_code" id="coupon_code" placeholder="Код купона" value="">
-                                                                <input type="submit" class="btn" name="apply_coupon" value="Применить купон">
-                                                            </div>
-                                                        </div>
-                                                        <input type="submit" class="button" name="update_cart" style="position: absolute; left: -50000px" value="Обновить корзину">
-                                                        <input type="hidden" id="_wpnonce" name="_wpnonce" value="f8873ffc63">
-                                                        <input type="hidden" name="_wp_http_referer" value="/cart">
-                                                    </div>
+{#                                                    <div class="cupon actions">#}
+{#                                                        <div class="form-cupon coupon">#}
+{#                                                            <div class="row-input coupon">#}
+{#                                                                <input type="text" name="coupon_code" id="coupon_code" placeholder="Код купона" value="">#}
+{#                                                                <input type="submit" class="btn" name="apply_coupon" value="Применить купон">#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                        <input type="submit" class="button" name="update_cart" style="position: absolute; left: -50000px" value="Обновить корзину">#}
+{#                                                        <input type="hidden" id="_wpnonce" name="_wpnonce" value="f8873ffc63">#}
+{#                                                        <input type="hidden" name="_wp_http_referer" value="/cart">#}
+{#                                                    </div>#}
                                                     <div class="cart-collaterals">
-                                                        <div class="all-price cart_totals ">
-                                                            <div class="allcost" style="text-align: right;">
-                                                                <div>Итого <b> <span><strong>
-                                                                    <span class="woocommerce-Price-amount amount">
-                                                                        {% change_currency cart.total_price CURRENCY_ACTIVE.abbreviation %}
-{#                                                                        {{ cart.total_price|floatformat }}#}
-                                                                    </span>
-                                                                    <span class="woocommerce-Price-currencySymbol"> {{ CURRENCY_ACTIVE.symbol }}</span></strong></span></b></div>
+                                                        <div class="all-price cart_totals">
+                                                            <div class="checkout_wrap">
+                                                                <a href="{% url 'orders:checkout' %}" class="btn btn-1 submition-butt">
+                                                                    <span>{% trans "Checkout" %}</span>
+                                                                </a>
                                                             </div>
-                                                            <a href="{% url 'orders:checkout' %}" class="checkout-button alt wc-forward submition-butt btn">
-                                                                <span>{% trans "Proceed to checkout" %}</span>
-                                                            </a>
+                                                            <div class="allcost" style="text-align: right;">
+                                                                <div>
+                                                                    <span>{% trans "Subtotal before shipping" %}:</span>
+                                                                    <span>
+                                                                        <strong>
+                                                                        <span class="woocommerce-Price-amount amount">
+                                                                            {% change_currency cart.total_price CURRENCY_ACTIVE.abbreviation %}
+    {#                                                                        {{ cart.total_price|floatformat }}#}
+                                                                        </span>
+                                                                        <span class="woocommerce-Price-currencySymbol"> {{ CURRENCY_ACTIVE.symbol }}</span></strong>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

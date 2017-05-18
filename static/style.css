@@ -1711,8 +1711,14 @@ body {
 .steper-row li.active .circlum svg{fill: white; width: 40px; }
 .steper-row li.active .circlum{width: 40px; height:40px;}
 
-.conteiner-corzin .item-list{border-top: 1px solid #ffd0cc;}
-.conteiner-corzin .item-list .item{ border-bottom: 1px solid #ffd0cc; padding: 20px 0; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between;}
+.conteiner-corzin .item-list{
+  /*border-top: 1px solid #ffd0cc;*/
+  border-top: none!important;
+}
+.conteiner-corzin .item-list .item{
+  /*border-bottom: 1px solid #ffd0cc;*/
+  border-bottom: none!important;
+  padding: 20px 0; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between;}
 .conteiner-corzin .item .con{display: block; text-decoration: none; width:  130px; height: auto; min-height: 130px; background-color: white; position: relative; overflow: hidden; border: 1px solid #ffd0cc; }
 .conteiner-corzin .item .con img{max-width: 100%; height: auto; max-height: 100%;}
 
@@ -1726,17 +1732,17 @@ body {
 .conteiner-corzin .item .texter-part .botomer .name{ font-size: 18px; color: rgb(56, 58, 58); line-height: 1.2; width: 90px;}
 .conteiner-corzin .item .texter-part .botomer .color-type{width: 30%; display: flex; align-items: center; justify-content: flex-start; }
 .conteiner-corzin .item .texter-part .botomer .color-type .cort{width: 64px; height:25px; border-radius: 5px;  overflow: hidden;   }
-.conteiner-corzin .item .texter-part .botomer .kilkist {width: 30%; display: flex; align-items: center; justify-content: flex-start;}
-.conteiner-corzin .item .texter-part .botomer .kilkist .input-row{width: 64px; height:25px; position: relative;}
-.conteiner-corzin .item .texter-part .botomer .kilkist .input-row input{width: 100% !important; height: 25px; border-radius: 5px; border: 1px solid #ff887b; text-align: center; font-size: 16px; color: rgb(56, 58, 58); padding: 0 15px; outline: none;}
-.conteiner-corzin .item .texter-part .botomer .kilkist .input-row .more{ width: 10px; position: absolute; right: 2px; top: 2px; height: 10px; background-color:transparent;  transition: all 0.3s }
+.conteiner-corzin .item .texter-part .kilkist {width: 30%; display: flex; align-items: center; justify-content: flex-start;}
+.conteiner-corzin .item .texter-part .kilkist .input-row{width: 64px; height:25px; position: relative;}
+.conteiner-corzin .item .kilkist .input-row input{width: 30% !important; height: 25px; border-radius: 5px; border: 1px solid #ff887b; text-align: center; font-size: 16px; color: rgb(56, 58, 58);margin-top: 0;}
+.conteiner-corzin .item .kilkist .input-row .more{ width: 10px; position: absolute; right: 2px; top: 2px; height: 10px; background-color:transparent;  transition: all 0.3s }
 .conteiner-corzin .item .texter-part .botomer .kilkist .input-row .more:hover{background-color: rgba(0,0,0,0.2);}
-.conteiner-corzin .item .texter-part .botomer .kilkist .input-row .more:before {content: ''; position: absolute; bottom: 2px; right: 1px; width: 0; height: 0;  border-style: solid; border-width: 0 4px 4px 4px; border-color: transparent transparent #ff887b transparent; cursor: pointer; z-index: 3; }
+.conteiner-corzin .item .kilkist .input-row .more:before {content: ''; position: absolute; bottom: 2px; right: 1px; width: 0; height: 0;  border-style: solid; border-width: 0 4px 4px 4px; border-color: transparent transparent #ff887b transparent; cursor: pointer; z-index: 3; }
 
-.conteiner-corzin .item .texter-part .botomer .kilkist .input-row .less{width: 10px; position: absolute; right: 2px; bottom: 2px; height: 10px; background-color: transparent; transition: all 0.3s; }
+.conteiner-corzin .item .kilkist .input-row .less{width: 10px; position: absolute; right: 2px; bottom: 2px; height: 10px; background-color: transparent; transition: all 0.3s; }
 .conteiner-corzin .item .texter-part .botomer .kilkist .input-row .less:hover{background-color: rgba(0,0,0,0.2);}
 
-.conteiner-corzin .item .texter-part .botomer .kilkist .input-row .less:before{ content: ''; position: absolute; top: 2px; right: 1px; width: 0; height: 0; border-style: solid; border-width: 4px 4px 0 4px; border-color: #ff887b transparent transparent transparent; cursor: pointer; z-index: 3;}
+.conteiner-corzin .item .kilkist .input-row .less:before{ content: ''; position: absolute; top: 2px; right: 1px; width: 0; height: 0; border-style: solid; border-width: 4px 4px 0 4px; border-color: #ff887b transparent transparent transparent; cursor: pointer; z-index: 3;}
 
 .conteiner-corzin .item .texter-part .botomer .price{width: 30%; display: flex; align-items: center; justify-content: flex-start;}
 .conteiner-corzin .item .texter-part .botomer .price .prise{ font-size: 18px; color: rgb(56, 58, 58); line-height: 1.2; font-weight: 900;}
@@ -1747,17 +1753,19 @@ body {
 .conteiner-corzin .item .deleter .deleter-christ:after{ content: ''; position: absolute; top: 7px; left: 13px; width: 1px; height: 12px; background-color: #ff887b; transform: rotate(45deg); }
 .conteiner-corzin .item .deleter .deleter-christ:hover{transform: rotate(180deg);}
 
-.conteiner-corzin .last-row-part{display: flex; align-items: center; justify-content: space-between;padding: 40px 0;}
+.conteiner-corzin .last-row-part{display: flex; align-items: center; justify-content: space-between;padding: 40px 0;border-top: 1px solid #ff887b;}
 .conteiner-corzin .last-row-part .cupon{ max-width: 225px; }
 .conteiner-corzin .last-row-part .cupon input{width: 100%; height: 36px; border: 1px solid #ff887b; background-color: white; outline: none; padding: 0 20px;}
 .conteiner-corzin .last-row-part .cupon input.error{box-shadow: inset 0px 0px 7px 0px #ff887b; }
 
 .conteiner-corzin .last-row-part .cupon .row-input{padding-bottom: 20px; }
 .conteiner-corzin .last-row-part .cupon button{display: block; padding: 17px 20px; font-size: 12px; letter-spacing: 0.2em; border-radius: 50px; border-width: 1px; text-align: center; }
-.conteiner-corzin .all-price{max-width: 350px; width: 100%; }
+.conteiner-corzin .all-price{
+  /*max-width: 350px;*/
+  width: 100%; }
 
-.conteiner-corzin .all-price .allcost{ font-size: 18px; color: rgb(56, 58, 58); line-height: 1.2; text-align: center; padding-bottom: 30px; }
-.conteiner-corzin .all-price .submition-butt{display: block; padding: 17px 20px; font-size: 12px; letter-spacing: 0.2em; border-radius: 50px; border-width: 1px; text-align: center;}
+.conteiner-corzin .all-price .allcost{ font-size: 18px; color: rgb(56, 58, 58); line-height: 1.2; text-align: right; padding-bottom: 30px;}
+.conteiner-corzin .all-price .submition-butt{display: block; padding: 17px 60px; font-size: 12px; letter-spacing: 0.2em; border-radius: 50px; border-width: 1px; text-align: center;}
 
 .conteiner-corzin .title-name-form h2{  font-size: 22px; color: rgb(85, 85, 85); font-weight: bold; line-height: 1.2; text-align: center; padding-bottom: 35px;}
 
@@ -2249,6 +2257,29 @@ span.img2 {
 .thumb_product:hover {
   border: 1px solid #f37f78;
 }
+
+.cart_wrapper_modal {
+  position: fixed;
+  top: 100px;
+  display: none;
+  width: 100%!important;
+  height: auto;
+  /*height: 300px;*/
+  background-color: white!important;
+  z-index: 100;
+  box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.activate_cart_wrapper {display: block;}
+.cart_wrapper_modal .title .h2 {text-align: center!important;text-transform: uppercase;margin-top: 40px;}
+
+.cart_item .amount, .conteiner-corzin .all-price .allcost strong {color: #f37f78!important;}
+.cart_totals {display: flex;justify-content: space-between;}
+.conteiner-corzin .item .con {  position: relative;  border: 4px solid #ebebeb;  width: 120px;  height: 100px;  }
+.conteiner-corzin .cart_item .title .name, .conteiner-corzin .cart_item .articool span, .conteiner-corzin .cart_item .color-type .name, .conteiner-corzin .cart_item .kilkist .name {font-weight: 500;}
+.conteiner-corzin .cart_item .title .name {color: #212121; font-size: 18px!important; text-transform: uppercase;}
+.conteiner-corzin .cart_item .price {font-weight: 500;}
+.conteiner-corzin .cart_item .kilkist {width: 150px!important;}
+.conteiner-corzin .cart_item .kilkist .input-row {position: relative;}
 
 @media screen and (max-width: 1200px) {
   .thumb_wrapper {

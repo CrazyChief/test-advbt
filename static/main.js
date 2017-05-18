@@ -426,6 +426,10 @@ $(document).ready(function(){
         $('body').toggleClass('active-menu-scroll');
     });
 
+    $('#cart_button').on('click', function () {
+        $('#cart_wrapper').fadeToggle();
+    });
+
     // if (window.location.pathname.match(/\//)) {
     //     document.getElementById("addSubscriber").addEventListener("click", showSnackbar);
     // }
