@@ -8,6 +8,7 @@ from .models import Order, OrderItem
 from products.models import ProductVariation
 from cart.views import Cart
 from .tasks import OrderCreate
+from products.models import Category
 
 
 class CheckoutView(FormView):
@@ -26,6 +27,7 @@ class CheckoutView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(CheckoutView, self).get_context_data(**kwargs)
+        context['category_list'] = Category.objects.filter(is_active=True)
         context['form'] = self.get_form()
         return context
 
@@ -62,8 +64,9 @@ class CreatedView(DetailView):
         self.order(kwargs['pk'])
         return super(CreatedView, self).get(request, *args, **kwargs)
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(CreatedView, self).get_context_data(**kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(CreatedView, self).get_context_data(**kwargs)
+        context['category_list'] = Category.objects.filter(is_active=True)
     #     context['ord'] = OrderCreate(kwargs['pk'])
-    #     return context
+        return context
 

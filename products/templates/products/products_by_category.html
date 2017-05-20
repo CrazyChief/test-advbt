@@ -113,7 +113,11 @@
                                                 <a href="{% url 'products:products_by_category' cat.id %}" class="active">{{ cat.title }}</a>
                                                 <ul class="sub_categories">
                                                     {% for sub_category in sub_category_list %}
-                                                        <li class="s_category">{{ sub_category.title }}</li>
+                                                        <li class="s_category">
+                                                            <a href="">
+                                                                {{ sub_category.title }}
+                                                            </a>
+                                                        </li>
                                                     {% endfor %}
                                                 </ul>
                                             </li>

@@ -3,6 +3,7 @@ from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy as _
 from .models import Review, Location, Email, Phone
 from .forms import ReviewForm
+from products.models import Category
 
 
 class ReviewCreate(CreateView):
@@ -11,6 +12,7 @@ class ReviewCreate(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(ReviewCreate, self).get_context_data(**kwargs)
+        context['category_list'] = Category.objects.filter(is_active=True)
         context['locations'] = Location.objects.all()
         context['emails'] = Email.objects.all()
         context['phones'] = Phone.objects.all()

@@ -11,6 +11,7 @@ from django.core import mail
 
 from .models import Post, Comments
 from .forms import CommentForm
+from products.models import Category
 
 
 class IndexView(ListView):
@@ -21,6 +22,11 @@ class IndexView(ListView):
 
     def get_queryset(self):
         return Post.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['category_list'] = Category.objects.filter(is_active=True)
+        return context
 
 
 class PostView(DetailView, FormMixin):

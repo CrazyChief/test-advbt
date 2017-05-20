@@ -27,6 +27,12 @@ class Category(models.Model):
     def is_category_active(self):
         return self.is_active
 
+    def get_subcategories(self):
+        sb_list = []
+        for sb in self.subcategory_set.filter(status__exact=True):
+            sb_list.append(sb)
+        return sb_list
+
     is_category_active.admin_order_field = 'is_active'
     is_category_active.boolean = True
     is_category_active.short_description = 'Is active?'
