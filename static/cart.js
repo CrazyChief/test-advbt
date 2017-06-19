@@ -4,6 +4,7 @@ var cart = {
         return $.post(URLS.addItem, {pk: pk, quantity: quantity}, function (xhr) {
             $("a.cart span").html("");
             $("a.cart span").html(xhr['itemCount']);
+            // console.log(xhr);
             $("div.wm").css({display: 'block'}).show(600);
         }, 'json');
     },
@@ -14,8 +15,10 @@ var cart = {
             $("a.cart span").html(xhr['itemCount']);
             if (window.location.pathname.match(/\/cart\/$/)) {
                 var bt = $('div.cart_item').find('.deleter button[data-product_id="' + itemPK + '"]'),
-                    field = bt.parents('div.cart_item');
+                    field = bt.parents('div.cart_item'),
+                    totalPrice = $("div.allcost span.woocommerce-Price-amount");
                 field.remove();
+                totalPrice.text(xhr['totalPrice']);
             }
             if (xhr['itemCount'] == 0) {
                 var wrapp = $('section.sector'),

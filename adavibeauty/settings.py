@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'star_ratings',
     'easycart',
     'django_social_share',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -295,6 +296,6 @@ EASYCART_CART_CLASS = 'cart.views.Cart'
 
 CART_SESSION_ID = 'cart'
 
-# STAR_RATINGS_STAR_HEIGHT = 16
-# STAR_RATINGS_RERATE = False
+STAR_RATINGS_RERATE = False
+STAR_RATINGS_STAR_HEIGHT = 20
 STAR_RATINGS_ANONYMOUS = True

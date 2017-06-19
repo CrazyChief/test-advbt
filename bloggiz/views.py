@@ -48,6 +48,7 @@ class PostView(DetailView, FormMixin):
         context = super(PostView, self).get_context_data(**kwargs)
         context['single_post'] = Post.objects.get(slug=self.kwargs['slug'])
         context['comments'] = Comments.objects.filter(post__slug=self.kwargs['slug']).filter(parent=None)
+        context['category_list'] = Category.objects.filter(is_active=True)
         context['form'] = self.get_form()
         if self.request.user.is_authenticated:
             context['user'] = User.objects.get(pk=self.request.user.id)

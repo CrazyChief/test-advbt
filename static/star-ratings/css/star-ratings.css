@@ -2,7 +2,6 @@
 .star-ratings {
   display: inline-block;
   position: relative;
-  margin-top: 20px;
 }
 /* line 7, ../sass/star-ratings.scss */
 .star-ratings ul {

@@ -73,7 +73,7 @@
                             <script>
                                 $("#slider").slider({
                                     /* TODO: push and pull values to session (Danilov Dmitry) */
-                                    min: 10,
+                                    min: 1,
                                     max: 200,
                                     values: [ 60, 100 ],
                                     classes: {
@@ -112,13 +112,15 @@
                                             <li class="category">
                                                 <a href="{% url 'products:products_by_category' cat.id %}" class="active">{{ cat.title }}</a>
                                                 <ul class="sub_categories">
-                                                    {% for sub_category in sub_category_list %}
-                                                        <li class="s_category">
-                                                            <a href="">
-                                                                {{ sub_category.title }}
-                                                            </a>
-                                                        </li>
-                                                    {% endfor %}
+                                                    {% block sub_category %}
+                                                        {% for sub_category in sub_category_list %}
+                                                            <li class="s_category">
+                                                                <a href="">
+                                                                    {{ sub_category.title }}
+                                                                </a>
+                                                            </li>
+                                                        {% endfor %}
+                                                    {% endblock %}
                                                 </ul>
                                             </li>
                                         {% else %}
@@ -148,11 +150,13 @@
                                             </div>
                                             <h2 class="title">
                                                 <span class="prod-title">{{ product.title }}</span>
-                                                <span class="main-product">{{ product.product }}</span>
+                                                <span class="main-product">
+{#                                                    {{ product.product }}#}
+                                                </span>
                                                 <span class="price">
-                                                    <span class="old_amount">1000 {{ CURRENCY_ACTIVE.symbol }}</span>
+{#                                                    <span class="old_amount">1000 {{ CURRENCY_ACTIVE.symbol }}</span>#}
                                                     <span class="amount">
-                                                        {% change_currency product.price CURRENCY_ACTIVE.abbreviation %}
+                                                        {% change_currency product.get_first_child_product.price CURRENCY_ACTIVE.abbreviation %}
                                                         <span class="woocommerce-Price-currencySymbol">
                                                             {{ CURRENCY_ACTIVE.symbol }}
                                                         </span>
@@ -165,23 +169,28 @@
                             {% endfor %}
                         </ul>
 
-                        <div class="container">
+{#                        <div class="container">#}
                             {% if is_paginated %}
                                 <div class="pagination">
                                     <span class="page-links">
                                         {% if page_obj.has_previous %}
-                                            <a href="?page={{ page_obj.previous_page_number }}">{% trans "previous" %}</a>
+                                            <a href="?page={{ page_obj.previous_page_number }}">
+                                                <span class="fa fa-chevron-left"></span>
+                                                {% trans "PREV" %}</a>
                                         {% endif %}
-                                        <span class="page-current">
-                                            {% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.
-                                        </span>
+{#                                        <span class="page-current">#}
+{#                                            {% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.#}
+{#                                        </span>#}
                                         {% if page_obj.has_next %}
-                                            <a href="?page={{ page_obj.next_page_number }}">{% trans "next" %}</a>
+                                            <a href="?page={{ page_obj.next_page_number }}">
+                                                {% trans "NEXT" %}
+                                                <span class="fa fa-chevron-right"></span>
+                                            </a>
                                         {% endif %}
                                     </span>
                                 </div>
                             {% endif %}
-                        </div>
+{#                        </div>#}
 
                     {% else %}
 

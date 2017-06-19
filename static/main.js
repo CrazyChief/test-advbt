@@ -8,13 +8,13 @@
     });
     $('body').addClass("viewing-page-1");
     $(window).scroll(function() {
-        if ($(this).scrollTop() > 2) {
-            $('body').removeClass("viewing-page-1");
-            $('.bar-menu').removeClass("sticky");
-        } else {
-            $('body').addClass("viewing-page-1");
-            $('.bar-menu').removeClass("sticky");
-        }
+        // if ($(this).scrollTop() > 2) {
+        //     $('body').removeClass("viewing-page-1");
+        //     $('.bar-menu').removeClass("sticky");
+        // } else {
+        //     $('body').addClass("viewing-page-1");
+        //     $('.bar-menu').removeClass("sticky");
+        // }
     });
 
 
@@ -404,14 +404,20 @@ $(document).ready(function(){
     if (window.location.pathname.match(/\/products\/([0-9]+)\/([0-9]+)\//)) {
         document.getElementById("defaultOpen").click();
         if ($(".varieble-box").find(".color-description span").text() == '') {
-            var wrap = $(".thumb_wrapper"),
+            var wrap = $(".thumb_wrapper .img_wrapper .pr_wr"),
                 first = wrap.children()[0],
                 title = first.childNodes[1].getAttribute("alt"),
-                src = first.childNodes[1].getAttribute("src");
+                src = first.childNodes[1].getAttribute("src"),
+                price = first.childNodes[1].getAttribute("data-price"),
+                pk = first.childNodes[1].getAttribute("data-index");
+            // console.log(first.childNodes[1]);
             var big_img_wrap = $(".owl-item"),
                 big_img_a = big_img_wrap.children(),
                 big_img = big_img_wrap.find("img").attr("src", src);
             big_img_a.attr("href", src);
+            // $("input[name='add-to-cart']").attr("data-color", pk);
+            $("input[name='add-to-cart']").attr("value", pk);
+            $(".line-price .price .woocommerce-Price-amount > .amount").text(price);
             $(".varieble-box").find(".color-description span").text(title);
         }
     }
@@ -426,9 +432,9 @@ $(document).ready(function(){
         $('body').toggleClass('active-menu-scroll');
     });
 
-    $('#cart_button').on('click', function () {
-        $('#cart_wrapper').fadeToggle();
-    });
+    // $('#cart_button').on('click', function () {
+    //     $('#cart_wrapper').fadeToggle();
+    // });
 
     // if (window.location.pathname.match(/\//)) {
     //     document.getElementById("addSubscriber").addEventListener("click", showSnackbar);
@@ -492,7 +498,9 @@ $(document).ready(function(){
 
     $("#addToCart").on('click', function () {
         var pk = $(this).siblings("input[name='add-to-cart']").val(),
-            quantity = $(this).siblings("div").find("input[name='quantity']").val();
+            quantity = $(this).siblings("div").find("input[name='quantity']").val(),
+            color = $(this).siblings("input[name='add-to-cart']").attr("data-color");
+        // console.log(color);
         // console.log("PK: " + pk);
         // console.log("quantity: " + quantity);
         cart.add(pk, quantity);
@@ -544,6 +552,7 @@ $(document).ready(function(){
             $('textarea[id="id_question"]').text("<b>" + parent_name + "</b>, ");
         }
     });
+
     // $("#slider").slider({
     //     min: 10,
     //     max: 200,
@@ -567,14 +576,25 @@ $(document).ready(function(){
 });
 
 function showThumb(e) {
-    var wrap = $(".thumb_wrapper"),
-        index = $(e).attr("data-index"),
+    if ($(e)[0].nodeName == 'A') {
+        var all_links = $('.varieble-box').find('a');
+        for (var i = 0; i < all_links.length; i++) {
+            all_links[i].className = 'varieble dot';
+        }
+        $(e).addClass('active_link_a');
+    }
+    var wrap = $(".thumb_wrapper .img_wrapper .pr_wr"),
+        pk = $(e).attr("data-index"),
+        price = $(e).attr("data-price"),
         title = $(e).attr("title"),
-        item = wrap.find(".thumb_product").find("img[data-index='"+index+"']").attr("src");
+        item = wrap.find(".thumb_product").find("img[data-index='"+pk+"']").attr("src");
     var big_img_wrap = $(".owl-item"),
         big_img_a = big_img_wrap.children().attr("href", item),
         big_img = big_img_wrap.find("img").attr("src", item);
     big_img.fadeIn(1000);
+    // $("input[name='add-to-cart']").attr("data-color", pk);
+    $("input[name='add-to-cart']").attr("value", pk);
+    $(".line-price .price .woocommerce-Price-amount > .amount").text(price);
     $(".varieble-box").find(".color-description span").text(title);
 }
 

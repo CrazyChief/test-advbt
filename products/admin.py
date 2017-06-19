@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db.models import TextField
 # from modeltranslation.admin import TranslationAdmin, TabbedTranslationAdmin, TranslationTabularInline
 from .models import Category, SubCategory, Product, ProductVariation, ProductImage, ProductReview, ProductQuestion, Discount
-from ckeditor.widgets import CKEditorWidget
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
 # class CategoryAdmin(TabbedTranslationAdmin):
@@ -44,17 +44,16 @@ class ProductAdmin(admin.ModelAdmin):
         'is_posted',
     )
     list_filter = [
-        'title',
         'date_added',
         'status',
     ]
-    formfield_overrides = {TextField: {'widget': CKEditorWidget}}
+    formfield_overrides = {TextField: {'widget': CKEditorUploadingWidget}}
     fieldsets = (
         (None, {
-            'fields': ('title', 'category', 'status', 'sku', 'price', 'is_new', 'is_available', 'sub_categories')
+            'fields': ('title', 'category', 'status', 'sku', 'is_new', 'is_available', 'sub_categories',),
         }),
         ('Image', {
-            'fields': ('image',)
+            'fields': ('image',),
         }),
         ('Description', {
             'classes': ('collapse',),
@@ -90,7 +89,7 @@ class ProductReviewAdmin(admin.ModelAdmin):
         'reviewer_email',
         'review_added',
     ]
-    formfield_overrides = {TextField: {'widget': CKEditorWidget}}
+    formfield_overrides = {TextField: {'widget': CKEditorUploadingWidget}}
 
 
 class ProductQuestionAdmin(admin.ModelAdmin):
@@ -103,7 +102,7 @@ class ProductQuestionAdmin(admin.ModelAdmin):
     list_filter = [
         'date_added',
     ]
-    formfield_overrides = {TextField: {'widget': CKEditorWidget}}
+    formfield_overrides = {TextField: {'widget': CKEditorUploadingWidget}}
 
 
 # class DiscountAdmin(TabbedTranslationAdmin):
@@ -122,7 +121,7 @@ class DiscountAdmin(admin.ModelAdmin):
         'discount_start_period',
         'discount_end_period',
     ]
-    formfield_overrides = {TextField: {'widget': CKEditorWidget}}
+    formfield_overrides = {TextField: {'widget': CKEditorUploadingWidget}}
 
 
 admin.site.register(Category, CategoryAdmin)

@@ -5,6 +5,7 @@ from django.http import Http404, HttpResponseForbidden
 from django.urls import reverse
 from django.conf import settings
 from django.core import mail
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.contrib.auth.models import User
 from .models import Category, SubCategory, Product, ProductVariation, ProductImage, ProductReview, ProductQuestion
@@ -14,26 +15,22 @@ from .forms import ReviewForm, QuestionForm
 
 class IndexView(ListView):
     template_name = 'products/list.html'
-    context_object_name = 'category_list'
-    paginate_by = 10
+    context_object_name = 'products_list'
+    paginate_by = 20
 
     def get_queryset(self):
-        return Category.objects.all()
+        return Product.objects.filter(status__exact=True)
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['products_list'] = Product.objects.filter(status__exact=True)
+        context['category_list'] = Category.objects.all()
         # context['product_variation_list'] = Product.objects.filter(status__exact=True)
-        # context['product_image_list'] = ProductImage.objects.all()
         return context
 
 
-class ProductCategoryView(TemplateView):
-    # model = Category
-
+class ProductCategoryView(ListView):
     template_name = 'products/products_by_category.html'
-    # queryset = Category.objects.all()
-    context_object_name = 'category'
+    context_object_name = 'products_list'
     paginate_by = 20
 
     def get(self, request, *args, **kwargs):
@@ -49,17 +46,37 @@ class ProductCategoryView(TemplateView):
     # def get_categories(self):
     #     return self.category.get_deferred_fields()
 
-    # def get_queryset(self):
-    #     return Category.objects.filter(pk=self.kwargs['pk'])
+    def get_queryset(self):
+        return Product.objects.filter(category__pk=self.category.id)
 
     def get_context_data(self, **kwargs):
         context = super(ProductCategoryView, self).get_context_data(**kwargs)
         context['category'] = self.category
-        context['category_list'] = Category.objects.all()
+        context['category_list'] = Category.objects.filter(is_active__exact=True)
         context['sub_category_list'] = SubCategory.objects.filter(category__exact=self.category.id)
-        context['products_list'] = Product.objects.filter(category__pk=self.category.id)
-        # context['product_image_list'] = ProductImage.objects.filter(product__product__category__id=self.category.id)
+        # context['products_list'] = Product.objects.filter(category__pk=self.category.id)
         return context
+
+
+# class ProductSubCategoryView(TemplateView):
+#     template_name = 'products/products_by_subcategory.html'
+#
+#     def get(self, request, *args, **kwargs):
+#
+#         return super(ProductSubCategoryView, self).get(request, *args, **kwargs)
+#
+#     def get_sub_category(self):
+#         if 'pk' in self.kwargs:
+#             return get_object_or_404(SubCategory, pk=self.kwargs['pk'])
+#         raise Http404
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(ProductSubCategoryView, self).get_context_data(**kwargs)
+#         context['category'] = Category.objects.filter(pk=self.kwargs['fk'])
+#         context['category_list'] = Category.objects.filter(is_active__exact=True)
+#         context['sub_category_list'] = SubCategory.objects.filter(category__exact=self.kwargs['fk'])
+#         context['products_list'] = Product.objects.filter(sub_categories=self.get_sub_category())
+#         return context
 
 
 class ProductView(DetailView, FormMixin):
@@ -100,12 +117,16 @@ class ProductView(DetailView, FormMixin):
     def get_context_data(self, **kwargs):
         context = super(ProductView, self).get_context_data(**kwargs)
         context['category'] = Category.objects.filter(pk=self.kwargs['fk'])
+        context['category_list'] = Category.objects.filter(is_active__exact=True)
         # kwargs['sizes'] = {size: self.model.objects.get_or_create(rate=str(size))[0] for size in range(10, 40)}
+        #
+        # context['sub_category'] = SubCategory.objects.filter(pk=self.kwargs['id'])
+        #
         context['product_images'] = ProductImage.objects.filter(product=self.kwargs['pk'])
         context['product_reviews'] = ProductReview.objects.filter(product=self.kwargs['pk'])
         context['product_variation_list'] = ProductVariation.objects.filter(product=self.get_product())
         context['questions'] = ProductQuestion.objects.filter(product=self.kwargs['pk']).filter(parent=None)
-        context['same_products'] = ProductVariation.objects.filter(product=self.get_product())[:4]
+        context['same_products'] = Product.objects.filter(category_id=self.kwargs['fk']).exclude(pk=self.kwargs['pk'])[:4]
         context['form'] = self.get_form()
         if self.request.user.is_authenticated:
             context['user'] = User.objects.get(pk=self.request.user.id)

@@ -26,437 +26,434 @@
 {% block content %}
 
     <div class="body woocomerce page">
-	<div class="block-left-fon" style="width: calc(20% + 11.9%); height: 1977px"></div>
-	<section class="sector cat" data-spy="scroll" data-target=".replies">
-		<div class="container">
+        <div class="block-left-fon" style="width: calc(20% + 11.9%); height: 1977px"></div>
+        <section class="sector cat" data-spy="scroll" data-target=".replies">
+            <div class="container">
 
-			<div class="nav">
-                <a href="/">{% trans "Home" %}</a>
-                <span class="line-bg"></span>
-                <a href="{% url 'products:index' %}">{% trans "All" %}</a>
-                <span class="line-bg"></span>
-                <a href="{% url 'products:products_by_category' category.get.id %}">{{ category.get.title|capfirst }}</a>
-                <span class="line-bg"></span>
-{#                <span>{{ category.get.id }}</span>#}
-                <span>{{ product.title }}</span>
-            </div>
-
-			<div class="box row">
-
-                <!-- Success message -->
-                <div class="wm">
-{#                    <a href="{% url 'cart:detail' %}" class="button wc-forward">{% trans "Go to cart" %}</a>#}
-                    {% trans "You put the" %} “{{ product.title }}” {% trans "in your shopping cart" %}.
+                <div class="nav">
+                    <a href="/">{% trans "Home" %}</a>
+                    <span class="line-bg"></span>
+                    <a href="{% url 'products:index' %}">{% trans "All" %}</a>
+                    <span class="line-bg"></span>
+                    <a href="{% url 'products:products_by_category' category.get.id %}">{{ category.get.title|capfirst }}</a>
+                    <span class="line-bg"></span>
+    {#                <span>{{ category.get.id }}</span>#}
+                    <span>{{ product.title }}</span>
                 </div>
-                <!-- Success message -->
 
-                <div itemscope="" itemtype="http://schema.org/Product" class="post-980 product">
-                    <div class="col-lg-5 col-md-5 col-xs-12">
-                        <!-- IMAGES -->
-                        <div class="images">
-                            <div class="box-img owl3 thumbnails columns-3 owl-carousel owl-theme" style="opacity: 1; display: block;">
-                                <div class="owl-wrapper-outer">
-                                    <div class="owl-wrapper" style="width: 1576px; left: 0px;
-                                     display: block; transition: all 0ms ease; transform: translate3d(0px, 0px, 0px);">
-                                        <div class="owl-item fade" style="width: 394px;">
-                                            <a href="{{ product.image.url }}" class="zoom first item fancybox-products" title="" data-rel="prettyPhoto[product-gallery]" rel="rel1" fancybox="on">
-                                                <img width="400" height="400" src="{{ product.image.url }}" alt="{{ product.title }}" title="{{ product.title }}" sizes="(max-width: 400px) 100vw, 400px">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-{#                                <div class="owl-controls clickable">#}
-{#                                    <div class="owl-pagination">#}
-{#                                        <div class="owl-page active">#}
-{#                                            <span class=""></span>#}
-{#                                        </div>#}
-{#                                        <div class="owl-page">#}
-{#                                            <span class=""></span>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                    <div class="owl-buttons">#}
-{#                                        <div class="owl-prev">prev</div>#}
-{#                                        <div class="owl-next">next</div>#}
-{#                                    </div>#}
-{#                                </div>#}
-                            </div>
-                            <div class="thumb_wrapper">
-                                {% for img in product_variation_list %}
-                                    <div class="thumb_product">
-                                        <img height="80" width="70" src="{{ img.get_main_image.url }}" alt="{{ img.color_description }}" data-index="{{ img.id }}">
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <!-- !IMAGES -->
-                    </div><!-- col -->
+                <div class="box row">
 
-                    <!-- CONTENT -->
-                    <div class="col-lg-7 col-md-7 col-xs-12">
-                        <div class="box-content">
-{#                            <div class="summary entry-summary">#}
-{#                            </div><!-- .summary -->#}
-                            <div class="line-title">
-                                <h1 class="title">
-                                    <div itemprop="name" class="product_title entry-title">{{ product.title }}</div>
-                                </h1>
-                                <div class="sku">
-                                    <div class="product_meta">{% trans "SKU" %}:{{ product.sku }}
-                                    <!--<span class="sku_wrapper">Артикул: <span class="sku" itemprop="sku">1102</span></span>-->
-                                    </div>
-                                </div>
+                    <!-- Success message -->
+                    <div class="wm">
+    {#                    <a href="{% url 'cart:detail' %}" class="button wc-forward">{% trans "Go to cart" %}</a>#}
+                        {% trans "You put the" %} “{{ product.title }}” {% trans "in your shopping cart" %}.
+                    </div>
+                    <!-- Success message -->
 
-                                <!-- RATING -->
-                                {% ratings object %}
-                                <!-- !RATING -->
-
-                            </div><!-- v><!-title -->
-                            <div class="line-price">
-                                <div class="price">
-                                    <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
-                                        <span class="woocommerce-Price-amount amount">
-                                            {% change_currency product.price CURRENCY_ACTIVE.abbreviation %}
-{#                                            {{ product.price }}#}
-                                            <span class="woocommerce-Price-currencySymbol">
-                                                {{ CURRENCY_ACTIVE.symbol }}
-                                            </span>
-                                        </span>
-                                        <meta itemprop="price" content="{% change_currency product.price CURRENCY_ACTIVE.abbreviation %}">
-                                        <meta itemprop="priceCurrency" content="{{ CURRENCY_ACTIVE.abbreviation }}">
-                                        <link itemprop="availability" href="http://schema.org/InStock">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- line-price -->
-
-                            <div class="box-content box-content-left-cart">
-                            <!-- VARIATION LINKS -->
-                            <div class="varieble-box">
-                                {% for variation in product_variation_list %}
-                                    <a data-href="{{ variation.get_main_image.url }}"
-                                       class="varieble dot {% if variation == product %}
-                                       active
-                                       {% endif %}" title="{{ variation.color_description }}"
-                                       data-index="{{ variation.id }}" onclick="showThumb(this)">
-                                        <span style="background-color: {{ variation.color_value }};"></span>
-                                    </a>
-                                {% endfor %}
-                                <span class="color-description">{% trans "Color" %}: <span></span></span>
-                            </div>
-                            <!-- !VARIATION LINKS -->
-                            <!-- ADD TO CARD FORM -->
-                            <div class="btn-box">
-                                {% if not product.is_available %}
-                                    <p class="text-center" style="color: grey"><b>Out of stock</b></p>
-                                {% else %}
-                                    <form class="cart" action="javascript:void(0)" method="post">
-                                        <input type="hidden" name="add-to-cart" value="{{ product.pk }}">
-                                        <div class="quantity">
-                                            <input type="hidden" step="1" min="1" name="quantity"
-                                                   value="1" title="Кол-во" class="input-text qty text">
-                                        </div>
-                                        <button id="addToCart" type="button" class="single_add_to_cart_button button alt btn btn-1"><span class="fa fa-shopping-cart"></span> {% trans "Add to cart" %}</button>
-                                    </form>
-                                {% endif %}
-                            </div><!-- box-desc -->
-                            <!-- !ADD TO CARD FORM -->
-
-                            <!-- SOCIAL'S SHARE -->
-                                <div id="supsystic" class="text-center">
-                                    <div class="row">
-                                        <div class="col-min-12 col-xs-4 text-left">
-                                            <strong>{% trans "SHARE" %}</strong>
-                                        </div>
-                                        <div class="col-min-12 col-xs-8 text-right">
-                                            <div data-animation="no-animation" data-icons-animation="no-animation"
-                                                 data-overlay="" data-change-size="" data-button-size="1"
-                                                 style="font-size: 1em;"
-                                                 class="supsystic-social-sharing supsystic-social-sharing-package-flat supsystic-social-sharing-content supsystic-social-sharing-content-align-left supsystic-social-sharing-init supsystic-social-sharing-loaded">
-                                                {% post_to_facebook object_or_url '' %}
-                                                {% post_to_twitter "Product: {{product.title}}. Check it out!" object_or_url "" %}
-                                                {% post_to_gplus object_or_url "" %}
+                    <div itemscope="" itemtype="http://schema.org/Product" class="post-980 product">
+                        <div class="col-lg-5 col-md-5 col-xs-12">
+                            <!-- IMAGES -->
+                            <div class="images">
+                                <div class="box-img owl3 thumbnails columns-3 owl-carousel owl-theme" style="opacity: 1; display: block;">
+                                    <div class="owl-wrapper-outer">
+                                        <div class="owl-wrapper" style="width: 1576px; left: 0px;
+                                         display: block; transition: all 0ms ease; transform: translate3d(0px, 0px, 0px);">
+                                            <div class="owl-item fade" style="width: 394px; background-color: #fff;">
+                                                <a href="{{ product.image.url }}" class="zoom first item fancybox-products" title="" data-rel="prettyPhoto[product-gallery]" rel="rel1" fancybox="on">
+                                                    <img width="400" height="400" src="{{ product.image.url }}" alt="{{ product.title }}" title="{{ product.title }}" sizes="(max-width: 400px) 100vw, 400px">
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-<!-- !SOCIAL'S SHARE -->
 
-                        </div><!-- box-content -->
-
-                        </div>
-                    </div><!-- col -->
-
-                </div><!-- #product -->
-                <script>
-                    var href = location.href;
-                    $('.varieble-box a[href="'+href+'"]').addClass('active');
-                </script>
-
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="tab tabs ws-tabs">
-                        <button class="tablinks" onclick="openDesc(event, 'details')" id="defaultOpen">
-                            {% trans "Details" %}
-                        </button>
-                        <button class="tablinks" onclick="openDesc(event, 'htu')">
-                            {% trans "How to use" %}
-                        </button>
-                        <button class="tablinks" onclick="openDesc(event, 'composition')">
-                            {% trans "Composition" %}
-                        </button>
-                        <button class="tablinks" onclick="openDesc(event, 'reviews')">
-                            {% trans "Reviews" %} ({{ product_reviews|length }})
-                        </button>
-                        <button class="tablinks" onclick="openDesc(event, 'questions')">
-                            {% trans "Questions" %} ({{ questions|length }})
-                        </button>
-                    </div>
-                </div>
-
-                <div class="box-desc col-lg-12 col-md-12 col-sm-12">
-                    <div class="desc">
-                        <div id="details" class="tabcontent">
-                            {{ product.details|safe }}
-                        </div>
-                        <div id="htu" class="tabcontent">
-                            {{ product.htu|safe }}
-                        </div>
-                        <div id="composition" class="tabcontent">
-                            {{ product.composition|safe }}
-                        </div>
-                        <div id="reviews" class="tabcontent">
-                            <h2 class="woocommerce-Reviews-title">{% trans "Reviews" %}</h2>
-                            {% if not product_reviews %}
-                                <p class="woocommerce-noreviews">{% trans "No reviews" %}</p>
-                            {% else %}
-                                <!-- REVIEWS -->
-                                {% for review in product_reviews %}
-                                    <div class="conteiner-comments">
-                                        <div class="authorInfo">
-                                            <strong itemprop="author">{% trans "Author" %}: {{ review.reviewer_name }}</strong>
+                                {% if product_variation_list %}
+                                    <div class="thumb_wrapper">
+                                        <div class="left_arrow_wrapper">
+                                            <span class="fa fa-chevron-left"></span>
                                         </div>
-                                        <div itemprop="description" class="description">
-                                            <p>{{ review.review|safe }}</p>
+                                        <div class="right_arrow_wrapper">
+                                            <span class="fa fa-chevron-right"></span>
                                         </div>
-                                        <div class="time">
-                                            <time itemprop="datePublished" datetime="{{ review.review_added }}">
-                                                    {{ review.review_added|date }}
-                                            </time>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                                <!-- !REVIEWS -->
-                            {% endif %}
-
-                            <!-- REVIEW_FORM -->
-                            <div class="review-form">
-                                <h3 class="text-center">{% trans "Add your review" %}:</h3>
-                                <form class="form-horizontal" action="" method="post">
-                                    {% csrf_token %}
-                                    {% for field in form %}
-                                        <div class="form-group">
-                                            <div class="col-sm-offset-4 col-sm-8">
-                                                <span class="text-danger small">{{ field.errors }}</span>
+                                        <div class="img_wrapper">
+                                            <div class="pr_wr">
+                                                {% for img in product_variation_list %}
+                                                    <div class="thumb_product">
+                                                        <img height="80" width="80"
+                                                             src="{{ img.get_main_image.url }}" alt="{{ img.color_description }}"
+                                                             title="{{ img.color_description }}"
+                                                             data-price="{% change_currency img.price CURRENCY_ACTIVE.abbreviation %}"
+                                                             data-index="{{ img.id }}" onclick="showThumb(this)">
+                                                    </div>
+                                                {% endfor %}
                                             </div>
-                                            <label class="control-label col-sm-2">{{ field.label_tag }}</label>
-                                            <div class="col-sm-10">{{ field }}</div>
-                                        </div>
-                                    {% endfor %}
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-4 col-sm-8">
-                                            <button type="submit" name="form" class="btn btn-1">{% trans "Submit" %}</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-                            <!-- !REVIEW_FORM -->
-                        </div>
-                        <!-- QUESTIONS -->
-                        <div id="questions" class="tabcontent">
-                            <!-- QUESTION_FORM -->
-                            <div class="conteiner-comments">
-
-                                <h2>{% trans "Questions" %}</h2>
-
-                                {% if questions %}
-                                    <ul class="replies">
-                                        {% for question in questions %}
-                                            <li class="reply" id="reply{{ question.id }}">
-                                                <div class="comment-info">
-                                                    <img src="{% static 'img/user.svg' %}" alt="user">
-                                                    {% if question.user %}
-                                                        <span class="name">{{ question.user.username }}</span>
-                                                        <span class="status">{{ question.user.groups.get.name }}</span>
-                                                    {% else %}
-                                                        <span class="name">{{ question.name }}</span>
-                                                    {% endif %}
-                                                </div>
-                                                <div class="comment-content">
-                                                    <blockquote>{{ question.question|safe }}</blockquote>
-                                                </div>
-                                                <div class="bottom-comment-pannel">
-                                                    <p>{% trans "Added" %}: <time>{{ question.date_added|timesince }}</time></p>
-                                                    <button class="btn btn-xs" id="question_reply_{{ question.id }}">
-                                                        <span class="fa fa-reply"> {{ question.children|length }}</span>
-                                                        {% trans "Reply" %}
-                                                    </button>
-                                                </div>
-
-                                                {% if question.children %}
-                                                    <ul class="replies">
-                                                        {% for child in question.children %}
-                                                            <li class="reply">
-                                                                <div class="comment-info">
-                                                                    <img src="{% static 'img/user.svg' %}" alt="user">
-                                                                    {% if child.user %}
-                                                                        <span class="name">{{ child.user.username }}</span>
-                                                                        <span class="status">{{ child.user.groups.get.name }}</span>
-                                                                    {% else %}
-                                                                        <span class="name">{{ child.name }}</span>
-                                                                    {% endif %}
-                                                                </div>
-                                                                <div class="comment-content">
-                                                                    <blockquote>{{ child.question|safe }}</blockquote>
-                                                                </div>
-                                                                <div class="bottom-comment-pannel">
-                                                                    <p>{% trans "Reply added" %}: <time>{{ child.date_added|timesince }}</time></p>
-                                                                    <button class="btn btn-xs" id="question_reply_{{ child.id }}">
-                                                                        <span class="fa fa-reply"></span>
-                                                                        {% trans "Reply" %}
-                                                                    </button>
-                                                                </div>
-                                                            </li>
-                                                        {% endfor %}
-                                                    </ul>
-                                                {% endif %}
-
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                {% else %}
-                                    <p class="woocommerce-noreviews">{% trans "No questions" %}</p>
                                 {% endif %}
-
-                                <div class="form-part" id="question_form">
-                                    <form action="" method="post">
-                                        {% csrf_token %}
-                                        <div class="row-name">
-                                            <div class="name">{% trans "pass your question" %}</div>
-                                            {% if user %}
-                                                <div class="hidden">
-                                                    {{ question_form.name }}
-                                                    {{ question_form.email }}
-                                                </div>
-                                            {% else %}
-                                                <div class="input-convert">
-                                                    {{ question_form.name }}
-                                                <span class="text-danger small">{{ question_form.name.errors }}</span>
-                                                </div>
-                                                <div class="input-convert">
-                                                    {{ question_form.email }}
-                                                <span class="text-danger small">{{ question_form.email.errors }}</span>
-                                                </div>
-                                            {% endif %}
-                                        </div>
-                                        <div class="contein-text">
-                                            {{ question_form.question }}
-                                            <span class="text-danger small">{{ question_form.question.errors }}</span>
-                                        </div>
-                                        <input type="hidden" id="id_parent" name="parent">
-                                        {% for field in question_form %}
-                                            {{ field.errors }}
-                                        {% endfor %}
-
-                                        <div class="submition-row">
-                                            <button type="submit" name="question_form">
-                                                <span>{% trans "Submit" %}</span>
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-
                             </div>
-                            <!-- !QUESTION_FORM -->
-                        </div>
-                        <!-- !QUESTIONS -->
+                            <!-- !IMAGES -->
+                        </div><!-- col -->
 
-                    </div>
-
-                </div>
-
-            </div>
-
-            {% if same_products %}
-            <div class="same_products products_wrapper">
-                <h3 class="text-center">
-                    {% trans "Same products" %}
-                </h3>
-
-                <ul class="products_items">
-                    {% for product in same_products %}
-                        {% if product.status and product != product %}
-                            <li class="product_item">
-                                <div class="item">
-                                    <a href="{% url 'products:detail' product.product.category.id product.id %}">
-                                        <div>
-                                            <span class="img1"></span>
-                                            <span class="img2"></span>
-                                            <img width="200" height="220" src="{{ product.get_main_image.url }}" alt="{{ product.get_main_image.description }}">
+                        <!-- CONTENT -->
+                        <div class="col-lg-7 col-md-7 col-xs-12">
+                            <div class="box-content">
+    {#                            <div class="summary entry-summary">#}
+    {#                            </div><!-- .summary -->#}
+                                <div class="line-title">
+                                    <h1 class="title">
+                                        <div itemprop="name" class="product_title entry-title">{{ product.title }}</div>
+                                    </h1>
+                                    <div class="sku">
+                                        <div class="product_meta">{% trans "SKU" %}:{{ product.sku }}
+                                        <!--<span class="sku_wrapper">Артикул: <span class="sku" itemprop="sku">1102</span></span>-->
                                         </div>
-                                        <h2 class="title">
-                                            <span class="prod-title">{{ product.title }}</span>
-                                            <span class="main-product">{{ product.product }}</span>
-                                            <span class="price">
-                                                <span class="old_amount">1000 {{ CURRENCY_ACTIVE.symbol }}</span>
+                                    </div>
+
+                                    <!-- RATING -->
+                                    <style>
+                                        .star-ratings {
+                                            margin-top: 20px;
+                                        }
+                                        .star-ratings-rating-stars-container, .star-ratings-rating-average, .star-ratings-rating-count, .star-ratings-rating-user {
+                                            display: inline-block!important;
+                                        }
+                                        .star-ratings-rating-average, .star-ratings-rating-count, .star-ratings-rating-user {
+                                            vertical-align: top;
+                                            padding-right: 10px;
+                                            padding-left: 10px;
+                                        }
+                                        .star-ratings-rating-average, .star-ratings-rating-count {
+                                            border-right: solid 1px #414141;
+                                        }
+                                    </style>
+                                    {% ratings object %}
+                                    <!-- !RATING -->
+
+                                </div><!-- v><!-title -->
+                                <div class="line-price">
+                                    <div class="price">
+                                        <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                                            <span class="woocommerce-Price-amount amount">
                                                 <span class="amount">
                                                     {% change_currency product.price CURRENCY_ACTIVE.abbreviation %}
-                                                    <span class="woocommerce-Price-currencySymbol">
-                                                        {{ CURRENCY_ACTIVE.symbol }}
-                                                    </span>
+                                                </span>
+    {#                                            {{ product.price }}#}
+                                                <span class="woocommerce-Price-currencySymbol">
+                                                    {{ CURRENCY_ACTIVE.symbol }}
                                                 </span>
                                             </span>
-                                        </h2>
-                                    </a>
+                                            <meta itemprop="price" content="{% change_currency product.price CURRENCY_ACTIVE.abbreviation %}">
+                                            <meta itemprop="priceCurrency" content="{{ CURRENCY_ACTIVE.abbreviation }}">
+                                            <link itemprop="availability" href="http://schema.org/InStock">
+                                        </div>
+                                    </div>
                                 </div>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
+                                <!-- line-price -->
 
-{#                <ul class="products">#}
-{#                    {% for product in same_products %}#}
-{#                        {% if product.status and product != product %}#}
-{#                            <li class="col product">#}
-{#                                <div class="back_piece"></div>#}
-{#                                <a href="{% url 'products:detail' category.get.id product.id %}" class="item">#}
-{#                                    <span class="img"></span>#}
-{#                                    <img width="200" height="240" src="{{ product.get_main_image.url }}" alt="{{ product.get_main_image.description }}" sizes="(max-width: 200px) 100vw, 200px">#}
-{#                                </a>#}
-{#                                <h2 class="title">#}
-{#                                    <span class="prod-title">{{ product.title }}</span>#}
-{#                                    <span class="main-product">{{ product.product }}</span>#}
-{#                                    <span>#}
-{#                                        <span class="price">#}
-{#                                            <span class="amount">#}
-{#                                                {% change_currency product.price CURRENCY_ACTIVE.abbreviation %}#}
-{#                                                <span class="woocommerce-Price-currencySymbol">#}
-{#                                                    {{ CURRENCY_ACTIVE.symbol }}#}
-{#                                                </span>#}
-{#                                            </span>#}
-{#                                        </span>#}
-{#                                    </span>#}
-{#                                </h2>#}
-{#                            </li>#}
-{#                        {% endif %}#}
-{#                    {% endfor %}#}
-{#                </ul>#}
+                                <div class="box-content box-content-left-cart">
+                                <!-- VARIATION LINKS -->
+                                <div class="varieble-box">
+                                    {% for variation in product_variation_list %}
+                                        <a data-href="{{ variation.get_main_image.url }}"
+                                           class="varieble dot" title="{{ variation.color_description }}"
+                                           data-index="{{ variation.id }}"
+                                           data-price="{% change_currency variation.price CURRENCY_ACTIVE.abbreviation %}"
+                                           onclick="showThumb(this)">
+                                            <span style="background-color: {{ variation.color_value }};"></span>
+                                        </a>
+                                    {% endfor %}
+                                    <span class="color-description">{% trans "Color" %}: <span></span></span>
+                                </div>
+                                <!-- !VARIATION LINKS -->
+
+                                <!-- ADD TO CARD FORM -->
+                                <div class="btn-box">
+                                    {% if not product.is_available %}
+                                        <p class="text-center" style="color: grey"><b>Out of stock</b></p>
+                                    {% else %}
+                                        <form class="cart" action="javascript:void(0)" method="post">
+                                            <input type="hidden" name="add-to-cart" value="" data-color="" data-price="">
+                                            <div class="quantity">
+                                                <input type="hidden" step="1" min="1" name="quantity"
+                                                       value="1" title="Кол-во" class="input-text qty text">
+                                            </div>
+                                            <button id="addToCart" type="button" class="single_add_to_cart_button button alt btn btn-1"><span class="fa fa-shopping-cart"></span> {% trans "Add to cart" %}</button>
+                                        </form>
+                                    {% endif %}
+                                </div><!-- box-desc -->
+                                <!-- !ADD TO CARD FORM -->
+
+                                <!-- SOCIAL'S SHARE -->
+    {#                                <div id="supsystic" class="text-center">#}
+    {#                                    <div class="row">#}
+    {#                                        <div class="col-min-12 col-xs-4 text-left">#}
+    {#                                            <strong>{% trans "SHARE" %}</strong>#}
+    {#                                        </div>#}
+    {#                                        <div class="col-min-12 col-xs-8 text-right">#}
+    {#                                            <div data-animation="no-animation" data-icons-animation="no-animation"#}
+    {#                                                 data-overlay="" data-change-size="" data-button-size="1"#}
+    {#                                                 style="font-size: 1em;"#}
+    {#                                                 class="supsystic-social-sharing supsystic-social-sharing-package-flat supsystic-social-sharing-content supsystic-social-sharing-content-align-left supsystic-social-sharing-init supsystic-social-sharing-loaded">#}
+    {#                                                {% post_to_facebook object_or_url '' %}#}
+    {#                                                {% post_to_twitter "Product: {{product.title}}. Check it out!" object_or_url "" %}#}
+    {#                                                {% post_to_gplus object_or_url "" %}#}
+    {#                                            </div>#}
+    {#                                        </div>#}
+    {#                                    </div>#}
+    {#                                </div>#}
+                                <!-- !SOCIAL'S SHARE -->
+
+                            </div><!-- box-content -->
+
+                            </div>
+                        </div><!-- col -->
+
+                    </div><!-- #product -->
+                    <script>
+                        var href = location.href;
+                        $('.varieble-box a[href="'+href+'"]').addClass('active');
+                    </script>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="tab tabs ws-tabs">
+                            <button class="tablinks" onclick="openDesc(event, 'details')" id="defaultOpen">
+                                {% trans "Details" %}
+                            </button>
+                            <button class="tablinks" onclick="openDesc(event, 'htu')">
+                                {% trans "How to use" %}
+                            </button>
+                            <button class="tablinks" onclick="openDesc(event, 'composition')">
+                                {% trans "Composition" %}
+                            </button>
+                            <button class="tablinks" onclick="openDesc(event, 'reviews')">
+                                {% trans "Reviews" %} ({{ product_reviews|length }})
+                            </button>
+                            <button class="tablinks" onclick="openDesc(event, 'questions')">
+                                {% trans "Questions" %} ({{ questions|length }})
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="box-desc col-lg-12 col-md-12 col-sm-12">
+                        <div class="desc">
+                            <div id="details" class="tabcontent">
+                                {{ product.details|safe }}
+                            </div>
+                            <div id="htu" class="tabcontent">
+                                {{ product.htu|safe }}
+                            </div>
+                            <div id="composition" class="tabcontent">
+                                {{ product.composition|safe }}
+                            </div>
+
+                            <!-- REVIEWS -->
+                            <div id="reviews" class="tabcontent">
+                                <h2 class="woocommerce-Reviews-title">{% trans "Reviews" %}</h2>
+                                {% if not product_reviews %}
+                                    <p class="woocommerce-noreviews">{% trans "No reviews" %}</p>
+                                {% else %}
+                                    {% for review in product_reviews %}
+                                        <div class="conteiner-comments">
+                                            <div class="authorInfo">
+                                                <strong itemprop="author">{% trans "Author" %}: {{ review.reviewer_name }}</strong>
+                                            </div>
+                                            <div itemprop="description" class="description">
+                                                <p>{{ review.review|safe }}</p>
+                                            </div>
+                                            <div class="time">
+                                                <time itemprop="datePublished" datetime="{{ review.review_added }}">
+                                                        {{ review.review_added|date }}
+                                                </time>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+
+                                <!-- REVIEW_FORM -->
+                                <div class="review-form">
+                                    <h3 class="text-center">{% trans "Add your review" %}:</h3>
+                                    <form class="form-horizontal" action="" method="post">
+                                        {% csrf_token %}
+                                        {% for field in form %}
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-4 col-sm-8">
+                                                    <span class="text-danger small">{{ field.errors }}</span>
+                                                </div>
+                                                <label class="control-label col-sm-2">{{ field.label_tag }}</label>
+                                                <div class="col-sm-10">{{ field }}</div>
+                                            </div>
+                                        {% endfor %}
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-4 col-sm-8">
+                                                <button type="submit" name="form" class="btn btn-1">{% trans "Submit" %}</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- !REVIEW_FORM -->
+
+                            </div>
+                            <!-- !REVIEWS -->
+
+                            <!-- QUESTIONS -->
+                            <div id="questions" class="tabcontent">
+                                <!-- QUESTION_FORM -->
+                                <div class="conteiner-comments">
+
+                                    <h2>{% trans "Questions" %}</h2>
+
+                                    {% if questions %}
+                                        <ul class="replies">
+                                            {% for question in questions %}
+                                                <li class="reply" id="reply{{ question.id }}">
+                                                    <div class="comment-info">
+                                                        <img src="{% static 'img/user.svg' %}" alt="user">
+                                                        {% if question.user %}
+                                                            <span class="name">{{ question.user.username }}</span>
+                                                            <span class="status">{{ question.user.groups.get.name }}</span>
+                                                        {% else %}
+                                                            <span class="name">{{ question.name }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="comment-content">
+                                                        <blockquote>{{ question.question|safe }}</blockquote>
+                                                    </div>
+                                                    <div class="bottom-comment-pannel">
+                                                        <p>{% trans "Added" %}: <time>{{ question.date_added|timesince }}</time></p>
+                                                        <button class="btn btn-xs" id="question_reply_{{ question.id }}">
+                                                            <span class="fa fa-reply"> {{ question.children|length }}</span>
+                                                            {% trans "Reply" %}
+                                                        </button>
+                                                    </div>
+
+                                                    {% if question.children %}
+                                                        <ul class="replies">
+                                                            {% for child in question.children %}
+                                                                <li class="reply">
+                                                                    <div class="comment-info">
+                                                                        <img src="{% static 'img/user.svg' %}" alt="user">
+                                                                        {% if child.user %}
+                                                                            <span class="name">{{ child.user.username }}</span>
+                                                                            <span class="status">{{ child.user.groups.get.name }}</span>
+                                                                        {% else %}
+                                                                            <span class="name">{{ child.name }}</span>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                    <div class="comment-content">
+                                                                        <blockquote>{{ child.question|safe }}</blockquote>
+                                                                    </div>
+                                                                    <div class="bottom-comment-pannel">
+                                                                        <p>{% trans "Reply added" %}: <time>{{ child.date_added|timesince }}</time></p>
+                                                                        <button class="btn btn-xs" id="question_reply_{{ child.id }}">
+                                                                            <span class="fa fa-reply"></span>
+                                                                            {% trans "Reply" %}
+                                                                        </button>
+                                                                    </div>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% else %}
+                                        <p class="woocommerce-noreviews">{% trans "No questions" %}</p>
+                                    {% endif %}
+
+                                    <div class="form-part" id="question_form">
+                                        <form action="" method="post">
+                                            {% csrf_token %}
+                                            <div class="row-name">
+                                                <div class="name">{% trans "pass your question" %}</div>
+                                                {% if user %}
+                                                    <div class="hidden">
+                                                        {{ question_form.name }}
+                                                        {{ question_form.email }}
+                                                    </div>
+                                                {% else %}
+                                                    <div class="input-convert">
+                                                        {{ question_form.name }}
+                                                    <span class="text-danger small">{{ question_form.name.errors }}</span>
+                                                    </div>
+                                                    <div class="input-convert">
+                                                        {{ question_form.email }}
+                                                    <span class="text-danger small">{{ question_form.email.errors }}</span>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="contein-text">
+                                                {{ question_form.question }}
+                                                <span class="text-danger small">{{ question_form.question.errors }}</span>
+                                            </div>
+                                            <input type="hidden" id="id_parent" name="parent">
+                                            {% for field in question_form %}
+                                                {{ field.errors }}
+                                            {% endfor %}
+
+                                            <div class="submition-row">
+                                                <button type="submit" name="question_form">
+                                                    <span>{% trans "Submit" %}</span>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                                <!-- !QUESTION_FORM -->
+                            </div>
+                            <!-- !QUESTIONS -->
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SAME PRODUCTS -->
+                {% if same_products %}
+                <div class="same_products products_wrapper">
+                    <h3 class="text-center">
+                        {% trans "Same products" %}
+                    </h3>
+
+                    <ul class="products_items">
+                        {% for s_product in same_products %}
+                            {% if s_product.status %}
+                                <li class="product_item">
+                                    <div class="item">
+                                        <a href="{% url 'products:detail' s_product.category.id s_product.id %}">
+                                            <div>
+                                                <span class="img1"></span>
+                                                <span class="img2"></span>
+                                                <img width="200" height="220" src="{{ s_product.image.url }}" alt="{{ s_product.title }}">
+                                            </div>
+                                            <h2 class="title">
+                                                <span class="prod-title">{{ s_product.title }}</span>
+                                                <span class="main-product">{{ s_product.title }}</span>
+                                                <span class="price">
+    {#                                                <span class="old_amount">1000 {{ CURRENCY_ACTIVE.symbol }}</span>#}
+                                                    <span class="amount">
+                                                        {% change_currency s_product.get_first_child_product.price CURRENCY_ACTIVE.abbreviation %}
+                                                        <span class="woocommerce-Price-currencySymbol">
+                                                            {{ CURRENCY_ACTIVE.symbol }}
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </h2>
+                                        </a>
+                                    </div>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                <!-- !SAME PRODUCTS -->
+
+
+
             </div>
-            {% endif %}
-
-
-
-		</div>
-	</section><!-- section blog -->
-</div>
+        </section><!-- section blog -->
+    </div>
 
 {% endblock %}
 

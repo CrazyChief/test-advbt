@@ -90,16 +90,15 @@ class Product(models.Model):
     title = models.CharField(max_length=100, verbose_name=_("Title"))
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=_("Category"))
     status = models.BooleanField(choices=STATUSES, default=DRAFT, verbose_name=_("Status"))
-    price = models.FloatField(default=0, verbose_name=_("Price"))
-    sku = models.CharField(max_length=20, unique=True, null=True)
+    sku = models.CharField(max_length=20, unique=True, null=True, verbose_name=_("Sku"))
     is_new = models.BooleanField(default=False, verbose_name=_("Is new"))
     is_available = models.BooleanField(default=False, verbose_name=_("Is available"))
     sub_categories = models.ManyToManyField(SubCategory, verbose_name=_("Sub categories"))
-    image = models.FileField(upload_to=upload_path)
+    image = models.FileField(upload_to=upload_path, verbose_name=_("Image"))
     date_added = models.DateTimeField(auto_now_add=True)
-    details = RichTextField(verbose_name=_("Details"), blank=True)
-    htu = RichTextField(verbose_name=_("How to use"), blank=True)
-    composition = RichTextField(verbose_name=_("Composition"), blank=True)
+    details = RichTextField(blank=True, verbose_name=_("Details"))
+    htu = RichTextField(blank=True, verbose_name=_("How to use"))
+    composition = RichTextField(blank=True, verbose_name=_("Composition"))
 
     class Meta:
         verbose_name = "Product"
@@ -113,6 +112,9 @@ class Product(models.Model):
 
     def is_posted(self):
         return self.status
+
+    def get_first_child_product(self):
+        return self.productvariation_set.first()
 
     is_posted.admin_order_field = 'status'
     is_posted.boolean = True
@@ -133,7 +135,7 @@ class ProductVariation(models.Model):
     color_description = models.CharField(max_length=50, blank=True, verbose_name=_("Color description"))
     color_value = ColorField(default='#FF0000', verbose_name=_("Color value"))
     status = models.BooleanField(choices=STATUSES, default=DRAFT, verbose_name=_("Status"))
-
+    price = models.FloatField(default=0, verbose_name=_("Price"))
     date_added = models.DateTimeField(auto_now_add=True)
 
     class Meta:

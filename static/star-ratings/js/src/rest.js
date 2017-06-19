@@ -1,4 +1,4 @@
-/*jslint browser:false */
+/*jslint browser:true */
 "use strict";
 
 

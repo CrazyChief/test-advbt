@@ -16,7 +16,7 @@
     <script type="text/javascript" src="{% static 'jquery-1.12.4.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'library.js' %}"></script>
     <script type="text/javascript" src="{% static 'main.js' %}"></script>
-    <script type="text/javascript" src="{% static 'cart.js' %}"></script>
+{#    <script type="text/javascript" src="{% static 'cart.js' %}"></script>#}
 
     {% load cy %}
 
@@ -63,7 +63,55 @@
         };
         var SUBURL = {
             addSubscriber: '{% url "subscribers:subscriber-add" %}',
-        }
+        };
+
+        var cart = {
+            add: function (pk, quantity) {
+                quantity = quantity || 1;
+                return $.post(URLS.addItem, {pk: pk, quantity: quantity}, function (xhr) {
+                    $("a.cart span").html("");
+                    $("a.cart span").html(xhr['itemCount']);
+                    // console.log(xhr);
+                    $("div.wm").css({display: 'block'}).show(600);
+                }, 'json');
+            },
+
+            removeProd: function (itemPK) {
+                return $.post(URLS.removeItem, {pk: itemPK}, function (xhr) {
+                    $("a.cart span").html("");
+                    $("a.cart span").html(xhr['itemCount']);
+                    if (window.location.pathname.match(/\/cart\/$/)) {
+                        var bt = $('div.cart_item').find('.deleter button[data-product_id="' + itemPK + '"]'),
+                            field = bt.parents('div.cart_item'),
+                            totalPrice = $("div.allcost span.woocommerce-Price-amount");
+                        field.remove();
+                        // totalPrice.text(xhr['totalPrice']);
+                        totalPrice.text({% change_currency xhr['totalPrice'] CURRENCY_ACTIVE.abbreviation %});
+                    }
+                    if (xhr['itemCount'] == 0) {
+                        var wrapp = $('section.sector'),
+                            blockForDelete = wrapp.find('div.row');
+                        blockForDelete.remove();
+                    }
+                }, 'json');
+            },
+
+            changeQuantity: function (pk, quantity) {
+                return $.post(URLS.changeQuantity, {pk: pk, quantity: quantity}, function (xhr) {
+                    console.log(xhr);
+                    var tp = +xhr['totalPrice'];
+                    tp = tp.toFixed(2);
+                    $('input[data-product_id="'+pk+'"]').val(quantity);
+                    // $('.cart_totals .woocommerce-Price-amount').text(tp);
+                    $('.cart_totals .woocommerce-Price-amount').text({% change_currency tp CURRENCY_ACTIVE.abbreviation %});
+                    $('.checkout-button').removeClass('disabled');
+                }, 'json');
+            },
+
+            empty: function () {
+                $.post(URLS.emptyCart, 'json');
+            }
+        };
     </script>
 
 </head>
@@ -140,7 +188,7 @@
                 </button>
 
                 <a data-href=""
-{#                   href="{% url 'cart:detail' %}"#}
+                   href="{% url 'cart:detail' %}"
                    id="cart_button" class="cart">
                     <img src="{% static 'img/cart-object.png' %}" alt="cart-object">
                     <span>{{ cart.item_count }}</span>
@@ -210,137 +258,53 @@
                             </style>
                             <div class="conteiner-corzin">
                                 <div class="wrap">
+                                    <div class="item-list cart">
 
-{#                                    <div class="steper-row">#}
-{#                                        <ul>#}
-{#                                            <li class="active">#}
-{#                                                <div class="circlum">#}
-{#                                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">#}
-{#                                                        <g>#}
-{#                                                            <g>#}
-{#                                                                <path d="M214.685,402.828c-24.829,0-45.029,20.2-45.029,45.029c0,24.829,20.2,45.029,45.029,45.029s45.029-20.2,45.029-45.029#}
-{#                                    C259.713,423.028,239.513,402.828,214.685,402.828z M214.685,467.742c-10.966,0-19.887-8.922-19.887-19.887#}
-{#                                    c0-10.966,8.922-19.887,19.887-19.887s19.887,8.922,19.887,19.887C234.572,458.822,225.65,467.742,214.685,467.742z"></path>#}
-{#                                                            </g>#}
-{#                                                        </g>#}
-{#                                                        <g>#}
-{#                                                            <g>#}
-{#                                                                <path d="M372.63,402.828c-24.829,0-45.029,20.2-45.029,45.029c0,24.829,20.2,45.029,45.029,45.029s45.029-20.2,45.029-45.029#}
-{#                                    C417.658,423.028,397.458,402.828,372.63,402.828z M372.63,467.742c-10.966,0-19.887-8.922-19.887-19.887#}
-{#                                    c0-10.966,8.922-19.887,19.887-19.887c10.966,0,19.887,8.922,19.887,19.887C392.517,458.822,383.595,467.742,372.63,467.742z"></path>#}
-{#                                                            </g>#}
-{#                                                        </g>#}
-{#                                                        <g>#}
-{#                                                            <g>#}
-{#                                                                <path d="M383.716,165.755H203.567c-6.943,0-12.571,5.628-12.571,12.571c0,6.943,5.629,12.571,12.571,12.571h180.149#}
-{#                                    c6.943,0,12.571-5.628,12.571-12.571C396.287,171.382,390.659,165.755,383.716,165.755z"></path>#}
-{#                                                            </g>#}
-{#                                                        </g>#}
-{#                                                        <g>#}
-{#                                                            <g>#}
-{#                                                                <path d="M373.911,231.035H213.373c-6.943,0-12.571,5.628-12.571,12.571s5.628,12.571,12.571,12.571h160.537#}
-{#                                    c6.943,0,12.571-5.628,12.571-12.571C386.481,236.664,380.853,231.035,373.911,231.035z"></path>#}
-{#                                                            </g>#}
-{#                                                        </g>#}
-{#                                                        <g>#}
-{#                                                            <g>#}
-{#                                                                <path d="M506.341,109.744c-4.794-5.884-11.898-9.258-19.489-9.258H95.278L87.37,62.097c-1.651-8.008-7.113-14.732-14.614-17.989 l-55.177-23.95c-6.37-2.767-13.773,0.156-16.536,6.524c-2.766,6.37,0.157,13.774,6.524,16.537L62.745,67.17l60.826,295.261#}
-{#                                    c2.396,11.628,12.752,20.068,24.625,20.068h301.166c6.943,0,12.571-5.628,12.571-12.571c0-6.943-5.628-12.571-12.571-12.571#}
-{#                                    H148.197l-7.399-35.916H451.69c11.872,0,22.229-8.44,24.624-20.068l35.163-170.675#}
-{#                                    C513.008,123.266,511.136,115.627,506.341,109.744z M451.69,296.301H135.619l-35.161-170.674l386.393,0.001L451.69,296.301z"></path>#}
-{#                                                            </g>#}
-{#                                                        </g>#}
-{#                                                    </svg>#}
-{#                                                </div>#}
-{#                                            </li>#}
-{#                                            <li>#}
-{#                                                <div class="circlum">#}
-{#                                                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 491.1 491.1" style="enable-background:new 0 0 491.1 491.1;" xml:space="preserve">#}
-{#                                                        <path transform="translate(0 -540.36)" d="M401.5,863.31c-12,0-23.4,4.7-32,13.2c-8.6,8.6-13.4,19.8-13.4,31.8s4.7,23.2,13.4,31.8#}
-{#                                c8.7,8.5,20,13.2,32,13.2c24.6,0,44.6-20.2,44.6-45S426.1,863.31,401.5,863.31z M401.5,933.31c-13.8,0-25.4-11.4-25.4-25#}
-{#                                s11.6-25,25.4-25c13.6,0,24.6,11.2,24.6,25S415.1,933.31,401.5,933.31z M413.1,713.41c-1.8-1.7-4.2-2.6-6.7-2.6h-51.3#}
-{#                                c-5.5,0-10,4.5-10,10v82c0,5.5,4.5,10,10,10h81.4c5.5,0,10-4.5,10-10v-54.9c0-2.8-1.2-5.5-3.3-7.4L413.1,713.41z M426.5,792.81#}
-{#                                h-61.4v-62.1h37.4l24,21.6V792.81z M157.3,863.31c-12,0-23.4,4.7-32,13.2c-8.6,8.6-13.4,19.8-13.4,31.8s4.7,23.2,13.4,31.8#}
-{#                                c8.7,8.5,20,13.2,32,13.2c24.6,0,44.6-20.2,44.6-45S181.9,863.31,157.3,863.31z M157.3,933.31c-13.8,0-25.4-11.4-25.4-25#}
-{#                                s11.6-25,25.4-25c13.6,0,24.6,11.2,24.6,25S170.9,933.31,157.3,933.31z M90.6,875.61H70.5v-26.6c0-5.5-4.5-10-10-10s-10,4.5-10,10#}
-{#                                v36.6c0,5.5,4.5,10,10,10h30.1c5.5,0,10-4.5,10-10S96.1,875.61,90.6,875.61z M141.3,821.11c0-5.5-4.5-10-10-10H10#}
-{#                                c-5.5,0-10,4.5-10,10s4.5,10,10,10h121.3C136.8,831.11,141.3,826.71,141.3,821.11z M30.3,785.01l121.3,0.7c5.5,0,10-4.4,10.1-9.9#}
-{#                                c0.1-5.6-4.4-10.1-9.9-10.1l-121.3-0.7c-0.1,0-0.1,0-0.1,0c-5.5,0-10,4.4-10,9.9C20.3,780.51,24.8,785.01,30.3,785.01z M50.7,739.61#}
-{#                                H172c5.5,0,10-4.5,10-10s-4.5-10-10-10H50.7c-5.5,0-10,4.5-10,10S45.2,739.61,50.7,739.61z M487.4,726.11L487.4,726.11l-71.6-59.3#}
-{#                                c-1.8-1.5-4-2.3-6.4-2.3h-84.2v-36c0-5.5-4.5-10-10-10H60.5c-5.5,0-10,4.5-10,10v73.2c0,5.5,4.5,10,10,10s10-4.5,10-10v-63.2h234.8#}
-{#                                v237.1h-82c-5.5,0-10,4.5-10,10s4.5,10,10,10h122.1c5.5,0,10-4.5,10-10s-4.5-10-10-10h-20.1v-191.1h80.6l65.2,54l-0.7,136.9H460#}
-{#                                c-5.5,0-10,4.5-10,10s4.5,10,10,10h20.3c5.5,0,10-4.4,10-9.9l0.8-151.6C491,730.91,489.7,728.01,487.4,726.11z"></path>#}
-{#                                                    </svg>#}
-{#                                                </div>#}
-{#                                            </li>#}
-{#                                            <li>#}
-{#                                                <div class="circlum">#}
-{#                                                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 51.997 51.997" style="enable-background:new 0 0 51.997 51.997;" xml:space="preserve">#}
-{#                                                        <g>#}
-{#                                                            <path d="M51.911,16.242C51.152,7.888,45.239,1.827,37.839,1.827c-4.93,0-9.444,2.653-11.984,6.905#}
-{#                                    c-2.517-4.307-6.846-6.906-11.697-6.906c-7.399,0-13.313,6.061-14.071,14.415c-0.06,0.369-0.306,2.311,0.442,5.478#}
-{#                                    c1.078,4.568,3.568,8.723,7.199,12.013l18.115,16.439l18.426-16.438c3.631-3.291,6.121-7.445,7.199-12.014#}
-{#                                    C52.216,18.553,51.97,16.611,51.911,16.242z M49.521,21.261c-0.984,4.172-3.265,7.973-6.59,10.985L25.855,47.481L9.072,32.25#}
-{#                                    c-3.331-3.018-5.611-6.818-6.596-10.99c-0.708-2.997-0.417-4.69-0.416-4.701l0.015-0.101C2.725,9.139,7.806,3.826,14.158,3.826#}
-{#                                    c4.687,0,8.813,2.88,10.771,7.515l0.921,2.183l0.921-2.183c1.927-4.564,6.271-7.514,11.069-7.514#}
-{#                                    c6.351,0,11.433,5.313,12.096,12.727C49.938,16.57,50.229,18.264,49.521,21.261z"></path>#}
-{#                                                            <path d="M15.999,7.904c-5.514,0-10,4.486-10,10c0,0.553,0.447,1,1,1s1-0.447,1-1c0-4.411,3.589-8,8-8c0.553,0,1-0.447,1-1#}
-{#                                    S16.551,7.904,15.999,7.904z"></path>#}
-{#                                                        </g>#}
-{#                                                    </svg>#}
-{#                                                </div>#}
-{#                                            </li>#}
-{#                                        </ul>#}
-{#                                    </div>#}
-
-    {#                                <form action="" method="post">#}
-                                        <div class="item-list cart">
-
-                                            {% for item in cart.list_items %}
-                                                <div class="item cart_item">
-                                                    <div class="img_link">
-                                                        <a href="{% url 'products:detail' item.obj.category.id item.obj.id %}" class="con">
-                                                            <img width="250" height="300" src="{{ item.obj.image.url }}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" sizes="(max-width: 250px) 100vw, 250px">
-                                                        </a>
-                                                    </div>
-                                                    <div class="title">
-                                                        <a href="{% url 'products:detail' item.obj.category.id item.obj.id %}" class="name">
-                                                            {{ item.obj.title }}
-                                                        </a>
-                                                    </div>
-                                                    <div class="articool">
-                                                        <span>{% trans "SKU" %}:</span> {{ item.obj.sku }}
-                                                    </div>
-                                                    <div class="color-type">
-                                                        <span class="name">{% trans "Color" %}: </span>
-                                                        <div class="cort" style="background-color: {{ item.obj.color_value }}"></div>
-                                                    </div>
-                                                    <div class="kilkist">
-                                                        <div class="input-row">
-                                                            <span class="name">{% trans "Quantity" %}: </span>
-                                                            <input type="number" step="1" min="1" data-product_id="{{ item.obj.id }}" value="{{ item.quantity }}" class="input-text qty text">
-                                                            <span class="less" onclick="decr(this)"></span>
-                                                            <span class="more" onclick="incr(this)"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <span class="price">
-                                                            <span class="woocommerce-Price-amount amount">
-                                                                {% change_currency item.price CURRENCY_ACTIVE.abbreviation %}
-    {#                                                                            {{ item.price }}#}
-                                                                <span class="woocommerce-Price-currencySymbol">
-                                                                    {{ CURRENCY_ACTIVE.symbol }}
-                                                                </span>
-                                                            </span>
-                                                        </span>
-                                                    </div>
-                                                    <div class="deleter">
-                                                        <button type="button" class="deleter-christ" data-product_id="{{ item.obj.id }}"></button>
+                                        {% for item in cart.list_items %}
+                                            <div class="item cart_item">
+                                                <div class="img_link">
+                                                    <a href="{% url 'products:detail' item.obj.product.category.id item.obj.product.id %}" class="con">
+                                                        <img width="250" height="300" src="{{ item.obj.get_main_image.url }}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" sizes="(max-width: 250px) 100vw, 250px">
+                                                    </a>
+                                                </div>
+                                                <div class="title">
+                                                    <a href="{% url 'products:detail' item.obj.product.category.id item.obj.product.id %}" class="name">
+                                                        {{ item.obj.product.title }}
+                                                    </a>
+                                                </div>
+                                                <div class="articool">
+                                                    <span>{% trans "SKU" %}:</span> {{ item.obj.product.sku }}
+                                                </div>
+                                                <div class="color-type">
+                                                    <span class="name">{% trans "Color" %}: </span>
+                                                    <div class="cort" style="background-color: {{ item.obj.color_value }}"></div>
+                                                </div>
+                                                <div class="kilkist">
+                                                    <div class="input-row">
+                                                        <span class="name">{% trans "Quantity" %}: </span>
+                                                        <input type="number" step="1" min="1" data-product_id="{{ item.obj.id }}" value="{{ item.quantity }}" class="input-text qty text">
+                                                        <span class="less" onclick="decr(this)"></span>
+                                                        <span class="more" onclick="incr(this)"></span>
                                                     </div>
                                                 </div>
-                                            {% endfor %}
+                                                <div class="price">
+                                                    <span class="price">
+                                                        <span class="woocommerce-Price-amount amount">
+                                                            {% change_currency item.price CURRENCY_ACTIVE.abbreviation %}
+{#                                                                            {{ item.price }}#}
+                                                            <span class="woocommerce-Price-currencySymbol">
+                                                                {{ CURRENCY_ACTIVE.symbol }}
+                                                            </span>
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <div class="deleter">
+                                                    <button type="button" class="deleter-christ" data-product_id="{{ item.obj.id }}"></button>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
 
-                                            <div class="last-row-part">
+                                        <div class="last-row-part">
 {#                                                    <div class="cupon actions">#}
 {#                                                        <div class="form-cupon coupon">#}
 {#                                                            <div class="row-input coupon">#}
@@ -352,31 +316,30 @@
 {#                                                        <input type="hidden" id="_wpnonce" name="_wpnonce" value="f8873ffc63">#}
 {#                                                        <input type="hidden" name="_wp_http_referer" value="/cart">#}
 {#                                                    </div>#}
-                                                <div class="cart-collaterals">
-                                                    <div class="all-price cart_totals">
-                                                        <div class="checkout_wrap">
-                                                            <a href="{% url 'orders:checkout' %}" class="btn btn-1 submition-butt">
-                                                                <span>{% trans "Checkout" %}</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="allcost" style="text-align: right;">
-                                                            <div>
-                                                                <span>{% trans "Subtotal before shipping" %}:</span>
-                                                                <span>
-                                                                    <strong>
-                                                                    <span class="woocommerce-Price-amount amount">
-                                                                        {% change_currency cart.total_price CURRENCY_ACTIVE.abbreviation %}
+                                            <div class="cart-collaterals">
+                                                <div class="all-price cart_totals">
+                                                    <div class="checkout_wrap">
+                                                        <a href="{% url 'orders:checkout' %}" class="btn btn-1 submition-butt">
+                                                            <span>{% trans "Checkout" %}</span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="allcost" style="text-align: right;">
+                                                        <div>
+                                                            <span>{% trans "Subtotal before shipping" %}:</span>
+                                                            <span>
+                                                                <strong>
+                                                                <span class="woocommerce-Price-amount amount">
+                                                                    {% change_currency cart.total_price CURRENCY_ACTIVE.abbreviation %}
 {#                                                                        {{ cart.total_price|floatformat }}#}
-                                                                    </span>
-                                                                    <span class="woocommerce-Price-currencySymbol"> {{ CURRENCY_ACTIVE.symbol }}</span></strong>
                                                                 </span>
-                                                            </div>
+                                                                <span class="woocommerce-Price-currencySymbol"> {{ CURRENCY_ACTIVE.symbol }}</span></strong>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-    {#                                </form>#}
+                                    </div>
                                 </div>
                             </div>
                         </div>
