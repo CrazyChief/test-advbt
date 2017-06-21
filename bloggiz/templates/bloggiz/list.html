@@ -53,18 +53,13 @@
                             <div class="pagination">
                                 <span class="page-links">
                                     {% if page_obj.has_previous %}
-                                        <a href="?page={{ page_obj.previous_page_number }}">
-                                            <span class="fa fa-chevron-left"></span>
-                                            {% trans "PREV" %}</a>
+                                        <a href="?page={{ page_obj.previous_page_number }}">{% trans "previous" %}</a>
                                     {% endif %}
-{#                                        <span class="page-current">#}
-{#                                            {% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.#}
-{#                                        </span>#}
+                                    <span class="page-current">
+                                        {% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.
+                                    </span>
                                     {% if page_obj.has_next %}
-                                        <a href="?page={{ page_obj.next_page_number }}">
-                                            {% trans "NEXT" %}
-                                            <span class="fa fa-chevron-right"></span>
-                                        </a>
+                                        <a href="?page={{ page_obj.next_page_number }}">{% trans "next" %}</a>
                                     {% endif %}
                                 </span>
                             </div>
