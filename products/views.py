@@ -47,7 +47,7 @@ class ProductCategoryView(ListView):
     #     return self.category.get_deferred_fields()
 
     def get_queryset(self):
-        return Product.objects.filter(category__pk=self.category.id)
+        return Product.objects.filter(category__pk=self.category.id).filter(status__exact=True)
 
     def get_context_data(self, **kwargs):
         context = super(ProductCategoryView, self).get_context_data(**kwargs)
