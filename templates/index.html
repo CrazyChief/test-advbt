@@ -8,57 +8,57 @@
 
 {% block includefiles %}
     <script type="text/javascript" src="{% static 'subscribers/subscribers.js' %}"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'media-md.css' %}">
+{#    <link rel="stylesheet" type="text/css" href="{% static 'media-md.css' %}">#}
 
-    <script>
-        $('body').addClass('js');
-        var new_footer = $('body.js .footer').html();
-        /*$('body.js #footer').html(new_footer).addClass('footer');
-        $('#end-section').remove();*/
-        $('li.go a').attr('data-href','off');
-        var main_outerwidth = $(window).outerWidth();
-        var main_outerHeight = $(window).outerHeight();
-        if (main_outerwidth > 992 ) {
-            $('.body').addClass('main');
-            document.write('<link rel="stylesheet" href="https://www.adavibeauty.com/wp-content/themes/templebeauty/media-md.css" />');
-            $(document).ready(function ($) {
-                $(".main").onepage_scroll({
-                    sectionContainer: "section", // контейнер, к которому будет применяться скролл
-                    easing: "ease-in-out", // Тип анимации "ease", "linear", "ease-in", "ease-out", "ease-in-out"
-                    animationTime: 300, // время анимации
-                    pagination: true, // скрыть или отобразить пагинатор
-                    updateURL: true // обновлять URL или нет
-                });
-            });
-            $('li.go a').click(function(){
-                var url = $(this).attr('href');
-                //url = url.substring(4);
-                url = '2';
-                $('.onepage-pagination a[href="#'+url+'"]').trigger('click');
-                return false
-            });
-            //$('.li.go a').attr('herf','');
-        } else {
-            $('.box-blog').addClass('owl2');
-            $('.go').click(function(event) {
-                event.preventDefault();
-                var target = $(this).find('>a').prop('hash');
-                $('html, body').animate({
-                    scrollTop: $(target).offset().top
-                }, 500);
-            });
-        }
-        $('.box-blog .col-xs-12:first-child').addClass('col-1');
-        $('.box-blog .col-xs-12:last-child').addClass('col-2');
-        $('li.go').removeClass('current-menu-item');
-        $('li.go a[data-href]').attr('href','/#d2');
-
-        $('.widget_wysija').addClass('form max-width280');
-        $('.wysija-paragraph').addClass('form-group');
-        $('.wysija-input').addClass('form-control');
-        $('.wysija-submit').addClass('btn');
-        $('.widget_wysija_cont').addClass('min-height-form');
-    </script>
+{#    <script>#}
+{#        $('body').addClass('js');#}
+{#        var new_footer = $('body.js .footer').html();#}
+{#        /*$('body.js #footer').html(new_footer).addClass('footer');#}
+{#        $('#end-section').remove();*/#}
+{#        $('li.go a').attr('data-href','off');#}
+{#        var main_outerwidth = $(window).outerWidth();#}
+{#        var main_outerHeight = $(window).outerHeight();#}
+{#        if (main_outerwidth > 992 ) {#}
+{#            $('.body').addClass('main');#}
+{#            document.write('<link rel="stylesheet" href="https://www.adavibeauty.com/wp-content/themes/templebeauty/media-md.css" />');#}
+{#            $(document).ready(function ($) {#}
+{#                $(".main").onepage_scroll({#}
+{#                    sectionContainer: "section", // контейнер, к которому будет применяться скролл#}
+{#                    easing: "ease-in-out", // Тип анимации "ease", "linear", "ease-in", "ease-out", "ease-in-out"#}
+{#                    animationTime: 300, // время анимации#}
+{#                    pagination: true, // скрыть или отобразить пагинатор#}
+{#                    updateURL: true // обновлять URL или нет#}
+{#                });#}
+{#            });#}
+{#            $('li.go a').click(function(){#}
+{#                var url = $(this).attr('href');#}
+{#                //url = url.substring(4);#}
+{#                url = '2';#}
+{#                $('.onepage-pagination a[href="#'+url+'"]').trigger('click');#}
+{#                return false#}
+{#            });#}
+{#            //$('.li.go a').attr('herf','');#}
+{#        } else {#}
+{#            $('.box-blog').addClass('owl2');#}
+{#            $('.go').click(function(event) {#}
+{#                event.preventDefault();#}
+{#                var target = $(this).find('>a').prop('hash');#}
+{#                $('html, body').animate({#}
+{#                    scrollTop: $(target).offset().top#}
+{#                }, 500);#}
+{#            });#}
+{#        }#}
+{#        $('.box-blog .col-xs-12:first-child').addClass('col-1');#}
+{#        $('.box-blog .col-xs-12:last-child').addClass('col-2');#}
+{#        $('li.go').removeClass('current-menu-item');#}
+{#        $('li.go a[data-href]').attr('href','/#d2');#}
+{##}
+{#        $('.widget_wysija').addClass('form max-width280');#}
+{#        $('.wysija-paragraph').addClass('form-group');#}
+{#        $('.wysija-input').addClass('form-control');#}
+{#        $('.wysija-submit').addClass('btn');#}
+{#        $('.widget_wysija_cont').addClass('min-height-form');#}
+{#    </script>#}
 
 {% endblock %}
 
@@ -98,7 +98,7 @@
             </div><!-- box-header -->
         </section><!-- header -->
 
-        <section class="sector pos-sm section" data-index="2" style="position: absolute;top: 100%;">
+        <section class="sector pos-sm section" data-index="2" style="min-height: 950px;">
             <div class="line-1"></div>
             <div class="line-2"></div>
             <div class="container flexbox">
@@ -115,8 +115,8 @@
         </section><!-- section id="d2" -->
 
 
-        <section class="sector product section" data-index="3" style="position: absolute;top: 200%;">
-        {% if products %}
+    {% if products %}
+        <section class="sector product section" data-index="3" style="min-height: 1000px;">
             <div class="container flexbox">
                 <div class="title style-2">
                     <h2 class="h2">{% trans "New products" %}</h2>
@@ -168,12 +168,10 @@
                     <a href="{% url 'products:index' %}" class="btn">{% trans "Learn More" %}</a>
                 </p>
             </div>
-        {% else %}
-            <p class="text-center">No available products here.</p>
-        {% endif %}
         </section><!-- section product -->
+    {% endif %}
 
-        <section class="sector form section" data-index="4" style="position: absolute;top: 300%;">
+        <section class="sector form section" data-index="4" style="min-height: 1000px;">
             <div class="container flexbox">
                 <div class="box-form">
                     <div class="row">
@@ -266,8 +264,8 @@
         </section><!-- section -->
 
 
-        <section class="sector blog section" data-index="5" style="position: absolute;top: 400%;">
-        {% if posts %}
+    {% if posts %}
+        <section class="sector blog section" data-index="5" style="min-height: 1000px;">
             <div class="container flexbox">
                 <div class="title style-3">
                     <h2 class="h2">{% trans "Blog" %}</h2>
@@ -301,30 +299,8 @@
                     <a href="{% url 'bloggiz:list' %}" class="btn">{% trans "Read more" %}</a>
                 </p>
             </div>
-            <div id="end-section" class="footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-3 hidden-xs">
-                            <a href=""><img src="{% static 'img/logo-foter.png' %}" alt=""></a>
-                        </div><!-- col -->
-                        <div class="col-sm-6 col-xs-12">
-                            <p class="text-center copyright">©<span id="copyrightTime"></span> AdaviBeauty.com {% trans "All Rights Reserved" %}</p>
-                        </div><!-- col -->
-                        <div class="col-sm-3 col-xs-12">
-                            <div class="box-ico">
-                                <a href="https://www.instagram.com/adavibeauty/" target="_blank" class="icon-instagram demo-icon"></a>
-                                <a href="https://www.facebook.com/adavibeauty/" target="_blank" class="icon-facebook demo-icon"></a>
-                                <a href="https://www.youtube.com/channel/UCV0W_NNNpT69EwolYTFKZ6Q" target="_blank" class="icon-youtube demo-icon"></a>
-                                <a href="https://plus.google.com/u/0/" target="_blank" class="icon-gplus demo-icon"></a>
-                            </div>
-                        </div><!-- col -->
-                    </div>
-                </div>
-            </div><!-- footer -->
-        {% else %}
-            <p class="text-center">No available posts here</p>
-        {% endif %}
         </section><!-- section blog -->
+    {% endif %}
 
     </div><!-- body -->
 
