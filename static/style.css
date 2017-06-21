@@ -1077,7 +1077,7 @@ body.viewing-page-1 .bar-menu{padding-top:20px;padding-bottom:20px;background-co
 body.viewing-page-1 .onepage-pagination li a:before{background:#fff;border:1px solid #ffd0cc}
 body.viewing-page-1 .onepage-pagination li a.active:before{background:#ff887b;border:1px solid #ff887b}
 body.viewing-page-1 .menu-scroll{top:0}
-body .menu-scroll{-o-transition:all 1s ease;-moz-transition:all 1s ease;-webkit-transition:all 1s ease;transition:all 1s ease;justify-content:space-between;flex-direction:row;align-items:center;display:flex;text-align:center;background-color:rgba(255,255,255,0.85);position:fixed;left:0;right:0;top:0%;bottom:0;z-index:-1;opacity:0}
+body .menu-scroll{-o-transition:all 1s ease;-moz-transition:all 1s ease;-webkit-transition:all 1s ease;transition:all 1s ease;justify-content:space-between;flex-direction:row;align-items:center;text-align:center;background-color:rgba(255,255,255,0.85);position:fixed;left:0;right:0;top:0%;bottom:0;z-index:-1;opacity:0}
 body .menu-scroll.active{z-index:10;opacity:1}
 body .menu-scroll ul{padding:0;margin:0;width:100%;list-style:none}
 body .menu-scroll ul li.active a{color:#ff887b;font-weight:700;font-size:265%;text-decoration:none}
