@@ -1522,6 +1522,7 @@ body {
   .body.woocomerce .box-content .title{line-height:1}
   .body.page .blog{padding-bottom:50px!important}
   .body.page .blog .box-blog .col:nth-child(2n){margin-top:20%}
+  .sector.blog.section .box-blog .col:nth-child(2n){margin-top:20%}
   /*.body.page .blog .box-blog .col:nth-child(4n + 2){margin-top:14%}*/
   /*.body.page .blog .box-blog .col:nth-child(4n + 3){margin-top:6%;margin-left:8%}*/
   /*.body.page .blog .box-blog .col:nth-child(4n + 4){float:right;margin-top:-4%}*/
@@ -2411,6 +2412,14 @@ li:hover > .dropdown-content_big {
   border-radius: 50%!important;
   transition: all, 0.3s;
 }
+
+.sector.product.section, .sector.form.section, .sector.blog.section {
+  padding-top: 0!important;
+  padding-bottom: 0!important;
+}
+/*.sector.blog.section {*/
+  /*padding-top: 0!important;*/
+/*}*/
 
 @media screen and (max-width: 1200px) {
   .thumb_wrapper {
