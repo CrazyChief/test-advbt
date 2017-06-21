@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     'star_ratings',
     'easycart',
     'django_social_share',
-    'django_filters',
+    # 'django_filters',
 ]
 
 MIDDLEWARE = [
