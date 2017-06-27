@@ -21,5 +21,14 @@
 {% load cy %}
 
 {% block sub_category %}
-
+    {% for sub_category in sub_category_list %}
+        <li class="s_category">
+            <a href="{% url "products:products_by_subcategory" category.id sub_category.slug %}"
+                    {% if sub_cat == sub_category %}
+                        class="active"
+                    {% endif %}>
+                {{ sub_category.title }}
+            </a>
+        </li>
+    {% endfor %}
 {% endblock %}

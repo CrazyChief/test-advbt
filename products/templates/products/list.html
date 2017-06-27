@@ -122,7 +122,7 @@
                             {% for product in products_list %}
                                 <li class="product_item">
                                     <div class="item">
-                                        <a href="{% url 'products:detail' product.category.id product.id %}">
+                                        <a href="{% url 'products:detail' product.category.id product.sub_categories.slug product.id %}">
                                             <div>
                                                 <span class="img1"></span>
                                                 <span class="img2"></span>

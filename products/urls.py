@@ -18,12 +18,13 @@ app_name = 'products'
 urlpatterns = [
     # ex: /products/
     url(r'^$', views.IndexView.as_view(), name='index'),
-    # ex: /products/face/
+    # ex: /products/1/
     url(r'^(?P<pk>[0-9]+)/$', views.ProductCategoryView.as_view(), name='products_by_category'),
-    # url(r'^(?P<fk>[0-9]+)/(?P<pk>[0-9]+)/$', views.ProductSubCategoryView.as_view(), name='products_by_subcategory'),
-    # ex: /products/face/1101/
-    url(r'^(?P<fk>[0-9]+)/(?P<pk>[0-9]+)/$', views.ProductView.as_view(), name='detail'),
-    # url(r'^(?P<fk>[0-9]+)/(?P<id>[0-9]+)/(?P<pk>[0-9]+)/$', views.ProductView.as_view(), name='detail'),
+    # ex: /products/1/qwerty/
+    url(r'^(?P<fk>[0-9]+)/(?P<slug>[-\w]+)/$', views.ProductSubCategoryView.as_view(), name='products_by_subcategory'),
+    # ex: /products/1/qwerty/1/
+    url(r'^(?P<fk>[0-9]+)/(?P<slug>[-\w]+)/(?P<pk>[0-9]+)/$', views.ProductView.as_view(), name='detail'),
+    # url(r'^(?P<fk>[0-9]+)/(?P<pk>[0-9]+)/$', views.ProductView.as_view(), name='detail'),
 
     # url(r'^(?P<fk>[0-9]+)/(?P<pk>[0-9]+)/$', views.ProductReviewCreate.as_view(), name='review-add'),
 ]

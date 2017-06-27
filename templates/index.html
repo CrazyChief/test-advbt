@@ -84,7 +84,7 @@
 
 
 {#    <div class="main body js onepage-wrapper" style="position: relative;">#}
-    <div class="main body js onepage-wrapper">
+    <div class="main body js onepage-wrapper" data-spy="scroll" data-target=".pos-sm">
         <section class="header section active" style="height: 950px;" data-index="1">
             <div class="box-header">
                 <span class="before-object" style="left: calc(50% + 474px);"></span>
@@ -98,7 +98,7 @@
             </div><!-- box-header -->
         </section><!-- header -->
 
-        <section class="sector pos-sm section" data-index="2" style="min-height: 1000px;">
+        <section class="sector pos-sm section" data-index="2" id="second" style="min-height: 1000px;">
             <div class="line-1"></div>
             <div class="line-2"></div>
             <div class="container flexbox">
@@ -130,7 +130,7 @@
                                         {% for product in products %}
                                             <div class="owl-item">
                                                 <li class="col product">
-                                                    <a href="{% url 'products:detail' product.category.id product.id %}" class="item">
+                                                    <a href="{% url 'products:detail' product.category.id product.sub_categories.slug product.id %}" class="item">
                                                         <span class="img"></span>
                                                         <img width="115" height="240" src="{{ product.image.url }}"
                                                              class="size-shop_catalog wp-post-image" alt="{{ product.title }}" title="{{ product.title }}"

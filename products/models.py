@@ -49,6 +49,7 @@ class SubCategory(models.Model):
         (DRAFT, 'Draft'),
     )
     title = models.CharField(max_length=100, unique=True, verbose_name=_('Title'))
+    slug = models.SlugField(null=True)
     category = models.ManyToManyField(Category, verbose_name=_("Category"))
     status = models.BooleanField(choices=STATUSES, default=DRAFT, verbose_name=_('Status'))
 
@@ -61,6 +62,9 @@ class SubCategory(models.Model):
 
     def is_sub_category_active(self):
         return self.status
+
+    # def get_products_count_by_sub_category(self):
+    #     return self.product_set.filter(self, {'pk': self.pk})
 
     is_sub_category_active.admin_order_field = 'status'
     is_sub_category_active.boolean = True
@@ -93,7 +97,7 @@ class Product(models.Model):
     sku = models.CharField(max_length=20, unique=True, null=True, verbose_name=_("Sku"))
     is_new = models.BooleanField(default=False, verbose_name=_("Is new"))
     is_available = models.BooleanField(default=False, verbose_name=_("Is available"))
-    sub_categories = models.ManyToManyField(SubCategory, verbose_name=_("Sub categories"))
+    sub_categories = models.ForeignKey(SubCategory, null=True, on_delete=models.SET_NULL, verbose_name=_("Sub categories"))
     image = models.FileField(upload_to=upload_path, verbose_name=_("Image"))
     date_added = models.DateTimeField(auto_now_add=True)
     details = RichTextField(blank=True, verbose_name=_("Details"))

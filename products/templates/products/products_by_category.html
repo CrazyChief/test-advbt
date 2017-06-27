@@ -62,6 +62,13 @@
                     <div class="wrapper">
 
                         <div class="currency_wrapper">
+
+{#                            <div style="margin: 20px; background-color: #00ad9c;">#}
+{#                                <form action="" method="get">#}
+{#                                    {{ filter.form.as_p }}#}
+{#                                </form>#}
+{#                            </div>#}
+
                             <p class="price">
                                 {% trans "Price" %}
                             </p>
@@ -107,6 +114,12 @@
                                     <li class="category">
                                         <a href="{% url 'products:index' %}">{% trans "All" %}</a>
                                     </li>
+
+{#                                    <form action="" method="post">#}
+{#                                        {% csrf_token %}#}
+{#                                        {{ form.title }}#}
+{#                                    </form>#}
+
                                     {% for cat in category_list %}
                                         {% if cat == category %}
                                             <li class="category">
@@ -115,7 +128,7 @@
                                                     {% block sub_category %}
                                                         {% for sub_category in sub_category_list %}
                                                             <li class="s_category">
-                                                                <a href="">
+                                                                <a href="{% url "products:products_by_subcategory" cat.id sub_category.slug %}">
                                                                     {{ sub_category.title }}
                                                                 </a>
                                                             </li>
@@ -142,7 +155,7 @@
                             {% for product in products_list %}
                                 <li class="product_item">
                                     <div class="item">
-                                        <a href="{% url 'products:detail' product.category.id product.id %}">
+                                        <a href="{% url 'products:detail' product.category.id product.sub_categories.slug product.id %}">
                                             <div>
                                                 <span class="img1"></span>
                                                 <span class="img2"></span>

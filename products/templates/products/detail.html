@@ -51,7 +51,12 @@
                     <!-- Success message -->
 
                     <div itemscope="" itemtype="http://schema.org/Product" class="post-980 product">
-                        <div class="col-lg-5 col-md-5 col-xs-12">
+
+                        <h1 class="title">
+                            <span itemprop="name" class="product_title entry-title">{{ product.title }}</span>
+                        </h1>
+
+                        <div class="big-images-content col-lg-5 col-md-5 col-sm-5 col-xs-5">
                             <!-- IMAGES -->
                             <div class="images">
                                 <div class="box-img owl3 thumbnails columns-3 owl-carousel owl-theme" style="opacity: 1; display: block;">
@@ -60,7 +65,7 @@
                                          display: block; transition: all 0ms ease; transform: translate3d(0px, 0px, 0px);">
                                             <div class="owl-item fade" style="width: 394px; background-color: #fff;">
                                                 <a href="{{ product.image.url }}" class="zoom first item fancybox-products" title="" data-rel="prettyPhoto[product-gallery]" rel="rel1" fancybox="on">
-                                                    <img width="400" height="400" src="{{ product.image.url }}" alt="{{ product.title }}" title="{{ product.title }}" sizes="(max-width: 400px) 100vw, 400px">
+                                                    <img src="{{ product.image.url }}" alt="{{ product.title }}" title="{{ product.title }}">
                                                 </a>
                                             </div>
                                         </div>
@@ -95,14 +100,14 @@
                         </div><!-- col -->
 
                         <!-- CONTENT -->
-                        <div class="col-lg-7 col-md-7 col-xs-12">
+                        <div class="short-description-content col-lg-7 col-md-7 col-sm-7 col-xs-7">
                             <div class="box-content">
     {#                            <div class="summary entry-summary">#}
     {#                            </div><!-- .summary -->#}
                                 <div class="line-title">
-                                    <h1 class="title">
-                                        <div itemprop="name" class="product_title entry-title">{{ product.title }}</div>
-                                    </h1>
+{#                                    <h1 class="title">#}
+{#                                        <div itemprop="name" class="product_title entry-title">{{ product.title }}</div>#}
+{#                                    </h1>#}
                                     <div class="sku">
                                         <div class="product_meta">{% trans "SKU" %}:{{ product.sku }}
                                         <!--<span class="sku_wrapper">Артикул: <span class="sku" itemprop="sku">1102</span></span>-->
@@ -214,7 +219,7 @@
                         $('.varieble-box a[href="'+href+'"]').addClass('active');
                     </script>
 
-                    <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="tab tabs ws-tabs">
                             <button class="tablinks" onclick="openDesc(event, 'details')" id="defaultOpen">
                                 {% trans "Details" %}
@@ -234,7 +239,7 @@
                         </div>
                     </div>
 
-                    <div class="box-desc col-lg-12 col-md-12 col-sm-12">
+                    <div class="box-desc col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="desc">
                             <div id="details" class="tabcontent">
                                 {{ product.details|safe }}
@@ -420,7 +425,7 @@
                             {% if s_product.status %}
                                 <li class="product_item">
                                     <div class="item">
-                                        <a href="{% url 'products:detail' s_product.category.id s_product.id %}">
+                                        <a href="{% url 'products:detail' s_product.category.id s_product.sub_categories.slug s_product.id %}">
                                             <div>
                                                 <span class="img1"></span>
                                                 <span class="img2"></span>

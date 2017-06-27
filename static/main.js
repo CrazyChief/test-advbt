@@ -85,7 +85,7 @@ $(document).ready(function(){
     /* !Time */
 
     /* Get the element with id="defaultOpen" and click on it */
-    if (window.location.pathname.match(/\/products\/([0-9]+)\/([0-9]+)\//)) {
+    if (window.location.pathname.match(/\/products\/([0-9]+)\/([a-z]+)|([a-z]+)\-\/([0-9]+)\//)) {
         document.getElementById("defaultOpen").click();
         if ($(".varieble-box").find(".color-description span").text() == '') {
             var wrap = $(".thumb_wrapper .img_wrapper .pr_wr"),

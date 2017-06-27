@@ -19,6 +19,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 # class SubCategoryAdmin(TabbedTranslationAdmin):
 class SubCategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("title",)}
     list_display = (
         'title',
         'is_sub_category_active',
@@ -60,7 +61,7 @@ class ProductAdmin(admin.ModelAdmin):
             'fields': ('details', 'htu', 'composition'),
         }),
     )
-    filter_horizontal = ('sub_categories',)
+    # filter_horizontal = ('sub_categories',)
 
 
 # class ProduvtVariationAdmin(TabbedTranslationAdmin):

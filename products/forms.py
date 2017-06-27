@@ -1,6 +1,8 @@
+from django import forms
+from django.http.request import HttpRequest
 from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
-from .models import ProductReview, ProductQuestion
+from .models import ProductReview, ProductQuestion, Product, ProductVariation, Category, SubCategory
 
 
 class ReviewForm(ModelForm):
@@ -29,6 +31,17 @@ class QuestionForm(ModelForm):
         self.fields['question'].widget.attrs.update({
             'placeholder': _('Question'),
         })
+
+
+class FilterForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(FilterForm, self).__init__(*args, **kwargs)
+        self.queryset = SubCategory.objects.all()
+        self.fields['title'] = forms.ModelMultipleChoiceField(queryset=self.queryset, widget=forms.CheckboxSelectMultiple)
+
+    class Meta:
+        model = SubCategory
+        fields = ['title']
 
 
 

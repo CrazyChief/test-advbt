@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'easycart',
     'django_social_share',
     # 'django_filters',
+    'django_select2',
 ]
 
 MIDDLEWARE = [
