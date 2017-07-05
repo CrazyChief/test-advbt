@@ -11,12 +11,13 @@
     {% load staticfiles %}
     <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">#}
 
     <script type="text/javascript" src="{% static 'jquery-1.12.4.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'library.js' %}"></script>
     <script type="text/javascript" src="{% static 'main.js' %}"></script>
     <script type="text/javascript" src="{% static 'cart.js' %}"></script>
+    <script type="text/javascript" src="{% static "price.js" %}"></script>
 
     {% load cy %}
 
@@ -64,6 +65,14 @@
         var SUBURL = {
             addSubscriber: '{% url "subscribers:subscriber-add" %}',
         };
+        var PRURL = {
+            setPrice: '{% url "products:set-price" %}',
+            resetPrice: '{% url "products:reset-price" %}',
+        };
+{#        window.addEventListener('beforeunload', function (e) {#}
+{#            e.preventDefault();#}
+{#            price.set(10, {{ max_price.price__max }});#}
+{#        });#}
 
 {#        var cart = {#}
 {#            add: function (pk, quantity) {#}
@@ -123,11 +132,11 @@
     </div>
     <!-- !PRELOADER -->
 
-    <style type="text/css">
-        .box-blog img {
-            max-height: 380px;
-        }
-    </style>
+{#    <style type="text/css">#}
+{#        .box-blog img {#}
+{#            max-height: 380px;#}
+{#        }#}
+{#    </style>#}
     <div style="display:none"></div>
     <style type="text/css">
         body.wp-admin.upload-php #wpbody-content {

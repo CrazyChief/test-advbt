@@ -1,4 +1,15 @@
 (function() {
+    function csrfSafeMethod(method) {
+            /* these HTTP methods do not require CSRF protection */
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
     $(document).ready(function() {
         fancyboxs();
     });
@@ -103,6 +114,7 @@ $(document).ready(function(){
             $("input[name='add-to-cart']").attr("value", pk);
             $(".line-price .price .woocommerce-Price-amount > .amount").text(price);
             $(".varieble-box").find(".color-description span").text(title);
+            $(".box.row div.wm span.prod_color").text(title);
         }
     }
 
@@ -125,17 +137,17 @@ $(document).ready(function(){
     // }
 
 
-    function csrfSafeMethod(method) {
-        /* these HTTP methods do not require CSRF protection */
-        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-    }
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        }
-    });
+    // function csrfSafeMethod(method) {
+    //     /* these HTTP methods do not require CSRF protection */
+    //     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    // }
+    // $.ajaxSetup({
+    //     beforeSend: function(xhr, settings) {
+    //         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+    //             xhr.setRequestHeader("X-CSRFToken", csrftoken);
+    //         }
+    //     }
+    // });
 
     $("#addToCart").on('click', function () {
         var pk = $(this).siblings("input[name='add-to-cart']").val(),
@@ -225,6 +237,7 @@ function showThumb(e) {
     $("input[name='add-to-cart']").attr("value", pk);
     $(".line-price .price .woocommerce-Price-amount > .amount").text(price);
     $(".varieble-box").find(".color-description span").text(title);
+    $(".box.row div.wm span.prod_color").text(title);
 }
 
 /* using jQuery */

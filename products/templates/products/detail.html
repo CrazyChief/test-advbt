@@ -4,11 +4,7 @@
 
 {% get_available_languages as languages %}
 
-{% block title %}
-    {% if product %}
-        {{ product.title }}
-    {% endif %}
-{% endblock %}
+{% block title %} {% if product %} {{ product.title }} {% endif %} {% endblock %}
 
 {% load staticfiles %}
 
@@ -37,7 +33,8 @@
                     <span class="line-bg"></span>
                     <a href="{% url 'products:products_by_category' category.get.id %}">{{ category.get.title|capfirst }}</a>
                     <span class="line-bg"></span>
-    {#                <span>{{ category.get.id }}</span>#}
+                    <a href="{% url 'products:products_by_subcategory' category.get.id product.sub_categories.slug %}">{{ product.sub_categories.title|capfirst }}</a>
+                    <span class="line-bg"></span>
                     <span>{{ product.title }}</span>
                 </div>
 
@@ -46,7 +43,7 @@
                     <!-- Success message -->
                     <div class="wm">
     {#                    <a href="{% url 'cart:detail' %}" class="button wc-forward">{% trans "Go to cart" %}</a>#}
-                        {% trans "You put the" %} “{{ product.title }}” {% trans "in your shopping cart" %}.
+                        {% trans "You put the" %} “{{ product.title }}” {% trans "with color:" %} <span class="prod_color"></span> {% trans "in your shopping cart" %}.
                     </div>
                     <!-- Success message -->
 
@@ -109,8 +106,8 @@
 {#                                        <div itemprop="name" class="product_title entry-title">{{ product.title }}</div>#}
 {#                                    </h1>#}
                                     <div class="sku">
-                                        <div class="product_meta">{% trans "SKU" %}:{{ product.sku }}
-                                        <!--<span class="sku_wrapper">Артикул: <span class="sku" itemprop="sku">1102</span></span>-->
+                                        <div class="product_meta">
+                                            {% trans "SKU" %}:{{ product.sku }}
                                         </div>
                                     </div>
 

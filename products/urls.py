@@ -16,6 +16,8 @@ app_name = 'products'
 # ]
 
 urlpatterns = [
+    url(r'^set/$', views.SetPrice.as_view(), name='set-price'),
+    url(r'^reset/$', views.ResetPrice.as_view(), name='reset-price'),
     # ex: /products/
     url(r'^$', views.IndexView.as_view(), name='index'),
     # ex: /products/1/

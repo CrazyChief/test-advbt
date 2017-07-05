@@ -1,18 +1,65 @@
 from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, DetailView, TemplateView
-from django.views.generic.edit import FormMixin, FormView
-from django.http import Http404, HttpResponseForbidden
+from django.views.generic import View, ListView, DetailView
+from django.views.generic.edit import FormMixin
+from django.http import Http404, HttpResponseForbidden, JsonResponse
 from django.urls import reverse
 from django.conf import settings
 from django.core import mail
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django_filters.views import FilterView
+from django.db.models import Q, Max
 
 from django.contrib.auth.models import User
-from .filters import ProductFilter
 from .models import Category, SubCategory, Product, ProductVariation, ProductImage, ProductReview, ProductQuestion
-from .forms import ReviewForm, QuestionForm, FilterForm
-# from cart.forms import CartAddProductForm
+from .forms import ReviewForm, QuestionForm
+from .products import ProductBase
+
+session_key = getattr(settings, 'PRODUCT_SESSION_KEY', 'products')
+
+
+class Price(View):
+
+    action = None
+    required_params = ()
+
+    def post(self, request):
+        params = {}
+        for param in self.required_params:
+            try:
+                params[param] = request.POST[param]
+            except KeyError:
+                return JsonResponse({
+                    'error': 'MissingRequestParam',
+                    'param': param,
+                })
+        product = Pr(request)
+        # min_price = request.POST['min_price']
+        # max_price = request.POST['max_price']
+        action = getattr(product, self.action)
+        try:
+            action(**params)
+        except KeyError:
+            return JsonResponse({
+                'error': 'MissingRequestParam',
+            })
+        # print(request.POST)
+        # product.set_price_values(min_price, max_price)
+        return product.encode()
+
+
+class SetPrice(Price):
+
+    action = 'set_price_values'
+    required_params = ('min_price', 'max_price',)
+
+
+class ResetPrice(Price):
+
+    action = 'reset'
+    # required_params = ('min_price', 'max_price',)
+
+
+class Pr(ProductBase):
+    pass
 
 
 class IndexView(ListView):
@@ -20,27 +67,32 @@ class IndexView(ListView):
     context_object_name = 'products_list'
     paginate_by = 20
 
+    def get(self, request, *args, **kwargs):
+        self.prod = ProductBase(request)
+        return super(IndexView, self).get(request, *args, **kwargs)
+
     def get_queryset(self):
-        return Product.objects.filter(status__exact=True)
+        # return Product.objects.filter(status__exact=True)
+        # return Product.objects.filter(productvariation__price__gte=43).filter(status__exact=True).distinct()
+        return Product.objects.filter(Q(productvariation__price__gte=self.prod.get_price_values()['min_price']) &
+                                      Q(productvariation__price__lte=self.prod.get_price_values()['max_price'])).\
+            filter(status__exact=True).distinct()
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['category_list'] = Category.objects.all()
-        # context['product_variation_list'] = Product.objects.filter(status__exact=True)
+        context['price_values'] = self.prod.get_price_values()
         return context
 
 
-class ProductCategoryView(ListView, FilterView):
+class ProductCategoryView(ListView):
     template_name = 'products/products_by_category.html'
     context_object_name = 'products_list'
-    filterset_class = ProductFilter
-    # form_class = FilterForm
     paginate_by = 20
 
     def get(self, request, *args, **kwargs):
         self.category = self.get_category()
-
-        # self.form_class = self.form_class(self.kwargs['pk'])
+        self.prod = ProductBase(request)
         return super(ProductCategoryView, self).get(request, *args, **kwargs)
 
     def get_category(self):
@@ -48,33 +100,35 @@ class ProductCategoryView(ListView, FilterView):
             return get_object_or_404(Category, pk=self.kwargs['pk'])
         raise Http404
 
-    # def get_categories(self):
-    #     return self.category.get_deferred_fields()
-
     def get_queryset(self):
-        return Product.objects.filter(category__pk=self.category.id).filter(status__exact=True)
+        return Product.objects.filter(Q(productvariation__price__gte=self.prod.get_price_values()['min_price']) &
+                                      Q(productvariation__price__lte=self.prod.get_price_values()['max_price'])).\
+            filter(category__pk=self.category.id).filter(status__exact=True).distinct()
 
     def get_context_data(self, **kwargs):
         context = super(ProductCategoryView, self).get_context_data(**kwargs)
         context['category'] = self.category
         context['category_list'] = Category.objects.filter(is_active__exact=True)
         context['sub_category_list'] = SubCategory.objects.filter(category__exact=self.category.id)
-        # context['form'] = self.get_form()
-        context['filter'] = self.filterset_class
-        # print('Printed context from products_list: %s' % context)
+        context['price_values'] = self.prod.get_price_values()
         # context['products_list'] = Product.objects.filter(category__pk=self.category.id)
         return context
 
 
-class ProductSubCategoryView(TemplateView):
+class ProductSubCategoryView(ListView):
     template_name = 'products/products_by_subcategory.html'
+    context_object_name = 'products_list'
+    paginate_by = 20
 
     def get(self, request, *args, **kwargs):
+        self.prod = ProductBase(request)
         return super(ProductSubCategoryView, self).get(request, *args, **kwargs)
 
-    # def get_queryset(self):
-    #     self.sub_category = get_object_or_404(SubCategory, self.args[0])
-    #     return SubCategory.objects.filter(pk=self.sub_category)
+    def get_queryset(self):
+        return Product.objects.filter(Q(productvariation__price__gte=self.prod.get_price_values()['min_price']) &
+                                      Q(productvariation__price__lte=self.prod.get_price_values()['max_price'])).\
+            filter(category__pk=self.kwargs['fk']).filter(sub_categories__slug__icontains=self.kwargs['slug']).\
+            filter(status__exact=True).distinct()
 
     def get_sub_category(self):
         if 'slug' in self.kwargs:
@@ -87,8 +141,7 @@ class ProductSubCategoryView(TemplateView):
         context['category_list'] = Category.objects.filter(is_active__exact=True)
         context['sub_cat'] = self.get_sub_category()
         context['sub_category_list'] = SubCategory.objects.filter(category__exact=self.kwargs['fk'])
-        # context['products_list'] = Product.objects.filter(sub_categories=self.get_sub_category())
-        context['products_list'] = Product.objects.filter(category__pk=self.kwargs['fk']).filter(sub_categories__slug__icontains=self.kwargs['slug']).filter(status__exact=True)
+        context['price_values'] = self.prod.get_price_values()
         return context
 
 

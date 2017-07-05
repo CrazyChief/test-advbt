@@ -2427,6 +2427,12 @@ li:hover > .dropdown-content_big {
   /*padding-top: 0!important;*/
 /*}*/
 
+.reset-price {
+  padding: 2%!important;
+  text-align: center!important;
+  font-size: small!important;
+}
+
 @media screen and (max-width: 1200px) {
   .thumb_wrapper {
     width: 100%;
@@ -2498,6 +2504,9 @@ li:hover > .dropdown-content_big {
   }
   .thumb_wrapper .right_arrow_wrapper {
     right:50px; top:240px;
+  }
+  .products_wrapper .products_items {
+    padding-left: 0;
   }
 }
 

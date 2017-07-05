@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'easycart',
     'django_social_share',
     # 'django_filters',
-    'django_select2',
+    # 'django_select2',
 ]
 
 MIDDLEWARE = [
@@ -89,6 +89,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'cy.context_processors.currency',
                 'easycart.context_processors.cart',
+                'products.context_processors.product',
             ],
         },
     },
@@ -298,6 +299,9 @@ CKEDITOR_UPLOAD_PATH = "ckeditor/uploads/"
 EASYCART_CART_CLASS = 'cart.views.Cart'
 
 CART_SESSION_ID = 'cart'
+
+# PRODUCT_SESSION_ID = 'product'
+PRODUCTS_PROD_CLASS = 'products.views.Prod'
 
 STAR_RATINGS_RERATE = False
 STAR_RATINGS_STAR_HEIGHT = 20

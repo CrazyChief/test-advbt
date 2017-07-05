@@ -5,7 +5,8 @@ var cart = {
             $("a.cart span").html("");
             $("a.cart span").html(xhr['itemCount']);
             // console.log(xhr);
-            $("div.wm").css({display: 'block'}).show(600);
+            $("div.wm").fadeIn(2000);
+            $("div.wm").fadeOut(2000);
         }, 'json');
     },
 

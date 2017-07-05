@@ -1,4 +1,4 @@
-{% extends 'products/index.html' %}
+{% extends 'products/list.html' %}
 
 {% load i18n %}
 
@@ -20,199 +20,39 @@
 
 {% load cy %}
 
-{% block content %}
+{% block categories %}
+    {% if category_list %}
+        <div class="categories_wrapper">
+            <ul class="categories">
+                <li class="category">
+                    <a href="{% url 'products:index' %}">{% trans "All" %}</a>
+                </li>
 
-    <div class="body woocomerce woocommerce">
+                {% for cat in category_list %}
+                    {% if cat == category %}
+                        <li class="category">
+                            <a href="{% url 'products:products_by_category' cat.id %}" class="active">{{ cat.title }}</a>
+                            <ul class="sub_categories">
 
-{#        <section class="header" style="max-height: 750px; background-repeat: no-repeat; background-image: url(&quot;https://www.adavibeauty.com/wp-content/uploads/2016/10/slide.png&quot;); background-color: rgb(230, 230, 230); color: rgb(255, 255, 255); height: 950px;">#}
-{#            <div class="box-header">#}
-{#                {% blocktrans %}<h1 class="h1">The Organic Face</h1>#}
-{#                <div class="title">PRODUCTS</div>{% endblocktrans %}#}
-{#            </div><!-- box-header -->#}
-{#        </section><!-- header -->#}
-
-        <section id="category-box" class="sector product">
-{#            <div class="line-1"></div>#}
-{#            <div class="line-2"></div>#}
-
-{#            <div class="container h120px">#}
-{#                <div class="filter-min hidden-md hidden-lg">#}
-{#                    <span class="btn">{% trans "Filter" %}</span>#}
-{#                </div>#}
-{##}
-{#                {% if category_list %}#}
-{#                    <ul class="filter hidden-xs hidden-sm">#}
-{#                        <li class="item menu-item current-menu-item">#}
-{#                            <a href="{% url 'products:index' %}">{% trans "All" %}</a>#}
-{#                        </li>#}
-{#                        {% for category in category_list %}#}
-{#                            <li class="item menu-item">#}
-{#                                <a href="{% url 'products:products_by_category' category.id %}">{{ category.title|capfirst }}</a>#}
-{#                            </li>#}
-{#                        {% endfor %}#}
-{#                    </ul>#}
-{#                {% endif %}#}
-{#            </div>#}
-
-            <div class="first_back_line"></div>
-            <div class="second_back_line"></div>
-
-            <div class="container-fluid content_wrapper">
-                <div class="filters_wrapper col-md-2">
-                    <div class="wrapper">
-
-                        <div class="currency_wrapper">
-
-{#                            <div style="margin: 20px; background-color: #00ad9c;">#}
-{#                                <form action="" method="get">#}
-{#                                    {{ filter.form.as_p }}#}
-{#                                </form>#}
-{#                            </div>#}
-
-                            <p class="price">
-                                {% trans "Price" %}
-                            </p>
-                            <div id="slider"></div>
-                            <div class="range_tips">
-                                <span>{% trans "From" %}</span>
-                                <span>{% trans "Till" %}</span>
-                            </div>
-                            <script>
-                                $("#slider").slider({
-                                    /* TODO: push and pull values to session (Danilov Dmitry) */
-                                    min: 1,
-                                    max: 200,
-                                    values: [ 60, 100 ],
-                                    classes: {
-                                        "ui-slider-handle": "advbt-slider-handle",
-                                        "ui-slider": "advbt-slider",
-                                        "ui-widget": "advbt-widget",
-                                        "ui-slider-horizontal": "advbt-slider-horizontal",
-                                        "ui-widget-content": "advbt-widget-content",
-                                    },
-                                    create: function( event, ui ) {
-                                        for (var i = 0; i < this.childNodes.length; i++) {
-                                            var toolTipMin = document.createElement('span');
-                                            toolTipMin.setAttribute("class", "toolTip");
-                                            this.childNodes[i].appendChild(toolTipMin);
-                                        }
-                                        /* TODO: set value from session; static values are 60,100 (Danilov Dmitry) */
-                                        this.childNodes[0].childNodes[0].innerText = 60;
-                                        this.childNodes[1].childNodes[0].innerText = 100;
-                                    },
-                                });
-                                $("#slider").on("slidechange", function (event, ui) {
-                                    ui.handle.childNodes[0].innerText = ui.value;
-{#                                    console.log(ui.handle.childNodes[0].innerText = ui.value);#}
-                                });
-                            </script>
-                        </div>
-
-                        {% if category_list %}
-                            <div class="categories_wrapper">
-                                <ul class="categories">
-                                    <li class="category">
-                                        <a href="{% url 'products:index' %}">{% trans "All" %}</a>
-                                    </li>
-
-{#                                    <form action="" method="post">#}
-{#                                        {% csrf_token %}#}
-{#                                        {{ form.title }}#}
-{#                                    </form>#}
-
-                                    {% for cat in category_list %}
-                                        {% if cat == category %}
-                                            <li class="category">
-                                                <a href="{% url 'products:products_by_category' cat.id %}" class="active">{{ cat.title }}</a>
-                                                <ul class="sub_categories">
-                                                    {% block sub_category %}
-                                                        {% for sub_category in sub_category_list %}
-                                                            <li class="s_category">
-                                                                <a href="{% url "products:products_by_subcategory" cat.id sub_category.slug %}">
-                                                                    {{ sub_category.title }}
-                                                                </a>
-                                                            </li>
-                                                        {% endfor %}
-                                                    {% endblock %}
-                                                </ul>
-                                            </li>
-                                        {% else %}
-                                            <li class="category">
-                                                <a href="{% url 'products:products_by_category' cat.id %}">{{ cat.title }}</a>
-                                            </li>
-                                        {% endif %}
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <div class="products_wrapper col-md-10">
-                    <h1 class="head_text">{% trans "Catalogue" %}</h1>
-                    {% if products_list %}
-                        <ul class="products_items">
-                            {% for product in products_list %}
-                                <li class="product_item">
-                                    <div class="item">
-                                        <a href="{% url 'products:detail' product.category.id product.sub_categories.slug product.id %}">
-                                            <div>
-                                                <span class="img1"></span>
-                                                <span class="img2"></span>
-                                                <img width="200" height="220" src="{{ product.image.url }}" alt="{{ product.title }}">
-                                            </div>
-                                            <h2 class="title">
-                                                <span class="prod-title">{{ product.title }}</span>
-                                                <span class="main-product">
-{#                                                    {{ product.product }}#}
-                                                </span>
-                                                <span class="price">
-{#                                                    <span class="old_amount">1000 {{ CURRENCY_ACTIVE.symbol }}</span>#}
-                                                    <span class="amount">
-                                                        {% change_currency product.get_first_child_product.price CURRENCY_ACTIVE.abbreviation %}
-                                                        <span class="woocommerce-Price-currencySymbol">
-                                                            {{ CURRENCY_ACTIVE.symbol }}
-                                                        </span>
-                                                    </span>
-                                                </span>
-                                            </h2>
-                                        </a>
-                                    </div>
-                                </li>
-                            {% endfor %}
-                        </ul>
-
-{#                        <div class="container">#}
-                            {% if is_paginated %}
-                                <div class="pagination">
-                                    <span class="page-links">
-                                        {% if page_obj.has_previous %}
-                                            <a href="?page={{ page_obj.previous_page_number }}">
-                                                <span class="fa fa-chevron-left"></span>
-                                                {% trans "PREV" %}</a>
-                                        {% endif %}
-{#                                        <span class="page-current">#}
-{#                                            {% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.#}
-{#                                        </span>#}
-                                        {% if page_obj.has_next %}
-                                            <a href="?page={{ page_obj.next_page_number }}">
-                                                {% trans "NEXT" %}
-                                                <span class="fa fa-chevron-right"></span>
+                                {% block sub_category %}
+                                    {% for sub_category in sub_category_list %}
+                                        <li class="s_category">
+                                            <a href="{% url "products:products_by_subcategory" cat.id sub_category.slug %}">
+                                                {{ sub_category.title }}
                                             </a>
-                                        {% endif %}
-                                    </span>
-                                </div>
-                            {% endif %}
-{#                        </div>#}
+                                        </li>
+                                    {% endfor %}
+                                {% endblock %}
 
+                            </ul>
+                        </li>
                     {% else %}
-
-                        <p class="text-center">{% trans "No products found" %}</p>
-
+                        <li class="category">
+                            <a href="{% url 'products:products_by_category' cat.id %}">{{ cat.title }}</a>
+                        </li>
                     {% endif %}
-                </div>
-            </div>
-        </section>
-    </div>
-
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
 {% endblock %}
