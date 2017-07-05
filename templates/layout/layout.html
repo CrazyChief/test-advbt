@@ -16,7 +16,7 @@
     <script type="text/javascript" src="{% static 'jquery-1.12.4.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'library.js' %}"></script>
     <script type="text/javascript" src="{% static 'main.js' %}"></script>
-    <script type="text/javascript" src="{% static 'cart.js' %}"></script>
+{#    <script type="text/javascript" src="{% static 'cart.js' %}"></script>#}
     <script type="text/javascript" src="{% static "price.js" %}"></script>
 
     {% load cy %}
@@ -69,58 +69,51 @@
             setPrice: '{% url "products:set-price" %}',
             resetPrice: '{% url "products:reset-price" %}',
         };
-{#        window.addEventListener('beforeunload', function (e) {#}
-{#            e.preventDefault();#}
-{#            price.set(10, {{ max_price.price__max }});#}
-{#        });#}
 
-{#        var cart = {#}
-{#            add: function (pk, quantity) {#}
-{#                quantity = quantity || 1;#}
-{#                return $.post(URLS.addItem, {pk: pk, quantity: quantity}, function (xhr) {#}
-{#                    $("a.cart span").html("");#}
-{#                    $("a.cart span").html(xhr['itemCount']);#}
-{#                    // console.log(xhr);#}
-{#                    $("div.wm").css({display: 'block'}).show(600);#}
-{#                }, 'json');#}
-{#            },#}
-{##}
-{#            removeProd: function (itemPK) {#}
-{#                return $.post(URLS.removeItem, {pk: itemPK}, function (xhr) {#}
-{#                    $("a.cart span").html("");#}
-{#                    $("a.cart span").html(xhr['itemCount']);#}
-{#                    if (window.location.pathname.match(/\/cart\/$/)) {#}
-{#                        var bt = $('div.cart_item').find('.deleter button[data-product_id="' + itemPK + '"]'),#}
-{#                            field = bt.parents('div.cart_item'),#}
-{#                            totalPrice = $("div.allcost span.woocommerce-Price-amount");#}
-{#                        field.remove();#}
-{#                        // totalPrice.text(xhr['totalPrice']);#}
-{#                        totalPrice.text({% change_currency xhr['totalPrice'] CURRENCY_ACTIVE.abbreviation %});#}
-{#                    }#}
-{#                    if (xhr['itemCount'] == 0) {#}
-{#                        var wrapp = $('section.sector'),#}
-{#                            blockForDelete = wrapp.find('div.row');#}
-{#                        blockForDelete.remove();#}
-{#                    }#}
-{#                }, 'json');#}
-{#            },#}
-{##}
-{#            changeQuantity: function (pk, quantity) {#}
-{#                return $.post(URLS.changeQuantity, {pk: pk, quantity: quantity}, function (xhr) {#}
-{#                    console.log(xhr);#}
-{#                    var tp = +xhr['totalPrice'];#}
-{#                    tp = tp.toFixed(2);#}
-{#                    $('input[data-product_id="'+pk+'"]').val(quantity);#}
-{#                    // $('.cart_totals .woocommerce-Price-amount').text(tp);#}
-{#                    $('.cart_totals .woocommerce-Price-amount').text({% change_currency tp CURRENCY_ACTIVE.abbreviation %});#}
-{#                    $('.checkout-button').removeClass('disabled');#}
-{#                }, 'json');#}
-{#            },#}
-{##}
-{#            empty: function () {#}
-{#                $.post(URLS.emptyCart, 'json');#}
-{#            }#}
-{#        };#}
+        var cart = {
+            add: function (pk, quantity) {
+                quantity = quantity || 1;
+                return $.post(URLS.addItem, {pk: pk, quantity: quantity}, function (xhr) {
+                    $("a.cart span").html("");
+                    $("a.cart span").html(xhr['itemCount']);
+                    $("div.wm").css({display: 'block'}).show(600);
+                }, 'json');
+            },
+
+            removeProd: function (itemPK) {
+                return $.post(URLS.removeItem, {pk: itemPK}, function (xhr) {
+                    $("a.cart span").html("");
+                    $("a.cart span").html(xhr['itemCount']);
+                    if (window.location.pathname.match(/\/cart\/$/)) {
+                        var bt = $('div.cart_item').find('.deleter button[data-product_id="' + itemPK + '"]'),
+                            field = bt.parents('div.cart_item'),
+                            totalPrice = $("div.allcost span.woocommerce-Price-amount"),
+                            tp = (xhr['totalPrice'] * {{ CURRENCY_ACTIVE.dimension }}).toFixed(1);
+                        field.remove();
+                        totalPrice.text(tp);
+                    }
+                    if (xhr['itemCount'] == 0) {
+                        var wrapp = $('section.sector'),
+                            blockForDelete = wrapp.find('div.row');
+                        blockForDelete.remove();
+                    }
+                }, 'json');
+            },
+
+            changeQuantity: function (pk, quantity) {
+                return $.post(URLS.changeQuantity, {pk: pk, quantity: quantity}, function (xhr) {
+                    var tp = +xhr['totalPrice'];
+                    tp = (tp * {{ CURRENCY_ACTIVE.dimension }}).toFixed(1);
+                    $('input[data-product_id="'+pk+'"]').val(quantity);
+                    $('.cart_totals .woocommerce-Price-amount').text(tp);
+                    $('.checkout-button').removeClass('disabled');
+                }, 'json');
+            },
+
+            empty: function () {
+                $.post(URLS.emptyCart, 'json');
+            }
+        };
     </script>
 
 </head>
