@@ -1,7 +1,4 @@
-import datetime
-
 from django.db import models
-from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
@@ -236,40 +233,5 @@ class ProductQuestion(models.Model):
 
     product_name.admin_order_field = 'product'
     product_name.short_description = 'Question for product'
-
-
-class Discount(models.Model):
-    """
-    Discount model. Stores an information about discount in details
-    """
-    PER_PRODUCT = 'P_P'
-    FOR_ALL = 'F_A'
-    TYPES = (
-        (PER_PRODUCT, 'Per product'),
-        (FOR_ALL, 'For all'),
-    )
-    discount_title = models.CharField(max_length=200)
-    discount_range = models.IntegerField()
-    discount_code = models.CharField(max_length=20)
-    discount_type = models.CharField(max_length=20, choices=TYPES, default=FOR_ALL)
-    discount_product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
-    discount_start_period = models.DateTimeField()
-    discount_end_period = models.DateTimeField()
-    discount_description = models.TextField()
-
-    class Meta:
-        verbose_name = "Discount"
-        verbose_name_plural = "Discounts"
-
-    def __str__(self):
-        return "%s %s" % (self.discount_code, self.discount_type)
-
-    def out_of_date(self):
-        now = timezone.now()
-        return now - datetime.timedelta(days=1) <= self.discount_end_period <= now
-
-    out_of_date.admin_order_field = 'discount_end_period'
-    out_of_date.boolean = True
-    out_of_date.short_description = 'Is out of date?'
 
 

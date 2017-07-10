@@ -1,12 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils import timezone
+from django.http import HttpResponseForbidden
+from django.urls import reverse
 from easycart import BaseItem, BaseCart
-from django.views.decorators.http import require_POST
-from django.views.generic import TemplateView, CreateView, DeleteView
+from django.views.generic import TemplateView
+from django.views.generic.edit import FormMixin
 from products.models import Product, ProductVariation
 import json
 # from .cart import Cart
 from .forms import CartAddProductForm
 from products.models import Category
+from discounts.models import Discount
+from discounts.forms import DiscountApplyForm
 
 
 class Cart(BaseCart):
@@ -26,13 +31,31 @@ class Cart(BaseCart):
         return ProductVariation.objects.filter(pk__in=pks)
 
 
-class CartDetail(TemplateView):
+class CartDetail(TemplateView, FormMixin):
     template_name = "cart/detail.html"
+    form_class = DiscountApplyForm
 
     def get_context_data(self, **kwargs):
         context = super(CartDetail, self).get_context_data(**kwargs)
         context['category_list'] = Category.objects.filter(is_active=True)
+        context['discount_apply_form'] = self.get_form()
         return context
+
+    def post(self, request, *args, **kwargs):
+        if not request:
+            return HttpResponseForbidden()
+        form = self.get_form()
+
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        pass
+
+    def get_success_url(self):
+        return reverse('cart:detail')
 
 
 

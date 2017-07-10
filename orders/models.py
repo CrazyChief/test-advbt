@@ -1,5 +1,6 @@
 from django.db import models
-from products.models import ProductVariation, Discount
+from products.models import ProductVariation
+from discounts.models import Discount
 
 
 class Order(models.Model):
