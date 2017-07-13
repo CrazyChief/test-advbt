@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'star_ratings',
     'easycart',
     'django_social_share',
+    'analytical',
     # 'django_filters',
     # 'django_select2',
 ]
@@ -300,6 +301,8 @@ CKEDITOR_UPLOAD_PATH = "ckeditor/uploads/"
 EASYCART_CART_CLASS = 'cart.views.Cart'
 
 CART_SESSION_ID = 'cart'
+
+GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-102508308-1'
 
 # PRODUCT_SESSION_ID = 'product'
 PRODUCTS_PROD_CLASS = 'products.views.Prod'
