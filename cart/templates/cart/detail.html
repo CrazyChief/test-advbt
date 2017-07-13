@@ -107,19 +107,18 @@
                                             {% endfor %}
 
                                             <div class="last-row-part">
-    {#                                                    <div class="cupon actions">#}
-    {#                                                        <div class="form-cupon coupon">#}
-    {#                                                            <div class="row-input coupon">#}
-    {#                                                                <input type="text" name="coupon_code" id="coupon_code" placeholder="Код купона" value="">#}
-    {#                                                                <input type="submit" class="btn" name="apply_coupon" value="Применить купон">#}
-    {#                                                            </div>#}
-    {#                                                        </div>#}
-    {#                                                        <input type="submit" class="button" name="update_cart" style="position: absolute; left: -50000px" value="Обновить корзину">#}
-    {#                                                        <input type="hidden" id="_wpnonce" name="_wpnonce" value="f8873ffc63">#}
-    {#                                                        <input type="hidden" name="_wp_http_referer" value="/cart">#}
-    {#                                                    </div>#}
                                                 <div class="cart-collaterals">
                                                     <div class="all-price cart_totals">
+{#                                                        <div class="cupon actions">#}
+{#                                                            <form action="" method="post">#}
+{#                                                                {% csrf_token %}#}
+{#                                                                <p>{{ discount_apply_form.discount_code.errors }}</p>#}
+{#                                                                {{ discount_apply_form }}#}
+{#                                                                <button class="btn btn-1" style="margin-top: 10px;" type="submit">#}
+{#                                                                    {% trans "Apply coupon" %}#}
+{#                                                                </button>#}
+{#                                                            </form>#}
+{#                                                        </div>#}
                                                         <div class="checkout_wrap">
                                                             <a href="{% url 'orders:checkout' %}" class="btn btn-1 submition-butt">
                                                                 <span>{% trans "Checkout" %}</span>

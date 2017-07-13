@@ -8,14 +8,13 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 class DiscountAdmin(admin.ModelAdmin):
     list_display = (
         'discount_title',
-        'discount_type',
-        'discount_range',
         'discount_code',
+        'discount_range',
         'out_of_date',
     )
     list_filter = [
-        'discount_range',
         'discount_code',
+        'discount_range',
         'discount_start_period',
         'discount_end_period',
     ]
@@ -23,4 +22,4 @@ class DiscountAdmin(admin.ModelAdmin):
     search_fields = ['discount_code',]
 
 
-admin.site.register(Discount, DiscountAdmin)
+# admin.site.register(Discount, DiscountAdmin)

@@ -37,7 +37,7 @@ class Discount(models.Model):
 
     def out_of_date(self):
         now = timezone.now()
-        return now - datetime.timedelta(days=1) <= self.discount_end_period <= now
+        return self.discount_end_period <= now
 
     out_of_date.admin_order_field = 'discount_end_period'
     out_of_date.boolean = True
