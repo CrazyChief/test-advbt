@@ -1,12 +1,13 @@
 {% load i18n %}
-{% load analytical %}
+{#{% load analytical %}#}
+{% load google_analytics %}
 
 {% get_available_languages as languages %}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% analytical_head_top %}
+{#    {% analytical_head_top %}#}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %} | Adavibeauty</title>
@@ -117,11 +118,12 @@
             }
         };
     </script>
-    {% analytical_head_bottom %}
+{#    {% analytical_head_bottom %}#}
 
 </head>
 <body class="viewing-page-1">
-    {% analytical_body_top %}
+    {% google_analytics %}
+{#    {% analytical_body_top %}#}
     <!-- PRELOADER -->
     <div id="page-preloader" style="display: none;">
         <span class="spinner" style="display: none;"></span>
@@ -382,6 +384,6 @@
             </div>
         </div>
     </div><!-- footer -->
-    {% analytical_body_bottom %}
+{#    {% analytical_body_bottom %}#}
 </body>
 </html>
