@@ -78,6 +78,7 @@
                                     min: 1,
                                     max: {{ price_values.max_price }} + 40,
                                     values: [ {{ price_values.min_price }}, {{ price_values.max_price }} ],
+                                    range: true,
                                     classes: {
                                         "ui-slider-handle": "advbt-slider-handle",
                                         "ui-slider": "advbt-slider",
@@ -91,8 +92,8 @@
                                             toolTipMin.setAttribute("class", "toolTip");
                                             this.childNodes[i].appendChild(toolTipMin);
                                         }
-                                        var min_price = this.childNodes[0].childNodes[0].innerText = {{ price_values.min_price }},
-                                            max_price = this.childNodes[1].childNodes[0].innerText = {{ price_values.max_price }};
+                                        var min_price = this.childNodes[1].childNodes[0].innerText = {{ price_values.min_price }},
+                                            max_price = this.childNodes[2].childNodes[0].innerText = {{ price_values.max_price }};
 {#                                        price.set(min_price, max_price);#}
                                     },
                                 });
