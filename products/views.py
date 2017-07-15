@@ -7,11 +7,13 @@ from django.conf import settings
 from django.core import mail
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q, Max
-
 from django.contrib.auth.models import User
+
 from .models import Category, SubCategory, Product, ProductVariation, ProductImage, ProductReview, ProductQuestion
 from .forms import ReviewForm, QuestionForm
 from .products import ProductBase
+
+from meta.views import MetadataMixin, Meta
 
 session_key = getattr(settings, 'PRODUCT_SESSION_KEY', 'products')
 
@@ -145,13 +147,21 @@ class ProductSubCategoryView(ListView):
         return context
 
 
-class ProductView(DetailView, FormMixin):
+class ProductView(MetadataMixin, DetailView, FormMixin):
     model = Product
     template_name = 'products/detail.html'
     form_class = ReviewForm
     question_form_class = QuestionForm
+    use_og = True
 
     def get(self, request, *args, **kwargs):
+        self.title = self.get_product().title
+        self.description = self.get_product().details
+        self.image = "%s" % self.get_product().image
+        self.url = self.get_success_url()
+        self.object_type = 'Product'
+        self.custom_namespace = 'product'
+        # self.keywords = self.get_product().keywords
         if request.user.is_authenticated:
             self.initial = {
                 'name': request.user.username,
@@ -165,6 +175,9 @@ class ProductView(DetailView, FormMixin):
     def get_variation_list(self):
         if 'pk' in self.kwargs:
             return get_object_or_404(ProductVariation, product=self.get_product())
+
+    def get_keywords(self):
+        pass
 
     def get_product(self):
         if 'pk' in self.kwargs:
@@ -246,7 +259,11 @@ class ProductView(DetailView, FormMixin):
         return super(ProductView, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse('products:detail', kwargs={'fk': self.kwargs['fk'], 'slug': self.kwargs['slug'], 'pk': self.kwargs['pk']})
+        return reverse('products:detail', kwargs={
+            'fk': self.kwargs['fk'],
+            'slug': self.kwargs['slug'],
+            'pk': self.kwargs['pk']
+        })
 
 
 

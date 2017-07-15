@@ -1,13 +1,15 @@
 {% load i18n %}
-{#{% load analytical %}#}
 {% load google_analytics %}
+{% load meta %}
+{% load sekizai_tags meta %}
 
 {% get_available_languages as languages %}
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
-{#    {% analytical_head_top %}#}
+<html lang="en" {% render_block 'html_extra' %}>
+<head {% meta_namespaces %}>
+    {% include "meta/meta.html" %}
+{#    {{ meta.og_image }}#}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %} | Adavibeauty</title>
@@ -118,15 +120,13 @@
             }
         };
     </script>
-{#    {% analytical_head_bottom %}#}
 
 </head>
 <body class="viewing-page-1">
     {% google_analytics %}
-{#    {% analytical_body_top %}#}
     <!-- PRELOADER -->
-    <div id="page-preloader" style="display: none;">
-        <span class="spinner" style="display: none;"></span>
+    <div id="page-preloader" style="display: block;">
+        <span class="spinner" style="display: block;"></span>
     </div>
     <!-- !PRELOADER -->
 
@@ -219,99 +219,99 @@
         </div>
     </div><!-- bar-menu -->
 
-    <div id="cart_wrapper" class="cart_wrapper_modal">
-
-        <div class="container">
-            <div class="title style-4">
-                <h1 class="h2">{% trans "Shopping bag" %}</h1>
-                <div class="clear"></div>
-            </div><!-- title -->
-
-            {% if cart.list_items %}
-
-                <div class="row box-blog">
-                    <div class="col-xs-12">
-                        <div class="woocommerce">
-                            <style>
-                                input::-webkit-outer-spin-button,
-                                input::-webkit-inner-spin-button {
-                                    -webkit-appearance: none;
-                                    margin: 0;
-                                }
-                                input[type='number'] {
-                                    -moz-appearance: textfield;
-                                    margin: 0;
-                                    float: right!important;
-                                }
-                                .conteiner-corzin .coupon input.btn {
-                                    display: block;
-                                    padding: 17px 20px;
-                                    font-size: 12px;
-                                    letter-spacing: 0.2em;
-                                    border-radius: 50px;
-                                    border-width: 1px;
-                                    text-align: center;
-                                    background-color: #ff887b;
-                                    height: auto;
-                                    margin-top: 15px;
-                                }
-                                .conteiner-corzin .coupon input.btn:hover {
-                                    background-color: white;
-                                }
-                                .woocommerce .cart-collaterals, .woocommerce-page .cart-collaterals {
+{#    <div id="cart_wrapper" class="cart_wrapper_modal">#}
+{##}
+{#        <div class="container">#}
+{#            <div class="title style-4">#}
+{#                <h1 class="h2">{% trans "Shopping bag" %}</h1>#}
+{#                <div class="clear"></div>#}
+{#            </div><!-- title -->#}
+{##}
+{#            {% if cart.list_items %}#}
+{##}
+{#                <div class="row box-blog">#}
+{#                    <div class="col-xs-12">#}
+{#                        <div class="woocommerce">#}
+{#                            <style>#}
+{#                                input::-webkit-outer-spin-button,#}
+{#                                input::-webkit-inner-spin-button {#}
+{#                                    -webkit-appearance: none;#}
+{#                                    margin: 0;#}
+{#                                }#}
+{#                                input[type='number'] {#}
+{#                                    -moz-appearance: textfield;#}
+{#                                    margin: 0;#}
+{#                                    float: right!important;#}
+{#                                }#}
+{#                                .conteiner-corzin .coupon input.btn {#}
+{#                                    display: block;#}
+{#                                    padding: 17px 20px;#}
+{#                                    font-size: 12px;#}
+{#                                    letter-spacing: 0.2em;#}
+{#                                    border-radius: 50px;#}
+{#                                    border-width: 1px;#}
+{#                                    text-align: center;#}
+{#                                    background-color: #ff887b;#}
+{#                                    height: auto;#}
+{#                                    margin-top: 15px;#}
+{#                                }#}
+{#                                .conteiner-corzin .coupon input.btn:hover {#}
+{#                                    background-color: white;#}
+{#                                }#}
+{#                                .woocommerce .cart-collaterals, .woocommerce-page .cart-collaterals {#}
 {#                                        max-width: 50%;#}
-                                    width: 100%;
-                                }
-                            </style>
-                            <div class="conteiner-corzin">
-                                <div class="wrap">
-                                    <div class="item-list cart">
-
-                                        {% for item in cart.list_items %}
-                                            <div class="item cart_item">
-                                                <div class="img_link">
-                                                    <a href="{% url 'products:detail' item.obj.product.category.id item.obj.product.sub_categories.slug item.obj.product.id %}" class="con">
-                                                        <img width="250" height="300" src="{{ item.obj.get_main_image.url }}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" sizes="(max-width: 250px) 100vw, 250px">
-                                                    </a>
-                                                </div>
-                                                <div class="title">
-                                                    <a href="{% url 'products:detail' item.obj.product.category.id item.obj.product.sub_categories.slug item.obj.product.id %}" class="name">
-                                                        {{ item.obj.product.title }}
-                                                    </a>
-                                                </div>
-                                                <div class="articool">
-                                                    <span>{% trans "SKU" %}:</span> {{ item.obj.product.sku }}
-                                                </div>
-                                                <div class="color-type">
-                                                    <span class="name">{% trans "Color" %}: </span>
-                                                    <div class="cort" style="background-color: {{ item.obj.color_value }}"></div>
-                                                </div>
-                                                <div class="kilkist">
-                                                    <div class="input-row">
-                                                        <span class="name">{% trans "Quantity" %}: </span>
-                                                        <input type="number" step="1" min="1" data-product_id="{{ item.obj.id }}" value="{{ item.quantity }}" class="input-text qty text">
-                                                        <span class="less" onclick="decr(this)"></span>
-                                                        <span class="more" onclick="incr(this)"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="price">
-                                                    <span class="price">
-                                                        <span class="woocommerce-Price-amount amount">
-                                                            {% change_currency item.price CURRENCY_ACTIVE.abbreviation %}
+{#                                    width: 100%;#}
+{#                                }#}
+{#                            </style>#}
+{#                            <div class="conteiner-corzin">#}
+{#                                <div class="wrap">#}
+{#                                    <div class="item-list cart">#}
+{##}
+{#                                        {% for item in cart.list_items %}#}
+{#                                            <div class="item cart_item">#}
+{#                                                <div class="img_link">#}
+{#                                                    <a href="{% url 'products:detail' item.obj.product.category.id item.obj.product.sub_categories.slug item.obj.product.id %}" class="con">#}
+{#                                                        <img width="250" height="300" src="{{ item.obj.get_main_image.url }}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" sizes="(max-width: 250px) 100vw, 250px">#}
+{#                                                    </a>#}
+{#                                                </div>#}
+{#                                                <div class="title">#}
+{#                                                    <a href="{% url 'products:detail' item.obj.product.category.id item.obj.product.sub_categories.slug item.obj.product.id %}" class="name">#}
+{#                                                        {{ item.obj.product.title }}#}
+{#                                                    </a>#}
+{#                                                </div>#}
+{#                                                <div class="articool">#}
+{#                                                    <span>{% trans "SKU" %}:</span> {{ item.obj.product.sku }}#}
+{#                                                </div>#}
+{#                                                <div class="color-type">#}
+{#                                                    <span class="name">{% trans "Color" %}: </span>#}
+{#                                                    <div class="cort" style="background-color: {{ item.obj.color_value }}"></div>#}
+{#                                                </div>#}
+{#                                                <div class="kilkist">#}
+{#                                                    <div class="input-row">#}
+{#                                                        <span class="name">{% trans "Quantity" %}: </span>#}
+{#                                                        <input type="number" step="1" min="1" data-product_id="{{ item.obj.id }}" value="{{ item.quantity }}" class="input-text qty text">#}
+{#                                                        <span class="less" onclick="decr(this)"></span>#}
+{#                                                        <span class="more" onclick="incr(this)"></span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                                <div class="price">#}
+{#                                                    <span class="price">#}
+{#                                                        <span class="woocommerce-Price-amount amount">#}
+{#                                                            {% change_currency item.price CURRENCY_ACTIVE.abbreviation %}#}
 {#                                                                            {{ item.price }}#}
-                                                            <span class="woocommerce-Price-currencySymbol">
-                                                                {{ CURRENCY_ACTIVE.symbol }}
-                                                            </span>
-                                                        </span>
-                                                    </span>
-                                                </div>
-                                                <div class="deleter">
-                                                    <button type="button" class="deleter-christ" data-product_id="{{ item.obj.id }}"></button>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-
-                                        <div class="last-row-part">
+{#                                                            <span class="woocommerce-Price-currencySymbol">#}
+{#                                                                {{ CURRENCY_ACTIVE.symbol }}#}
+{#                                                            </span>#}
+{#                                                        </span>#}
+{#                                                    </span>#}
+{#                                                </div>#}
+{#                                                <div class="deleter">#}
+{#                                                    <button type="button" class="deleter-christ" data-product_id="{{ item.obj.id }}"></button>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        {% endfor %}#}
+{##}
+{#                                        <div class="last-row-part">#}
 {#                                                    <div class="cupon actions">#}
 {#                                                        <div class="form-cupon coupon">#}
 {#                                                            <div class="row-input coupon">#}
@@ -323,42 +323,42 @@
 {#                                                        <input type="hidden" id="_wpnonce" name="_wpnonce" value="f8873ffc63">#}
 {#                                                        <input type="hidden" name="_wp_http_referer" value="/cart">#}
 {#                                                    </div>#}
-                                            <div class="cart-collaterals">
-                                                <div class="all-price cart_totals">
-                                                    <div class="checkout_wrap">
-                                                        <a href="{% url 'orders:checkout' %}" class="btn btn-1 submition-butt">
-                                                            <span>{% trans "Checkout" %}</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="allcost" style="text-align: right;">
-                                                        <div>
-                                                            <span>{% trans "Subtotal before shipping" %}:</span>
-                                                            <span>
-                                                                <strong>
-                                                                <span class="woocommerce-Price-amount amount">
-                                                                    {% change_currency cart.total_price CURRENCY_ACTIVE.abbreviation %}
+{#                                            <div class="cart-collaterals">#}
+{#                                                <div class="all-price cart_totals">#}
+{#                                                    <div class="checkout_wrap">#}
+{#                                                        <a href="{% url 'orders:checkout' %}" class="btn btn-1 submition-butt">#}
+{#                                                            <span>{% trans "Checkout" %}</span>#}
+{#                                                        </a>#}
+{#                                                    </div>#}
+{#                                                    <div class="allcost" style="text-align: right;">#}
+{#                                                        <div>#}
+{#                                                            <span>{% trans "Subtotal before shipping" %}:</span>#}
+{#                                                            <span>#}
+{#                                                                <strong>#}
+{#                                                                <span class="woocommerce-Price-amount amount">#}
+{#                                                                    {% change_currency cart.total_price CURRENCY_ACTIVE.abbreviation %}#}
 {#                                                                        {{ cart.total_price|floatformat }}#}
-                                                                </span>
-                                                                <span class="woocommerce-Price-currencySymbol"> {{ CURRENCY_ACTIVE.symbol }}</span></strong>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- col -->
-                </div><!-- box-blog -->
-
-            {% else %}
-                <p>{% trans "Your cart is empty" %}.</p>
-            {% endif %}
-        </div>
-
-    </div>
+{#                                                                </span>#}
+{#                                                                <span class="woocommerce-Price-currencySymbol"> {{ CURRENCY_ACTIVE.symbol }}</span></strong>#}
+{#                                                            </span>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div><!-- col -->#}
+{#                </div><!-- box-blog -->#}
+{##}
+{#            {% else %}#}
+{#                <p>{% trans "Your cart is empty" %}.</p>#}
+{#            {% endif %}#}
+{#        </div>#}
+{##}
+{#    </div>#}
 
     {% block content %}
 
@@ -384,6 +384,5 @@
             </div>
         </div>
     </div><!-- footer -->
-{#    {% analytical_body_bottom %}#}
 </body>
 </html>

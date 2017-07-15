@@ -1,8 +1,19 @@
 from django.contrib import admin
 from django.db.models import TextField
 # from modeltranslation.admin import TranslationAdmin, TabbedTranslationAdmin, TranslationTabularInline
-from .models import Category, SubCategory, Product, ProductVariation, ProductImage, ProductReview, ProductQuestion
+from .models import Category, SubCategory, Product, ProductVariation, ProductImage, ProductReview, ProductQuestion, Keyword
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+
+
+class KeywordAdmin(admin.ModelAdmin):
+    list_display = (
+        'word',
+        'is_keyword_active',
+    )
+    list_filter = [
+        'word',
+        'is_active',
+    ]
 
 
 # class CategoryAdmin(TabbedTranslationAdmin):
@@ -51,7 +62,7 @@ class ProductAdmin(admin.ModelAdmin):
     formfield_overrides = {TextField: {'widget': CKEditorUploadingWidget}}
     fieldsets = (
         (None, {
-            'fields': ('title', 'category', 'status', 'sku', 'is_new', 'is_available', 'sub_categories',),
+            'fields': ('title', 'category', 'status', 'sku', 'is_new', 'is_available', 'sub_categories', 'keywords',),
         }),
         ('Image', {
             'fields': ('image',),
@@ -61,7 +72,8 @@ class ProductAdmin(admin.ModelAdmin):
             'fields': ('details', 'htu', 'composition'),
         }),
     )
-    # filter_horizontal = ('sub_categories',)
+    # inlines = [KeywordAdmin]
+    filter_horizontal = ('keywords',)
 
 
 # class ProduvtVariationAdmin(TabbedTranslationAdmin):
@@ -112,3 +124,4 @@ admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductVariation, ProductVariationAdmin)
 admin.site.register(ProductReview, ProductReviewAdmin)
 admin.site.register(ProductQuestion, ProductQuestionAdmin)
+# admin.site.register(Keyword, KeywordAdmin)

@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     'easycart',
     'django_social_share',
     'analytical',
+    'sekizai',
+    'meta',
     # 'django_filters',
     # 'django_select2',
 ]
@@ -92,6 +94,7 @@ TEMPLATES = [
                 'cy.context_processors.currency',
                 'easycart.context_processors.cart',
                 'products.context_processors.product',
+                'sekizai.context_processors.sekizai',
             ],
         },
     },
@@ -310,3 +313,8 @@ PRODUCTS_PROD_CLASS = 'products.views.Prod'
 STAR_RATINGS_RERATE = False
 STAR_RATINGS_STAR_HEIGHT = 20
 STAR_RATINGS_ANONYMOUS = True
+
+META_SITE_PROTOCOL = 'http'
+META_SITE_DOMAIN = 'http://127.0.0.1:8000'
+META_SITE_NAME = 'Adavibeauty'
+META_USE_OG_PROPERTIES = True
