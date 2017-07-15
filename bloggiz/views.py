@@ -12,6 +12,7 @@ from django.core import mail
 from .models import Post, Comments
 from .forms import CommentForm
 from products.models import Category
+from meta.views import MetadataMixin, Meta
 
 
 class IndexView(ListView):
@@ -29,13 +30,19 @@ class IndexView(ListView):
         return context
 
 
-class PostView(DetailView, FormMixin):
+class PostView(MetadataMixin, DetailView, FormMixin):
     model = Post
     template_name = "bloggiz/detail.html"
     form_class = CommentForm
-    # initial = {}
+    use_og = True
 
     def get(self, request, *args, **kwargs):
+        self.title = self.get_post().title
+        self.description = self.get_post().content
+        self.image = "%s" % self.get_post().cover_picture
+        self.url = self.get_success_url()
+        self.object_type = 'Article'
+        self.custom_namespace = 'blog'
         if request.user.is_authenticated:
             self.initial = {
                 'name': request.user.username,
@@ -43,6 +50,12 @@ class PostView(DetailView, FormMixin):
             }
         # print(request.META['HTTP_REFERER'])
         return super(PostView, self).get(request, *args, **kwargs)
+
+    def get_post(self):
+        if 'slug' in self.kwargs:
+            # self.prod_var = Product.objects.filter(pk=self.kwargs['pk'])
+            return get_object_or_404(Post, slug=self.kwargs['slug'])
+        raise Http404
 
     def get_context_data(self, **kwargs):
         context = super(PostView, self).get_context_data(**kwargs)
