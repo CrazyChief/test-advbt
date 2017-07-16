@@ -1,13 +1,15 @@
 from django.contrib import admin
+# from imagekit.admin import AdminThumbnail
 # from modeltranslation.admin import TranslationAdmin, TabbedTranslationAdmin, TranslationTabularInline
 from .models import Post, Comments
 from django.db.models import TextField, FileField
 from ckeditor.widgets import CKEditorWidget
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from image_cropping import ImageCroppingMixin
 
 
 # class PostAdmin(TabbedTranslationAdmin):
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(ImageCroppingMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
     radio_fields = {'is_published': admin.HORIZONTAL}
     list_display = (
