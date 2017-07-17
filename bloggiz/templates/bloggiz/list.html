@@ -1,6 +1,7 @@
 {% extends 'layout/layout.html' %}
 
 {% load i18n %}
+{% load cropping %}
 
 {% get_available_languages as languages %}
 
@@ -31,7 +32,7 @@
                             <div class="col-md-6 col">
                                 <div class="item-blog">
                                     <a href="{% url 'bloggiz:detail' post.slug %}">
-                                        <img src="{{ post.cover_picture.url }}" alt="{{ post.title }}" height="430px" width="300px">
+                                        <img src="{% cropped_thumbnail post "cropping" scale=1 %}" alt="{{ post.title }}" height="430px" width="300px">
                                     </a>
                                     <div class="text">
         {#    							<span class="pull-left cat"><a href="https://www.adavibeauty.com/blog/interesting" rel="category tag">Interesting</a></span> << Blog category here#}

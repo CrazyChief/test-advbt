@@ -1,6 +1,7 @@
 {% extends 'layout/layout.html' %}
 
 {% load i18n %}
+{% load cropping %}
 
 {% get_available_languages as languages %}
 
@@ -279,7 +280,7 @@
                         <div class="col-xs-12 col-md-6 col col-1">
                             <div class="item-blog">
                                 <a href="{% url 'bloggiz:detail' post.slug %}">
-                                    <img src="{{ post.cover_picture.url }}" alt="{{ post.title }}">
+                                    <img src="{% cropped_thumbnail post "cropping" scale=1 %}" alt="{{ post.title }}">
                                 </a>
                                 <div class="text">
 {#                                    <span class="pull-left cat">#}

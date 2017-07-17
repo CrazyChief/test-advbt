@@ -27,7 +27,7 @@ SECRET_KEY = 't0fd&$z^=g5kwn%^obiwpcrzs%o3!s@b3@$413%4ye@nib97bm'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    # 'crazychief.pythonanywhere.com'
+    # 'crazychief.pythonanywhere.com',
     ]
 
 
@@ -325,3 +325,6 @@ META_SITE_PROTOCOL = 'http'
 META_SITE_DOMAIN = 'http://127.0.0.1:8000'
 META_SITE_NAME = 'Adavibeauty'
 META_USE_OG_PROPERTIES = True
+
+IMAGE_CROPPING_BACKEND = 'image_cropping.backends.easy_thumbs.EasyThumbnailsBackend'
+IMAGE_CROPPING_BACKEND_PARAMS = {}

@@ -2,8 +2,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
-# from imagekit.models import ProcessedImageField
-# from imagekit.processors import ResizeToFill
 from image_cropping import ImageRatioField
 
 
@@ -61,9 +59,8 @@ class Post(models.Model):
     )
     title = models.CharField(max_length=500, unique=True, verbose_name=_('Title'))
     slug = models.SlugField(null=True)
-    # cover_picture = models.FileField(upload_to=upload_path, null=True)
     cover_picture = models.ImageField(blank=True, upload_to=upload_path)
-    cropping = ImageRatioField('image', '300x430', free_crop=True)
+    cropping = ImageRatioField('cover_picture', '300x430', free_crop=True)
     # category = models.ForeignKey(Category, on_delete=models.CASCADE)
     is_published = models.BooleanField(choices=POST_CHOICES, default=DRAFT, verbose_name=_('Is published'))
     pretext = models.TextField(verbose_name=_('Short content'))
