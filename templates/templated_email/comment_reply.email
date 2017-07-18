@@ -1,0 +1,11 @@
+{% block html %}
+
+    <p>Dear <b>{{ full_name }}</b></p>
+    <br>
+    <p>This user <b style="font-style: italic;">{{ user }}</b> replied to your comment. Follow this link: {{ link }}</p>
+
+    <p>-------------------<br>
+    <b>Adavibeauty company</b>
+    </p>
+
+{% endblock %}

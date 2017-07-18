@@ -13,6 +13,7 @@ from .models import Post, Comments
 from .forms import CommentForm
 from products.models import Category
 from meta.views import MetadataMixin, Meta
+from templated_email import send_templated_mail
 
 
 class IndexView(ListView):
@@ -96,12 +97,22 @@ class PostView(MetadataMixin, DetailView, FormMixin):
                 obj.parent = parent_qs.first()
                 # link = "http://127.0.0.1:8000" + self.get_success_url() + "#reply" + str(parent_id)
                 link = self.request.META['HTTP_REFERER'] + "#reply" + str(parent_id)
-                msg = "This user (%s) replied to your comment. Follow this link: %s" % (obj.name, link)
-                with mail.get_connection() as connection:
-                    mail.EmailMessage(
-                        "Reply to comment", msg, settings.DEFAULT_FROM_EMAIL, [parent_qs.get().email],
-                        connection=connection
-                    ).send()
+                # msg = "This user (%s) replied to your comment. Follow this link: %s" % (obj.name, link)
+                # with mail.get_connection() as connection:
+                #     mail.EmailMessage(
+                #         "Reply to comment", msg, settings.DEFAULT_FROM_EMAIL, [parent_qs.get().email],
+                #         connection=connection
+                #     ).send()
+                send_templated_mail(
+                    template_name='comment_reply',
+                    from_email='noreply@sandbox8f86f5175eec47f39c7887ee6e45e3a9.mailgun.org',
+                    recipient_list=[parent_qs.get().email],
+                    context={
+                        'full_name': parent_qs.get().name,
+                        'user': obj.name,
+                        'link': link
+                    }
+                )
 
         if self.request.user.is_authenticated:
             obj.user = User.objects.get(pk=self.request.user.id)

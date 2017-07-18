@@ -139,10 +139,39 @@
                                                             <div class="bottom-comment-pannel">
                                                                 <p>{% trans "Reply added" %}: <time>{{ child.date_added|timesince }}</time></p>
                                                                 <button class="btn btn-xs" id="comment_reply_{{ child.id }}">
-                                                                    <span class="fa fa-reply"></span>
+                                                                    <span class="fa fa-reply"> {{ child.children|length }}</span>
                                                                     {% trans "Reply" %}
                                                                 </button>
                                                             </div>
+
+                                                            {% if child.children %}
+                                                                <ul class="replies">
+                                                                    {% for childd in child.children %}
+                                                                        <li class="reply">
+                                                                            <div class="comment-info">
+                                                                                <img src="{% static 'img/user.svg' %}" alt="user">
+                                                                                {% if childd.user %}
+                                                                                    <span class="name">{{ childd.user.username }}</span>
+                                                                                    <span class="status">{{ childd.user.groups.get.name }}</span>
+                                                                                {% else %}
+                                                                                    <span class="name">{{ childd.name }}</span>
+                                                                                {% endif %}
+                                                                            </div>
+                                                                            <div class="comment-content">
+                                                                                <blockquote>{{ childd.comment|safe }}</blockquote>
+                                                                            </div>
+                                                                            <div class="bottom-comment-pannel">
+                                                                                <p>{% trans "Reply added" %}: <time>{{ childd.date_added|timesince }}</time></p>
+{#                                                                                <button class="btn btn-xs" id="comment_reply_{{ childd.id }}">#}
+{#                                                                                    <span class="fa fa-reply"></span>#}
+{#                                                                                    {% trans "Reply" %}#}
+{#                                                                                </button>#}
+                                                                            </div>
+                                                                        </li>
+                                                                    {% endfor %}
+                                                                </ul>
+                                                            {% endif %}
+
                                                         </li>
                                                     {% endfor %}
                                                 </ul>
