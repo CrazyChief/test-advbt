@@ -347,10 +347,39 @@
                                                                     <div class="bottom-comment-pannel">
                                                                         <p>{% trans "Reply added" %}: <time>{{ child.date_added|timesince }}</time></p>
                                                                         <button class="btn btn-xs" id="question_reply_{{ child.id }}">
-                                                                            <span class="fa fa-reply"></span>
+                                                                            <span class="fa fa-reply"> {{ child.children|length }}</span>
                                                                             {% trans "Reply" %}
                                                                         </button>
                                                                     </div>
+
+                                                                    {% if child.children %}
+                                                                        <ul class="replies">
+                                                                            {% for q in child.children %}
+                                                                                <li class="reply">
+                                                                                    <div class="comment-info">
+                                                                                        <img src="{% static 'img/user.svg' %}" alt="user">
+                                                                                        {% if q.user %}
+                                                                                            <span class="name">{{ q.user.username }}</span>
+                                                                                            <span class="status">{{ q.user.groups.get.name }}</span>
+                                                                                        {% else %}
+                                                                                            <span class="name">{{ q.name }}</span>
+                                                                                        {% endif %}
+                                                                                    </div>
+                                                                                    <div class="comment-content">
+                                                                                        <blockquote>{{ q.question|safe }}</blockquote>
+                                                                                    </div>
+                                                                                    <div class="bottom-comment-pannel">
+                                                                                        <p>{% trans "Reply added" %}: <time>{{ q.date_added|timesince }}</time></p>
+{#                                                                                        <button class="btn btn-xs" id="question_reply_{{ q.id }}">#}
+{#                                                                                            <span class="fa fa-reply"></span>#}
+{#                                                                                            {% trans "Reply" %}#}
+{#                                                                                        </button>#}
+                                                                                    </div>
+                                                                                </li>
+                                                                            {% endfor %}
+                                                                        </ul>
+                                                                    {% endif %}
+
                                                                 </li>
                                                             {% endfor %}
                                                         </ul>
