@@ -1,7 +1,7 @@
 {% block html %}
     <p>Hi <b>{{ full_name }}</b></p>
 
-    <p>Dear {{ full_name }}, thanks for your subscribing. We will notify you about all news on our site.</p>
+    <p>Dear {{ full_name }}, thanks for your notification. We will contact you soon.</p>
 
     <p>Regards <br>
     <b>Adavibeauty company</b>
