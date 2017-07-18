@@ -1,3 +1,9 @@
 {% block html %}
+    <p style="color: green">Hi <b>{{ full_name }}</b></p>
 
+    <p>Dear {{ full_name }}, thanks for your subscribing. We will notify you about all news on our site.</p>
+
+    <p>Regards <br>
+    Adavibeauty company
+    </p>
 {% endblock %}

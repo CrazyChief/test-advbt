@@ -5,7 +5,7 @@ from django.conf import settings
 from django.core import mail
 from django.views.generic.edit import CreateView
 
-from templated_email import get_templated_mail
+from templated_email import send_templated_mail, get_templated_mail
 
 from .models import Subscriber
 
@@ -47,19 +47,21 @@ class SubscriberView(object):
                 'name': self.object.name,
             }
             print(data)
-            get_templated_mail(
+            send_templated_mail(
                 template_name='subscriber_noreply',
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                to=[self.object.email],
-                context={}
+                from_email='noreply@sandbox8f86f5175eec47f39c7887ee6e45e3a9.mailgun.org',
+                recipient_list=[self.object.email],
+                context={
+                    'full_name': self.object.name,
+                }
             )
-            msg = """Dear %s, thanks for your subscribing. We will notify you about all news on our site.
-            Regards, AdaviBeauty.""" % self.object.name
-            with mail.get_connection() as connection:
-                mail.EmailMessage(
-                    "No reply, AdaviBeauty", msg, settings.DEFAULT_FROM_EMAIL, [self.object.email],
-                    connection=connection
-                ).send()
+            # msg = """Dear %s, thanks for your subscribing. We will notify you about all news on our site.
+            # Regards, AdaviBeauty.""" % self.object.name
+            # with mail.get_connection() as connection:
+            #     mail.EmailMessage(
+            #         "No reply, AdaviBeauty", msg, settings.DEFAULT_FROM_EMAIL, [self.object.email],
+            #         connection=connection
+            #     ).send()
             return JsonResponse(data)
         else:
             return response

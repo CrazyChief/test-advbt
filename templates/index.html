@@ -280,7 +280,7 @@
                         <div class="col-xs-12 col-md-6 col col-1">
                             <div class="item-blog">
                                 <a href="{% url 'bloggiz:detail' post.slug %}">
-                                    <img src="{% cropped_thumbnail post "cropping" scale=1 %}" alt="{{ post.title }}">
+                                    <img src="{% cropped_thumbnail post "cropping" height=430 %}" alt="{{ post.title }}">
                                 </a>
                                 <div class="text">
 {#                                    <span class="pull-left cat">#}

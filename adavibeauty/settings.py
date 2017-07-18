@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'meta',
     'easy_thumbnails',
     'image_cropping',
+    'anymail',
     # 'django_filters',
     # 'django_select2',
 ]
@@ -255,6 +256,14 @@ CKEDITOR_CONFIGS = {
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+# EMAIL_USE_SSL = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 465
+# EMAIL_HOST_USER = 'danilovdmitry94@gmail.com'
+# EMAIL_HOST_PASSWORD = '609NumberOne$$123'
+# DEFAULT_FROM_EMAIL = 'danilovdmitry94@gmail.com'
+# # DEFAULT_TO_EMAIL = 'to email'
+
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
@@ -329,4 +338,11 @@ META_USE_OG_PROPERTIES = True
 IMAGE_CROPPING_BACKEND = 'image_cropping.backends.easy_thumbs.EasyThumbnailsBackend'
 IMAGE_CROPPING_BACKEND_PARAMS = {}
 
+ANYMAIL = {
+    # (exact settings here depend on your ESP...)
+    "MAILGUN_API_KEY": "key-7be344612b0888788a26c6de180f1d5a",
+    "MAILGUN_SENDER_DOMAIN": 'crazychief.pythonanywhere.com',  # your Mailgun domain, if needed
+}
+
 TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBackend'
+
