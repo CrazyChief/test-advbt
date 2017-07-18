@@ -5,6 +5,8 @@ from django.conf import settings
 from django.core import mail
 from django.views.generic.edit import CreateView
 
+from templated_email import get_templated_mail
+
 from .models import Subscriber
 
 
@@ -45,6 +47,12 @@ class SubscriberView(object):
                 'name': self.object.name,
             }
             print(data)
+            get_templated_mail(
+                template_name='subscriber_noreply',
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=[self.object.email],
+                context={}
+            )
             msg = """Dear %s, thanks for your subscribing. We will notify you about all news on our site.
             Regards, AdaviBeauty.""" % self.object.name
             with mail.get_connection() as connection:
