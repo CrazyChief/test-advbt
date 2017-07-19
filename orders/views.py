@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.core.urlresolvers import reverse
 from easycart import BaseCart
 from django.urls import reverse
 from django.http import HttpResponseForbidden
@@ -7,7 +8,7 @@ from .forms import OrderCreateForm
 from .models import Order, OrderItem
 from products.models import ProductVariation
 from cart.views import Cart
-from .tasks import OrderCreate
+from .tasks import OrderCreated
 from products.models import Category
 
 
@@ -46,6 +47,9 @@ class CheckoutView(FormView):
         for item in self.cart.list_items(Cart(self.request)):
             OrderItem.objects.create(order=self.order, product=item.obj, price=item.obj.price, quantity=item.quantity)
             # ProductVariation.objects.get(pk=item.obj.pk).update_quantity(item.quantity)
+            OrderCreated.delay(self.order.id)
+            self.request.session['order_id'] = self.order.id
+            return redirect(reverse('payment:process'))
         self.cart.empty(Cart(self.request))
         return super(CheckoutView, self).form_valid(form)
 
@@ -58,7 +62,7 @@ class CreatedView(DetailView):
     template_name = 'orders/created.html'
 
     def __init__(self):
-        self.order = OrderCreate
+        self.order = OrderCreated
 
     def get(self, request, *args, **kwargs):
         self.order(kwargs['pk'])

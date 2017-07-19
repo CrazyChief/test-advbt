@@ -1,0 +1,20 @@
+{% extends 'layout/layout.html' %}
+
+{% load i18n %}
+
+{% get_available_languages as languages %}
+
+{% block title %}{% trans "Payment declined" %}{% endblock %}
+
+{% load staticfiles %}
+
+{% block includefiles %}{% endblock %}
+
+{% block content %}
+    <div class="body page">
+        <div style="width: 300px; margin: 150px auto;text-align: center;">
+            <h1>{% trans "Payment declined" %}</h1>
+            <p>{% trans "There were problems with payment!" %}</p>
+        </div>
+    </div>
+{% endblock %}

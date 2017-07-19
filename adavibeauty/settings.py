@@ -28,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     # 'crazychief.pythonanywhere.com',
+    'ee461b5b.ngrok.io',
+    # '127.0.0.1',
     ]
 
 
@@ -63,6 +65,8 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'image_cropping',
     'anymail',
+    'paypal.standard.ipn',
+    'payment',
     # 'django_filters',
     # 'django_select2',
 ]
@@ -346,3 +350,5 @@ ANYMAIL = {
 
 TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBackend'
 
+# PAYPAL_RECEIVER_EMAIL = 'danilovdmitry94-facilitator-1@gmail.com'
+PAYPAL_TEST = True
