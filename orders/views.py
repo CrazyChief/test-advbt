@@ -38,22 +38,30 @@ class CheckoutView(FormView):
         form = self.get_form()
         # print(form)
         if form.is_valid():
-            return self.form_valid(form)
+            self.order = form.save(commit=False)
+            self.order.save()
+            for item in self.cart.list_items(Cart(self.request)):
+                OrderItem.objects.create(order=self.order, product=item.obj, price=item.obj.price,
+                                         quantity=item.quantity)
+            self.request.session['order_id'] = self.order.id
+            # self.cart.empty(Cart(self.request))
+            return redirect(reverse('payment:process'))
         else:
             return self.form_invalid(form)
 
-    def form_valid(self, form):
-        self.order = form.save()
-        for item in self.cart.list_items(Cart(self.request)):
-            OrderItem.objects.create(order=self.order, product=item.obj, price=item.obj.price, quantity=item.quantity)
-            # ProductVariation.objects.get(pk=item.obj.pk).update_quantity(item.quantity)
-            OrderCreated.delay(self.order.id)
-            self.request.session['order_id'] = self.order.id
-            return redirect(reverse('payment:process'))
-        self.cart.empty(Cart(self.request))
-        return super(CheckoutView, self).form_valid(form)
+    # def form_valid(self, form):
+    #     self.order = form.save(commit=False)
+    #     for item in self.cart.list_items(Cart(self.request)):
+    #         OrderItem.objects.create(order=self.order, product=item.obj, price=item.obj.price, quantity=item.quantity)
+    #         # ProductVariation.objects.get(pk=item.obj.pk).update_quantity(item.quantity)
+    #         # OrderCreated.delay(self.order.id)
+    #     self.request.session['order_id'] = self.order.id
+    #     self.cart.empty(Cart(self.request))
+    #     redirect(reverse('payment:process'))
+    #     return super(CheckoutView, self).form_valid(form)
 
     def get_success_url(self):
+        # return redirect(reverse('payment:process'))
         return reverse('orders:created', kwargs={'pk': self.order.pk})
 
 
