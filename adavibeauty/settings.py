@@ -66,7 +66,7 @@ INSTALLED_APPS = [
     'image_cropping',
     'anymail',
     'paypal.standard.ipn',
-    'payment',
+    'payment.apps.PaymentConfig',
     # 'django_filters',
     # 'django_select2',
 ]
@@ -335,7 +335,7 @@ STAR_RATINGS_STAR_HEIGHT = 20
 STAR_RATINGS_ANONYMOUS = True
 
 META_SITE_PROTOCOL = 'http'
-META_SITE_DOMAIN = 'http://127.0.0.1:8000'
+META_SITE_DOMAIN = '2f6da08b.ngrok.io'
 META_SITE_NAME = 'Adavibeauty'
 META_USE_OG_PROPERTIES = True
 
@@ -350,5 +350,5 @@ ANYMAIL = {
 
 TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBackend'
 
-# PAYPAL_RECEIVER_EMAIL = 'danilovdmitry94-facilitator-1@gmail.com'
+PAYPAL_RECEIVER_EMAIL = 'danilovdmitry94-bussines@gmail.com'
 PAYPAL_TEST = True

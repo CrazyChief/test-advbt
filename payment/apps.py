@@ -6,6 +6,6 @@ class PaymentConfig(AppConfig):
     verbose_name = 'Payment'
 
     def ready(self):
-        print("Payment app is ready!")
+        # print("Payment app is ready!")
         import payment.signals
-        print("I hope, It imported!")
+        # print("I hope, It imported!")
