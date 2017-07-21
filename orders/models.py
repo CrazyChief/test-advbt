@@ -34,7 +34,7 @@ class Order(models.Model):
     shipping_email = models.EmailField(max_length=254)
 
     pay_type = models.CharField(max_length=40, choices=PAY_TYPES, default=PAY_NOW)
-    discount_code = models.ForeignKey(Discount, null=True, on_delete=models.SET_NULL)
+    # discount_code = models.ForeignKey(Discount, null=True, on_delete=models.SET_NULL)
     # total = models.FloatField(null=True, blank=True)
     # item_total = models.IntegerField()
     pay_status = models.BooleanField(default=False)
@@ -52,7 +52,7 @@ class Order(models.Model):
         return "%s %s %s" % (self.id, self.shipping_name(), self.created)
 
     def get_total_cost(self):
-        return sum(item.get_cost() for item in self.items.all())
+        return sum(item.get_cost() for item in self.orderitem_set.all())
 
 
 class OrderItem(models.Model):

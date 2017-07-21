@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     # 'crazychief.pythonanywhere.com',
-    '2f6da08b.ngrok.io',
+    'd17cfc19.ngrok.io',
     # '127.0.0.1',
     ]
 
@@ -335,7 +335,7 @@ STAR_RATINGS_STAR_HEIGHT = 20
 STAR_RATINGS_ANONYMOUS = True
 
 META_SITE_PROTOCOL = 'http'
-META_SITE_DOMAIN = '2f6da08b.ngrok.io'
+META_SITE_DOMAIN = 'd17cfc19.ngrok.io'
 META_SITE_NAME = 'Adavibeauty'
 META_USE_OG_PROPERTIES = True
 

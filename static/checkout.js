@@ -44,6 +44,9 @@ $(document).ready(function () {
 
     if($('#id_shipping_type_1:checked').length) {
         $('#id_shipping_departament').prop('required', false);
+        $('#id_shipping_country').prop('required', false);
+        $('#id_shipping_state').prop('required', false);
+        $('#id_shipping_postcode').prop('required', false);
         $('#id_shipping_city').prop('required',false);
         $('#id_pay_type_1').prop('disabled', true);
         $('#id_pay_type_1').parent('label').css('opacity', '0.4');

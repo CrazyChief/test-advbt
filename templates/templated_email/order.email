@@ -1,0 +1,71 @@
+{% block html %}
+    <style></style>
+
+    <h1>Order</h1>
+    <br>
+    <p>
+        <b>Order number: {{ order.id }}</b> <br>
+        <span class="secondary">
+            <b>Date:</b> {{ order.created }}
+        </span>
+    </p>
+    <h3>Buyer</h3>
+    <p>
+        <b>Name:</b> {{ order.shipping_name }}<br>
+        <b>Email:</b> {{ order.shipping_email }} <br>
+        <b>Phone:</b> {{ order.shipping_phone }} <br>
+        {% if order.shipping_type == 'N_P' %}
+            <b>Country:</b> {{ order.shipping_country }}<br>
+            <b>State:</b> {{ order.shipping_state }} <br>
+            <b>City:</b> {{ order.shipping_city }}<br>
+            <b>Post code:</b> {{ order.shipping_postcode }}<br>
+            <b>Street:</b> {{ order.shipping_street }}<br>
+            <b>Home:</b> {{ order.shipping_home }}<br>
+            <b>Departament:</b> {{ order.shipping_departament }}<br>
+            <b>Home delivery:</b> {% if order.shipping_to_home == True %}
+                Yes
+            {% else %}
+                No
+            {% endif %}
+        {% endif %}
+    </p>
+    <br>
+    -----------------------------------------
+    <br>
+    <h3>Purchased products</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Color</th>
+                <th>Cost</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.orderitem_set.all %}
+                <tr class="row{% cycle "1" "2" %}">
+                    <td>{{ item.product }}</td>
+                    <td>{{ item.product.color_description }}</td>
+                    <td>${{ item.price }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ item.get_cost }}</td>
+                </tr>
+            {% endfor %}
+            <tr class="total">
+                <td colspan="3">Total:</td>
+                <td class="num">${{ order.get_total_cost }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <span class="{% if order.pay_status %}paid{% else %}pending{% endif %}">
+        <b>Pay status:</b> {% if order.pay_status %}Payed{% else %}Pending payment{% endif %}
+    </span>
+    <br><br>
+    <span>--------------------</span>
+    <p>
+        <b>Adavibeauty</b>
+    </p>
+{% endblock %}

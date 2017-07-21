@@ -1,15 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
-from easycart import BaseCart
 from django.urls import reverse
 from django.http import HttpResponseForbidden
 from django.views.generic import FormView, DetailView
 from .forms import OrderCreateForm
 from .models import Order, OrderItem
-from products.models import ProductVariation
 from cart.views import Cart
 from .tasks import OrderCreated
 from products.models import Category
+from templated_email import send_templated_mail
 
 
 class CheckoutView(FormView):
@@ -43,9 +42,21 @@ class CheckoutView(FormView):
             for item in self.cart.list_items(Cart(self.request)):
                 OrderItem.objects.create(order=self.order, product=item.obj, price=item.obj.price,
                                          quantity=item.quantity)
-            self.request.session['order_id'] = self.order.id
-            # self.cart.empty(Cart(self.request))
-            return redirect(reverse('payment:process'))
+            if self.order.pay_type == "N":
+                self.request.session['order_id'] = self.order.id
+                # self.cart.empty(Cart(self.request))
+                return redirect(reverse('payment:process'))
+            elif self.order.pay_type == "W_R":
+                send_templated_mail(
+                    template_name='order',
+                    from_email='noreply@sandbox8f86f5175eec47f39c7887ee6e45e3a9.mailgun.org',
+                    recipient_list=[self.order.shipping_email],
+                    context={
+                        'order': self.order,
+                    }
+                )
+                self.cart.empty(Cart(self.request))
+                return redirect(self.get_success_url())
         else:
             return self.form_invalid(form)
 
@@ -69,12 +80,12 @@ class CreatedView(DetailView):
     model = Order
     template_name = 'orders/created.html'
 
-    def __init__(self):
-        self.order = OrderCreated
+    # def __init__(self):
+    #     self.order = OrderCreated
 
-    def get(self, request, *args, **kwargs):
-        self.order(kwargs['pk'])
-        return super(CreatedView, self).get(request, *args, **kwargs)
+    # def get(self, request, *args, **kwargs):
+    #     self.order(kwargs['pk'])
+    #     return super(CreatedView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(CreatedView, self).get_context_data(**kwargs)

@@ -4,6 +4,7 @@ from django.conf import settings
 from paypal.standard.models import ST_PP_COMPLETED
 from paypal.standard.ipn.signals import valid_ipn_received
 from orders.models import Order
+from templated_email import send_templated_mail
 
 
 @receiver(valid_ipn_received)
@@ -22,5 +23,14 @@ def payment_notification(sender, **kwargs):
         # print(order)
         order.pay_status = True
         order.save()
+
+        send_templated_mail(
+            template_name='order',
+            from_email='noreply@sandbox8f86f5175eec47f39c7887ee6e45e3a9.mailgun.org',
+            recipient_list=[order.shipping_email],
+            context={
+                'order': order,
+            }
+        )
 
 
