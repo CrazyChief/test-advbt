@@ -1,17 +1,10 @@
 {% extends 'layout/layout.html' %}
-
 {% load i18n %}
-
 {% get_available_languages as languages %}
-
 {% load staticfiles %}
-
 {% block includefiles %}{% endblock %}
-
 {% block title %}{% trans "Cart" %}{% endblock %}
-
 {% load cy %}
-
 {% block content %}
     <div class="body page height-2" style="min-height:855px">
         <div class="block-left-fon" style="width: calc(390px + 225px); height: 950px"></div>
@@ -21,47 +14,21 @@
                     <h1 class="h2">{% trans "Shopping cart" %}</h1>
                     <div class="clear"></div>
                 </div><!-- title -->
-
                 {% if cart.list_items %}
-
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="woocommerce">
                                 <style>
                                     input::-webkit-outer-spin-button,
-                                    input::-webkit-inner-spin-button {
-                                        -webkit-appearance: none;
-                                        margin: 0;
-                                    }
-                                    input[type='number'] {
-                                        -moz-appearance: textfield;
-                                        margin: 0;
-                                        float: right!important;
-                                    }
-                                    .conteiner-corzin .coupon input.btn {
-                                        display: block;
-                                        padding: 17px 20px;
-                                        font-size: 12px;
-                                        letter-spacing: 0.2em;
-                                        border-radius: 50px;
-                                        border-width: 1px;
-                                        text-align: center;
-                                        background-color: #ff887b;
-                                        height: auto;
-                                        margin-top: 15px;
-                                    }
-                                    .conteiner-corzin .coupon input.btn:hover {
-                                        background-color: white;
-                                    }
-                                    .woocommerce .cart-collaterals, .woocommerce-page .cart-collaterals {
-{#                                        max-width: 50%;#}
-                                        width: 100%;
-                                    }
+                                    input::-webkit-inner-spin-button {-webkit-appearance: none;margin: 0;}
+                                    input[type='number'] {-moz-appearance: textfield;margin: 0;float: right!important;}
+                                    .conteiner-corzin .coupon input.btn {display: block;padding: 17px 20px;font-size: 12px;letter-spacing: 0.2em;border-radius: 50px;border-width: 1px;text-align: center;background-color: #ff887b;height: auto;margin-top: 15px;}
+                                    .conteiner-corzin .coupon input.btn:hover {background-color: white;}
+                                    .woocommerce .cart-collaterals, .woocommerce-page .cart-collaterals {width: 100%;}
                                 </style>
                                 <div class="conteiner-corzin">
                                     <div class="wrap">
                                         <div class="item-list cart">
-
                                             {% for item in cart.list_items %}
                                                 <div class="item cart_item">
                                                     <div class="img_link">
@@ -131,7 +98,6 @@
                                                                     <strong>
                                                                     <span class="woocommerce-Price-amount amount">
                                                                         {% change_currency cart.total_price CURRENCY_ACTIVE.abbreviation %}
-    {#                                                                        {{ cart.total_price|floatformat }}#}
                                                                     </span>
                                                                     <span class="woocommerce-Price-currencySymbol"> {{ CURRENCY_ACTIVE.symbol }}</span></strong>
                                                                 </span>
@@ -146,12 +112,10 @@
                             </div>
                         </div><!-- col -->
                     </div><!-- box-blog -->
-
                 {% else %}
                     <p>{% trans "Your cart is empty" %}.</p>
                 {% endif %}
             </div>
         </section>
     </div>
-
 {% endblock %}

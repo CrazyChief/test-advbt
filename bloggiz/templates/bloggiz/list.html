@@ -1,18 +1,11 @@
 {% extends 'layout/layout.html' %}
-
 {% load i18n %}
 {% load cropping %}
-
 {% get_available_languages as languages %}
-
 {% block title %}{% trans "Blog" %}{% endblock %}
-
 {% load staticfiles %}
-
 {% block includefiles %}{% endblock %}
-
 {% block content %}
-
     <div class="body page">
         <div class="block-left-fon" style="width: calc(381.5px + 225px); height: 100%"></div>
         <section class="sector blog page">
@@ -22,33 +15,23 @@
                     <!-- title -->
                 </div>
                 <div class="row box-blog wauto">
-
                 {% if post_list %}
-
                     {% for post in post_list %}
-
                         {% if post.is_published %}
-
                             <div class="col-md-6 col">
                                 <div class="item-blog">
-                                    <a href="{% url 'bloggiz:detail' post.slug %}">
-                                        <img src="{% cropped_thumbnail post "cropping" height=430 %}" alt="{{ post.title }}">
-                                    </a>
+                                    <a href="{% url 'bloggiz:detail' post.slug %}"><img src="{% cropped_thumbnail post "cropping" height=430 %}" alt="{{ post.title }}"></a>
                                     <div class="text">
-        {#    							<span class="pull-left cat"><a href="https://www.adavibeauty.com/blog/interesting" rel="category tag">Interesting</a></span> << Blog category here#}
-                                        <span class="pull-right data">{{ post.date_added|date }}</span> {# << Date of post #}
+                                        <span class="pull-right data">{{ post.date_added|date }}</span>
                                         <p class="clear"></p>
-                                        <h2 class="title">{{ post.title }}</h2> {# Title of post #}
-                                        {{ post.pretext|safe }} {# Mini content of post #}
-                                        <a href="{% url 'bloggiz:detail' post.slug %}" class="read-more">{% trans "Read" %}</a> {# Link to post #}
+                                        <h2 class="title">{{ post.title }}</h2>
+                                        {{ post.pretext|safe }}
+                                        <a href="{% url 'bloggiz:detail' post.slug %}" class="read-more">{% trans "Read" %}</a>
                                     </div><!-- text -->
                                 </div><!-- item-blog -->
                             </div><!-- col -->
-
                         {% endif %}
-
                     {% endfor %}
-
                     <div class="container">
                         {% if is_paginated %}
                             <div class="pagination">
@@ -56,9 +39,6 @@
                                     {% if page_obj.has_previous %}
                                         <a href="?page={{ page_obj.previous_page_number }}">{% trans "previous" %}</a>
                                     {% endif %}
-                                    <span class="page-current">
-                                        {% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.
-                                    </span>
                                     {% if page_obj.has_next %}
                                         <a href="?page={{ page_obj.next_page_number }}">{% trans "next" %}</a>
                                     {% endif %}
@@ -66,16 +46,11 @@
                             </div>
                         {% endif %}
                     </div>
-
                 {% else %}
-
                     <p class="text-center">{% trans "No posts found" %}</p>
-
                 {% endif %}
-
                 </div><!-- box-blog -->
             </div>
         </section><!-- section blog -->
     </div>
-
 {% endblock %}

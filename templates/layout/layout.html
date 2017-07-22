@@ -9,7 +9,6 @@
 <html lang="en" {% render_block 'html_extra' %}>
 <head {% meta_namespaces %}>
     {% include "meta/meta.html" %}
-{#    {{ meta.og_image }}#}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %} | Adavibeauty</title>
@@ -21,7 +20,6 @@
     <script type="text/javascript" src="{% static 'jquery-1.12.4.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'library.js' %}"></script>
     <script type="text/javascript" src="{% static 'main.js' %}"></script>
-{#    <script type="text/javascript" src="{% static 'cart.js' %}"></script>#}
     <script type="text/javascript" src="{% static "price.js" %}"></script>
 
     {% load cy %}
@@ -29,92 +27,27 @@
     {% block includefiles %}{% endblock %}
 
     <style>
-        #page-preloader {
-            position: fixed;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255,255,255,1);
-            z-index: 100500;
-        }
-        #page-preloader .spinner {
-            position: absolute;
-            left: 0;
-            top: 0;
-            z-index: 999;
-            width: 100%;
-            height: 100%;
-            overflow: visible;
-            background: #fff url('{% static 'img/logo-header.png' %}') no-repeat center center;
-        }
-        .fancybox-margin{
-            margin-right:0px;
-        }
+        #page-preloader {position: fixed;left: 0;top: 0;right: 0;bottom: 0;background: rgba(255,255,255,1);z-index: 100500;}
+        #page-preloader .spinner {position: absolute;left: 0;top: 0;z-index: 999;width: 100%;height: 100%;overflow: visible;background: #fff url('{% static 'img/logo-header.png' %}') no-repeat center center;}
+        .fancybox-margin{margin-right:0px;}
     </style>
     <script>
-        $(window).on('load', function () {
-            var $preloader = $('#page-preloader'),
-                $spinner = $preloader.find('.spinner');
-            $spinner.delay(50).fadeOut('slow');
-            $preloader.delay(50).fadeOut('slow');
-        });
+        $(window).on('load', function () {var $preloader = $('#page-preloader'),$spinner = $preloader.find('.spinner');$spinner.delay(50).fadeOut('slow');$preloader.delay(50).fadeOut('slow');});
     </script>
     <script>
-        var URLS = {
-            addItem: '{% url "cart:cart-add" %}',
-            removeItem: '{% url "cart:cart-remove" %}',
-            changeQuantity: '{% url "cart:cart-change-quantity" %}',
-            emptyCart: '{% url "cart:cart-empty" %}',
-        };
-        var SUBURL = {
-            addSubscriber: '{% url "subscribers:subscriber-add" %}',
-        };
-        var PRURL = {
-            setPrice: '{% url "products:set-price" %}',
-            resetPrice: '{% url "products:reset-price" %}',
-        };
-
+        var URLS = {addItem: '{% url "cart:cart-add" %}',removeItem: '{% url "cart:cart-remove" %}',changeQuantity: '{% url "cart:cart-change-quantity" %}',emptyCart: '{% url "cart:cart-empty" %}',};
+        var SUBURL = {addSubscriber: '{% url "subscribers:subscriber-add" %}',};
+        var PRURL = {setPrice: '{% url "products:set-price" %}',resetPrice: '{% url "products:reset-price" %}',};
         var cart = {
             add: function (pk, quantity) {
-                quantity = quantity || 1;
-                return $.post(URLS.addItem, {pk: pk, quantity: quantity}, function (xhr) {
-                    $("a.cart span").html("");
-                    $("a.cart span").html(xhr['itemCount']);
-                    $("div.wm").css({display: 'block'}).show(600);
-                }, 'json');
+                quantity = quantity || 1;return $.post(URLS.addItem, {pk: pk, quantity: quantity}, function (xhr) {$("a.cart span").html("");$("a.cart span").html(xhr['itemCount']);$("div.wm").css({display: 'block'}).show(600);}, 'json');
             },
-
             removeProd: function (itemPK) {
-                return $.post(URLS.removeItem, {pk: itemPK}, function (xhr) {
-                    $("a.cart span").html("");
-                    $("a.cart span").html(xhr['itemCount']);
-                    if (window.location.pathname.match(/\/cart\/$/)) {
-                        var bt = $('div.cart_item').find('.deleter button[data-product_id="' + itemPK + '"]'),
-                            field = bt.parents('div.cart_item'),
-                            totalPrice = $("div.allcost span.woocommerce-Price-amount"),
-                            tp = (xhr['totalPrice'] * {{ CURRENCY_ACTIVE.dimension }}).toFixed(1);
-                        field.remove();
-                        totalPrice.text(tp);
-                    }
-                    if (xhr['itemCount'] == 0) {
-                        var wrapp = $('section.sector'),
-                            blockForDelete = wrapp.find('div.row');
-                        blockForDelete.remove();
-                    }
-                }, 'json');
+                return $.post(URLS.removeItem, {pk: itemPK}, function (xhr) {$("a.cart span").html("");$("a.cart span").html(xhr['itemCount']);if (window.location.pathname.match(/\/cart\/$/)) {var bt = $('div.cart_item').find('.deleter button[data-product_id="' + itemPK + '"]'),field = bt.parents('div.cart_item'),totalPrice = $("div.allcost span.woocommerce-Price-amount"),tp = (xhr['totalPrice'] * {{ CURRENCY_ACTIVE.dimension }}).toFixed(1);field.remove();totalPrice.text(tp);}if (xhr['itemCount'] == 0) {var wrapp = $('section.sector'),blockForDelete = wrapp.find('div.row');blockForDelete.remove();}}, 'json');
             },
-
             changeQuantity: function (pk, quantity) {
-                return $.post(URLS.changeQuantity, {pk: pk, quantity: quantity}, function (xhr) {
-                    var tp = +xhr['totalPrice'];
-                    tp = (tp * {{ CURRENCY_ACTIVE.dimension }}).toFixed(1);
-                    $('input[data-product_id="'+pk+'"]').val(quantity);
-                    $('.cart_totals .woocommerce-Price-amount').text(tp);
-                    $('.checkout-button').removeClass('disabled');
-                }, 'json');
+                return $.post(URLS.changeQuantity, {pk: pk, quantity: quantity}, function (xhr) {var tp = +xhr['totalPrice'];tp = (tp * {{ CURRENCY_ACTIVE.dimension }}).toFixed(1);$('input[data-product_id="'+pk+'"]').val(quantity);$('.cart_totals .woocommerce-Price-amount').text(tp);$('.checkout-button').removeClass('disabled');}, 'json');
             },
-
             empty: function () {
                 $.post(URLS.emptyCart, 'json');
             }
@@ -129,21 +62,7 @@
         <span class="spinner" style="display: block;"></span>
     </div>
     <!-- !PRELOADER -->
-
-{#    <style type="text/css">#}
-{#        .box-blog img {#}
-{#            max-height: 380px;#}
-{#        }#}
-{#    </style>#}
     <div style="display:none"></div>
-    <style type="text/css">
-        body.wp-admin.upload-php #wpbody-content {
-            width: calc(100% - 250px);
-        }.rml-container.rml-no-dummy {
-            width: 250px;
-        }
-    </style>
-
     <div class="menu-scroll">
         <ul>
             <li class="menu-item current-menu-item page-item-56 current_page_item menu-item-688"><a href="/">{% trans "Home" %}</a></li>
@@ -153,13 +72,11 @@
             <li class="menu-item menu-item-724"><a href="{% url 'contacts:index' %}">{% trans "Contacts" %}</a></li>
         </ul>
     </div>
-
     <div class="bar-menu">
         <div class="container">
             <div class="logo">
                 <a href="/"><img src="{% static 'img/logo-header.png' %}" alt=""></a>
             </div><!-- logo -->
-
             <div class="menu">
                 <ul class="hidden-md hidden-sm hidden-xs">
                     <li><a href="/">{% trans "Home" %}</a></li>
@@ -187,183 +104,21 @@
                 </ul>
                 <div class="clear"></div>
             </div><!-- menu -->
-
             <div class="box-cart">
                 <button type="button" id="tcon1" class="tcon tcon1 tcon-menu--xcross hidden-lg pull-right" aria-label="toggle menu">
                     <span class="tcon-menu__lines" aria-hidden="true"></span>
                     <span class="tcon-visuallyhidden">toggle menu</span>
                 </button>
-
-                <a data-href=""
-                   href="{% url 'cart:detail' %}"
-                   id="cart_button" class="cart">
+                <a data-href="" href="{% url 'cart:detail' %}" id="cart_button" class="cart">
                     <img src="{% static 'img/cart-object.png' %}" alt="cart-object">
                     <span>{{ cart.item_count }}</span>
                 </a>
-
-{#                <div class="lang">#}
-{#                    <div class="rezult"><span>RUS</span>#}
-{#                        <ul class="language-chooser language-chooser-both qtranxs_language_chooser" id="qtranslate-chooser">#}
-{#                            <li><a href="/ru/" class="qtranxs_flag_ru qtranxs_flag_and_text" title="RUS (ru)"><span>RUS</span></a></li>#}
-{#                            <li><a href="/uk/" class="qtranxs_flag_ua qtranxs_flag_and_text" title="UKR (ua)"><span>UKR</span></a></li>#}
-{#                            <li><a href="/en-us/" class="qtranxs_flag_en qtranxs_flag_and_text" title="ENG (en)"><span>ENG</span></a></li>#}
-{#                        </ul>#}
-{#                        <div class="qtranxs_widget_end"></div>#}
-{#                    </div>#}
-{#                </div>#}
-
                 {% include 'cy/currency_base_template.html' %}
             </div><!-- box-cart -->
-
             <div class="clear"></div>
         </div>
     </div><!-- bar-menu -->
-
-{#    <div id="cart_wrapper" class="cart_wrapper_modal">#}
-{##}
-{#        <div class="container">#}
-{#            <div class="title style-4">#}
-{#                <h1 class="h2">{% trans "Shopping bag" %}</h1>#}
-{#                <div class="clear"></div>#}
-{#            </div><!-- title -->#}
-{##}
-{#            {% if cart.list_items %}#}
-{##}
-{#                <div class="row box-blog">#}
-{#                    <div class="col-xs-12">#}
-{#                        <div class="woocommerce">#}
-{#                            <style>#}
-{#                                input::-webkit-outer-spin-button,#}
-{#                                input::-webkit-inner-spin-button {#}
-{#                                    -webkit-appearance: none;#}
-{#                                    margin: 0;#}
-{#                                }#}
-{#                                input[type='number'] {#}
-{#                                    -moz-appearance: textfield;#}
-{#                                    margin: 0;#}
-{#                                    float: right!important;#}
-{#                                }#}
-{#                                .conteiner-corzin .coupon input.btn {#}
-{#                                    display: block;#}
-{#                                    padding: 17px 20px;#}
-{#                                    font-size: 12px;#}
-{#                                    letter-spacing: 0.2em;#}
-{#                                    border-radius: 50px;#}
-{#                                    border-width: 1px;#}
-{#                                    text-align: center;#}
-{#                                    background-color: #ff887b;#}
-{#                                    height: auto;#}
-{#                                    margin-top: 15px;#}
-{#                                }#}
-{#                                .conteiner-corzin .coupon input.btn:hover {#}
-{#                                    background-color: white;#}
-{#                                }#}
-{#                                .woocommerce .cart-collaterals, .woocommerce-page .cart-collaterals {#}
-{#                                        max-width: 50%;#}
-{#                                    width: 100%;#}
-{#                                }#}
-{#                            </style>#}
-{#                            <div class="conteiner-corzin">#}
-{#                                <div class="wrap">#}
-{#                                    <div class="item-list cart">#}
-{##}
-{#                                        {% for item in cart.list_items %}#}
-{#                                            <div class="item cart_item">#}
-{#                                                <div class="img_link">#}
-{#                                                    <a href="{% url 'products:detail' item.obj.product.category.id item.obj.product.sub_categories.slug item.obj.product.id %}" class="con">#}
-{#                                                        <img width="250" height="300" src="{{ item.obj.get_main_image.url }}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" sizes="(max-width: 250px) 100vw, 250px">#}
-{#                                                    </a>#}
-{#                                                </div>#}
-{#                                                <div class="title">#}
-{#                                                    <a href="{% url 'products:detail' item.obj.product.category.id item.obj.product.sub_categories.slug item.obj.product.id %}" class="name">#}
-{#                                                        {{ item.obj.product.title }}#}
-{#                                                    </a>#}
-{#                                                </div>#}
-{#                                                <div class="articool">#}
-{#                                                    <span>{% trans "SKU" %}:</span> {{ item.obj.product.sku }}#}
-{#                                                </div>#}
-{#                                                <div class="color-type">#}
-{#                                                    <span class="name">{% trans "Color" %}: </span>#}
-{#                                                    <div class="cort" style="background-color: {{ item.obj.color_value }}"></div>#}
-{#                                                </div>#}
-{#                                                <div class="kilkist">#}
-{#                                                    <div class="input-row">#}
-{#                                                        <span class="name">{% trans "Quantity" %}: </span>#}
-{#                                                        <input type="number" step="1" min="1" data-product_id="{{ item.obj.id }}" value="{{ item.quantity }}" class="input-text qty text">#}
-{#                                                        <span class="less" onclick="decr(this)"></span>#}
-{#                                                        <span class="more" onclick="incr(this)"></span>#}
-{#                                                    </div>#}
-{#                                                </div>#}
-{#                                                <div class="price">#}
-{#                                                    <span class="price">#}
-{#                                                        <span class="woocommerce-Price-amount amount">#}
-{#                                                            {% change_currency item.price CURRENCY_ACTIVE.abbreviation %}#}
-{#                                                                            {{ item.price }}#}
-{#                                                            <span class="woocommerce-Price-currencySymbol">#}
-{#                                                                {{ CURRENCY_ACTIVE.symbol }}#}
-{#                                                            </span>#}
-{#                                                        </span>#}
-{#                                                    </span>#}
-{#                                                </div>#}
-{#                                                <div class="deleter">#}
-{#                                                    <button type="button" class="deleter-christ" data-product_id="{{ item.obj.id }}"></button>#}
-{#                                                </div>#}
-{#                                            </div>#}
-{#                                        {% endfor %}#}
-{##}
-{#                                        <div class="last-row-part">#}
-{#                                                    <div class="cupon actions">#}
-{#                                                        <div class="form-cupon coupon">#}
-{#                                                            <div class="row-input coupon">#}
-{#                                                                <input type="text" name="coupon_code" id="coupon_code" placeholder="Код купона" value="">#}
-{#                                                                <input type="submit" class="btn" name="apply_coupon" value="Применить купон">#}
-{#                                                            </div>#}
-{#                                                        </div>#}
-{#                                                        <input type="submit" class="button" name="update_cart" style="position: absolute; left: -50000px" value="Обновить корзину">#}
-{#                                                        <input type="hidden" id="_wpnonce" name="_wpnonce" value="f8873ffc63">#}
-{#                                                        <input type="hidden" name="_wp_http_referer" value="/cart">#}
-{#                                                    </div>#}
-{#                                            <div class="cart-collaterals">#}
-{#                                                <div class="all-price cart_totals">#}
-{#                                                    <div class="checkout_wrap">#}
-{#                                                        <a href="{% url 'orders:checkout' %}" class="btn btn-1 submition-butt">#}
-{#                                                            <span>{% trans "Checkout" %}</span>#}
-{#                                                        </a>#}
-{#                                                    </div>#}
-{#                                                    <div class="allcost" style="text-align: right;">#}
-{#                                                        <div>#}
-{#                                                            <span>{% trans "Subtotal before shipping" %}:</span>#}
-{#                                                            <span>#}
-{#                                                                <strong>#}
-{#                                                                <span class="woocommerce-Price-amount amount">#}
-{#                                                                    {% change_currency cart.total_price CURRENCY_ACTIVE.abbreviation %}#}
-{#                                                                        {{ cart.total_price|floatformat }}#}
-{#                                                                </span>#}
-{#                                                                <span class="woocommerce-Price-currencySymbol"> {{ CURRENCY_ACTIVE.symbol }}</span></strong>#}
-{#                                                            </span>#}
-{#                                                        </div>#}
-{#                                                    </div>#}
-{#                                                </div>#}
-{#                                            </div>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div><!-- col -->#}
-{#                </div><!-- box-blog -->#}
-{##}
-{#            {% else %}#}
-{#                <p>{% trans "Your cart is empty" %}.</p>#}
-{#            {% endif %}#}
-{#        </div>#}
-{##}
-{#    </div>#}
-
-    {% block content %}
-
-    {% endblock %}
-
+    {% block content %}{% endblock %}
     <div id="end-section" class="footer">
         <div class="container">
             <div class="row">

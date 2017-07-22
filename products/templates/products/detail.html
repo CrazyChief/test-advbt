@@ -1,31 +1,21 @@
 {% extends 'products/index.html' %}
 
 {% load i18n %}
-
 {% get_available_languages as languages %}
-
 {% block title %} {% if product %} {{ product.title }} {% endif %} {% endblock %}
-
 {% load staticfiles %}
-
 {% block includefiles %}
     <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
     <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.js' %}"></script>
 {% endblock %}
-
 {% load ratings %}
-
 {% load cy %}
-
 {% load social_share %}
-
 {% block content %}
-
     <div class="body woocomerce page">
         <div class="block-left-fon" style="width: calc(20% + 11.9%); height: 1977px"></div>
         <section class="sector cat" data-spy="scroll" data-target=".replies">
             <div class="container">
-
                 <div class="nav">
                     <a href="/">{% trans "Home" %}</a>
                     <span class="line-bg"></span>
@@ -37,22 +27,15 @@
                     <span class="line-bg"></span>
                     <span>{{ product.title }}</span>
                 </div>
-
                 <div class="box row">
-
                     <!-- Success message -->
                     <div class="wm">
-    {#                    <a href="{% url 'cart:detail' %}" class="button wc-forward">{% trans "Go to cart" %}</a>#}
+                        <a href="{% url 'cart:detail' %}" class="button wc-forward">{% trans "Go to cart" %}</a>
                         {% trans "You put the" %} “{{ product.title }}” {% trans "with color:" %} <span class="prod_color"></span> {% trans "in your shopping cart" %}.
                     </div>
                     <!-- Success message -->
-
                     <div itemscope="" itemtype="http://schema.org/Product" class="post-980 product">
-
-                        <h1 class="title">
-                            <span itemprop="name" class="product_title entry-title">{{ product.title }}</span>
-                        </h1>
-
+                        <h1 class="title"><span itemprop="name" class="product_title entry-title">{{ product.title }}</span></h1>
                         <div class="big-images-content col-lg-5 col-md-5 col-sm-5 col-xs-5">
                             <!-- IMAGES -->
                             <div class="images">
@@ -68,7 +51,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 {% if product_variation_list %}
                                     <div class="thumb_wrapper">
                                         <div class="left_arrow_wrapper">
@@ -95,42 +77,24 @@
                             </div>
                             <!-- !IMAGES -->
                         </div><!-- col -->
-
                         <!-- CONTENT -->
                         <div class="short-description-content col-lg-7 col-md-7 col-sm-7 col-xs-7">
                             <div class="box-content">
-    {#                            <div class="summary entry-summary">#}
-    {#                            </div><!-- .summary -->#}
                                 <div class="line-title">
-{#                                    <h1 class="title">#}
-{#                                        <div itemprop="name" class="product_title entry-title">{{ product.title }}</div>#}
-{#                                    </h1>#}
                                     <div class="sku">
                                         <div class="product_meta">
                                             {% trans "SKU" %}:{{ product.sku }}
                                         </div>
                                     </div>
-
                                     <!-- RATING -->
                                     <style>
-                                        .star-ratings {
-                                            margin-top: 20px;
-                                        }
-                                        .star-ratings-rating-stars-container, .star-ratings-rating-average, .star-ratings-rating-count, .star-ratings-rating-user {
-                                            display: inline-block!important;
-                                        }
-                                        .star-ratings-rating-average, .star-ratings-rating-count, .star-ratings-rating-user {
-                                            vertical-align: top;
-                                            padding-right: 10px;
-                                            padding-left: 10px;
-                                        }
-                                        .star-ratings-rating-average, .star-ratings-rating-count {
-                                            border-right: solid 1px #414141;
-                                        }
+                                        .star-ratings {margin-top: 20px;}
+                                        .star-ratings-rating-stars-container, .star-ratings-rating-average, .star-ratings-rating-count, .star-ratings-rating-user {display: inline-block!important;}
+                                        .star-ratings-rating-average, .star-ratings-rating-count, .star-ratings-rating-user {vertical-align: top;padding-right: 10px;padding-left: 10px;}
+                                        .star-ratings-rating-average, .star-ratings-rating-count {border-right: solid 1px #414141;}
                                     </style>
                                     {% ratings object %}
                                     <!-- !RATING -->
-
                                 </div><!-- v><!-title -->
                                 <div class="line-price">
                                     <div class="price">
@@ -151,7 +115,6 @@
                                     </div>
                                 </div>
                                 <!-- line-price -->
-
                                 <div class="box-content box-content-left-cart">
                                 <!-- VARIATION LINKS -->
                                 <div class="varieble-box">
@@ -167,7 +130,6 @@
                                     <span class="color-description">{% trans "Color" %}: <span></span></span>
                                 </div>
                                 <!-- !VARIATION LINKS -->
-
                                 <!-- ADD TO CARD FORM -->
                                 <div class="btn-box">
                                     {% if not product.is_available %}
@@ -176,46 +138,39 @@
                                         <form class="cart" action="javascript:void(0)" method="post">
                                             <input type="hidden" name="add-to-cart" value="" data-color="" data-price="">
                                             <div class="quantity">
-                                                <input type="hidden" step="1" min="1" name="quantity"
-                                                       value="1" title="Кол-во" class="input-text qty text">
+                                                <input type="hidden" step="1" min="1" name="quantity" value="1" title="Кол-во" class="input-text qty text">
                                             </div>
                                             <button id="addToCart" type="button" class="single_add_to_cart_button button alt btn btn-1"><span class="fa fa-shopping-cart"></span> {% trans "Add to cart" %}</button>
                                         </form>
                                     {% endif %}
                                 </div><!-- box-desc -->
                                 <!-- !ADD TO CARD FORM -->
-
                                 <!-- SOCIAL'S SHARE -->
-    {#                                <div id="supsystic" class="text-center">#}
-    {#                                    <div class="row">#}
-    {#                                        <div class="col-min-12 col-xs-4 text-left">#}
-    {#                                            <strong>{% trans "SHARE" %}</strong>#}
-    {#                                        </div>#}
-    {#                                        <div class="col-min-12 col-xs-8 text-right">#}
-    {#                                            <div data-animation="no-animation" data-icons-animation="no-animation"#}
-    {#                                                 data-overlay="" data-change-size="" data-button-size="1"#}
-    {#                                                 style="font-size: 1em;"#}
-    {#                                                 class="supsystic-social-sharing supsystic-social-sharing-package-flat supsystic-social-sharing-content supsystic-social-sharing-content-align-left supsystic-social-sharing-init supsystic-social-sharing-loaded">#}
-    {#                                                {% post_to_facebook object_or_url '' %}#}
-    {#                                                {% post_to_twitter "Product: {{product.title}}. Check it out!" object_or_url "" %}#}
-    {#                                                {% post_to_gplus object_or_url "" %}#}
-    {#                                            </div>#}
-    {#                                        </div>#}
-    {#                                    </div>#}
-    {#                                </div>#}
+                                    <div id="supsystic" class="text-center">
+                                        <div class="row">
+                                            <div class="col-min-12 col-xs-4 text-left">
+                                                <strong>{% trans "SHARE" %}</strong>
+                                            </div>
+                                            <div class="col-min-12 col-xs-8 text-right">
+                                                <div data-animation="no-animation" data-icons-animation="no-animation"
+                                                     data-overlay="" data-change-size="" data-button-size="1"
+                                                     style="font-size: 1em;"
+                                                     class="supsystic-social-sharing supsystic-social-sharing-package-flat supsystic-social-sharing-content supsystic-social-sharing-content-align-left supsystic-social-sharing-init supsystic-social-sharing-loaded">
+                                                    {% post_to_facebook object_or_url '' %}
+                                                    {% post_to_twitter "Product: {{product.title}}. Check it out!" object_or_url "" %}
+                                                    {% post_to_gplus object_or_url "" %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 <!-- !SOCIAL'S SHARE -->
-
                             </div><!-- box-content -->
-
                             </div>
                         </div><!-- col -->
-
                     </div><!-- #product -->
                     <script>
-                        var href = location.href;
-                        $('.varieble-box a[href="'+href+'"]').addClass('active');
+                        var href = location.href;$('.varieble-box a[href="'+href+'"]').addClass('active');
                     </script>
-
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="tab tabs ws-tabs">
                             <button class="tablinks" onclick="openDesc(event, 'details')" id="defaultOpen">
@@ -235,7 +190,6 @@
                             </button>
                         </div>
                     </div>
-
                     <div class="box-desc col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="desc">
                             <div id="details" class="tabcontent">
@@ -247,7 +201,6 @@
                             <div id="composition" class="tabcontent">
                                 {{ product.composition|safe }}
                             </div>
-
                             <!-- REVIEWS -->
                             <div id="reviews" class="tabcontent">
                                 <h2 class="woocommerce-Reviews-title">{% trans "Reviews" %}</h2>
@@ -270,7 +223,6 @@
                                         </div>
                                     {% endfor %}
                                 {% endif %}
-
                                 <!-- REVIEW_FORM -->
                                 <div class="review-form">
                                     <h3 class="text-center">{% trans "Add your review" %}:</h3>
@@ -293,17 +245,13 @@
                                     </form>
                                 </div>
                                 <!-- !REVIEW_FORM -->
-
                             </div>
                             <!-- !REVIEWS -->
-
                             <!-- QUESTIONS -->
                             <div id="questions" class="tabcontent">
                                 <!-- QUESTION_FORM -->
                                 <div class="conteiner-comments">
-
                                     <h2>{% trans "Questions" %}</h2>
-
                                     {% if questions %}
                                         <ul class="replies">
                                             {% for question in questions %}
@@ -327,7 +275,6 @@
                                                             {% trans "Reply" %}
                                                         </button>
                                                     </div>
-
                                                     {% if question.children %}
                                                         <ul class="replies">
                                                             {% for child in question.children %}
@@ -351,7 +298,6 @@
                                                                             {% trans "Reply" %}
                                                                         </button>
                                                                     </div>
-
                                                                     {% if child.children %}
                                                                         <ul class="replies">
                                                                             {% for q in child.children %}
@@ -370,28 +316,21 @@
                                                                                     </div>
                                                                                     <div class="bottom-comment-pannel">
                                                                                         <p>{% trans "Reply added" %}: <time>{{ q.date_added|timesince }}</time></p>
-{#                                                                                        <button class="btn btn-xs" id="question_reply_{{ q.id }}">#}
-{#                                                                                            <span class="fa fa-reply"></span>#}
-{#                                                                                            {% trans "Reply" %}#}
-{#                                                                                        </button>#}
                                                                                     </div>
                                                                                 </li>
                                                                             {% endfor %}
                                                                         </ul>
                                                                     {% endif %}
-
                                                                 </li>
                                                             {% endfor %}
                                                         </ul>
                                                     {% endif %}
-
                                                 </li>
                                             {% endfor %}
                                         </ul>
                                     {% else %}
                                         <p class="woocommerce-noreviews">{% trans "No questions" %}</p>
                                     {% endif %}
-
                                     <div class="form-part" id="question_form">
                                         <form action="" method="post">
                                             {% csrf_token %}
@@ -421,7 +360,6 @@
                                             {% for field in question_form %}
                                                 {{ field.errors }}
                                             {% endfor %}
-
                                             <div class="submition-row">
                                                 <button type="submit" name="question_form">
                                                     <span>{% trans "Submit" %}</span>
@@ -429,23 +367,19 @@
                                             </div>
                                         </form>
                                     </div>
-
                                 </div>
                                 <!-- !QUESTION_FORM -->
                             </div>
                             <!-- !QUESTIONS -->
-
                         </div>
                     </div>
                 </div>
-
                 <!-- SAME PRODUCTS -->
                 {% if same_products %}
                 <div class="same_products products_wrapper">
                     <h3 class="text-center">
                         {% trans "Same products" %}
                     </h3>
-
                     <ul class="products_items">
                         {% for s_product in same_products %}
                             {% if s_product.status %}
@@ -479,13 +413,9 @@
                 </div>
                 {% endif %}
                 <!-- !SAME PRODUCTS -->
-
-
-
             </div>
         </section><!-- section blog -->
     </div>
-
 {% endblock %}
 
 

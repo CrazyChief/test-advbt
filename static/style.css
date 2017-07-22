@@ -1086,7 +1086,7 @@ body .menu-scroll ul li a:hover{color:#ff887b;font-weight:700;font-size:255%;tex
 body .bar-menu{-o-transition:all 1s ease;-moz-transition:all 1s ease;-webkit-transition:all 1s ease;transition:all 1s ease;padding-top:10px;padding-bottom:2px;position:fixed;top:0;left:0;right:0;z-index:50;background-color:rgba(255,255,255,1);box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 3px 15px 0 rgba(0, 0, 0, 0.19);}
 body .bar-menu .logo{width:250px;float:left}
 body .bar-menu .menu{float:left;width:calc(100% - 250px - 160px);margin-top:-3px;min-height:50px}
-body .bar-menu .menu ul{margin:0;padding:0;list-style-type:none;justify-content:space-around;flex-direction:row;align-items:center;display:-webkit-flex;display:-moz-flex;display:-ms-flex;display:-o-flex;display:flex}
+body .bar-menu .menu ul{margin:0;padding:0;list-style-type:none;-webkit-justify-content:space-around;justify-content:space-around;flex-direction:row;align-items:center;display:-webkit-flex;display:-moz-flex;display:-ms-flex;display:-o-flex;display:flex}
 body .bar-menu .menu ul li{padding:15px 17px;
   /*position:relative;*/
 }

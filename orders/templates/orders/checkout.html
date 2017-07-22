@@ -1,17 +1,11 @@
 {% extends 'layout/layout.html' %}
-
-{#{% load i18n %}#}
-
-{#{% get_available_languages as languages %}#}
-
+{% load i18n %}
+{% get_available_languages as languages %}
 {% load staticfiles %}
-
 {% block includefiles %}
     <script type="text/javascript" src="{% static 'checkout.js' %}"></script>
 {% endblock %}
-
 {% block title %}Ordering{% endblock %}
-
 {% block content %}
     <div class="body page height-2" style="min-height:855px">
         <div class="block-left-fon" style="width: calc(95.5px + 225px); height: 1114px"></div>
@@ -21,20 +15,17 @@
                     <h1 class="h2">Ordering</h1>
                     <div class="clear"></div>
                 </div><!-- title -->
-
                 <div class="row box-blog">
                     <div class="col-xs-12">
                         <div class="woocommerce">
                             <div class="conteiner-corzin">
                                 <div class="wrap">
-
                                     <div class="title-name-form">
                                         <h2>Select the desired method of delivery, payment and fill out the information</h2>
                                     </div>
                                     <form name="checkout" action="" method="post" class="conteiner-form">
                                         {% csrf_token %}
                                         <div class="top-row">
-                                            <!--div class="woocommerce-billing-fields"-->
                                             <div class="cel-inp">
                                                 <div class="titl-inp">{{ form.shipping_first_name.label_tag }}</div>
                                                 {{ form.shipping_first_name }}
@@ -51,7 +42,6 @@
                                                 <div class="titl-inp">{{ form.shipping_phone.label_tag }}</div>
                                                 {{ form.shipping_phone }}
                                             </div>
-                                            <!--/div-->
                                         </div>
                                         <div id="order_review" class="woocommerce-checkout-review-order">
                                             <div class="last-row">
@@ -133,14 +123,9 @@
                                             </div>
                                         </div>
                                         <div class="submit-row form-row place-order">
-{#                                            <noscript>#}
-{#                                                Поскольку ваш браузер не поддерживает JavaScript или в нем он отключен, просим убедиться в том, что вы нажали кнопку &lt;em&gt;Обновить итог&lt;/em&gt; перед регистрацией заказа. Иначе, есть риск неправильного подсчета стоимости.        &lt;br/&gt;&lt;input type="submit" class="button alt" name="woocommerce_checkout_update_totals" value="Обновить итог" /&gt;#}
-{#                                            </noscript>#}
                                             <button type="submit" class="btn alt">
                                                 <span>Confirm</span>
                                             </button>
-{#                                            <input type="hidden" id="_wpnonce" name="_wpnonce" value="aca3235573">#}
-{#                                            <input type="hidden" name="_wp_http_referer" value="/checkout">#}
                                         </div>
                                     </form>
                                 </div>
@@ -148,7 +133,6 @@
                         </div>
                     </div>
                 </div><!-- col -->
-
             </div><!-- box-blog -->
         </section>
     </div>

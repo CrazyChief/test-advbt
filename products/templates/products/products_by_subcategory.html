@@ -1,34 +1,21 @@
 {% extends 'products/products_by_category.html' %}
-
 {% load i18n %}
-
 {% get_available_languages as languages %}
-
-
 {% load staticfiles %}
-
 {% block includefiles %}
     <link rel="stylesheet" href="{% static "jquery-ui.min.css" %}">
     <link rel="stylesheet" href="{% static "jquery-ui.structure.min.css" %}">
     <link rel="stylesheet" href="{% static "jquery-ui.theme.min.css" %}">
     <script type="text/javascript" src="{% static "jquery-ui.min.js" %}"></script>
 {% endblock %}
-
 {% block title %}
     {% if category %} {{ category.title|capfirst }} {% else %} {% trans "All products" %} {% endif %}
 {% endblock %}
-
 {% load cy %}
-
 {% block sub_category %}
     {% for sub_category in sub_category_list %}
         <li class="s_category">
-            <a href="{% url "products:products_by_subcategory" category.id sub_category.slug %}"
-                    {% if sub_cat == sub_category %}
-                        class="active"
-                    {% endif %}>
-                {{ sub_category.title }}
-            </a>
+            <a href="{% url "products:products_by_subcategory" category.id sub_category.slug %}"{% if sub_cat == sub_category %} class="active"{% endif %}>{{ sub_category.title }}</a>
         </li>
     {% endfor %}
 {% endblock %}

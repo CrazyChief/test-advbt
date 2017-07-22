@@ -2,94 +2,17 @@
 
 {% load i18n %}
 {% load cropping %}
-
 {% get_available_languages as languages %}
-
 {% load staticfiles %}
-
 {% block includefiles %}
     <script type="text/javascript" src="{% static 'subscribers/subscribers.js' %}"></script>
     <style type="text/css">
-        .box-blog img {
-            max-height: 380px;
-        }
+        .box-blog img {max-height: 380px;}
     </style>
-{#    <link rel="stylesheet" type="text/css" href="{% static 'media-md.css' %}">#}
-
-{#    <script>#}
-{#        $('body').addClass('js');#}
-{#        var new_footer = $('body.js .footer').html();#}
-{#        /*$('body.js #footer').html(new_footer).addClass('footer');#}
-{#        $('#end-section').remove();*/#}
-{#        $('li.go a').attr('data-href','off');#}
-{#        var main_outerwidth = $(window).outerWidth();#}
-{#        var main_outerHeight = $(window).outerHeight();#}
-{#        if (main_outerwidth > 992 ) {#}
-{#            $('.body').addClass('main');#}
-{#            document.write('<link rel="stylesheet" href="https://www.adavibeauty.com/wp-content/themes/templebeauty/media-md.css" />');#}
-{#            $(document).ready(function ($) {#}
-{#                $(".main").onepage_scroll({#}
-{#                    sectionContainer: "section", // контейнер, к которому будет применяться скролл#}
-{#                    easing: "ease-in-out", // Тип анимации "ease", "linear", "ease-in", "ease-out", "ease-in-out"#}
-{#                    animationTime: 500, // время анимации#}
-{#                    pagination: true, // скрыть или отобразить пагинатор#}
-{#                    updateURL: true // обновлять URL или нет#}
-{#                });#}
-{#            });#}
-{#            $('li.go a').click(function(){#}
-{#                var url = $(this).attr('href');#}
-{#                //url = url.substring(4);#}
-{#                url = '2';#}
-{#                $('.onepage-pagination a[href="#'+url+'"]').trigger('click');#}
-{#                return false#}
-{#            });#}
-{#            //$('.li.go a').attr('herf','');#}
-{#        } else {#}
-{#            $('.box-blog').addClass('owl2');#}
-{#            $('.go').click(function(event) {#}
-{#                event.preventDefault();#}
-{#                var target = $(this).find('>a').prop('hash');#}
-{#                $('html, body').animate({#}
-{#                    scrollTop: $(target).offset().top#}
-{#                }, 500);#}
-{#            });#}
-{#        }#}
-{#        $('.box-blog .col-xs-12:first-child').addClass('col-1');#}
-{#        $('.box-blog .col-xs-12:last-child').addClass('col-2');#}
-{#        $('li.go').removeClass('current-menu-item');#}
-{#        $('li.go a[data-href]').attr('href','/#d2');#}
-{##}
-{#        $('.widget_wysija').addClass('form max-width280');#}
-{#        $('.wysija-paragraph').addClass('form-group');#}
-{#        $('.wysija-input').addClass('form-control');#}
-{#        $('.wysija-submit').addClass('btn');#}
-{#        $('.widget_wysija_cont').addClass('min-height-form');#}
-{#    </script>#}
-
 {% endblock %}
-
 {% block title %}{% trans "Home" %}{% endblock %}
-
 {% load cy %}
-
 {% block content %}
-
-{#    <ul class="onepage-pagination">#}
-{#        <li><a data-index="1" href="#1" class="active"></a></li>#}
-{#        <li><a data-index="2" href="#2"></a></li>#}
-{#        {% if products %}#}
-{#            <li><a data-index="3" href="#3"></a></li>#}
-{#        {% endif %}#}
-{#        <li><a data-index="4" href="#4"></a></li>#}
-{#        {% if posts %}#}
-{#            <li><a data-index="5" href="#5"></a></li>#}
-{#        {% endif %}#}
-{#    </ul>#}
-
-
-
-
-{#    <div class="main body js onepage-wrapper" style="position: relative;">#}
     <div class="main body js onepage-wrapper" data-spy="scroll" data-target=".pos-sm">
         <section class="header section active" style="height: 950px;" data-index="1">
             <div class="box-header">
@@ -103,7 +26,6 @@
                 <h2 class="title">{% trans "Natural organic cosmetic" %}</h2>
             </div><!-- box-header -->
         </section><!-- header -->
-
         <section class="sector pos-sm section" data-index="2" id="second" style="min-height: 1000px;">
             <div class="line-1"></div>
             <div class="line-2"></div>
@@ -119,7 +41,6 @@
                 </div><!-- content -->
             </div>
         </section><!-- section id="d2" -->
-
     {% if products %}
         <section class="sector product section" data-index="3" style="min-height: 1000px;">
             <div class="container flexbox">
@@ -132,7 +53,6 @@
                             <ul class="products" style="opacity: 1; display: block;">
                                 <div class="owl-wrapper-outer">
                                     <div class="owl-wrapper" style="width: 100%; transition: all 0ms ease; transform: translate3d(0px, 0px, 0px);">
-
                                         {% for product in products %}
                                             <div class="owl-item">
                                                 <li class="col product">
@@ -155,27 +75,21 @@
                                                             </span>
                                                         </span>
                                                     </h2>
-{#                                                    <p class="box-btn">#}
-{#                                                        <a href="{% url 'products:detail' product.product.category.id product.id %}" class="btn btn-1 w234">{% trans "view more" %}</a>#}
-{#                                                    </p>#}
                                                 </li>
                                             </div>
                                         {% endfor %}
-
                                     </div>
                                 </div>
-
                             </ul>
                         </div>
                     </div><!-- owl1 -->
                 </div><!-- row new-product -->
                 <p class="text-center">
-                    <a href="{% url 'products:index' %}" class="btn">{% trans "Learn More" %}</a>
+                    <a href="{% url 'products:index' %}" class="btn">{% trans "View More" %}</a>
                 </p>
             </div>
         </section><!-- section product -->
     {% endif %}
-
         <section class="sector form section" data-index="4" style="min-height: 1025px;">
             <div class="container flexbox">
                 <div class="box-form">
@@ -203,63 +117,20 @@
                                                         <div class="mailerlite-form-field">
                                                             <input id="subscr_name_field" class="form-control" placeholder="{% trans 'Name' %}" type="text" required="required" name="subscr_name">
                                                         </div>
-{#                                                        <div class="mailerlite-form-loader">Подождите....</div>#}
                                                         <div class="mailerlite-subscribe-button-container">
                                                             <button type="button" id="addSubscriber" class="mailerlite-subscribe-submit btn">{% trans "Subscribe" %}</button>
                                                         </div>
-{#                                                        <input type="hidden" name="form_id" value="1">#}
-{#                                                        <input type="hidden" name="action" value="mailerlite_subscribe_form">#}
                                                     </div>
                                                     <div id="snackbar" class="mailerlite-form-response">
-                                                        <h4>
-                                                            <p>
-                                                                <span style="color: #339966;">
-                                                                    {% blocktrans %}
-                                                                        Thank you for subscribing. A confirmation letter has been sent to you. Check your email.
-                                                                    {% endblocktrans %}
-                                                                </span>
-                                                            </p>
-                                                        </h4>
+                                                        <h4><p><span style="color: #339966;">{% blocktrans %}Thank you for subscribing. A confirmation letter has been sent to you. Check your email.{% endblocktrans %}</span></p></h4>
                                                     </div>
                                                     <div id="error_snackbar">
-                                                        <h4>
-                                                            <p>
-                                                                <span style="color: #991010;">
-                                                                    {% blocktrans %}
-                                                                        You passed incorrect email address or this email already exists. Please, check your email address. Or you use incognito profile.
-                                                                    {% endblocktrans %}
-                                                                </span>
-                                                            </p>
-                                                        </h4>
+                                                        <h4><p><span style="color: #991010;">{% blocktrans %}You passed incorrect email address or this email already exists. Please, check your email address. Or you use incognito profile.{% endblocktrans %}</span></p></h4>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
-{#                                    <script type="text/javascript">#}
-{#                                        (function() {#}
-{#                                            var jQuery = window.jQueryWP || window.jQuery;#}
-{#                                            jQuery(document).ready(function () {#}
-{#                                                var form_container = jQuery("#mailerlite-form_1[data-temp-id=58a97cb3d28b7] form");#}
-{#                                                form_container.submit(function (e) {#}
-{#                                                    e.preventDefault();#}
-{#                                                }).validate({#}
-{#                                                    submitHandler: function (form) {#}
-{#                                                        jQuery(this.submitButton).prop('disabled', true);#}
-{#                                                        form_container.find('.mailerlite-subscribe-button-container').fadeOut(function () {#}
-{#                                                            form_container.find('.mailerlite-form-loader').fadeIn()#}
-{#                                                        });#}
-{#                                                        var data = jQuery(form).serialize();#}
-{#                                                        jQuery.post('https://www.adavibeauty.com/wp-admin/admin-ajax.php', data, function (response) {#}
-{#                                                            form_container.find('.mailerlite-form-inputs').fadeOut(function () {#}
-{#                                                                form_container.find('.mailerlite-form-response').fadeIn()#}
-{#                                                            });#}
-{#                                                        });#}
-{#                                                    }#}
-{#                                                });#}
-{#                                            });#}
-{#                                        })();#}
-{#                                    </script>#}
                                 </div>
                             </div>
                         </div><!-- col -->
@@ -267,7 +138,6 @@
                 </div>
             </div>
         </section><!-- section -->
-
     {% if posts %}
         <section class="sector blog section" data-index="5" style="min-height: 1000px;">
             <div class="container flexbox">
@@ -275,17 +145,11 @@
                     <h2 class="h2">{% trans "Blog" %}</h2>
                 </div><!-- title -->
                 <div class="row box-blog">
-
                     {% for post in posts %}
                         <div class="col-xs-12 col-md-6 col col-1">
                             <div class="item-blog">
-                                <a href="{% url 'bloggiz:detail' post.slug %}">
-                                    <img src="{% cropped_thumbnail post "cropping" height=430 %}" alt="{{ post.title }}">
-                                </a>
+                                <a href="{% url 'bloggiz:detail' post.slug %}"><img src="{% cropped_thumbnail post "cropping" height=430 %}" alt="{{ post.title }}"></a>
                                 <div class="text">
-{#                                    <span class="pull-left cat">#}
-{#                                        <a href="https://www.adavibeauty.com/blog/interesting" rel="category tag">Interesting</a>#}
-{#                                    </span>#}
                                     <span class="pull-right data">{{ post.date_added|date }}</span>
                                     <p class="clear"></p>
                                     <h3 class="title">{{ post.title }}</h3>
@@ -297,17 +161,12 @@
                             </div><!-- item-blog -->
                         </div><!-- col -->
                     {% endfor %}
-
                 </div>
-                <p class="text-center">
-                    <a href="{% url 'bloggiz:list' %}" class="btn">{% trans "Read more" %}</a>
-                </p>
+                <p class="text-center"><a href="{% url 'bloggiz:list' %}" class="btn">{% trans "Read more" %}</a></p>
             </div>
         </section><!-- section blog -->
     {% endif %}
-
     </div><!-- body -->
-
 {% endblock %}
 
 

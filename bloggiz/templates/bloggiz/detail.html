@@ -1,42 +1,26 @@
 {% extends 'layout/layout.html' %}
-
 {% load i18n %}
-
 {% get_available_languages as languages %}
-
 {% block title %}{{ single_post.title }}{% endblock %}
-
 {% load staticfiles %}
-
 {% block includefiles %}
-{#    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>#}
-{#    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>#}
     <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
     <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.js' %}"></script>
 {% endblock %}
-
 {% load ratings %}
-
 {% load social_share %}
-
 {% block content %}
-
     <div data-spy="scroll" data-target=".replies" class="body page height-2" style="min-height:855px">
         <div class="block-left-fon" style="width: calc(381.5px + 225px); height: 3041px"></div>
         <section class="sector blog page single">
             <div class="container">
                 <div class="title style-4 row">
-                    <div class="col-xs-12">
-{#                        <div class="nav"><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="https://www.adavibeauty.com/" itemprop="url"><span itemprop="title">Главная</span></a></span> <span class="line-bg">›</span> <span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="https://www.adavibeauty.com/blog" itemprop="url"><span itemprop="title">Блог</span></a></span> <span class="line-bg">›</span> <span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="https://www.adavibeauty.com/blog/interesting" itemprop="url"><span itemprop="title">Interesting</span></a></span> <span class="line-bg">›</span> <span class="current">6 причин отказаться от химии в косметике</span></div><!-- .nav -->#}
-                    </div>
+                    <div class="col-xs-12"></div>
                     <div class="clear"></div>
                 </div><!-- title -->
                 <div class="row box-blog wauto">
-{#                    <div class="col-lg-6 col-md-5 col-xs-12 text-center m20"></div><!-- col -->#}
                     <div class="col-xs-12">
-                        <div class="cat cat2 name-article-tree">
-{#                            <a href="https://www.adavibeauty.com/blog/interesting" rel="category tag">Interesting</a>#}
-                        </div>
+                        <div class="cat cat2 name-article-tree"></div>
                         <div class="headrow">
                             <div class="named">
                                 <h1>{{ single_post.title }}</h1>
@@ -47,55 +31,35 @@
                                     <span>by</span>
                                     <b>{{ single_post.author }}</b>
                                 </div>
-{#                                <div class="looker">#}
-{#                                    <img src="{% static 'img/looker.png' %}" alt="">#}
-{#                                    <span>119</span>#}
-{#                                </div>#}
                                 <div class="typers">
                                     <img src="{% static 'img/typer.png' %}" alt="">
                                     <span>{{ comments|length }}</span>
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <!-- STAR RATING HERE -->
                                 {% ratings object %}
                                 <!-- !STAR RATING HERE -->
                             </div>
-
                         </div>
-
                         <div class="content2">
-                            <div class="ctext">
-                                {{ single_post.content|safe }}
-                            </div>
+                            <div class="ctext">{{ single_post.content|safe }}</div>
                         </div>
-{#                        <div class="pagination-row">#}
-{#                            <a href="https://www.adavibeauty.com/blog/interesting/orhanichna-kosmetyka-korinnykh-zhyteliv-madahaskaru" class="prew left-post post-all">#}
-{#                                <img src="{% static 'img/post-left.png' %}">#}
-{#                                <span>Prew Post</span>#}
-{#                            </a>#}
-{#                        </div>#}
-
                         <div class="conteiner-comments">
-
                             <div class="share-row" id="supsystic">
                                 <div class="comment-part">
                                     <span>{% trans "Comments" %}</span>
                                     <b>{{ comments|length }}</b>
                                 </div>
-
-{#                                <div class="share-part">#}
-{#                                    <span>{% trans "SHARE" %}:</span>#}
-{#                                    <div data-animation="no-animation" data-icons-animation="no-animation" data-overlay="" data-change-size="" data-button-size="1" style="font-size: 1em;" class="supsystic-social-sharing supsystic-social-sharing-package-flat supsystic-social-sharing-content supsystic-social-sharing-content-align-left supsystic-social-sharing-init supsystic-social-sharing-loaded">#}
-{#                                        {% post_to_facebook object_or_url '' %}#}
-{#                                        {% post_to_twitter "Post: {{single_post.title}}." object_or_url "" %}#}
-{#                                        {% post_to_gplus object_or_url "" %}#}
-{#                                    </div>#}
-{#                                </div>#}
-
+                                <div class="share-part">
+                                    <span>{% trans "SHARE" %}:</span>
+                                    <div data-animation="no-animation" data-icons-animation="no-animation" data-overlay="" data-change-size="" data-button-size="1" style="font-size: 1em;" class="supsystic-social-sharing supsystic-social-sharing-package-flat supsystic-social-sharing-content supsystic-social-sharing-content-align-left supsystic-social-sharing-init supsystic-social-sharing-loaded">
+                                        {% post_to_facebook object_or_url '' %}
+                                        {% post_to_twitter "Post: {{single_post.title}}." object_or_url "" %}
+                                        {% post_to_gplus object_or_url "" %}
+                                    </div>
+                                </div>
                             </div>
-
                             {% if comments %}
                                 <ul class="replies">
                                     {% for comment in comments %}
@@ -119,7 +83,6 @@
                                                     {% trans "Reply" %}
                                                 </button>
                                             </div>
-
                                             {% if comment.children %}
                                                 <ul class="replies">
                                                     {% for child in comment.children %}
@@ -143,7 +106,6 @@
                                                                     {% trans "Reply" %}
                                                                 </button>
                                                             </div>
-
                                                             {% if child.children %}
                                                                 <ul class="replies">
                                                                     {% for childd in child.children %}
@@ -157,31 +119,22 @@
                                                                                     <span class="name">{{ childd.name }}</span>
                                                                                 {% endif %}
                                                                             </div>
-                                                                            <div class="comment-content">
-                                                                                <blockquote>{{ childd.comment|safe }}</blockquote>
-                                                                            </div>
+                                                                            <div class="comment-content"><blockquote>{{ childd.comment|safe }}</blockquote></div>
                                                                             <div class="bottom-comment-pannel">
                                                                                 <p>{% trans "Reply added" %}: <time>{{ childd.date_added|timesince }}</time></p>
-{#                                                                                <button class="btn btn-xs" id="comment_reply_{{ childd.id }}">#}
-{#                                                                                    <span class="fa fa-reply"></span>#}
-{#                                                                                    {% trans "Reply" %}#}
-{#                                                                                </button>#}
                                                                             </div>
                                                                         </li>
                                                                     {% endfor %}
                                                                 </ul>
                                                             {% endif %}
-
                                                         </li>
                                                     {% endfor %}
                                                 </ul>
                                             {% endif %}
-
                                         </li>
                                     {% endfor %}
                                 </ul>
                             {% endif %}
-
                             <div class="form-part" id="comment_form">
                                 <form action="" method="post">
                                     {% csrf_token %}
@@ -211,7 +164,6 @@
                                     {% for field in form %}
                                         {{ field.errors }}
                                     {% endfor %}
-
                                     <div class="submition-row">
                                         <button type="submit">
                                             <span>{% trans "Submit" %}</span>
@@ -219,7 +171,6 @@
                                     </div>
                                 </form>
                             </div>
-
                         </div>
                         </div><!-- col -->
                     <div class="col-xs-12 constructor-b"></div><!-- row -->
@@ -227,7 +178,6 @@
             </div><!-- box-blog -->
         </section>
     </div>
-
 {% endblock %}
 
 
