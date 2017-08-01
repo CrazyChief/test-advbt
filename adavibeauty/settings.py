@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     # 'crazychief.pythonanywhere.com',
-    'aabe136f.ngrok.io',
+    # 'aabe136f.ngrok.io',
     # '127.0.0.1',
     ]
 

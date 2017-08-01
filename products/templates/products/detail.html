@@ -100,13 +100,13 @@
                                     <div class="price">
                                         <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
                                             <span class="woocommerce-Price-amount amount">
+                                                <span class="woocommerce-Price-currencySymbol">
+                                                    {{ CURRENCY_ACTIVE.symbol }}
+                                                </span>
                                                 <span class="amount">
                                                     {% change_currency product.price CURRENCY_ACTIVE.abbreviation %}
                                                 </span>
     {#                                            {{ product.price }}#}
-                                                <span class="woocommerce-Price-currencySymbol">
-                                                    {{ CURRENCY_ACTIVE.symbol }}
-                                                </span>
                                             </span>
                                             <meta itemprop="price" content="{% change_currency product.price CURRENCY_ACTIVE.abbreviation %}">
                                             <meta itemprop="priceCurrency" content="{{ CURRENCY_ACTIVE.abbreviation }}">
@@ -397,10 +397,10 @@
                                                 <span class="price">
     {#                                                <span class="old_amount">1000 {{ CURRENCY_ACTIVE.symbol }}</span>#}
                                                     <span class="amount">
-                                                        {% change_currency s_product.get_first_child_product.price CURRENCY_ACTIVE.abbreviation %}
                                                         <span class="woocommerce-Price-currencySymbol">
                                                             {{ CURRENCY_ACTIVE.symbol }}
                                                         </span>
+                                                        {% change_currency s_product.get_first_child_product.price CURRENCY_ACTIVE.abbreviation %}
                                                     </span>
                                                 </span>
                                             </h2>

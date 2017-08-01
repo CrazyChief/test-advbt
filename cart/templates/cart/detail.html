@@ -59,11 +59,11 @@
                                                     <div class="price">
                                                         <span class="price">
                                                             <span class="woocommerce-Price-amount amount">
-                                                                {% change_currency item.price CURRENCY_ACTIVE.abbreviation %}
-    {#                                                                            {{ item.price }}#}
                                                                 <span class="woocommerce-Price-currencySymbol">
                                                                     {{ CURRENCY_ACTIVE.symbol }}
                                                                 </span>
+                                                                {% change_currency item.price CURRENCY_ACTIVE.abbreviation %}
+    {#                                                                            {{ item.price }}#}
                                                             </span>
                                                         </span>
                                                     </div>
@@ -96,10 +96,11 @@
                                                                 <span>{% trans "Subtotal before shipping" %}:</span>
                                                                 <span>
                                                                     <strong>
-                                                                    <span class="woocommerce-Price-amount amount">
-                                                                        {% change_currency cart.total_price CURRENCY_ACTIVE.abbreviation %}
-                                                                    </span>
-                                                                    <span class="woocommerce-Price-currencySymbol"> {{ CURRENCY_ACTIVE.symbol }}</span></strong>
+                                                                        <span class="woocommerce-Price-currencySymbol"> {{ CURRENCY_ACTIVE.symbol }}</span>
+                                                                        <span class="woocommerce-Price-amount amount">
+                                                                            {% change_currency cart.total_price CURRENCY_ACTIVE.abbreviation %}
+                                                                        </span>
+                                                                    </strong>
                                                                 </span>
                                                             </div>
                                                         </div>

@@ -160,7 +160,8 @@ class ProductVariation(models.Model):
     color_description = models.CharField(max_length=50, blank=True, verbose_name=_("Color description"))
     color_value = ColorField(default='#FF0000', verbose_name=_("Color value"))
     status = models.BooleanField(choices=STATUSES, default=DRAFT, verbose_name=_("Status"))
-    price = models.FloatField(default=0, verbose_name=_("Price"))
+    # price = models.FloatField(default=0, verbose_name=_("Price"))
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name=_("Price"))
     date_added = models.DateTimeField(auto_now_add=True)
 
     class Meta:

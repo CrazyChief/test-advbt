@@ -3,7 +3,7 @@ from .models import Cy
 from .conf import session_key
 
 
-def calc(price, abbreviation, decimals=1):
+def calc(price, abbreviation, decimals=2):
     dimension = Cy.objects.get(abbreviation__iexact=abbreviation).dimension
     price = (D(price)) * dimension
     return price_round(price, decimals=decimals)
@@ -23,7 +23,7 @@ def get_active_currency(request):
         return None
 
 
-def price_round(price, decimals=1):
+def price_round(price, decimals=2):
     decimal_f = "0.1"
     if decimals > 1:
         decimal_f = "0.{}".format('1'.zfill(decimals))

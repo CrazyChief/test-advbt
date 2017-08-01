@@ -67,10 +67,10 @@
                                                         <span>
                                                             <span class="price">
                                                                 <span class="woocommerce-Price-amount amount">
-                                                                    {% change_currency product.get_first_child_product.price CURRENCY_ACTIVE.abbreviation %}
                                                                     <span class="woocommerce-Price-currencySymbol">
                                                                         {{ CURRENCY_ACTIVE.symbol }}
                                                                     </span>
+                                                                    {% change_currency product.get_first_child_product.price CURRENCY_ACTIVE.abbreviation %}
                                                                 </span>
                                                             </span>
                                                         </span>
