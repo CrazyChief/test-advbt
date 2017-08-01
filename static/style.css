@@ -1236,7 +1236,9 @@ body .body section.sector.blog .box-blog .col-1{position:absolute;right:50%;top:
 body .body section.sector.blog .box-blog .col-2{position:absolute;right:0;bottom:0;left:50%; position: static; align-self: flex-end;}
 body .body section.sector.blog .box-blog .text{
   padding:30px 0 30px 30px;
-  right:0;background-color:#fff;display:inline-block;margin:auto 0 auto -20%}
+  right:0;background-color:rgba(255,255,255,0.5);display:inline-block;
+  /*margin:auto 0 auto -20%;*/
+}
 body .body section.sector.blog .box-blog .text .cat{color:#ffb1aa;text-transform:uppercase;font-weight:500;letter-spacing:.2em}
 body .body section.sector.blog .box-blog .text .data{color:#afb8b9;font-weight:400;font-size:75%;letter-spacing:.2em}
 body .body section.sector.blog .box-blog .text .title{color:#383a3a;font-family:"Times New Roman";font-weight:700;font-size:145%;text-align:left}
