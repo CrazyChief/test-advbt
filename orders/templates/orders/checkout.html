@@ -62,13 +62,17 @@
                                             </div>
                                             <div class="hidden-part" style="display: none;">
                                                 <div class="main-row">
-                                                    <div class="cel-inp" id="id_shipping_departament_field">
-                                                        <div class="titl-inp">{{ form.shipping_departament.label_tag }}</div>
-                                                        {{ form.shipping_departament }}
-                                                    </div>
+{#                                                    <div class="cel-inp" id="id_shipping_departament_field">#}
+{#                                                        <div class="titl-inp">{{ form.shipping_departament.label_tag }}</div>#}
+{#                                                        {{ form.shipping_departament }}#}
+{#                                                    </div>#}
                                                     <div class="cel-inp" id="id_shipping_city_field">
                                                         <div class="titl-inp">{{ form.shipping_country.label_tag }}</div>
                                                         {{ form.shipping_country }}
+                                                    </div>
+                                                    <div class="cel-inp" id="id_shipping_city_field">
+                                                        <div class="titl-inp">{{ form.shipping_city.label_tag }}</div>
+                                                        {{ form.shipping_city }}
                                                     </div>
                                                     <div class="cel-inp" id="id_shipping_city_field">
                                                         <div class="titl-inp">{{ form.shipping_state.label_tag }}</div>
@@ -77,10 +81,6 @@
                                                     <div class="cel-inp" id="id_shipping_city_field">
                                                         <div class="titl-inp">{{ form.shipping_postcode.label_tag }}</div>
                                                         {{ form.shipping_postcode }}
-                                                    </div>
-                                                    <div class="cel-inp" id="id_shipping_city_field">
-                                                        <div class="titl-inp">{{ form.shipping_city.label_tag }}</div>
-                                                        {{ form.shipping_city }}
                                                     </div>
                                                 </div>
                                                 <div class="center-row">

@@ -17,7 +17,7 @@ $(document).ready(function () {
 
     $('input[name="shipping_type"]').on('change', function () {
         console.log($(this).val());
-        if( $(this).val() == 'N_P' ){
+        if( $(this).val() == 'USA_S' ){
             $('.hidden-part').slideDown(300);
             $('.hidden-part .main-row input').prop('required',true);
         } else {
@@ -30,7 +30,7 @@ $(document).ready(function () {
             }
         }
     });
-    if($('input[name="shipping_type"]:checked').val() == 'N_P') {
+    if($('input[name="shipping_type"]:checked').val() == 'USA_S') {
         $('.hidden-part').slideDown(300);
         $('.hidden-part .main-row input').prop('required',true);
     }

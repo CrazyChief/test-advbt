@@ -7,11 +7,11 @@ class Order(models.Model):
     """
     Order model. Stores detail information of every order
     """
-    NEW_POST = 'N_P'
-    ANOTHER_VARIANT = 'A_V'
+    USA_SHIPPING = 'USA_S'
+    INTERNATIONAL_SHIPPING = 'I_S'
     SHIPPING_TYPES = (
-        (NEW_POST, 'New Post'),
-        (ANOTHER_VARIANT, 'Another variant (We will call you back to clarify the details)'),
+        (USA_SHIPPING, 'USA Shipping'),
+        (INTERNATIONAL_SHIPPING, 'International Shipping (We will call you back to clarify the details)'),
     )
     PAY_NOW = 'N'
     WHEN_RECEIVING = 'W_R'
@@ -21,14 +21,14 @@ class Order(models.Model):
     )
     shipping_first_name = models.CharField(max_length=100)
     shipping_last_name = models.CharField(max_length=100)
-    shipping_type = models.CharField(max_length=50, choices=SHIPPING_TYPES, default=ANOTHER_VARIANT)
+    shipping_type = models.CharField(max_length=50, choices=SHIPPING_TYPES, default=INTERNATIONAL_SHIPPING)
     shipping_street = models.CharField(max_length=200, null=True, blank=True)
     shipping_home = models.CharField(max_length=20, null=True, blank=True)
     shipping_state = models.CharField(max_length=100, null=True, blank=True)
     shipping_postcode = models.CharField(max_length=15, null=True, blank=True)
     shipping_country = models.CharField(max_length=50, null=True, blank=True)
     shipping_city = models.CharField(max_length=100, null=True, blank=True)
-    shipping_departament = models.CharField(max_length=400, null=True, blank=True)
+    # shipping_departament = models.CharField(max_length=400, null=True, blank=True)
     shipping_to_home = models.BooleanField(default=False)
     shipping_phone = models.CharField(max_length=20)
     shipping_email = models.EmailField(max_length=254)
