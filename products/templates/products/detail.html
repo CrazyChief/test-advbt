@@ -67,7 +67,9 @@
                                                              src="{{ img.get_main_image.url }}" alt="{{ img.color_description }}"
                                                              title="{{ img.color_description }}"
                                                              data-price="{% change_currency img.price CURRENCY_ACTIVE.abbreviation %}"
-                                                             data-index="{{ img.id }}" onclick="showThumb(this)">
+                                                             data-index="{{ img.id }}"
+                                                             data-sku="{{ img.sku }}"
+                                                             onclick="showThumb(this)">
                                                     </div>
                                                 {% endfor %}
                                             </div>
@@ -83,7 +85,7 @@
                                 <div class="line-title">
                                     <div class="sku">
                                         <div class="product_meta">
-                                            {% trans "SKU" %}:{{ product.sku }}
+                                            {% trans "SKU" %}: <span></span>
                                         </div>
                                     </div>
                                     <!-- RATING -->
@@ -123,6 +125,7 @@
                                            class="varieble dot" title="{{ variation.color_description }}"
                                            data-index="{{ variation.id }}"
                                            data-price="{% change_currency variation.price CURRENCY_ACTIVE.abbreviation %}"
+                                           data-sku="{{ variation.sku }}"
                                            onclick="showThumb(this)">
                                             <span style="background-color: {{ variation.color_value }};"></span>
                                         </a>

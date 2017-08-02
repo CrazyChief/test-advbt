@@ -114,7 +114,6 @@ class Product(models.Model):
     title = models.CharField(max_length=100, verbose_name=_("Title"))
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=_("Category"))
     status = models.BooleanField(choices=STATUSES, default=DRAFT, verbose_name=_("Status"))
-    sku = models.CharField(max_length=20, unique=True, null=True, verbose_name=_("Sku"))
     is_new = models.BooleanField(default=False, verbose_name=_("Is new"))
     is_available = models.BooleanField(default=False, verbose_name=_("Is available"))
     sub_categories = models.ForeignKey(SubCategory, null=True, on_delete=models.SET_NULL, verbose_name=_("Sub categories"))
@@ -133,7 +132,7 @@ class Product(models.Model):
         return reverse('products:detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return self.title + " - " + str(self.sku)
+        return self.title
 
     def is_posted(self):
         return self.status
@@ -157,6 +156,7 @@ class ProductVariation(models.Model):
         (DRAFT, 'Draft'),
     )
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_("Product"))
+    sku = models.CharField(max_length=20, unique=True, null=True, verbose_name=_("Sku"))
     color_description = models.CharField(max_length=50, blank=True, verbose_name=_("Color description"))
     color_value = ColorField(default='#FF0000', verbose_name=_("Color value"))
     status = models.BooleanField(choices=STATUSES, default=DRAFT, verbose_name=_("Status"))

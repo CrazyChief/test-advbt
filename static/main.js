@@ -82,7 +82,8 @@ $(document).ready(function(){
                 title = first.childNodes[1].getAttribute("alt"),
                 src = first.childNodes[1].getAttribute("src"),
                 price = first.childNodes[1].getAttribute("data-price"),
-                pk = first.childNodes[1].getAttribute("data-index");
+                pk = first.childNodes[1].getAttribute("data-index"),
+                sku = first.childNodes[1].getAttribute("data-sku");
             var big_img_wrap = $(".owl-item"),
                 big_img_a = big_img_wrap.children(),
                 big_img = big_img_wrap.find("img").attr("src", src);
@@ -91,6 +92,7 @@ $(document).ready(function(){
             $(".line-price .price .woocommerce-Price-amount > .amount").text(price);
             $(".varieble-box").find(".color-description span").text(title);
             $(".box.row div.wm span.prod_color").text(title);
+            $("div.sku span").text(sku);
         }
     }
     if (window.location.pathname.match(pattern_products_details) || window.location.pathname.match(pattern_bloggiz_details)) {
@@ -159,7 +161,8 @@ function showThumb(e) {
         pk = $(e).attr("data-index"),
         price = $(e).attr("data-price"),
         title = $(e).attr("title"),
-        item = wrap.find(".thumb_product").find("img[data-index='"+pk+"']").attr("src");
+        item = wrap.find(".thumb_product").find("img[data-index='"+pk+"']").attr("src"),
+        sku = $(e).attr('data-sku');
     var big_img_wrap = $(".owl-item"),
         big_img_a = big_img_wrap.children().attr("href", item),
         big_img = big_img_wrap.find("img").attr("src", item);
@@ -168,6 +171,8 @@ function showThumb(e) {
     $(".line-price .price .woocommerce-Price-amount > .amount").text(price);
     $(".varieble-box").find(".color-description span").text(title);
     $(".box.row div.wm span.prod_color").text(title);
+    $("div.sku span").text(sku);
+
 }
 /* using jQuery */
 function getCookie(name) {

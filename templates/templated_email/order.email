@@ -14,7 +14,7 @@
         <b>Name:</b> {{ order.shipping_name }}<br>
         <b>Email:</b> {{ order.shipping_email }} <br>
         <b>Phone:</b> {{ order.shipping_phone }} <br>
-        {% if order.shipping_type == 'N_P' %}
+        {% if order.shipping_type == 'USA_S' %}
             <b>Country:</b> {{ order.shipping_country }}<br>
             <b>State:</b> {{ order.shipping_state }} <br>
             <b>City:</b> {{ order.shipping_city }}<br>
@@ -37,6 +37,7 @@
         <thead>
             <tr>
                 <th>Product</th>
+                <th>SKU</th>
                 <th>Color</th>
                 <th>Cost</th>
                 <th>Quantity</th>
@@ -47,6 +48,7 @@
             {% for item in order.orderitem_set.all %}
                 <tr class="row{% cycle "1" "2" %}">
                     <td>{{ item.product }}</td>
+                    <td>{{ item.product.sku }}</td>
                     <td>{{ item.product.color_description }}</td>
                     <td>${{ item.price }}</td>
                     <td>{{ item.quantity }}</td>

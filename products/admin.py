@@ -62,7 +62,7 @@ class ProductAdmin(admin.ModelAdmin):
     formfield_overrides = {TextField: {'widget': CKEditorUploadingWidget}}
     fieldsets = (
         (None, {
-            'fields': ('title', 'category', 'status', 'sku', 'is_new', 'is_available', 'sub_categories', 'keywords',),
+            'fields': ('title', 'category', 'status', 'is_new', 'is_available', 'sub_categories', 'keywords',),
         }),
         ('Image', {
             'fields': ('image',),
