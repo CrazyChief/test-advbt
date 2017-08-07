@@ -49,12 +49,12 @@
                                             toolTipMin.setAttribute("class", "toolTip");
                                             this.childNodes[i].appendChild(toolTipMin);
                                         }
-                                        this.childNodes[1].childNodes[0].innerText = {{ price_values.min_price }};
-                                        this.childNodes[2].childNodes[0].innerText = {{ price_values.max_price }};
+                                        this.childNodes[1].childNodes[0].innerText = ({{ price_values.min_price }} * {{ CURRENCY_ACTIVE.dimension }}).toFixed(0);
+                                        this.childNodes[2].childNodes[0].innerText = ({{ price_values.max_price }} * {{ CURRENCY_ACTIVE.dimension }}).toFixed(0);
                                     },
                                 });
                                 $("#slider").on("slidechange", function (event, ui) {
-                                    ui.handle.childNodes[0].innerText = ui.value;
+                                    ui.handle.childNodes[0].innerText = (ui.value * {{ CURRENCY_ACTIVE.dimension }}).toFixed(0);
                                     var min_price = ui.values[0],
                                         max_price = ui.values[1];
                                     price.set(min_price, max_price);
