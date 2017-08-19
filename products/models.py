@@ -121,7 +121,7 @@ class Product(models.Model):
     image = models.FileField(upload_to=upload_path, verbose_name=_("Image"))
     date_added = models.DateTimeField(auto_now_add=True)
     details = models.TextField(blank=True, verbose_name=_("Details"))
-    htu = models.TextField(blank=True, verbose_name=_("How to use"))
+    htu = models.TextField(blank=True, verbose_name=_("Benefits and how to use info"))
     composition = models.TextField(blank=True, verbose_name=_("Composition"))
 
     class Meta:
