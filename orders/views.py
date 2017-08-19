@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.urls import reverse
 from django.http import HttpResponseForbidden
 from django.views.generic import FormView, DetailView
+from django.conf import settings
 from .forms import OrderCreateForm
 from .models import Order, OrderItem
 from cart.views import Cart
@@ -18,6 +19,7 @@ class CheckoutView(FormView):
 
     def __init__(self):
         self.cart = Cart
+        self.receiver_email = settings.PAYPAL_RECEIVER_EMAIL
 
     def get(self, request, *args, **kwargs):
         self.cart = self.cart(request)
@@ -53,6 +55,7 @@ class CheckoutView(FormView):
                     recipient_list=[self.order.shipping_email],
                     context={
                         'order': self.order,
+                        'receiver_email': self.receiver_email,
                     }
                 )
                 self.cart.empty(Cart(self.request))

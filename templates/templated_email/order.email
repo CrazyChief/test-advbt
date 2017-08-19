@@ -27,6 +27,23 @@
             {% else %}
                 No
             {% endif %}
+        {% elif order.shipping_type == 'I_S' %}
+            <b>Country:</b> {{ order.shipping_country }}<br>
+            <b>City:</b> {{ order.shipping_city }}<br>
+            <b>Post code:</b> {{ order.shipping_postcode }}<br>
+            <b>Street:</b> {{ order.shipping_street }}<br>
+            <b>Home:</b> {{ order.shipping_home }}<br>
+            <b>Departament:</b> {{ order.shipping_departament }}<br>
+            <b>Home delivery:</b> {% if order.shipping_to_home == True %}
+                Yes
+            {% else %}
+                No
+            {% endif %}
+            <p style="font-weight: 600; color: red;">
+                When you'll pay your order, type a note "Adavibeauty, Order number: {{ order.id }}". <br>
+                Receiver email: {{ receiver_email }}
+                All payments for PayPal only!
+            </p>
         {% endif %}
     </p>
     <br>

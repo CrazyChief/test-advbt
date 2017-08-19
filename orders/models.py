@@ -17,7 +17,7 @@ class Order(models.Model):
     WHEN_RECEIVING = 'W_R'
     PAY_TYPES = (
         (PAY_NOW, 'Now'),
-        (WHEN_RECEIVING, 'When receiving (for New Post only)'),
+        (WHEN_RECEIVING, 'When receiving'),
     )
     shipping_first_name = models.CharField(max_length=100)
     shipping_last_name = models.CharField(max_length=100)

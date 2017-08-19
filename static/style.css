@@ -1804,7 +1804,7 @@ body {
 
 .conteiner-corzin .conteiner-form .cel-inp{ width: 100%; padding: 10px; }
 .conteiner-corzin .conteiner-form .cel-inp .titl-inp{ font-size: 16px; color: rgb(93, 99, 106); line-height: 1.2; padding-bottom: 15px; }
-.conteiner-corzin .conteiner-form .cel-inp input{width: 100%; border: 1px solid #ff887b; outline: none; padding: 0 5px; font-size: 16px; color: rgb(93, 99, 106); height: 36px;}
+.conteiner-corzin .conteiner-form .cel-inp input, .conteiner-corzin .conteiner-form .cel-inp select {width: 100%; border: 1px solid #ff887b; outline: none; padding: 0 5px; font-size: 16px; color: rgb(93, 99, 106); height: 36px; background-color: white;}
 .conteiner-corzin .conteiner-form .cel-inp input.error{box-shadow: inset 0px 0px 7px 0px #ff887b;}
 .conteiner-corzin .conteiner-form .hidden-part .main-row{display: flex; align-items: center; justify-content: space-around; }
 .conteiner-corzin .conteiner-form .hidden-part .main-row .cel-inp{max-width: 315px; }
