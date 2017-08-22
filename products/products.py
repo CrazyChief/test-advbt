@@ -9,7 +9,7 @@ session_key = getattr(settings, 'PRODUCT_SESSION_KEY', 'products')
 class ProductBase(object):
 
     default_min_price = 10
-    default_max_price = ProductVariation.objects.all().aggregate(Max('price'))['price__max']
+    default_max_price = int(ProductVariation.objects.all().aggregate(Max('price'))['price__max'])
 
     def __init__(self, request):
         self.request = request
