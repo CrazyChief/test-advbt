@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     # 'crazychief.pythonanywhere.com',
-    # 'aabe136f.ngrok.io',
+    # '2a328aa6.ngrok.io',
     # '127.0.0.1',
     ]
 
@@ -272,7 +272,7 @@ EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'danilovdmitry94@gmail.com'
-EMAIL_HOST_PASSWORD = '609NumberOne$$123'
+EMAIL_HOST_PASSWORD = '#$@609absolute361'
 DEFAULT_FROM_EMAIL = 'danilovdmitry94@gmail.com'
 # DEFAULT_TO_EMAIL = 'to email'
 
@@ -335,7 +335,8 @@ STAR_RATINGS_STAR_HEIGHT = 20
 STAR_RATINGS_ANONYMOUS = True
 
 META_SITE_PROTOCOL = 'http'
-META_SITE_DOMAIN = 'aabe136f.ngrok.io'
+META_SITE_DOMAIN = 'crazychief.pythonanywhere.com'
+# META_SITE_DOMAIN = '2a328aa6.ngrok.io'
 META_SITE_NAME = 'Adavibeauty'
 META_USE_OG_PROPERTIES = True
 

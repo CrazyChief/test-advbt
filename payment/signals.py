@@ -26,7 +26,7 @@ def payment_notification(sender, **kwargs):
 
         send_templated_mail(
             template_name='order',
-            from_email='noreply@sandbox8f86f5175eec47f39c7887ee6e45e3a9.mailgun.org',
+            from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[order.shipping_email],
             context={
                 'order': order,
