@@ -7,27 +7,27 @@ from ckeditor.fields import RichTextField
 from colorfield.fields import ColorField
 
 
-class Keyword(models.Model):
-    """
-    Keywords for meta
-    """
-    word = models.CharField(max_length=240, unique=True, verbose_name=_("Word"))
-    is_active = models.BooleanField(default=False, verbose_name=_("Is active?"))
-    # product = models.ManyToManyField(Product, null=True)
-
-    class Meta:
-        verbose_name = _("Keyword")
-        verbose_name_plural = _("Keywords")
-
-    def __str__(self):
-        return self.word
-
-    def is_keyword_active(self):
-        return self.is_active
-
-    is_keyword_active.admin_order_field = 'is_active'
-    is_keyword_active.boolean = True
-    is_keyword_active.short_description = 'Is active?'
+# class Keyword(models.Model):
+#     """
+#     Keywords for meta
+#     """
+#     word = models.CharField(max_length=240, unique=True, verbose_name=_("Word"))
+#     is_active = models.BooleanField(default=False, verbose_name=_("Is active?"))
+#     # product = models.ManyToManyField(Product, null=True)
+#
+#     class Meta:
+#         verbose_name = _("Keyword")
+#         verbose_name_plural = _("Keywords")
+#
+#     def __str__(self):
+#         return self.word
+#
+#     def is_keyword_active(self):
+#         return self.is_active
+#
+#     is_keyword_active.admin_order_field = 'is_active'
+#     is_keyword_active.boolean = True
+#     is_keyword_active.short_description = 'Is active?'
 
 
 class Category(models.Model):
@@ -117,7 +117,7 @@ class Product(models.Model):
     is_new = models.BooleanField(default=False, verbose_name=_("Is new"))
     is_available = models.BooleanField(default=False, verbose_name=_("Is available"))
     sub_categories = models.ForeignKey(SubCategory, null=True, on_delete=models.SET_NULL, verbose_name=_("Sub categories"))
-    keywords = models.ManyToManyField(Keyword, verbose_name=_("Keywords"), null=True)
+    # keywords = models.ManyToManyField(Keyword, verbose_name=_("Keywords"), null=True)
     image = models.FileField(upload_to=upload_path, verbose_name=_("Image"))
     date_added = models.DateTimeField(auto_now_add=True)
     details = models.TextField(blank=True, verbose_name=_("Details"))

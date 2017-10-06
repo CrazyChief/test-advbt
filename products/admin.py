@@ -1,19 +1,19 @@
 from django.contrib import admin
 from django.db.models import TextField
 # from modeltranslation.admin import TranslationAdmin, TabbedTranslationAdmin, TranslationTabularInline
-from .models import Category, SubCategory, Product, ProductVariation, ProductImage, ProductReview, ProductQuestion, Keyword
+from .models import Category, SubCategory, Product, ProductVariation, ProductImage, ProductReview, ProductQuestion
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
-class KeywordAdmin(admin.ModelAdmin):
-    list_display = (
-        'word',
-        'is_keyword_active',
-    )
-    list_filter = [
-        'word',
-        'is_active',
-    ]
+# class KeywordAdmin(admin.ModelAdmin):
+#     list_display = (
+#         'word',
+#         'is_keyword_active',
+#     )
+#     list_filter = [
+#         'word',
+#         'is_active',
+#     ]
 
 
 # class CategoryAdmin(TabbedTranslationAdmin):
@@ -62,7 +62,7 @@ class ProductAdmin(admin.ModelAdmin):
     formfield_overrides = {TextField: {'widget': CKEditorUploadingWidget}}
     fieldsets = (
         (None, {
-            'fields': ('title', 'category', 'status', 'is_new', 'is_available', 'sub_categories', 'keywords',),
+            'fields': ('title', 'category', 'status', 'is_new', 'is_available', 'sub_categories',),
         }),
         ('Image', {
             'fields': ('image',),
@@ -73,7 +73,7 @@ class ProductAdmin(admin.ModelAdmin):
         }),
     )
     # inlines = [KeywordAdmin]
-    filter_horizontal = ('keywords',)
+    # filter_horizontal = ('keywords',)
 
 
 # class ProduvtVariationAdmin(TabbedTranslationAdmin):
