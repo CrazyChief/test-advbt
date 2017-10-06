@@ -27,6 +27,7 @@ SECRET_KEY = 't0fd&$z^=g5kwn%^obiwpcrzs%o3!s@b3@$413%4ye@nib97bm'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    # 'en.adavibeauty.com',
     # 'crazychief.pythonanywhere.com',
     # '2a328aa6.ngrok.io',
     # '127.0.0.1',
@@ -219,40 +220,6 @@ CKEDITOR_CONFIGS = {
                 'elementspath'
             ]),
     },
-    # 'comment': {
-    #     # 'skin': 'moono',
-    #     'toolbar_Basic': [
-    #         ['Source', '-', 'Bold', 'Italic']
-    #     ],
-    #     'toolbar_YourCustomToolbarConfig': [
-    #         {'name': 'basicstyles',
-    #          'items': ['Bold', 'Italic', 'Underline', 'Strike', '-']},
-    #         {'name': 'paragraph',
-    #          'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft',
-    #              'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', ]},
-    #         {'name': 'styles', 'items': ['Styles', 'Font', 'FontSize']},
-    #         {'name': 'colors', 'items': ['TextColor', 'BGColor']},
-    #         {'name': 'about', 'items': ['About']},
-    #     ],
-    #     'toolbar': 'YourCustomToolbarConfig',
-    #     'tabSpaces': 2,
-    #     'extraPlugins': ','.join(
-    #         [
-    #             # your extra plugins here
-    #             'div',
-    #             'autolink',
-    #             'autoembed',
-    #             'embedsemantic',
-    #             'autogrow',
-    #             # 'devtools',
-    #             'widget',
-    #             'lineutils',
-    #             # 'clipboard',
-    #             'dialog',
-    #             'dialogui',
-    #             'elementspath'
-    #         ]),
-    # }
 }
 
 # Email
@@ -260,17 +227,12 @@ CKEDITOR_CONFIGS = {
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-# EMAIL_USE_SSL = True
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 465
-# EMAIL_HOST_USER = 'danilovdmitry94@gmail.com'
-# EMAIL_HOST_PASSWORD = '609NumberOne$$123'
-# DEFAULT_FROM_EMAIL = 'danilovdmitry94@gmail.com'
-# # DEFAULT_TO_EMAIL = 'to email'
-
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
+# EMAIL_HOST_USER = 'adavibeauty@gmail.com'
+# EMAIL_HOST_PASSWORD = 'Mevsha_21'
+# DEFAULT_FROM_EMAIL = 'adavibeauty@gmail.com'
 EMAIL_HOST_USER = 'danilovdmitry94@gmail.com'
 EMAIL_HOST_PASSWORD = '#$@609absolute361'
 DEFAULT_FROM_EMAIL = 'danilovdmitry94@gmail.com'
@@ -335,7 +297,7 @@ STAR_RATINGS_STAR_HEIGHT = 20
 STAR_RATINGS_ANONYMOUS = True
 
 META_SITE_PROTOCOL = 'http'
-META_SITE_DOMAIN = 'crazychief.pythonanywhere.com'
+META_SITE_DOMAIN = 'en.adavibeauty.com'
 # META_SITE_DOMAIN = '2a328aa6.ngrok.io'
 META_SITE_NAME = 'Adavibeauty'
 META_USE_OG_PROPERTIES = True
@@ -353,3 +315,5 @@ TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBacke
 
 PAYPAL_RECEIVER_EMAIL = 'danilovdmitry94-bussines@gmail.com'
 PAYPAL_TEST = True
+# PAYPAL_RECEIVER_EMAIL = 'adavibeauty@gmail.com'
+# PAYPAL_TEST = True

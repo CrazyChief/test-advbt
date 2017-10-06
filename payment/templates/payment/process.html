@@ -8,7 +8,12 @@
     <div class="body page">
         <div style="width: 300px;margin: 150px auto;text-align: center;">
             <h1>{% trans "Payment PayPal" %}</h1>
-            {{ form.render }}
+            <br>
+            <div style="padding: 5px 10px; border: 1px solid #ff887b;">
+                <h2 style="color: black; text-align: center; border-bottom: 1px solid #ff887b;">Press button below!</h2>
+                <br>
+                {{ form.render }}
+            </div>
         </div>
     </div>
 {% endblock %}

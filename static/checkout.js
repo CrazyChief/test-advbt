@@ -23,12 +23,16 @@ $(document).ready(function () {
             $('.hidden-part .main-row input').prop('required',true);
             $('.hidden-part .main-row select').prop('required',true);
             $('.hidden-part .main-row #id_shipping_state_field').css({display: "block"});
+            $('#id_shipping_country_field').css({display: "none"});
+            $('.hidden-part .main-row input#id_shipping_country').prop('required', false);
         } else if ($(this).val() == 'I_S'){
             $('.hidden-part').slideUp(300);
             $('.hidden-part').slideDown(300);
             $('.hidden-part .main-row input').prop('required',true);
             $('.hidden-part .main-row select').prop('required',false);
             $('.hidden-part .main-row #id_shipping_state_field').css({display: "none"});
+            $('#id_shipping_country_field').css({display: "block"});
+            $('.hidden-part .main-row input#id_shipping_country').prop('required', true);
             if ( $('#id_pay_type_1').is(":checked") ) {
                 $('#id_pay_type_1').removeProp('checked');
                 $('#id_pay_type_0').prop('checked', true);
@@ -40,11 +44,15 @@ $(document).ready(function () {
         $('.hidden-part').slideDown(300);
         $('.hidden-part .main-row input').prop('required',true);
         $('.hidden-part .main-row select').prop('required',true);
+        $('#id_shipping_country_field').css({display: "none"});
+        $('.hidden-part .main-row input#id_shipping_country').prop('required', false);
     } else if ($('input[name="shipping_type"]:checked').val() == 'I_S') {
         $('.hidden-part').slideDown(300);
         $('.hidden-part .main-row input').prop('required',true);
         $('.hidden-part .main-row select').prop('required',false);
         $('.hidden-part .main-row #id_shipping_state_field').css({display: "none"});
+        $('#id_shipping_country_field').css({display: "block"});
+        $('.hidden-part .main-row input#id_shipping_country').prop('required', true);
     }
     if ($('#id_shipping_to_home:checked').length) {
         $('#id_shipping_street').prop('required',true);
