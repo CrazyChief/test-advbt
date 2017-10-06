@@ -49,10 +49,19 @@ class SubscriberView(object):
             print(data)
             send_templated_mail(
                 template_name='subscriber_noreply',
-                from_email='noreply@sandbox8f86f5175eec47f39c7887ee6e45e3a9.mailgun.org',
+                from_email=settings.DEFAULT_FROM_EMAIL,
                 recipient_list=[self.object.email],
                 context={
                     'full_name': self.object.name,
+                }
+            )
+            send_templated_mail(
+                template_name='new_subscriber',
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.DEFAULT_FROM_EMAIL],
+                context={
+                    'full_name': self.object.name,
+                    'email': self.object.email,
                 }
             )
             # msg = """Dear %s, thanks for your subscribing. We will notify you about all news on our site.

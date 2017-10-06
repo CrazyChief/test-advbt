@@ -32,5 +32,13 @@ def payment_notification(sender, **kwargs):
                 'order': order,
             }
         )
+        send_templated_mail(
+            template_name='new_order',
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[settings.DEFAULT_FROM_EMAIL],
+            context={
+                'order': order,
+            }
+        )
 
 

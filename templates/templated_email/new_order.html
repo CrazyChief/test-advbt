@@ -1,7 +1,7 @@
 {% block html %}
     <style></style>
 
-    <h1>Order</h1>
+    <h1>NEW Order!</h1>
     <br>
     <p>
         <b>Order number: {{ order.id }}</b> <br>
@@ -42,9 +42,7 @@
         {% endif %}
         {% if order.pay_type == 'W_R' %}
             <p style="font-weight: 600; color: red;">
-                When you'll pay your order, type a note "Adavibeauty, Order number: {{ order.id }}". <br>
-                Receiver email: {{ receiver_email }}
-                All payments for PayPal only!
+                This buyer will pay this order, when receive.<br>
             </p>
         {% endif %}
     </p>

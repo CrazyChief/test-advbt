@@ -5,7 +5,7 @@
     <p>This user <b style="font-style: italic;">{{ user }}</b> replied to your comment. Follow this link: {{ link }}</p>
 
     <p>-------------------<br>
-    <b>Adavibeauty company</b>
+    <b>Adavi Beauty LLC</b>
     </p>
 
 {% endblock %}

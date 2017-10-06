@@ -195,13 +195,6 @@ CKEDITOR_CONFIGS = {
             ]},
         ],
         'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
-        # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
-        # 'height': 291,
-        # 'width': '100%',
-        # 'filebrowserWindowHeight': 725,
-        # 'filebrowserWindowWidth': 940,
-        # 'toolbarCanCollapse': True,
-        # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
         'tabSpaces': 4,
         'extraPlugins': ','.join(
             [
@@ -230,13 +223,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
-# EMAIL_HOST_USER = 'adavibeauty@gmail.com'
-# EMAIL_HOST_PASSWORD = 'Mevsha_21'
-# DEFAULT_FROM_EMAIL = 'adavibeauty@gmail.com'
-EMAIL_HOST_USER = 'danilovdmitry94@gmail.com'
-EMAIL_HOST_PASSWORD = '#$@609absolute361'
-DEFAULT_FROM_EMAIL = 'danilovdmitry94@gmail.com'
-# DEFAULT_TO_EMAIL = 'to email'
+EMAIL_HOST_USER = 'adavibeauty@gmail.com'
+EMAIL_HOST_PASSWORD = 'Mevsha_21'
+DEFAULT_FROM_EMAIL = 'adavibeauty@gmail.com'
+DEFAULT_TO_EMAIL = 'adavibeauty@gmail.com'
 
 
 # Internationalization
@@ -316,4 +306,4 @@ TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBacke
 PAYPAL_RECEIVER_EMAIL = 'danilovdmitry94-bussines@gmail.com'
 PAYPAL_TEST = True
 # PAYPAL_RECEIVER_EMAIL = 'adavibeauty@gmail.com'
-# PAYPAL_TEST = True
+# PAYPAL_TEST = False

@@ -4,6 +4,6 @@
     <p>Dear {{ full_name }}, thanks for your notification. We will contact you soon.</p>
 
     <p>Regards <br>
-    <b>Adavibeauty company</b>
+    <b>Adavi Beauty LLC</b>
     </p>
 {% endblock %}

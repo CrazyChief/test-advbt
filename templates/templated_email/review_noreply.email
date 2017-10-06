@@ -5,7 +5,7 @@
     <p>Thank you for review of our product (<b>{{ product }}</b>). Every your review is really important for us!</p>
 
     <p>-------------------<br>
-    <b>Adavibeauty company</b>
+    <b>Adavi Beauty LLC</b>
     </p>
 
 {% endblock %}

@@ -3,7 +3,7 @@
 
     <p>Dear {{ full_name }}, thanks for your subscribing. We will notify you about all news on our site.</p>
 
-    <p>Regards <br>
-    <b>Adavibeauty company</b>
+    <p>-------------------<br>
+    <b>Adavi Beauty LLC</b>
     </p>
 {% endblock %}
