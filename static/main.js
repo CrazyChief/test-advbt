@@ -148,6 +148,10 @@ $(document).ready(function(){
             $('textarea[id="id_question"]').text("<b>" + parent_name + "</b>, ");
         }
     });
+    // var pattern_cart = /\/cart\//;
+    // if (window.location.pathname.match(pattern_cart)) {
+    //
+    // }
 });
 function showThumb(e) {
     if ($(e)[0].nodeName == 'A') {
@@ -219,6 +223,20 @@ function decr(e) {
         vl--;
     }
     cart.changeQuantity(pk, vl);
+}
+function changeQ(e) {
+    var vl = $(e).val(),
+        pk = $(e).attr('data-product_id'),
+        btn = $('.checkout-button');
+    btn.addClass('disabled');
+    if (vl.match(/([a-z]+)/) || vl.match(/\-/) || vl.match(/0/) || (vl === '')) {
+        alert("Incorrect value! Min value 1. Please, check field!");
+        $(e).val(1);
+        btn.removeClass('disabled');
+    } else if (vl.match(/([1-9]+)/)) {
+    cart.changeQuantity(pk, vl);
+    btn.removeClass('disabled');
+    }
 }
 function showSnackbar(param) {
     var strName = "snackbar";

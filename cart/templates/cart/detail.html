@@ -51,7 +51,7 @@
                                                     <div class="kilkist">
                                                         <div class="input-row">
                                                             <span class="name">{% trans "Quantity" %}: </span>
-                                                            <input type="number" step="1" min="1" data-product_id="{{ item.obj.id }}" value="{{ item.quantity }}" class="input-text qty text">
+                                                            <input type="number" onchange="changeQ(this)" step="1" min="1" data-product_id="{{ item.obj.id }}" value="{{ item.quantity }}" class="input-text qty text">
                                                             <span class="less" onclick="decr(this)"></span>
                                                             <span class="more" onclick="incr(this)"></span>
                                                         </div>
@@ -87,7 +87,7 @@
 {#                                                            </form>#}
 {#                                                        </div>#}
                                                         <div class="checkout_wrap">
-                                                            <a href="{% url 'orders:checkout' %}" class="btn btn-1 submition-butt">
+                                                            <a href="{% url 'orders:checkout' %}" class="btn btn-1 submition-butt checkout-button">
                                                                 <span>{% trans "Checkout" %}</span>
                                                             </a>
                                                         </div>

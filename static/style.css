@@ -1763,7 +1763,7 @@ body {
 .conteiner-corzin .item .texter-part .botomer .color-type .cort{width: 64px; height:25px; border-radius: 5px;  overflow: hidden;   }
 .conteiner-corzin .item .texter-part .kilkist {width: 30%; display: flex; align-items: center; justify-content: flex-start;}
 .conteiner-corzin .item .texter-part .kilkist .input-row{width: 64px; height:25px; position: relative;}
-.conteiner-corzin .item .kilkist .input-row input{width: 30% !important; height: 25px; border-radius: 5px; border: 1px solid #ff887b; text-align: center; font-size: 16px; color: rgb(56, 58, 58);margin-top: 0;}
+.conteiner-corzin .item .kilkist .input-row input{width: 30% !important; height: 30px; border-radius: 5px; border: 1px solid #ff887b; text-align: center; font-size: 16px; color: rgb(56, 58, 58);margin-top: 0; padding-top: 3px;}
 .conteiner-corzin .item .kilkist .input-row .more{ width: 10px; position: absolute; right: 2px; top: 2px; height: 10px; background-color:transparent;  transition: all 0.3s }
 .conteiner-corzin .item .texter-part .botomer .kilkist .input-row .more:hover{background-color: rgba(0,0,0,0.2);}
 .conteiner-corzin .item .kilkist .input-row .more:before {content: ''; position: absolute; bottom: 2px; right: 1px; width: 0; height: 0;  border-style: solid; border-width: 0 4px 4px 4px; border-color: transparent transparent #ff887b transparent; cursor: pointer; z-index: 3; }
@@ -2380,6 +2380,7 @@ div.pagination {
 .conteiner-corzin .cart_item .color-type > .cort {position:relative; top:4px;width: 24px; height: 24px; border-radius: 50%;}
 .conteiner-corzin .cart_item .color-type > .cort, .conteiner-corzin .cart_item .color-type > .name {display: inline-block!important;}
 .conteiner-corzin .cart_item .color-type > .name {vertical-align: 5px!important;}
+.conteiner-corzin .cart_item .kilkist .name {vertical-align: middle!important;}
 
 /*.dropdown {*/
   /*position: relative;*/
