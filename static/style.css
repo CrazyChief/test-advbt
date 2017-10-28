@@ -2411,7 +2411,7 @@ li:hover > .dropdown-content_big {
   margin-left: 40px;
 }
 .dropdown-content_big .wr h2 {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   font-size: 16px!important;
 }
 .dropdown-content_big .wr h2 a {font-weight: 600!important;}
@@ -2422,6 +2422,9 @@ li:hover > .dropdown-content_big {
   text-align: left;
   font-size: 16px!important;
   padding: 0;
+}
+.dropdown-content_big .wr li.sub_item:last-child {
+  margin-bottom: 20px;
 }
 .dropdown-content_big .wr li.sub_item a {font-weight: 400!important;}
 

@@ -10,6 +10,7 @@ class ProductBase(object):
 
     default_min_price = 10
     default_max_price = int(ProductVariation.objects.all().aggregate(Max('price'))['price__max'])
+    # default_max_price = 100
 
     def __init__(self, request):
         self.request = request

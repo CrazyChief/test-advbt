@@ -1,7 +1,5 @@
 from .models import Cy
-from django.conf import settings
 from .conf import session_key
-# from .utils import get_active_currency
 
 
 def currency(request):
@@ -12,7 +10,7 @@ def currency(request):
         cy = Cy.objects.get(abbreviation__iexact=request.session[session_key])
     except Cy.DoesNotExist:
         cy = None
-    print("From context processor: %s" % cy)
+    # print("From context processor: %s" % cy)
     return {
         'CURRENCIES': Cy.objects.filter(active=True),
         'CURRENCY_ACTIVE': cy,
