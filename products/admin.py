@@ -5,17 +5,6 @@ from .models import Category, SubCategory, Product, ProductVariation, ProductIma
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
-# class KeywordAdmin(admin.ModelAdmin):
-#     list_display = (
-#         'word',
-#         'is_keyword_active',
-#     )
-#     list_filter = [
-#         'word',
-#         'is_active',
-#     ]
-
-
 # class CategoryAdmin(TabbedTranslationAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
@@ -124,4 +113,3 @@ admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductVariation, ProductVariationAdmin)
 admin.site.register(ProductReview, ProductReviewAdmin)
 admin.site.register(ProductQuestion, ProductQuestionAdmin)
-# admin.site.register(Keyword, KeywordAdmin)

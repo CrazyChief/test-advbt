@@ -1,5 +1,3 @@
-from django import forms
-from django.http.request import HttpRequest
 from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
 from .models import ProductReview, ProductQuestion
@@ -31,20 +29,5 @@ class QuestionForm(ModelForm):
         self.fields['question'].widget.attrs.update({
             'placeholder': _('Question'),
         })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

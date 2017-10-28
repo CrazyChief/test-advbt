@@ -4,16 +4,14 @@ from django.views.generic.edit import FormMixin
 from django.http import Http404, HttpResponseForbidden, JsonResponse
 from django.urls import reverse
 from django.conf import settings
-from django.core import mail
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Q, Max
+from django.db.models import Q
 from django.contrib.auth.models import User
 
 from .models import Category, SubCategory, Product, ProductVariation, ProductImage, ProductReview, ProductQuestion
 from .forms import ReviewForm, QuestionForm
 from .products import ProductBase
 
-from meta.views import MetadataMixin, Meta
+from meta.views import MetadataMixin
 from templated_email import send_templated_mail
 
 session_key = getattr(settings, 'PRODUCT_SESSION_KEY', 'products')
@@ -35,8 +33,6 @@ class Price(View):
                     'param': param,
                 })
         product = Pr(request)
-        # min_price = request.POST['min_price']
-        # max_price = request.POST['max_price']
         action = getattr(product, self.action)
         try:
             action(**params)
@@ -44,8 +40,6 @@ class Price(View):
             return JsonResponse({
                 'error': 'MissingRequestParam',
             })
-        # print(request.POST)
-        # product.set_price_values(min_price, max_price)
         return product.encode()
 
 
@@ -75,8 +69,6 @@ class IndexView(ListView):
         return super(IndexView, self).get(request, *args, **kwargs)
 
     def get_queryset(self):
-        # return Product.objects.filter(status__exact=True)
-        # return Product.objects.filter(productvariation__price__gte=43).filter(status__exact=True).distinct()
         return Product.objects.filter(Q(productvariation__price__gte=self.prod.get_price_values()['min_price']) &
                                       Q(productvariation__price__lte=self.prod.get_price_values()['max_price'])).\
             filter(status__exact=True).distinct()
@@ -114,7 +106,6 @@ class ProductCategoryView(ListView):
         context['category_list'] = Category.objects.filter(is_active__exact=True)
         context['sub_category_list'] = SubCategory.objects.filter(category__exact=self.category.id)
         context['price_values'] = self.prod.get_price_values()
-        # context['products_list'] = Product.objects.filter(category__pk=self.category.id)
         return context
 
 
@@ -162,14 +153,11 @@ class ProductView(MetadataMixin, DetailView, FormMixin):
         self.url = self.get_success_url()
         self.object_type = 'Product'
         self.custom_namespace = 'product'
-        # self.keywords = self.get_product().keywords
         if request.user.is_authenticated:
             self.initial = {
                 'name': request.user.username,
                 'email': request.user.email,
             }
-        # self.category = self.get_category()
-        # self.variations = self.get_variation_list()
 
         return super(ProductView, self).get(request, *args, **kwargs)
 
@@ -182,7 +170,6 @@ class ProductView(MetadataMixin, DetailView, FormMixin):
 
     def get_product(self):
         if 'pk' in self.kwargs:
-            # self.prod_var = Product.objects.filter(pk=self.kwargs['pk'])
             return get_object_or_404(Product, pk=self.kwargs['pk'])
         raise Http404
 
@@ -198,10 +185,6 @@ class ProductView(MetadataMixin, DetailView, FormMixin):
         context = super(ProductView, self).get_context_data(**kwargs)
         context['category'] = Category.objects.filter(pk=self.kwargs['fk'])
         context['category_list'] = Category.objects.filter(is_active__exact=True)
-        # kwargs['sizes'] = {size: self.model.objects.get_or_create(rate=str(size))[0] for size in range(10, 40)}
-        #
-        # context['sub_category'] = SubCategory.objects.filter(pk=self.kwargs['id'])
-        #
         context['product_images'] = ProductImage.objects.filter(product=self.kwargs['pk'])
         context['product_reviews'] = ProductReview.objects.filter(product=self.kwargs['pk'])
         context['product_variation_list'] = ProductVariation.objects.filter(product=self.get_product())
@@ -278,24 +261,3 @@ class ProductView(MetadataMixin, DetailView, FormMixin):
             'slug': self.kwargs['slug'],
             'pk': self.kwargs['pk']
         })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
